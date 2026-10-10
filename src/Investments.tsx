@@ -1,0 +1,8 @@
+import { efficiencyQuote, automationCost, scanCost, UPGRADES, upgradeReason, type Action, type GameState, type Upgrade } from './game.ts';
+export default function Investments({state:s,dispatch}:{state:GameState;dispatch:(a:Action)=>void}) {
+  const next=efficiencyQuote(s);
+  return <section className="map-upgrades investments" aria-label="Investments">
+    {(['scanning','remediation'] as Upgrade[]).map(key=>{const u=UPGRADES[key],reason=upgradeReason(s,key);return <article key={key}><div><h3>{u.name}</h3><span>{u.before.replace(' seconds','s')} → {u.after.replace(' seconds','s')}</span></div><button aria-label={`Invest ${u.cost} credits`} disabled={!!reason} title={reason??u.description} onClick={()=>dispatch({type:'upgrade',upgrade:key})}>{s.upgrades[key]?'✓ Installed':`Upgrade · ${u.cost} cr`}</button></article>;})}
+    <article className="efficiency-upgrade"><div><h3>Scan efficiency · {s.efficiency}/5</h3><span>{next?`${next.scanCost} cr/scan · ${next.automationCost} cr setup`:`${scanCost(s)} cr/scan · ${automationCost(s)} cr setup`}</span></div><button aria-label={next?`Buy scan efficiency tier ${next.tier} for ${next.cost} credits`:'Maximum scan efficiency'} disabled={!next||!!next.reason} title={next?.reason??'Lower scan costs and new automatic-scan setup costs. Existing purchases and queued work are not refunded.'} onClick={()=>dispatch({type:'efficiency'})}>{next?`Upgrade · ${next.cost} cr`:'✓ Installed'}</button><small>{next?`Scan-only payback: ${next.payback}`:'All scan types'}</small></article>
+  </section>;
+}
