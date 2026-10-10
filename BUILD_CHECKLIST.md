@@ -341,5 +341,5 @@ Only mark implementation complete after inspecting or exercising it. Record test
 - [x] Initialize main, review the source/file list and exclude dependencies, builds, local test artifacts and credentials.
 - [x] Add an Actions workflow for tests, repository-base production build and Pages deployment. Update landing metadata and README deployment instructions.
 - [x] All 70 tests and the /recon-game/ production build pass locally.
-- [ ] Complete CLI sign-in, create/push erlandvr/recon-game and enable Actions-based Pages.
-- [ ] Verify deployment and live gameplay; record final URLs and commit.
+- [x] Complete CLI sign-in, create/push public erlandvr/recon-game and enable Actions-based Pages. Initial source commit 1736713. Local production-path Chromium scan/repair and desktop/phone checks pass.
+- [x] GitHub run 38052992096 succeeded (Node 24 tests/build/deploy). Public repository https://github.com/erlandvr/recon-game; playable HTTPS site https://erlandvr.github.io/recon-game/. Deployed source 1736713. Live Chromium checks pass for assets, Start game, paid scan/repair, health recovery and desktop/phone bounds; no browser errors. Evidence: test-results/published-browser.json.

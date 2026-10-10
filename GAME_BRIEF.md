@@ -288,3 +288,7 @@ Source basis: Erland's Recon Game concept and request to start the first stage; 
 The timer shows the current medal target beside elapsed time; opening rules list all targets. Chapter 5 shows repositories with both automations, a continuous 0–60s trial bar and the current blocker. Interrupting a running trial records its cause, announces it for 12 game seconds and retains it in the operation log. Brief repair/automation border feedback lasts 900 ms, with static feedback under reduced motion. Optional chapter-completion sound defaults off, is enabled deliberately in the footer and has no persistence. Completion audio plays once when the existing completion presentation becomes visible, never as repeated progress audio.
 
 Recalibration and limitations: MEDAL_PLAYTEST.md. Unassisted human sessions remain pending in HUMAN_PLAYTEST.md.
+
+### Public delivery (D88)
+
+The game is published at [erlandvr.github.io/recon-game](https://erlandvr.github.io/recon-game/) with source at [erlandvr/recon-game](https://github.com/erlandvr/recon-game). GitHub Actions tests and builds main before deploying the static site. First deployment and live gameplay were verified on 2026-10-10. Current fixed-order problem distribution is deliberately unchanged following the user review.
