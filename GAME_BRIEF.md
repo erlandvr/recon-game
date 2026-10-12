@@ -2,11 +2,15 @@
 
 Status: Stages 1–7 implemented and locally verified. Pacing and balance await human playtesting.
 
-Updated: 2026-10-10.
+Updated: 2026-10-12.
 
 Owner: Erland.
 
 Companion records: [build checklist](BUILD_CHECKLIST.md), [decisions](DECISIONS.md), [handover](HANDOVER.md).
+
+## Visual identity
+
+D89 applies the supplied Recon design system: Space Grotesk and Space Mono, the supplied brand mark, neutral dark surfaces, green healthy/active accents, amber degradation and red failure. Compact ecosystem-first geometry, stacked automation and all gameplay rules remain unchanged. See [design-system integration](DESIGN_SYSTEM.md) for source provenance and adaptations.
 
 ## Executive Summary
 

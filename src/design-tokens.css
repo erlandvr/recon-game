@@ -1,0 +1,53 @@
+/* Recon design-system extract, 2026-10-12. See DESIGN_SYSTEM.md for provenance.
+   Dark palette from src/styles/globals.css; game keeps its established dark mode. */
+@import '@fontsource/space-grotesk/latin-400.css';
+@import '@fontsource/space-grotesk/latin-700.css';
+@import '@fontsource/space-mono/latin-400.css';
+
+:root {
+  color-scheme: dark;
+  --font-body: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-heading: var(--font-body);
+  --font-micrographics: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --neutral-0: oklch(0.145 0.002 141.5);
+  --neutral-4: oklch(0.17 0.002 141.5);
+  --neutral-8: oklch(0.185 0.003 141.5);
+  --neutral-12: oklch(0.22 0.004 141.5);
+  --neutral-16: oklch(0.26 0.004 141.5);
+  --neutral-60: oklch(0.69 0.01 141.5);
+  --neutral-100: oklch(1 0 0);
+  --brand-60: oklch(0.838 0.065 141.5);
+  --brand-80: oklch(0.68 0.098 141.5);
+  --destructive: oklch(0.68 0.2 27);
+  --warning: oklch(68.735% 0.19855 42.606);
+  --caution: oklch(73.75% 0.14941 80.639);
+
+  --background: var(--neutral-0);
+  --foreground: var(--neutral-100);
+  --card: var(--neutral-4);
+  --muted: var(--neutral-8);
+  --muted-foreground: var(--neutral-60);
+  --primary: var(--brand-60);
+  --primary-foreground: var(--neutral-4);
+  --border: var(--neutral-16);
+  --input: var(--neutral-16);
+  --ring: var(--brand-60);
+  --radius-control: 6px;
+  --radius-card: 8px;
+
+  /* Game-specific visualization extensions, derived from the source palette. */
+  --primary-soft: color-mix(in oklch, var(--primary) 8%, var(--card));
+  --primary-border: color-mix(in oklch, var(--primary) 40%, var(--border));
+  --caution-soft: color-mix(in oklch, var(--caution) 8%, var(--card));
+  --caution-border: color-mix(in oklch, var(--caution) 60%, var(--border));
+  --map-grid: color-mix(in oklch, var(--foreground) 12%, transparent);
+  --map-wire: color-mix(in oklch, var(--primary) 45%, var(--border));
+  --map-orbit: color-mix(in oklch, var(--primary) 20%, transparent);
+  --overlay: color-mix(in oklch, var(--background) 80%, transparent);
+  --shadow: #0008;
+  /* Award metals retain their distinct meaning; not product severity colors. */
+  --medal-gold: #efcc77;
+  --medal-silver: #c4d1d5;
+  --medal-bronze: #dfab82;
+}

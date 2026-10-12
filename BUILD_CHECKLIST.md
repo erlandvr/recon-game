@@ -1,6 +1,6 @@
 # Recon Game — build checklist
 
-Updated: 2026-10-10. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); this file tracks delivery evidence, not a second set of rules.
+Updated: 2026-10-12. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); this file tracks delivery evidence, not a second set of rules.
 
 Earlier sections record delivery at that time. Pause/save checks and full-slot rejection were superseded by D42–D44; later sections record current verification. The earlier combined automation was superseded by D51; D69 now adds separately purchased automatic remediation. Fixed elapsed-time milestones and unattended debug presets are superseded by D65–D67.
 
@@ -343,3 +343,15 @@ Only mark implementation complete after inspecting or exercising it. Record test
 - [x] All 70 tests and the /recon-game/ production build pass locally.
 - [x] Complete CLI sign-in, create/push public erlandvr/recon-game and enable Actions-based Pages. Initial source commit 1736713. Local production-path Chromium scan/repair and desktop/phone checks pass.
 - [x] GitHub run 38052992096 succeeded (Node 24 tests/build/deploy). Public repository https://github.com/erlandvr/recon-game; playable HTTPS site https://erlandvr.github.io/recon-game/. Deployed source 1736713. Live Chromium checks pass for assets, Start game, paid scan/repair, health recovery and desktop/phone bounds; no browser errors. Evidence: test-results/published-browser.json.
+
+
+## D89 — Recon design-system integration (2026-10-12)
+
+- [x] Review supplied archive foundations, tokens, component patterns, assets and integration dependencies.
+- [x] Create `codex/recon-design-system` from origin/main; preserve unrelated user image.
+- [x] Apply exact dark palette, self-hosted fonts, supplied brand mark, semantic surfaces, control states, dialogs and status labels.
+- [x] Preserve gameplay and compact responsive layout, including vertically stacked automation and reduced motion.
+- [x] Pass all 70 tests and production build under the GitHub Pages base path.
+- [x] Pass Chromium automation layout at five sizes, story, full gameplay, chapter completion and production font/scan/repair smoke checks; inspect desktop/phone screenshots.
+- [x] Record provenance/adaptations and review screenshots in DESIGN_SYSTEM.md.
+- [ ] Push branch and open GitHub PR; verify remote checks. Main publication stays unchanged pending merge.
