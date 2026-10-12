@@ -5,7 +5,7 @@ import {serviceFindings} from '../src/campaign.ts';
 import {timelineFixture} from './fixtures.ts';
 const buy=(s:GameState)=>{const r=act(s,{type:'efficiency'});assert.ok(r.ok,r.message);return r.state;};
 
-test('healthy seconds accumulate, hold without resetting, and resume after actual repair completion',()=>{
+test('healthy seconds accumulate, hold without resetting, and resume after actual fix completion',()=>{
  let s=advance(newGame(),45);assert.equal(s.healthyTime,45);assert.equal(levelProgress(s).goal,120);
  s=advance(act(s,{type:'scan'}).state,3);assert.equal(s.healthyTime,45);
  s=act(s,{type:'repair',findingId:1}).state;s=advance(s,5);assert.equal(s.healthyTime,45);assert.equal(health(s),80);

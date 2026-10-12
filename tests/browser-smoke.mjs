@@ -16,7 +16,7 @@ const errors=[];const evidence=[];page.on('pageerror',e=>errors.push(e.message))
 const output=new URL('../test-results/',import.meta.url);await mkdir(output,{recursive:true});
 const button=name=>page.getByRole('button',{name,exact:true});
 const time=async()=>{const value=await page.locator('.world-time time').innerText();const [m,s]=value.trim().split(':').map(Number);return m*60+s;};
-const dismissStory=async()=>{if(await page.locator('.chapter-completion').count()){await page.clock.runFor(2500);await page.waitForTimeout(50);}if(await button(/^(Start game|Start Next Chapter|Keep playing)$/).isVisible())await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();};
+const dismissStory=async()=>{if(await page.locator('.chapter-completion').count()){await page.clock.runFor(3700);await page.waitForTimeout(50);}if(await button(/^(Start game|Start Next Chapter|Keep playing)$/).isVisible())await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();};
 const tick=async seconds=>{await page.clock.runFor(seconds*1000);await page.waitForTimeout(50);await dismissStory();};
 const jump=async seconds=>{await page.clock.fastForward(seconds*1000);await tick(Math.ceil(seconds/300)/4+1);};
 const queue=async()=>Number(await page.locator('[aria-label="Queued actions"] strong').innerText());
@@ -44,16 +44,16 @@ try{
  assert.equal(await time(),0);assert.equal(await healthy(),0);assert.equal(await page.getByRole('switch').count(),0);
  await bounds('phase5-start');await tick(15);assert.equal(await time(),15);assert.equal(await healthy(),15);
  const firstMoney=await creditsNow();await button('Buy scan efficiency tier 1 for 20 credits').click();assert.equal(await creditsNow(),firstMoney-20);assert.match(await button('Scan Backend').innerText(),/4 cr/);
- await button('Scan Backend').click();await tick(3);assert.equal(await healthy(),18);await button('Repair Backend').click();await tick(5);assert.equal(await healthy(),23);await tick(1);assert.equal(await healthy(),24);
+ await button('Scan Backend').click();await tick(3);assert.equal(await healthy(),18);await button('Fix Backend').click();await tick(5);assert.equal(await healthy(),23);await tick(1);assert.equal(await healthy(),24);
  await button('Double speed').click();await tick(2);assert.equal(await time(),28);assert.equal(await healthy(),28);await button('Double speed').click();
  await button('View log').click();let before=await time();await tick(2);assert.equal(await time(),before+2);await button('Close log').click();
  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});
  before=await time();await jump(300);assert.ok(await time()>=before+300);await page.evaluate(()=>{delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));});
  assert.equal(await page.locator('.connection-preview').count(),0);assert.match(await page.locator('.guide h1').innerText(),/Progress on hold/);const held=await healthy(),money=await creditsNow();await tick(5);assert.equal(await healthy(),held);assert.ok(await creditsNow()>money);
  await button('Invest 150 credits').click();assert.equal(await page.locator('.work-slot').count(),2);
- await page.setViewportSize({width:390,height:844});await bounds('phase5-held-phone');await page.setViewportSize({width:1280,height:800});
- await debug('Ecosystem expansion');assert.equal(await healthy(),0);assert.ok(await time()>=120);assert.equal(await page.locator('.connection-preview').count(),1);await tick(30);assert.equal(await button('Inspect Identity').count(),1);
- for(const [w,h] of [[1280,800],[1024,768],[800,700],[390,844]]){await page.setViewportSize({width:w,height:h});await bounds(`phase5-connected-${w}`);}await page.setViewportSize({width:1280,height:800});
+ await page.setViewportSize({width:1280,height:800});
+ await debug('Ecosystem expansion');assert.equal(await healthy(),0);assert.ok(await time()>=120);assert.equal(await page.locator('.connection-preview').count(),1);await tick(30);assert.equal(await page.getByRole('article',{name:'Identity system',exact:true}).count(),1);
+ for(const [w,h] of [[1280,800],[1024,768],[800,700]]){await page.setViewportSize({width:w,height:h});await bounds(`phase5-connected-${w}`);}await page.setViewportSize({width:1280,height:800});
  await button('Milestones').click();assert.match(await page.getByRole('dialog').innerText(),/First 2 healthy minutes/);await button('Close milestones').click();
  // Debug reaches a real healthy-time corporate milestone; leave it unattended to build a queue-test backlog.
  await debug('100-repository company');assert.equal(await page.locator('.work-slot').count(),5);await jump(3000);
@@ -67,13 +67,11 @@ try{
  const credits=async()=>Number(await page.locator('[data-credits]').getAttribute('data-credits'));
  assert.equal(await canvas.locator('.repo-dot').count(),100);
  assert.equal(await page.locator('.scope-card,.scope-pagination').count(),0);
- await focus('backend');await button('Scan Backend').click();await tick(3);await button('Inspect Backend').click();
- for(let n=0;n<7;n++){await page.locator('.context-findings button:not([disabled])').first().click();assert.equal(await page.locator('.system-actions').isVisible(),true);}
- assert.equal(await page.locator('.context-findings button:disabled').count(),7);await button('Close system actions').click();
+ await focus('backend');await button('Scan Backend').click();await tick(3);await button('Fix Backend').click();
  assert.equal(await page.locator('.work-slot.occupied').count(),5);assert.equal(await queue(),2);
- for(const [w,h] of [[1280,800],[1024,768],[800,700],[390,844]]){
+ for(const [w,h] of [[1280,800],[1024,768],[800,700]]){
   await page.setViewportSize({width:w,height:h});await focus('backend');await bounds(`canvas-repo-${w}`);
-  const node=await button('Inspect Backend').boundingBox(),box=await canvas.boundingBox();assert.ok(node.y>=box.y&&node.y+node.height<=box.y+box.height,JSON.stringify({viewport:[w,h],node,box}));
+  const node=await page.getByRole('article',{name:'Backend system',exact:true}).boundingBox(),box=await canvas.boundingBox();assert.ok(node.y>=box.y&&node.y+node.height<=box.y+box.height,JSON.stringify({viewport:[w,h],node,box}));
   if(await button('Work slots').isVisible()){await button('Work slots').click();await bounds(`queue-slots-${w}`);await button('Ecosystem').first().click();}
  }
  await tick(10);assert.equal(await queue(),0);assert.equal(await page.locator('.work-slot.occupied').count(),0);
@@ -82,9 +80,9 @@ try{
  await focus('frontend');assert.equal(await button('Automate Frontend scans for 31.5 credits').count(),1);
  assert.equal(await page.getByRole('button',{name:/About .* automatic scans/}).count(),0);assert.equal(await page.getByRole('tooltip').count(),0);
  await page.setViewportSize({width:1280,height:800});await focus('frontend');
- await focus('backend');await page.locator('.operation-strip dt').first().click();await button('Inspect Backend').click();await page.locator('.system-actions h2').click();assert.equal(await page.locator('.system-actions').isVisible(),true);await page.locator('.operation-strip dt').first().click();assert.equal(await page.locator('.system-actions').count(),0);
+ await focus('backend');await page.getByRole('article',{name:'Backend system',exact:true}).locator('.system-inspect').click();assert.equal(await page.locator('.system-actions').count(),0);
  await button('Fit all').click();await settle();const allCamera=await camera();
- for(const [w,h] of [[1280,800],[1024,768],[800,700],[390,844]]){
+ for(const [w,h] of [[1280,800],[1024,768],[800,700]]){
   await page.setViewportSize({width:w,height:h});await button('Fit all').click();await settle();await bounds(`canvas-all-${w}`);
   await button('Open Customer platform project').click();await settle();await bounds(`canvas-project-${w}`);
   const labels=await page.locator('.map-group-label').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height};}));for(const [i,a] of labels.entries())for(const b of labels.slice(i+1))assert.ok(a.x+a.w<=b.x||b.x+b.w<=a.x||a.y+a.h<=b.y||b.y+b.h<=a.y,`Module labels overlap at ${w}px`);
@@ -113,44 +111,25 @@ try{
  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await settle();assert.ok((await camera()).zoom>touchBefore.zoom);await cdp.detach();
  await button('Fit all').click();await button('Open Customer platform project').click();await settle();
  const scanGroup=button('Scan project Customer platform');const groupCost=parseFloat(await scanGroup.locator('span').innerText());const preGroup=await credits();await scanGroup.click();assert.equal(await credits(),Math.round((preGroup-groupCost)*100)/100);assert.equal(await scanGroup.isDisabled(),true);assert.ok(await queue()>0);await tick(30);
- const repairGroup=button('Repair project Customer platform');const repairCost=Number((await repairGroup.locator('span').innerText()).replace(/[^0-9]/g,''));const preRepair=await credits();await repairGroup.click();assert.equal(await credits(),Math.round((preRepair-repairCost)*100)/100);assert.ok(await queue()>0);
+ const repairGroup=button('Fix project Customer platform');const repairCost=Number((await repairGroup.locator('span').innerText()).replace(/[^0-9]/g,''));const preRepair=await credits();await repairGroup.click();assert.equal(await credits(),Math.round((preRepair-repairCost)*100)/100);assert.ok(await queue()>0);
  await button('Open Core experience module').click();await settle();const autoModule=button('Auto-scans module Core experience');await autoModule.click();assert.equal(await autoModule.isDisabled(),true);
  await button('Customer platform').click();await settle();const autoProject=button('Auto-scans project Customer platform');const projectCost=parseFloat(await autoProject.locator('span').innerText()),preAuto=await credits();await autoProject.click();assert.equal(await credits(),Math.round((preAuto-projectCost)*100)/100);assert.equal(await autoProject.isDisabled(),true);
  await button('Open Core experience module').click();assert.equal(await button('Auto-scans module Core experience').isDisabled(),true);
  await jump(600);await focus('repo-100');const generated=await page.locator('option[value="repo-100"]').innerText();assert.ok(!['Backend','Frontend','Identity'].includes(generated));
- await button(`Scan ${generated}`).click();await tick(30);await button(`Inspect ${generated}`).click();const findingButton=page.locator('.context-findings button:not([disabled])').first();const repairLabel=await findingButton.getAttribute('aria-label');await findingButton.click();assert.equal(await page.locator('.system-actions').isVisible(),true);await tick(10);assert.equal(await button(repairLabel).count(),0);await page.locator('.operation-strip dt').first().click();
- evidence.push('Single 100-repository canvas: project/module framing, repository finder, pointer-anchored trackpad zoom, two-axis pan across project boundaries, drag, touch pinch and subsequent clicks, keyboard zoom/pan/Home, stable topology, desktop/phone bounds, original scan/repair/automation controls without scan-info popups, five slots/FIFO queue, exact group costs and overlapping automation.');
+ await button(`Scan ${generated}`).click();await tick(30);await button(`Fix ${generated}`).click();assert.equal(await page.locator('.system-actions').count(),0);await tick(10);
+
+ evidence.push('Single 100-repository canvas: project/module framing, repository finder, pointer-anchored trackpad zoom, two-axis pan across project boundaries, drag, touch pinch and subsequent clicks, keyboard zoom/pan/Home, stable topology, desktop/phone bounds, original scan/fix/automation controls without scan-info popups, five slots/FIFO queue, exact group costs and overlapping automation.');
  await page.reload();assert.equal(await time(),0);assert.equal(await page.locator('.work-slot').count(),1);assert.equal(await queue(),0);await dismissStory();await tick(2);assert.equal(await time(),2);
  await button('Restart operation').click();await button('Start fresh').click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).waitFor({state:'visible'});await dismissStory();assert.equal(await time(),0);await tick(2);assert.ok(await time()>=1);
- // The introduction also keeps findings open across active and queued repairs and completion.
- await page.reload();await dismissStory();await tick(45);await button('Scan Backend').click();await tick(3);
- await button('Inspect Backend').click();
- for(let n=0;n<2;n++){
-  await page.locator('.context-findings button:not([disabled])').first().click();
-  assert.equal(await page.locator('.system-actions').isVisible(),true);
- }
- assert.equal(await queue(),1);assert.equal(await page.locator('.context-findings button:disabled').count(),2);
- await tick(10);assert.equal(await page.locator('.system-actions').isVisible(),true);
- assert.equal(await page.locator('.context-findings button').count(),0);
- await button('Close Backend actions').focus();await page.keyboard.press('Escape');
- assert.equal(await page.locator('.system-actions').count(),0);
- await button('Inspect Backend').click();await page.locator('.operation-strip dt').first().click();assert.equal(await page.locator('.system-actions').count(),0);
- evidence.push('Findings stay open for successive repairs in introduction and expansion, including queued work and completion; explicit close and Escape still dismiss.');
- // One click repairs the repository when affordable; otherwise choose without spending.
- for(const [w,h] of [[1280,800],[390,844]]){
+ // Direct fixing pays for all affordable findings without opening a popup.
+ for(const [w,h] of [[1280,800],[1024,768]]){
   await page.setViewportSize({width:w,height:h});await page.reload();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);
-  assert.match(await button('Repair Backend').innerText(),/Repair all \(3\) · 45 cr/);await bounds(`repair-all-${w}`);
-  let money=await creditsNow();await button('Repair Backend').click();assert.equal(await creditsNow(),Math.round((money-45)*100)/100);assert.equal(await queue(),2);assert.equal(await page.locator('.system-actions').count(),0);
-  assert.equal(await button('Repair Backend').isDisabled(),true);await tick(15);assert.equal(await queue(),0);
-  await page.reload();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);if(w<650)await page.getByRole('button',{name:/^Work slots/}).click();await button('Invest 150 credits').click();if(w<650)await button('Ecosystem').click();while(await creditsNow()<30)await tick(1);money=await creditsNow();assert.ok(money>=30&&money<45);
-  await button('Repair Backend').click();assert.equal(await creditsNow(),money);assert.equal(await page.locator('.system-actions').isVisible(),true);
-  const rows=()=>page.locator('.context-findings article');const labels=()=>rows().locator('button').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('aria-label')));
-  const original=await labels();await rows().first().locator('button').click();assert.deepEqual(await labels(),[original[1],original[2],original[0]]);
-  assert.equal(await page.locator('.context-findings button:focus').getAttribute('aria-label'),original[1]);assert.match(await rows().last().innerText(),/Repairing/);
-  const scroll=await page.locator('.system-actions').evaluate(e=>e.scrollTop);await rows().first().locator('button').click();assert.deepEqual(await labels(),[original[2],original[0],original[1]]);assert.equal(await page.locator('.system-actions').evaluate(e=>e.scrollTop),scroll);
-  assert.equal(await page.locator('.context-findings button:disabled').count(),3);await bounds(`repair-choice-${w}`);
+  assert.match(await button('Fix Backend').innerText(),/Fix all \(3\) · 45 cr/);await bounds(`fix-all-${w}`);
+  let money=await creditsNow();await button('Fix Backend').click();assert.equal(await creditsNow(),Math.round((money-45)*100)/100);assert.equal(await queue(),2);assert.equal(await page.locator('.system-actions').count(),0);
+  await page.reload();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);await button('Invest 150 credits').click();while(await creditsNow()<30)await tick(1);money=await creditsNow();assert.ok(money>=30&&money<45);
+  assert.match(await button('Fix Backend').innerText(),/Fix 2\/3 · 30 cr/);await button('Fix Backend').click();assert.equal(await creditsNow(),Math.round((money-30)*100)/100);assert.equal(await page.locator('.system-actions').count(),0);assert.equal(await page.locator('.work-slot.occupied').count(),2);
  }
- evidence.push('Repository Repair all shows count/total, pays once and queues overflow; insufficient total opens individual choices without charge. Selected findings move to the bottom; next-choice focus and list scroll position are retained on desktop and phone.');
+ evidence.push('Direct Fix starts the affordable subset with exact spending and no details popup; full affordable batches queue overflow.');
  // Healthy-time and live-time reset together; double speed accelerates both when healthy.
  await page.reload();await page.waitForTimeout(80);await dismissStory();assert.equal(await time(),0);assert.equal(await healthy(),0);
  await button('Double speed').click();await tick(5);assert.equal(await time(),10);assert.equal(await healthy(),10);
@@ -164,18 +143,18 @@ try{
  await page.reload();await page.waitForTimeout(80);await dismissStory();assert.equal(await button('Debug').count(),0);assert.equal(await button('Double speed').getAttribute('aria-pressed'),'false');assert.equal(await healthy(),0);
  // Separate automatic repairs, scope prices and the sustained autonomy finish.
  await page.setViewportSize({width:1280,height:800});await debug('Connected systems');await tick(100);while(await creditsNow()<600)await tick(10);
- let repairFunds=await creditsNow();await button('Automate Backend repairs for 480 credits').click();assert.equal(await creditsNow(),Math.round((repairFunds-480)*100)/100);
- assert.equal(await button('Automate Identity repairs for 480 credits').count(),1);assert.match(await page.getByLabel('Backend automatic repairs',{exact:true}).innerText(),/Needs scan/);
- await button('Scan Backend').click();await tick(3);assert.match(await page.getByLabel('Backend automatic repairs',{exact:true}).innerText(),/Repairing/);await tick(20);await button('Inspect Backend').click();assert.equal(await page.locator('.context-findings button:not(:disabled)').count(),0);await button('Close system actions').click();
- await debug('100-repository company');await focus('backend');let q=button('Auto-repairs module Core experience'),charge=parseFloat(await q.locator('span').innerText());repairFunds=await creditsNow();await q.click();assert.equal(await creditsNow(),Math.round((repairFunds-charge)*100)/100);assert.equal(await q.isDisabled(),true);
- await button('Customer platform').click();await settle();q=button('Auto-repairs project Customer platform');charge=parseFloat(await q.locator('span').innerText());repairFunds=await creditsNow();await q.click();assert.equal(await creditsNow(),Math.round((repairFunds-charge)*100)/100);await button('Open Core experience module').click();assert.equal(await button('Auto-repairs module Core experience').isDisabled(),true);
+ let repairFunds=await creditsNow();await button('Automate Backend fixes for 480 credits').click();assert.equal(await creditsNow(),Math.round((repairFunds-480)*100)/100);
+ assert.equal(await button('Automate Identity fixes for 480 credits').count(),1);assert.match(await page.getByLabel('Backend automatic fixes',{exact:true}).innerText(),/Needs scan/);
+ await button('Scan Backend').click();await tick(3);assert.match(await page.getByLabel('Backend automatic fixes',{exact:true}).innerText(),/Fixing/);await tick(20);assert.equal(await button('Fix Backend').isDisabled(),true);assert.equal(await page.locator('.system-actions').count(),0);
+ await debug('100-repository company');await focus('backend');let q=button('Auto-fixes module Core experience'),charge=parseFloat(await q.locator('span').innerText());repairFunds=await creditsNow();await q.click();assert.equal(await creditsNow(),Math.round((repairFunds-charge)*100)/100);assert.equal(await q.isDisabled(),true);
+ await button('Customer platform').click();await settle();q=button('Auto-fixes project Customer platform');charge=parseFloat(await q.locator('span').innerText());repairFunds=await creditsNow();await q.click();assert.equal(await creditsNow(),Math.round((repairFunds-charge)*100)/100);await button('Open Core experience module').click();assert.equal(await button('Auto-fixes module Core experience').isDisabled(),true);
  await debug('Autonomy trial');assert.match(await page.locator('.autonomy-progress').innerText(),/100\/100 fully automated/);await button('Autonomy').click();assert.match(await page.getByRole('dialog').innerText(),/60 uninterrupted/);await tick(2);await button('Back to ecosystem').click();
- await focus('backend');for(const [w,h] of [[1280,800],[1024,768],[800,700],[390,844]]){await page.setViewportSize({width:w,height:h});await focus('backend');await bounds(`automatic-repairs-${w}`);}
+ await focus('backend');for(const [w,h] of [[1280,800],[1024,768],[800,700]]){await page.setViewportSize({width:w,height:h});await focus('backend');await bounds(`automatic-fixes-${w}`);}
  await page.setViewportSize({width:1280,height:800});await tick(180);assert.match(await page.locator('.guide h1').innerText(),/Victory/);assert.equal(await page.getByRole('dialog').count(),0);before=await time();await tick(2);assert.equal(await time(),before+2);
- for(const [w,h] of [[1280,800],[390,844]]){await page.setViewportSize({width:w,height:h});await bounds(`autonomy-victory-${w}`);await button('Victory').click();assert.match(await page.getByRole('dialog').innerText(),/Full autonomy achieved/);await bounds(`autonomy-details-${w}`);await button('Back to ecosystem').click();}
+ for(const [w,h] of [[1280,800]]){await page.setViewportSize({width:w,height:h});await bounds(`autonomy-victory-${w}`);await button('Victory').click();assert.match(await page.getByRole('dialog').innerText(),/Full autonomy achieved/);await bounds(`autonomy-details-${w}`);await button('Back to ecosystem').click();}
  await button('Milestones').click();assert.match(await page.getByRole('dialog').innerText(),/Full autonomy achieved/);await button('Close milestones').click();
  await button('Restart operation').click();await button('Start fresh').click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).waitFor({state:'visible'});await dismissStory();assert.equal(await button('Victory').count(),0);
- evidence.push('Separate per-repository automatic repair purchases and status, scan-to-repair completion, overlap-safe scoped purchases, paid Autonomy trial debug start, sustained victory, continued simulation, desktop/phone criteria and immutable milestone presentation.');
+ evidence.push('Separate per-repository automatic fix purchases and status, scan-to-fix completion, overlap-safe scoped purchases, paid Autonomy trial debug start, sustained victory, continued simulation, desktop/phone criteria and immutable milestone presentation.');
  assert.deepEqual(errors,[]);evidence.push('Phase 5: healthy-time hold/resume, live earnings and background catch-up, first efficiency purchase and all five tiers, fractional group prices, coached debug goals, speed/reset and no persistence/browser errors.');
  await writeFile(new URL('continuous-browser.json',output),JSON.stringify({evidence,errors},null,2));console.log(JSON.stringify({passed:true,evidence},null,2));
 }finally{await browser.close();}

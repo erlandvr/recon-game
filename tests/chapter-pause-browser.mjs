@@ -32,8 +32,8 @@ try{
  }
  await freeze('Opening briefing');await page.keyboard.press('Escape');assert.equal(await world(),0);
  await button('Start game').click();await tick(15);assert.match(await page.locator('.next-move h1').innerText(),/First problem detected/);
- await tick(60);await button('Scan Backend').click();await tick(3);await button('Repair Backend').click();assert.match(await page.locator('.queue-summary').innerText(),/2/);
- await tick(1);await button('Open company story').click();await freeze('Reopened briefing with running repair and queued findings');
+ await tick(60);await button('Scan Backend').click();await tick(3);await button('Fix Backend').click();assert.match(await page.locator('.queue-summary').innerText(),/2/);
+ await tick(1);await button('Open company story').click();await freeze('Reopened briefing with running fix and queued findings');
  const t=await world();await page.keyboard.press('Escape');assert.equal(await world(),t);await tick(1);assert.equal(await world(),t+1);
  // Other dialogs remain live; only chapter briefings suspend the ecosystem.
  await button('View log').click();const logTime=await world();await tick(2);assert.equal(await world(),logTime+2);await button('Close log').click();

@@ -4,6 +4,29 @@ Updated: 2026-10-12. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); th
 
 Earlier sections record delivery at that time. Pause/save checks and full-slot rejection were superseded by D42–D44; later sections record current verification. The earlier combined automation was superseded by D51; D69 now adds separately purchased automatic remediation. Fixed elapsed-time milestones and unattended debug presets are superseded by D65–D67.
 
+Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
+
+## Automation coverage markers (D100)
+
+- [x] Gold outlines/glow and Automated labels on fully covered repositories, modules and projects; partial or scan-only coverage stays unmarked.
+- [x] Focused unit tests cover both-automation requirements, partial/empty groups, degraded health and new uncovered members. Production build passes. Desktop browser checks cover unautomated starts, complete project/module labels, full repository cards and compact repository labels; screenshots inspected. Automation layout regression passes 20 views across four desktop sizes.
+
+## Chapter celebration (D99)
+
+- [x] Show a prominent 3.6-second completion animation before the next briefing, with the completed goal and upcoming chapter. Preserve reduced motion, dialog/visibility deferral and the briefing pause.
+- [x] Production build passes; the real-control first-chapter browser journey checks the completed 02:00 timer, delayed Chapter 2 modal, pause on entry, once-only delivery, reduced motion/2×, hidden-tab and other-dialog deferral, restart cancellation and desktop bounds.
+
+## Desktop UX follow-up (D92–D98)
+
+- [x] Simplify opening copy and oversize Start game.
+- [x] Record desktop/laptop-only scope; stop mobile validation.
+- [x] Scale lore to 150% and other text to 120% of original sizes.
+- [x] Apply Start game green to action buttons; retain original colours for chapter navigation, work slots, logo, map labels and system summaries.
+- [x] Replace player-facing Repair language with Fix.
+- [x] Remove system-heading buttons and details/findings popups; retain direct map actions and repository navigation.
+- [x] Submit affordable deadline-first fixes, displaying partial count and exact cost. Existing queue/prepayment rules remain.
+- [x] Production build and 71 engine/map tests pass. Desktop direct-actions browser check passes at 1280×800, 1024×768 and 800×700, including colour exceptions, no popup, partial spending, later remaining fix and guidance focus. Expanded ecosystem layout checks also pass at four desktop sizes (1440, 1280, 1024 and 800px wide), across connected/corporate/autonomy stages and focused/zoomed views. No mobile checks run.
+
 ## Stage 1 — establish the design baseline
 
 - [x] Capture the user's intent and distinguish it from working design choices.
@@ -366,3 +389,12 @@ Only mark implementation complete after inspecting or exercising it. Record test
 - [x] Preserve free initial start, completion celebration and live non-chapter dialogs.
 - [x] Pass 70 tests, production build, dedicated pause, story and completion browser checks; inspect desktop/phone opening screenshots.
 - [x] Full gameplay, health-feedback and finishing/sound regressions pass. Fix short-laptop deadline-card clipping and pass five-size automation-layout checks; inspect the corrected 1024×768 view.
+
+## D92 — opening copy cleanup (2026-10-12)
+
+- [x] Remove opening em dash, Chapter 1 subtitle and pre-start timer sentence; retain later labels and pause explanation.
+- [x] Update affected browser selectors. Production build and direct Chromium opening-copy check pass.
+
+## D93 — oversized Start game (2026-10-12)
+
+- [x] Full-width 64px button, bold 22px uppercase label. Build passes; direct Chromium checks at 1280×800 and 390×844 confirm no modal scrolling and successful start.

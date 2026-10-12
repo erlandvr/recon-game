@@ -26,10 +26,10 @@ try{
   if(a.type==='efficiency'){const q=efficiencyQuote(expected);await button(`Buy scan efficiency tier ${q.tier} for ${q.cost} credits`).click();}
   else if(a.type==='upgrade')await button(`Invest ${UPGRADES[a.upgrade].cost} credits`).click();
   else if(a.type==='scan')await button(`Scan ${name}`).click();
-  else if(a.type==='repair-repository')await button(`Repair ${name}`).click();
+  else if(a.type==='repair-repository')await button(`Fix ${name}`).click();
   else if(a.type==='automate')await button(`Automate ${name} scans for ${automationCost(expected)} credits`).click();
-  else if(a.type==='auto-repair')await button(`Automate ${name} repairs for 480 credits`).click();
-  else if(a.type==='repair'){await button(`Inspect ${name}`).click();await button(`Repair finding ${a.findingId}`).click();await page.keyboard.press('Escape');}
+  else if(a.type==='auto-repair')await button(`Automate ${name} fixes for 480 credits`).click();
+  else if(a.type==='repair'){await button(`Inspect ${name}`).click();await button(`Fix finding ${a.findingId}`).click();await page.keyboard.press('Escape');}
   else throw Error(`Unexpected action ${a.type}`);
   const result=act(expected,a);assert.ok(result.ok);expected=result.state;
   if(index%100===0){assert.equal(Number(await page.locator('[data-credits]').getAttribute('data-credits')),expected.credits);console.log(`Paid actions ${index}/${data.plan.length}; elapsed ${now}s`);}

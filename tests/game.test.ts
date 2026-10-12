@@ -10,7 +10,7 @@ function firstRepair(): GameState {
   s = advance(action(s, { type: 'scan' }), 3);
   return advance(action(s, { type: 'repair', findingId: 1 }), 5);
 }
-test('first loop: income, symptoms, discovery, spending and repair completion', () => {
+test('first loop: income, symptoms, discovery, spending and fix completion', () => {
   let s = advance(running(), 15);
   assert.equal(s.credits, 70); assert.equal(health(s), 80); assert.equal(s.findings[0].known, false);
   const before = s;
@@ -30,7 +30,7 @@ test('scan captures start-time coverage and later development stays hidden', () 
   s = advance(action(s, { type: 'scan' }), 3);
   assert.equal(s.findings[0].known, true); assert.equal(scanStale(s), false);
 });
-test('rescans preserve discovery and never resurrect repaired findings', () => {
+test('rescans preserve discovery and never resurrect fixed findings', () => {
   let s = firstRepair();
   s = advance(action(s, { type: 'scan' }), 3);
   assert.equal(s.findings.length, 1); assert.equal(s.findings[0].repairedAt, 23); assert.equal(s.stats.repairs, 1);
@@ -39,7 +39,7 @@ test('rescans preserve discovery and never resurrect repaired findings', () => {
   s = advance(action(s, { type: 'scan' }), 3);
   assert.equal(s.findings.filter(f => f.known && f.repairedAt === null).length, 1);
 });
-test('unknown and duplicate repairs reject; full slots accept a distinct queued scan', () => {
+test('unknown and duplicate fixes reject; full slots accept a distinct queued scan', () => {
   let s = advance(running(), 15);
   assert.equal(act(s, { type: 'repair', findingId: 1 }).ok, false);
   s = action(s, { type: 'scan' });

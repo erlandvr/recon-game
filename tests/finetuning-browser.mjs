@@ -18,13 +18,13 @@ try{
  const credits=await page.locator('.operation-strip').innerText();await tick(90);await page.keyboard.press('Escape');
  assert.equal(await page.getByRole('dialog').count(),1);assert.equal(await page.locator('.operation-strip').innerText(),credits);assert.equal(await page.locator('.world-time time').innerText(),'00:00');
  await button('Start game').click();assert.equal(await button('Chapter sound').getAttribute('aria-pressed'),'false');assert.match(await page.locator('.medal-target').innerText(),/Gold/);
- await tick(15);await button('Scan Backend').click();await tick(3);await button('Repair Backend').click();await tick(5);
- assert.equal(await page.locator('.system-card').getAttribute('data-feedback'),'Repair complete');assert.equal(await page.locator('.system-card').evaluate(e=>getComputedStyle(e).animationName),'none');await tick(1);assert.equal(await page.locator('.system-card').getAttribute('data-feedback'),null);
+ await tick(15);await button('Scan Backend').click();await tick(3);await button('Fix Backend').click();await tick(5);
+ assert.equal(await page.locator('.system-card').getAttribute('data-feedback'),'Fix complete');assert.equal(await page.locator('.system-card').evaluate(e=>getComputedStyle(e).animationName),'none');await tick(1);assert.equal(await page.locator('.system-card').getAttribute('data-feedback'),null);
  await button('Chapter sound').click();assert.equal(await button('Chapter sound').getAttribute('aria-pressed'),'true');
  const progress=async()=>Number(await page.locator('[data-healthy-time]').getAttribute('data-healthy-time'));
  for(let n=0;n<100&&(await progress())<120;n++){
   if(await button('Scan Backend').isEnabled()){await button('Scan Backend').click();await tick(3)}
-  if(await button('Repair Backend').isEnabled()){await button('Repair Backend').click();await tick(5)}
+  if(await button('Fix Backend').isEnabled()){await button('Fix Backend').click();await tick(5)}
   if(await progress()<120)await tick(Math.min(5,120-await progress()));
  }
  assert.equal(await page.evaluate(()=>window.audioNotes),3);await tick(5);assert.equal(await page.evaluate(()=>window.audioNotes),3);
@@ -35,5 +35,5 @@ try{
  await page.clock.fastForward(300*1000);await tick(2);assert.match(await page.locator('.medal-target').innerText(),/Bronze/);
  for(let i=0;i<3;i++)await button('Recon logo').click();await page.getByRole('button',{name:/^Connected systems /}).click();await button('Start Next Chapter').click();await tick(100);
  await button('Automate Backend scans for 210 credits').click();await page.waitForTimeout(50);assert.equal(await page.locator('.node-backend').getAttribute('data-feedback'),'Automation enabled');await tick(1);assert.equal(await page.locator('.node-backend').getAttribute('data-feedback'),null);
- assert.deepEqual(errors,[]);await writeFile('test-results/finetuning-browser.json',JSON.stringify({passed:true,checks:['opening waits without earnings or elapsed time','Escape cannot skip start','repair feedback and reduced motion','sound opt-in, once per completion, opt-out','later story pauses','restart returns to waiting','medal targets advance to silver and bronze','automation purchase confirmation'],errors},null,2));console.log('Finetuning browser checks passed');
+ assert.deepEqual(errors,[]);await writeFile('test-results/finetuning-browser.json',JSON.stringify({passed:true,checks:['opening waits without earnings or elapsed time','Escape cannot skip start','fix feedback and reduced motion','sound opt-in, once per completion, opt-out','later story pauses','restart returns to waiting','medal targets advance to silver and bronze','automation purchase confirmation'],errors},null,2));console.log('Finetuning browser checks passed');
 }finally{await browser.close()}

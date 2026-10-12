@@ -19,8 +19,8 @@ try{
  fonts.requests=fontRequests;
  assert.ok(fonts.loaded,'All three supplied font faces load');assert.match(fonts.body,/Space Grotesk/);
  assert.ok(fonts.requests.length>=3);assert.ok(fonts.requests.every(src=>new URL(src).origin===new URL(url).origin&&new URL(src).pathname.startsWith('/recon-game/assets/')),'Fonts are served by the game beneath the Pages prefix');
- await button('Start game').click();await page.clock.runFor(15000);await button('Scan Backend').click();await page.clock.runFor(3000);await button('Repair Backend').click();await page.clock.runFor(5000);assert.equal(await page.locator('.world-time time').innerText(),'00:23');assert.match(await page.locator('.node-backend').innerText(),/100%/);
+ await button('Start game').click();await page.clock.runFor(15000);await button('Scan Backend').click();await page.clock.runFor(3000);await button('Fix Backend').click();await page.clock.runFor(5000);assert.equal(await page.locator('.world-time time').innerText(),'00:23');assert.match(await page.locator('.node-backend').innerText(),/100%/);
  await mkdir('test-results',{recursive:true});
  for(const [width,height] of [[1280,800],[390,844]]){await page.setViewportSize({width,height});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1||document.documentElement.scrollHeight>innerHeight+1),false);await page.screenshot({path:`test-results/published-${width}.png`});}
- assert.deepEqual(errors,[]);await writeFile('test-results/published-browser.json',JSON.stringify({passed:true,url,checks:['production asset base','self-hosted Recon fonts','free rules reading','paid scan and repair','healthy recovery','desktop and phone bounds'],fonts,errors},null,2));console.log(`PASS: ${url}`);
+ assert.deepEqual(errors,[]);await writeFile('test-results/published-browser.json',JSON.stringify({passed:true,url,checks:['production asset base','self-hosted Recon fonts','free rules reading','paid scan and fix','healthy recovery','desktop and phone bounds'],fonts,errors},null,2));console.log(`PASS: ${url}`);
 }finally{await browser.close()}

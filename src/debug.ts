@@ -38,6 +38,6 @@ export function debugGame(id:DebugStart,seed:number) {
   }
   if(!reached())throw new Error('Debug strategy could not reach this stage.');
   s.practice=id!=='backend';
-  s.events.push({id:++s.sequence,at:s.time,text:`Debug start: ${DEBUG_STARTS.find(item=>item.id===id)!.name}. Earlier progress uses a coached run with paid scans, repairs and upgrades.`,kind:'info'});
+  s.events.push({id:++s.sequence,at:s.time,text:`Debug start: ${DEBUG_STARTS.find(item=>item.id===id)!.name}. Earlier progress uses a coached run with paid scans, fixes and upgrades.`,kind:'info'});
   s.events=s.events.slice(-80);return s;
 }

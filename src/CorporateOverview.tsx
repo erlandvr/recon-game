@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Action, GameState } from './game.ts';
-import { scopeQuote } from './game.ts';
+import { scopeQuote, fullyAutomated } from './game.ts';
 import { activeServices, serviceFindings, serviceHealth, type ServiceId } from './campaign.ts';
 import { CORPORATE, scopeRepositories, type Scope } from './organization.ts';
 import { ecosystemLayout, placeGroupLabels, fitCamera, mapBounds, zoomCamera, type Camera, type Point } from './ecosystemMap.ts';
 import SystemNode from './SystemNode.tsx';
 
-type Props = { focusRequest: {id:ServiceId} | null; state: GameState; dispatch: (a: Action) => void; inspect: (id: ServiceId) => void; selected: ServiceId | null; onNavigate: () => void; registerNode: (id: ServiceId, node: HTMLButtonElement | null) => void };
-export default function CorporateOverview({ focusRequest, state: s, dispatch, inspect, selected, onNavigate, registerNode }: Props) {
+type Props = { focusRequest: {id:ServiceId} | null; state: GameState; dispatch: (a: Action) => void; registerNode: (id: ServiceId, node: HTMLElement | null) => void };
+export default function CorporateOverview({ focusRequest, state: s, dispatch, registerNode }: Props) {
   const layout = useMemo(() => ecosystemLayout(s.organization), [s.organization.seed]);
   const [scope, setScope] = useState<Scope | null>(null);
   const [camera, setCamera] = useState<Camera>({x:0,y:0,zoom:1});
@@ -54,11 +54,11 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, in
     fitMode.current=null;
     setCamera({zoom:1,x:sizeRef.current.width/2-point.x,y:sizeRef.current.height/2-point.y});
   }, [focusRequest, layout]);
-  function navigate(target: Scope | null) { setScope(target); fitMode.current = target ?? 'all'; frame(target ?? 'all'); onNavigate(); }
+  function navigate(target: Scope | null) { setScope(target); fitMode.current = target ?? 'all'; frame(target ?? 'all'); }
   function focusRepo(id: ServiceId) {
     const repo = s.organization.repositories.find(r=>r.id===id)!;
     setScope({level:'module',id:repo.moduleId}); fitMode.current = null;
-    const point=layout.repos[id];setCamera({zoom:1,x:size.width/2-point.x,y:size.height/2-point.y});onNavigate();
+    const point=layout.repos[id];setCamera({zoom:1,x:size.width/2-point.x,y:size.height/2-point.y});
   }
   const position = (p: Point) => ({left:camera.x+p.x*camera.zoom,top:camera.y+p.y*camera.zoom});
   const inView = (p: Point, margin=140) => {const x=camera.x+p.x*camera.zoom,y=camera.y+p.y*camera.zoom;return x>-margin&&x<size.width+margin&&y>-margin&&y<size.height+margin;};
@@ -95,7 +95,7 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, in
       <select aria-label="Find repository" value="" onChange={e=>focusRepo(e.target.value as ServiceId)}><option value="" disabled>Find repo…</option>{active.map(id=><option key={id} value={id}>{s.organization.repositories.find(r=>r.id===id)!.name}</option>)}</select>
     </div>
     {scope&&<div className="scope-actions" aria-label="Group actions">{(['scan','repair','automate','auto-repair'] as const).map(operation=>{
-      const quote=scopeQuote(s,scope,operation),label=operation==='auto-repair'?'Auto-repairs':operation==='automate'?'Auto-scans':operation==='repair'?'Repair':'Scan';
+      const quote=scopeQuote(s,scope,operation),label=operation==='auto-repair'?'Auto-fixes':operation==='automate'?'Auto-scans':operation==='repair'?'Fix':'Scan';
       return <button key={operation} aria-label={`${label} ${scope.level} ${module?.name??project?.name}`} disabled={!!quote.reason} title={quote.reason??'Ordinary costs and shared slots. Manual overflow queues; automation uses spare slots.'} onClick={()=>dispatch({type:'scope',scope,operation})}><strong>{label} {quote.actions.length}</strong><span>{quote.cost} cr</span></button>;
     })}</div>}
     <div ref={viewport} className="ecosystem-canvas" tabIndex={0} role="region" aria-label="Zoomable ecosystem" aria-describedby="canvas-help" data-zoom={camera.zoom} data-camera-x={camera.x} data-camera-y={camera.y}
@@ -110,13 +110,14 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, in
       </g>{focusedLabels.map(label=>{const p=labelPositions[label.id];return <line key={label.id} className="membership-wire" x1={label.x} y1={label.y} x2={p.x} y2={p.y}/>;})}</svg>
       {groups.filter(g=>g.level===groupLevel && (g.level==='project' || (!repoLabels && (!framingProject || !project || g.projectId===project.id)))).map(g=>{
         const ids=scopeRepositories(s,g),p=g.level==='module'?layout.modules[g.id]:layout.projects[g.id];if(!ids.length||!inView(p))return null;
+        const automated=fullyAutomated(s,ids);
         const average=Math.round(ids.reduce((sum,id)=>sum+serviceHealth(s,id),0)/ids.length);
-        return <button key={g.id} className={`map-group-label ${average<100?'degraded':''} ${g.level==='module'&&camera.zoom<.065?'compact-group':''}`} style={{...(labelPositions[g.id]?{left:labelPositions[g.id].x,top:labelPositions[g.id].y}:position(p)),width:groupWidth(g.level)}} title={`${g.name} · ${g.level} · ${ids.length} repos · ${average}% health`} aria-label={`Open ${g.name} ${g.level}`} onClick={()=>navigate(g)}>{!(g.level==='module'&&camera.zoom<.065)&&<small>{ids.length} repos</small>}<strong>{g.name}</strong><span>{average}%</span></button>;
+        return <button key={g.id} className={`map-group-label ${automated?'fully-automated':''} ${average<100?'degraded':''} ${g.level==='module'&&camera.zoom<.065?'compact-group':''}`} style={{...(labelPositions[g.id]?{left:labelPositions[g.id].x,top:labelPositions[g.id].y}:position(p)),width:groupWidth(g.level)}} title={`${g.name} · ${g.level} · ${ids.length} repos · ${average}% health${automated?' · Automated scans and fixes':''}`} aria-label={`Open ${g.name} ${g.level}`} onClick={()=>navigate(g)}>{automated?<small className="automation-badge">Automated</small>:!(g.level==='module'&&camera.zoom<.065)&&<small>{ids.length} repos</small>}<strong>{g.name}</strong><span>{average}%</span></button>;
       })}
       {active.map(id=>{const p=layout.repos[id];if(!inView(p)||!repoLabels)return null;
-        const repo=s.organization.repositories.find(r=>r.id===id)!,h=serviceHealth(s,id),findings=serviceFindings(s,id);
+        const repo=s.organization.repositories.find(r=>r.id===id)!,h=serviceHealth(s,id),findings=serviceFindings(s,id),automated=fullyAutomated(s,[id]);
         // Full cards need the world spacing at 100%; keep compact nodes below it.
-        return camera.zoom>=1 ? <div className="map-repo-detail" key={id} style={position(p)}><SystemNode state={s} serviceId={id} dispatch={dispatch} inspect={()=>inspect(id)} expanded={selected===id} inspectRef={node=>registerNode(id,node)}/></div> : <button key={id} className={`map-repo-label ${h<100?'degraded':''}`} style={{...position(p),width:Math.min(112,Math.max(68,290*camera.zoom-4))}} title={repo.name} aria-label={`Focus ${repo.name}`} onClick={()=>focusRepo(id)}><strong>{repo.name}</strong><span>{h}% · {findings.length} open</span></button>;
+        return camera.zoom>=1 ? <div className="map-repo-detail" key={id} style={position(p)}><SystemNode state={s} serviceId={id} dispatch={dispatch} nodeRef={node=>registerNode(id,node)}/></div> : <button key={id} className={`map-repo-label ${h<100?'degraded':''} ${automated?'fully-automated':''}`} style={{...position(p),width:Math.min(112,Math.max(68,290*camera.zoom-4))}} title={`${repo.name} · ${h}% health · ${findings.length} open${automated?' · Automated scans and fixes':''}`} aria-label={`Focus ${repo.name}`} onClick={()=>focusRepo(id)}><strong>{repo.name}</strong>{automated?<span className="automation-badge">Automated</span>:<span>{h}% · {findings.length} open</span>}</button>;
       })}
     </div>
     <div className="canvas-bottom"><span id="canvas-help">Two fingers to pan · pinch to zoom</span><div className="canvas-zoom" aria-label="Map zoom controls"><button aria-label="Zoom out" onClick={()=>zoom(1/1.4)}>−</button><output>{Math.round(camera.zoom*100)}%</output><button aria-label="Zoom in" onClick={()=>zoom(1.4)}>+</button><button onClick={()=>navigate(null)}>Fit all</button></div>

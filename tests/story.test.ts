@@ -18,18 +18,18 @@ test('story waits for earned milestones, not elapsed time, and resets with a new
   assert.equal(chapterIndex(newGame()),0);
 });
 
-test('guidance follows scan, discovery, repair and completion without duplicate orders', () => {
+test('guidance follows scan, discovery, fix and completion without duplicate orders', () => {
   let s=advance(newGame(),15);
   assert.equal(nextMove(s).target,'backend');assert.match(nextMove(s).title,/Scan Backend/);
   s=act(s,{type:'scan'}).state;
   assert.equal(nextMove(s).target,undefined);assert.match(nextMove(s).title,/underway/);
-  s=advance(s,3);assert.match(nextMove(s).title,/Repair Backend/);
+  s=advance(s,3);assert.match(nextMove(s).title,/Fix Backend/);
   s=act(s,{type:'repair',findingId:1}).state;assert.equal(nextMove(s).target,undefined);
   s=advance(s,5);assert.equal(nextMove(s).destination,'investments');assert.match(nextMove(s).detail,/Keep 20 cr/);
   s=act(s,{type:'efficiency'}).state;assert.match(nextMove(s).detail,/Keep 19 cr/);
 });
 
-test('guidance prioritizes known deadlines and explains insufficient repair funds', () => {
+test('guidance prioritizes known deadlines and explains insufficient fix funds', () => {
   const s=timelineFixture(210);s.findings.forEach(f=>f.known=true);
   s.findings.push({id:999,known:true,repairedAt:null,bornAt:s.time,deadline:s.time+5,serviceId:'auth',title:'Urgent',description:''});
   s.credits=0;const before=structuredClone(s),move=nextMove(s);
