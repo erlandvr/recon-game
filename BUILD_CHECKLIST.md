@@ -354,4 +354,5 @@ Only mark implementation complete after inspecting or exercising it. Record test
 - [x] Pass all 70 tests and production build under the GitHub Pages base path.
 - [x] Pass Chromium automation layout at five sizes, story, full gameplay, chapter completion and production font/scan/repair smoke checks; inspect desktop/phone screenshots.
 - [x] Record provenance/adaptations and review screenshots in DESIGN_SYSTEM.md.
-- [ ] Push branch and open GitHub PR; verify remote checks. Main publication stays unchanged pending merge.
+- [x] Push branch and open [GitHub PR #1](https://github.com/erlandvr/recon-game/pull/1). Main publication stays unchanged pending merge.
+- Remote Node 24 test/build status is tracked on PR #1; browser checks above were run locally.
