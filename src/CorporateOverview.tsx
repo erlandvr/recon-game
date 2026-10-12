@@ -21,24 +21,45 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, re
   const active = activeServices(s);
   const project = scope ? s.organization.projects.find(p => p.id === (scope.level === 'project' ? scope.id : s.organization.modules.find(m=>m.id===scope.id)?.projectId)) : undefined;
   const module = scope?.level === 'module' ? s.organization.modules.find(m=>m.id===scope.id) : undefined;
+  const cameraRef=useRef(camera);cameraRef.current=camera;
+  const cameraAnimation=useRef<number|null>(null),hasFramed=useRef(false);
+  function stopCamera(){if(cameraAnimation.current!==null){cancelAnimationFrame(cameraAnimation.current);cameraAnimation.current=null;}}
+  useEffect(()=>()=>stopCamera(),[]);
+  function moveCamera(target:Camera){
+    stopCamera();
+    if(latest.current.time===0||!hasFramed.current||window.matchMedia('(prefers-reduced-motion: reduce)').matches){hasFramed.current=true;setCamera(target);return;}
+    const from=cameraRef.current,start=performance.now();
+    function animate(now:number){
+      const t=Math.min(1,(now-start)/850),ease=1-(1-t)**3;
+      setCamera({x:from.x+(target.x-from.x)*ease,y:from.y+(target.y-from.y)*ease,zoom:from.zoom+(target.zoom-from.zoom)*ease});
+      cameraAnimation.current=t<1?requestAnimationFrame(animate):null;
+    }
+    cameraAnimation.current=requestAnimationFrame(animate);
+  }
   const frame = (target: Scope | 'all', dimensions = sizeRef.current) => {
     const ids = target === 'all' ? activeServices(latest.current) : scopeRepositories(latest.current,target);
-    setCamera(fitCamera(mapBounds(ids.map(id=>layout.repos[id])), dimensions));
+    const targetCamera=fitCamera(mapBounds(ids.map(id=>layout.repos[id])), dimensions);
+    if(s.speed&&ids.length===1){const p=layout.repos[ids[0]];targetCamera.zoom=1;targetCamera.x=dimensions.width/2-p.x;targetCamera.y=dimensions.height/2-p.y;}
+    moveCamera(targetCamera);
   };
   useEffect(() => {
     const element = viewport.current!;
+    let windowSize = {width:window.innerWidth,height:window.innerHeight};
     const observer = new ResizeObserver(([entry]) => {
       const next = {width:entry.contentRect.width,height:entry.contentRect.height};
       if (!next.width || !next.height) return;
       const previous = sizeRef.current;
       sizeRef.current = next; setSize(next);
+      const resized = next.width !== previous.width || windowSize.width !== window.innerWidth || windowSize.height !== window.innerHeight;
+      windowSize = {width:window.innerWidth,height:window.innerHeight};
+      if (resized) { setScope(null); fitMode.current = 'all'; }
       if (fitMode.current) frame(fitMode.current,next);
       else setCamera(c=>({...c,x:c.x+(next.width-previous.width)/2,y:c.y+(next.height-previous.height)/2}));
     });
     observer.observe(element);
     // Trackpads pan with two fingers; browsers expose pinch as ctrl+wheel.
     const wheel = (e: WheelEvent) => {
-      e.preventDefault(); fitMode.current = null;
+      e.preventDefault(); stopCamera(); fitMode.current = null;
       const rect = element.getBoundingClientRect();
       const factor = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? rect.height : 1;
       if (e.ctrlKey || e.metaKey) setCamera(c=>zoomCamera(c,{x:e.clientX-rect.left,y:e.clientY-rect.top},Math.exp(-e.deltaY*factor*.01)));
@@ -49,6 +70,7 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, re
   }, [layout]);
   useEffect(() => {
     if (!focusRequest) return;
+    stopCamera();
     const id=focusRequest.id, point=layout.repos[id];
     setScope({level:'module',id:latest.current.organization.repositories.find(r=>r.id===id)!.moduleId});
     fitMode.current=null;
@@ -56,13 +78,14 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, re
   }, [focusRequest, layout]);
   function navigate(target: Scope | null) { setScope(target); fitMode.current = target ?? 'all'; frame(target ?? 'all'); }
   function focusRepo(id: ServiceId) {
+    stopCamera();
     const repo = s.organization.repositories.find(r=>r.id===id)!;
     setScope({level:'module',id:repo.moduleId}); fitMode.current = null;
     const point=layout.repos[id];setCamera({zoom:1,x:size.width/2-point.x,y:size.height/2-point.y});
   }
   const position = (p: Point) => ({left:camera.x+p.x*camera.zoom,top:camera.y+p.y*camera.zoom});
   const inView = (p: Point, margin=140) => {const x=camera.x+p.x*camera.zoom,y=camera.y+p.y*camera.zoom;return x>-margin&&x<size.width+margin&&y>-margin&&y<size.height+margin;};
-  const zoom = (factor:number) => {fitMode.current=null;setCamera(c=>zoomCamera(c,{x:size.width/2,y:size.height/2},factor));};
+  const zoom = (factor:number) => {stopCamera();fitMode.current=null;setCamera(c=>zoomCamera(c,{x:size.width/2,y:size.height/2},factor));};
   function movePointer(e: React.PointerEvent) {
     const old = pointers.current.get(e.pointerId); if (!old) return;
     const next = {x:e.clientX,y:e.clientY};
@@ -85,6 +108,10 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, re
   const groupWidth=(level:'module'|'project')=>level==='project'?Math.min(142,Math.max(68,3400*camera.zoom-14)):Math.min(130,Math.max(64,1100*camera.zoom));
   const focusedLabels=framingProject&&project ? s.organization.modules.filter(m=>m.projectId===project.id&&scopeRepositories(s,{level:'module',id:m.id}).length).map(m=>({id:m.id,x:layout.modules[m.id].x*camera.zoom+camera.x,y:layout.modules[m.id].y*camera.zoom+camera.y,width:groupWidth('module'),height:camera.zoom<.065?48:64})) : [];
   const labelPositions=placeGroupLabels(focusedLabels,size);
+  // Growth always returns to the whole ecosystem, including from a focused repo.
+  // Normal ticks leave the player's camera alone between arrivals.
+  useEffect(()=>{navigate(null);},[active.length]);
+  const actionScope=s.speed&&!s.campaign?null:scope??(s.speed?{level:'project' as const,id:s.organization.projects[0].id}:null);
   return <div className="ecosystem-canvas-shell">
     <div className="canvas-toolbar">
       <nav className="scope-path" aria-label="Ecosystem focus">
@@ -94,13 +121,13 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, re
       </nav>
       <select aria-label="Find repository" value="" onChange={e=>focusRepo(e.target.value as ServiceId)}><option value="" disabled>Find repo…</option>{active.map(id=><option key={id} value={id}>{s.organization.repositories.find(r=>r.id===id)!.name}</option>)}</select>
     </div>
-    {scope&&<div className="scope-actions" aria-label="Group actions">{(['scan','repair','automate','auto-repair'] as const).map(operation=>{
-      const quote=scopeQuote(s,scope,operation),label=operation==='auto-repair'?'Auto-fixes':operation==='automate'?'Auto-scans':operation==='repair'?'Fix':'Scan';
-      return <button key={operation} aria-label={`${label} ${scope.level} ${module?.name??project?.name}`} disabled={!!quote.reason} title={quote.reason??'Ordinary costs and shared slots. Manual overflow queues; automation uses spare slots.'} onClick={()=>dispatch({type:'scope',scope,operation})}><strong>{label} {quote.actions.length}</strong><span>{quote.cost} cr</span></button>;
+    {actionScope&&<div className="scope-actions" aria-label="Group actions">{(['scan','repair','automate','auto-repair'] as const).map(operation=>{
+      const quote=scopeQuote(s,actionScope,operation),label=operation==='auto-repair'?'Auto-fixes':operation==='automate'?'Auto-scans':operation==='repair'?'Fix':'Scan';
+      return <button key={operation} aria-label={`${label} ${actionScope.level} ${module?.name??project?.name??s.organization.projects[0].name}`} disabled={!!quote.reason} title={quote.reason??'Ordinary costs and shared slots. Manual overflow queues; automation uses spare slots.'} onClick={()=>dispatch({type:'scope',scope:actionScope,operation})}><strong>{label} {quote.actions.length}</strong><span>{quote.cost} cr</span></button>;
     })}</div>}
     <div ref={viewport} className="ecosystem-canvas" tabIndex={0} role="region" aria-label="Zoomable ecosystem" aria-describedby="canvas-help" data-zoom={camera.zoom} data-camera-x={camera.x} data-camera-y={camera.y}
-      onKeyDown={e=>{if(e.target!==e.currentTarget)return; if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Home'].includes(e.key)){e.preventDefault();fitMode.current=null;if(e.key==='Home')navigate(null);else if(e.key==='+'||e.key==='=')zoom(1.3);else if(e.key==='-')zoom(1/1.3);else setCamera(c=>({...c,x:c.x+(e.key==='ArrowLeft'?70:e.key==='ArrowRight'?-70:0),y:c.y+(e.key==='ArrowUp'?70:e.key==='ArrowDown'?-70:0)}));}}}
-      onPointerDown={e=>{if(e.button!==0)return;dragged.current=false;if((e.target as Element).closest('button,select'))return;pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});e.currentTarget.setPointerCapture(e.pointerId);e.currentTarget.focus();}}
+      onKeyDown={e=>{if(e.target!==e.currentTarget)return; if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Home'].includes(e.key)){e.preventDefault();stopCamera();fitMode.current=null;if(e.key==='Home')navigate(null);else if(e.key==='+'||e.key==='=')zoom(1.3);else if(e.key==='-')zoom(1/1.3);else setCamera(c=>({...c,x:c.x+(e.key==='ArrowLeft'?70:e.key==='ArrowRight'?-70:0),y:c.y+(e.key==='ArrowUp'?70:e.key==='ArrowDown'?-70:0)}));}}}
+      onPointerDown={e=>{if(e.button!==0)return;stopCamera();dragged.current=false;if((e.target as Element).closest('button,select'))return;pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});e.currentTarget.setPointerCapture(e.pointerId);e.currentTarget.focus();}}
       onPointerMove={movePointer} onPointerUp={e=>{pointers.current.delete(e.pointerId);}} onPointerCancel={e=>{pointers.current.delete(e.pointerId);}} onLostPointerCapture={e=>pointers.current.delete(e.pointerId)}
       onClickCapture={e=>{if(dragged.current){e.preventDefault();e.stopPropagation();dragged.current=false;}}}>
       <svg className="ecosystem-wires" width="100%" height="100%" aria-hidden="true"><g transform={`translate(${camera.x} ${camera.y}) scale(${camera.zoom})`}>
@@ -122,6 +149,6 @@ export default function CorporateOverview({ focusRequest, state: s, dispatch, re
     </div>
     <div className="canvas-bottom"><span id="canvas-help">Two fingers to pan · pinch to zoom</span><div className="canvas-zoom" aria-label="Map zoom controls"><button aria-label="Zoom out" onClick={()=>zoom(1/1.4)}>−</button><output>{Math.round(camera.zoom*100)}%</output><button aria-label="Zoom in" onClick={()=>zoom(1.4)}>+</button><button onClick={()=>navigate(null)}>Fit all</button></div>
     </div>
-    <div className="canvas-caption"><span>{s.campaign!.repositoryCount<CORPORATE.maxRepositories?`Next repo in ${Math.max(0,Math.ceil(s.campaign!.nextRepositoryAt-s.time))}s`:'100 repos · live'}</span></div>
+    <div className="canvas-caption"><span>{s.speed?`${active.length}/12 repos · ${s.speed.expansion?'team connecting':'live'}`:s.campaign!.repositoryCount<CORPORATE.maxRepositories?`Next repo in ${Math.max(0,Math.ceil(s.campaign!.nextRepositoryAt-s.time))}s`:'100 repos · live'}</span></div>
   </div>;
 }

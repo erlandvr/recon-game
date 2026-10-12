@@ -549,3 +549,39 @@ button:not(:disabled) .node-warning{color:#822b16!important}
 .system-card .automation-badge,.map-group-label .automation-badge,.map-repo-label .automation-badge{color:var(--medal-gold);font-weight:700}
 .map-group-label .automation-badge{font-size:calc(9px * var(--text-scale));line-height:1;white-space:nowrap}
 .map-group-label.compact-group.fully-automated{height:64px}
+
+/* Two deliberate journeys, one ecosystem visual language. Desktop/laptop only. */
+.mode-entry{min-height:100dvh;height:auto}.mode-intro{max-width:1060px;margin:clamp(20px,5vh,60px) auto;width:100%;flex:initial}.mission-eyebrow{color:var(--primary);font-size:calc(12px * var(--text-scale))}.mode-intro h1{font-size:clamp(36px,4.5vw,60px);line-height:1.06;letter-spacing:-2px;margin:12px 0 20px}.mode-intro>p{color:var(--muted-foreground);line-height:1.5}.mode-options{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}.mode-options article{border:1px solid var(--border);border-top:2px solid var(--primary);background:var(--card);padding:24px}.mode-duration{font-family:var(--font-micrographics);color:var(--primary);float:right}.mode-options h2{font-size:calc(22px * var(--text-scale));margin-bottom:10px}.mode-options p{color:var(--muted-foreground);max-width:32ch}.mode-options ul{padding-left:20px;line-height:1.8;margin:20px 0}.mode-options button{width:100%;padding:14px}.mode-footnote{font-size:calc(11px * var(--text-scale));margin-top:20px}.mode-back{margin-top:12px}.speed-game .map-world{grid-template-rows:auto minmax(190px,1fr) auto}.speed-guide{display:grid;gap:6px}.speed-guide h2{font-size:calc(16px * var(--text-scale))}.speed-guide p{color:var(--muted-foreground);font-size:calc(12px * var(--text-scale))}.speed-coverage{display:flex;gap:12px;font-size:calc(10px * var(--text-scale));color:var(--muted-foreground)}.gold-text{color:var(--medal-gold)}.speed-next{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:28px;font-size:calc(11px * var(--text-scale))}.speed-next button{padding:4px 8px;flex-shrink:0}.speed-clock small{font-size:calc(10px * var(--text-scale));color:var(--muted-foreground)}.speed-first-system{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;flex:1;background-image:radial-gradient(var(--map-grid) .8px,transparent .8px);background-size:22px 22px}.speed-first-system .system-card{position:relative;left:auto;top:auto;transform:none;width:240px}.speed-first-system>p{color:var(--muted-foreground);font-size:calc(12px * var(--text-scale))}.speed-tip{font-size:calc(12px * var(--text-scale));line-height:1.4;color:var(--muted-foreground);margin-top:12px}.speed-beat{color:var(--primary);animation:speed-beat-in .5s ease-out}.speed-result-stats{display:flex;gap:28px;padding:20px 0}.speed-result-stats dt{font-size:calc(12px * var(--text-scale));color:var(--muted-foreground)}.speed-result-stats dd{font-size:calc(24px * var(--text-scale));font-weight:700}.speed-medal{display:flex;gap:16px;align-items:center;color:var(--medal-gold)}.speed-medal.medal-silver{color:var(--medal-silver)}.speed-medal.medal-bronze{color:var(--medal-bronze)}.speed-medal>span{font-size:70px}.speed-medal h3{text-transform:capitalize}.speed-game .event-ticker{min-height:44px}.speed-game .event-ticker span{white-space:normal;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}.speed-game .capacity-column{gap:10px}
+@keyframes speed-beat-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-height:800px){.mode-intro{margin:16px auto}.mode-intro h1{font-size:38px;margin:8px 0 12px}.mode-options{margin-top:16px}.mode-options article{padding:18px}.mode-options ul{margin:10px 0}.speed-game .map-world{gap:8px}.speed-guide{gap:4px}.speed-tip{display:none}.speed-game .operation-strip{padding-top:8px;padding-bottom:8px}.speed-guide h2{font-size:calc(14px * var(--text-scale))}.speed-guide p{font-size:calc(11px * var(--text-scale))}}
+@media(prefers-reduced-motion:reduce){.speed-beat{animation:none}}
+.speed-game .global-controls button{width:auto;height:auto;min-height:40px;padding:8px 14px;font-size:calc(12px * var(--text-scale));white-space:nowrap}
+.speed-game .repo-dot{animation:speed-arrival .85s ease-out}
+@keyframes speed-arrival{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.speed-game .repo-dot{animation:none}}
+.speed-game .session-layout .map-world:has(.ecosystem-canvas-shell){grid-template-rows:auto minmax(0,1fr) auto}
+.speed-game .speed-guide .section-heading>button{min-height:28px;padding:4px 9px;font-size:calc(11px * var(--text-scale))}
+.speed-game .speed-next,.speed-game .speed-next button{min-height:26px}
+.speed-game .map-upgrades.investments article{padding:5px;gap:3px}
+.speed-game .investments .efficiency-upgrade small{display:none!important}
+.speed-game .health-status{min-height:24px}
+.speed-game .event-ticker{min-height:32px;padding:6px 0}
+@media(min-width:651px) and (max-height:850px){.speed-game .ecosystem-canvas{min-height:160px}.speed-game .game-layout{padding-top:4px;padding-bottom:4px}.speed-game .speed-guide{gap:3px}}
+@media(min-width:651px) and (max-height:760px){.speed-game .speed-coverage{display:none}.speed-game .speed-clock small{font-size:11px}.speed-game .speed-guide p{line-height:1.3}}
+.app.speed-game .health-status{min-height:24px}
+@media(min-width:651px) and (max-height:760px){.speed-game .scope-actions button{padding:2px;min-height:30px}.speed-game .speed-guide{gap:2px}}
+.speed-game footer{padding-top:6px;padding-bottom:6px}
+
+/* Keep queued action labels on one line on short laptop canvases. */
+@media(min-width:651px) and (max-height:850px){.speed-game .session-layout:has(.investments) .map-repo-detail .system-card{width:270px;grid-template-columns:minmax(0,1fr) 140px}}
+
+@media(min-width:651px) and (max-height:850px){
+ .speed-game .session-layout:has(.investments) .map-repo-detail .node-automation,.speed-game .map-repo-detail .repair-automation{padding-bottom:0}
+ .speed-game .session-layout:has(.investments) .map-repo-detail .node-actions{padding:2px 5px}
+ .speed-game .map-repo-detail .node-automation button,.speed-game .map-repo-detail .automation-state{min-height:36px;padding:2px}
+}
+@media(min-width:651px) and (max-height:850px){
+ .speed-game .speed-coverage{display:none}
+ .speed-game .health-status .health-reason{display:none}
+ .speed-game .health-status .health-reason-compact{display:block}
+}

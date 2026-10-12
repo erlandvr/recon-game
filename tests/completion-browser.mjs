@@ -13,7 +13,7 @@ try {
   const progress=async()=>Number(await page.locator('[data-healthy-time]').getAttribute('data-healthy-time'));
   const world=async()=>page.locator('.world-time time').innerText();
   await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));
-  await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173');await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
+  await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
   assert.equal(await page.locator('.chapter-completion').count(),0);
   const speed=reduced?2:1;if(reduced)await button('Double speed').click();
   // Earn the first milestone through ordinary paid scans and repairs.

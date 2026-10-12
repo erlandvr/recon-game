@@ -9,7 +9,7 @@ page.on('request',r=>{if(r.resourceType()==='font')fontRequests.push(r.url());})
 const button=name=>page.getByRole('button',{name,exact:true});
 try{
  await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));
- const response=await page.goto(url);assert.equal(response.status(),200);await button('Start game').waitFor();await page.clock.runFor(10000);assert.equal(await page.locator('.world-time time').innerText(),'00:00');
+ const response=await page.goto(url);await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();assert.equal(response.status(),200);await button('Start game').waitFor();await page.clock.runFor(10000);assert.equal(await page.locator('.world-time time').innerText(),'00:00');
  assert.ok((await page.locator('script[src]').getAttribute('src')).startsWith('/recon-game/assets/'));
  // Font loading must work beneath the Pages prefix, without an external font service.
  const fonts=await page.evaluate(async()=>{

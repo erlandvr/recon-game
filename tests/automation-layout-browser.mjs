@@ -27,7 +27,7 @@ async function check(label,focused){
  await page.screenshot({path:`test-results/automation-${label}.png`});assert.deepEqual(issues,[],label);evidence.push(label);
 }
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
  for(const checkpoint of ['Connected systems','Corporate expansion','Autonomy trial']){
   await debug(checkpoint);await page.clock.runFor(100000);if(await button(/^(Start game|Start Next Chapter|Keep playing)$/).isVisible())await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
   for(const [width,height] of [[1440,1000],[1280,800],[1024,768],[800,700]]){

@@ -17,7 +17,7 @@ let expected=newGame(data.report.seed),now=0;
 async function dismiss(){const next=button(/^(Start game|Start Next Chapter)$/);if(await next.isVisible())await next.click();}
 async function to(at){if(at>now){await page.clock.runFor((at-now)*1000);expected=advance(expected,at-now);now=at;}await dismiss();}
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await dismiss();
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await dismiss();
  for(const [index,item] of data.plan.entries()){
   await to(item.at);const a=item.action;
   const id=a.serviceId??(a.type==='repair'?serviceOf(expected.findings.find(f=>f.id===a.findingId)):'backend');

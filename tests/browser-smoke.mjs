@@ -37,7 +37,7 @@ async function bounds(label){
  await page.screenshot({path:fileURLToPath(new URL(`${label}.png`,output)),fullPage:true});
 }
 try{
- await page.clock.install({time:new Date('2026-10-09T10:00:00Z')});await page.clock.pauseAt(new Date('2026-10-09T10:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173');await page.waitForTimeout(50);await dismissStory();
+ await page.clock.install({time:new Date('2026-10-09T10:00:00Z')});await page.clock.pauseAt(new Date('2026-10-09T10:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await page.waitForTimeout(50);await dismissStory();
  const healthy=async()=>Number(await page.locator('[data-healthy-time]').getAttribute('data-healthy-time'));
  const creditsNow=async()=>Number(await page.locator('[data-credits]').getAttribute('data-credits'));
  const debug=async name=>{if(!await button('Debug').count()){for(let n=0;n<3;n++)await button('Recon logo').click();}else await button('Debug').click();await page.getByRole('button',{name:new RegExp(`^${name} `)}).click();await page.waitForTimeout(100);await dismissStory();};
@@ -119,19 +119,19 @@ try{
  await button(`Scan ${generated}`).click();await tick(30);await button(`Fix ${generated}`).click();assert.equal(await page.locator('.system-actions').count(),0);await tick(10);
 
  evidence.push('Single 100-repository canvas: project/module framing, repository finder, pointer-anchored trackpad zoom, two-axis pan across project boundaries, drag, touch pinch and subsequent clicks, keyboard zoom/pan/Home, stable topology, desktop/phone bounds, original scan/fix/automation controls without scan-info popups, five slots/FIFO queue, exact group costs and overlapping automation.');
- await page.reload();assert.equal(await time(),0);assert.equal(await page.locator('.work-slot').count(),1);assert.equal(await queue(),0);await dismissStory();await tick(2);assert.equal(await time(),2);
+ await page.reload();await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();assert.equal(await time(),0);assert.equal(await page.locator('.work-slot').count(),1);assert.equal(await queue(),0);await dismissStory();await tick(2);assert.equal(await time(),2);
  await button('Restart operation').click();await button('Start fresh').click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).waitFor({state:'visible'});await dismissStory();assert.equal(await time(),0);await tick(2);assert.ok(await time()>=1);
  // Direct fixing pays for all affordable findings without opening a popup.
  for(const [w,h] of [[1280,800],[1024,768]]){
-  await page.setViewportSize({width:w,height:h});await page.reload();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);
+  await page.setViewportSize({width:w,height:h});await page.reload();await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);
   assert.match(await button('Fix Backend').innerText(),/Fix all \(3\) · 45 cr/);await bounds(`fix-all-${w}`);
   let money=await creditsNow();await button('Fix Backend').click();assert.equal(await creditsNow(),Math.round((money-45)*100)/100);assert.equal(await queue(),2);assert.equal(await page.locator('.system-actions').count(),0);
-  await page.reload();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);await button('Invest 150 credits').click();while(await creditsNow()<30)await tick(1);money=await creditsNow();assert.ok(money>=30&&money<45);
+  await page.reload();await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await page.waitForTimeout(80);await dismissStory();await tick(75);await button('Scan Backend').click();await tick(3);await button('Invest 150 credits').click();while(await creditsNow()<30)await tick(1);money=await creditsNow();assert.ok(money>=30&&money<45);
   assert.match(await button('Fix Backend').innerText(),/Fix 2\/3 · 30 cr/);await button('Fix Backend').click();assert.equal(await creditsNow(),Math.round((money-30)*100)/100);assert.equal(await page.locator('.system-actions').count(),0);assert.equal(await page.locator('.work-slot.occupied').count(),2);
  }
  evidence.push('Direct Fix starts the affordable subset with exact spending and no details popup; full affordable batches queue overflow.');
  // Healthy-time and live-time reset together; double speed accelerates both when healthy.
- await page.reload();await page.waitForTimeout(80);await dismissStory();assert.equal(await time(),0);assert.equal(await healthy(),0);
+ await page.reload();await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await page.waitForTimeout(80);await dismissStory();assert.equal(await time(),0);assert.equal(await healthy(),0);
  await button('Double speed').click();await tick(5);assert.equal(await time(),10);assert.equal(await healthy(),10);
  await debug('Starting backend');assert.equal(await time(),0);assert.equal(await button('Double speed').getAttribute('aria-pressed'),'true');await tick(1);assert.equal(await time(),2);
  const checkpoints=[['Growing backend',null],['Full-pace backend',null],['Ecosystem expansion',0],['Connected systems',null],['Release challenge',null],['Corporate expansion',0],['100-repository company',null]];
@@ -140,7 +140,7 @@ try{
  await button('Debug').click();before=await time();await tick(1);assert.equal(await time(),before+2);await page.keyboard.press('Escape');
  await button('Restart operation').click();await button('Start fresh').click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).waitFor({state:'visible'});await dismissStory();assert.equal(await time(),0);assert.equal(await healthy(),0);assert.equal(await button('Debug').isVisible(),true);
  await button('Debug').click();await button('Exit debug mode').click();assert.equal(await button('Debug').count(),0);
- await page.reload();await page.waitForTimeout(80);await dismissStory();assert.equal(await button('Debug').count(),0);assert.equal(await button('Double speed').getAttribute('aria-pressed'),'false');assert.equal(await healthy(),0);
+ await page.reload();await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await page.waitForTimeout(80);await dismissStory();assert.equal(await button('Debug').count(),0);assert.equal(await button('Double speed').getAttribute('aria-pressed'),'false');assert.equal(await healthy(),0);
  // Separate automatic repairs, scope prices and the sustained autonomy finish.
  await page.setViewportSize({width:1280,height:800});await debug('Connected systems');await tick(100);while(await creditsNow()<600)await tick(10);
  let repairFunds=await creditsNow();await button('Automate Backend fixes for 480 credits').click();assert.equal(await creditsNow(),Math.round((repairFunds-480)*100)/100);

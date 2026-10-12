@@ -6,7 +6,7 @@ const browser=await chromium.launch(),page=await browser.newPage({viewport:{widt
 page.on('pageerror',e=>errors.push(e.message));const button=name=>page.getByRole('button',{name,exact:true});
 async function debug(name){if(!await button('Debug').count()){for(let n=0;n<3;n++)await button('Recon logo').click();}else await button('Debug').click();await page.getByRole('button',{name:new RegExp(`^${name} `)}).click();await button('Start Next Chapter').click();}
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto('http://127.0.0.1:5173/');await button('Start game').click();assert.equal(await page.locator('.fully-automated').count(),0);
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto('http://127.0.0.1:5173/');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await button('Start game').click();assert.equal(await page.locator('.fully-automated').count(),0);
  await debug('Connected systems');assert.equal(await page.locator('.fully-automated').count(),0);
  await debug('Autonomy trial');await page.waitForTimeout(100);
  const groups=page.locator('.map-group-label');assert.ok(await groups.count()>0);assert.equal(await groups.count(),await page.locator('.map-group-label.fully-automated').count());assert.equal(await groups.count(),await groups.locator('.automation-badge').count());assert.equal(await groups.first().evaluate(el=>getComputedStyle(el,'::before').borderTopStyle),'solid');

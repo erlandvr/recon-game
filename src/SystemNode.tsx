@@ -1,8 +1,8 @@
 import { repository } from './organization.ts';
 import {useEffect,useRef,useState,type Ref} from 'react';
 import type { Action, GameState } from './game.ts';
-import { automationCost, autoRepairReason, autoRepairStatus, automationReason, automationStatus, repairDuration, repositoryRepairQuote, scanCost, scanDuration, scanReason, slots } from './game.ts';
-import { AUTO_REPAIR_COST, kindOf, serviceFindings, serviceHealth } from './campaign.ts';
+import { automationCost, autoRepairCost, autoRepairReason, autoRepairStatus, automationReason, automationStatus, repairDuration, repositoryRepairQuote, scanCost, scanDuration, scanReason, slots } from './game.ts';
+import { kindOf, serviceFindings, serviceHealth } from './campaign.ts';
 import type { ServiceId } from './campaign.ts';
 
 type Props = { state: GameState; serviceId: ServiceId; dispatch: (action: Action) => void; nodeRef?: Ref<HTMLElement>; className?: string };
@@ -49,6 +49,6 @@ export default function SystemNode({ state: s, serviceId: id, dispatch, nodeRef,
     {s.campaign && <div className="node-automation"><div className="automation-control">
       {automated ? <div className="automation-state" aria-label={`${name} automation`}><strong className={coverage===2?'automation-badge':undefined}>{coverage===2?'✓ Automated':'✓ Auto-scans'}</strong><span>{automationStatus(s, id)}</span></div> : <button aria-label={`Automate ${name} scans for ${automationCost(s)} credits`} disabled={!!autoReason} title={autoReason ?? undefined} onClick={() => dispatch({type:'automate', serviceId:id})}><strong>Automate scans</strong><span>{automationCost(s)} cr once</span></button>}
     </div></div>}
-    {s.campaign&&<div className="repair-automation">{repairsAutomated?<div className="repair-auto-state" aria-label={`${name} automatic fixes`}><strong>✓ Auto fixes</strong><span>{autoRepairStatus(s,id)}</span></div>:<button aria-label={`Automate ${name} fixes for ${AUTO_REPAIR_COST} credits`} disabled={!!repairAutoReason} title={repairAutoReason??'Fixes known findings automatically for 15 credits each, preserving a 20-credit reserve.'} onClick={()=>dispatch({type:'auto-repair',serviceId:id})}>Auto fixes · {AUTO_REPAIR_COST} cr</button>}</div>}
+    {s.campaign&&<div className="repair-automation">{repairsAutomated?<div className="repair-auto-state" aria-label={`${name} automatic fixes`}><strong>✓ Auto fixes</strong><span>{autoRepairStatus(s,id)}</span></div>:<button aria-label={`Automate ${name} fixes for ${autoRepairCost(s)} credits`} disabled={!!repairAutoReason} title={repairAutoReason??'Fixes known findings automatically for 15 credits each, preserving a 20-credit reserve.'} onClick={()=>dispatch({type:'auto-repair',serviceId:id})}>Auto fixes · {autoRepairCost(s)} cr</button>}</div>}
   </article>;
 }

@@ -6,7 +6,7 @@ const browser=await chromium.launch(),page=await browser.newPage({viewport:{widt
 page.on('pageerror',e=>errors.push(e.message));
 const button=name=>page.getByRole('button',{name,exact:true}),credits=async()=>Number(await page.locator('[data-credits]').getAttribute('data-credits'));
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173/');
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173/');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();
  const primary=await button('Start game').evaluate(e=>getComputedStyle(e).backgroundColor);await button('Start game').click();
  const summary=page.locator('.system-inspect');assert.equal(await summary.evaluate(e=>e.tagName),'DIV');await summary.click();assert.equal(await page.locator('.system-actions').count(),0);
  assert.notEqual(await summary.evaluate(e=>getComputedStyle(e).backgroundColor),primary);

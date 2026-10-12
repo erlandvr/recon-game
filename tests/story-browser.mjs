@@ -26,7 +26,7 @@ async function bounds(label){
  await page.screenshot({path:`test-results/${label}.png`,fullPage:true});assert.deepEqual(issues,[],label);evidence.push(label);
 }
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173/');
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173/');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();
  assert.equal(await page.locator('.story-guide').getAttribute('data-chapter'),'1');await dismissStory();
  for(const [w,h] of [[1280,800],[800,700]]){await page.setViewportSize({width:w,height:h});await bounds(`story-start-${w}`);await button('Plan investment').click();assert.match(await page.getByRole('dialog').innerText(),/Keep 20 cr/);await bounds(`story-plan-${w}`);await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();}
  await tick(15);await button('Find Backend').click();assert.equal(await page.getByRole('article',{name:'Backend system',exact:true}).evaluate(e=>e===document.activeElement),true);assert.equal(await page.locator('.system-actions').count(),0);

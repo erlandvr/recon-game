@@ -6,6 +6,17 @@ Earlier sections record delivery at that time. Pause/save checks and full-slot r
 
 Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
 
+## Speed Game (D101–D105)
+
+- [x] Mode selection, independent 12-repo speed rules, two efficiency tiers, elapsed finish timer, five-minute target and 20-second autonomy trial.
+- [x] Earned team growth, sequential 2.5-second arrivals, one persistent map and smooth framing with reduced-motion support.
+- [x] Frozen victory result, medals within target times, late completion, restart and unranked practice; preserve Long Game rules.
+- [x] Paid benchmark: 27 policies finish in 230.5–285.5 seconds; slower one-action-at-a-time limits documented in SPEED_MODE.md.
+- [x] All 80 unit tests and production build pass. Full sprint browser journey passes at 1280×800; first-expansion and reduced-motion checks pass at 1280×800 / 800×700. Long Game chapter-completion regression passes.
+- [x] First automation unlock pauses on the exact tick; Dive Back In resumes, excluding reading time.
+- [x] Both modes automatically return to Fit all on growth, including from focused repos; resize and reduced-motion checks pass.
+- [x] Full paid sprint replay at 800×700: 230.5s victory; briefing pause/resume, restart, continued play beyond 05:00, post-target layouts at 1024×768 / 800×700 and Long Game entry pass. Long Game automation layout passes 20 desktop views. Final production build and source/diff review pass.
+
 ## Automation coverage markers (D100)
 
 - [x] Gold outlines/glow and Automated labels on fully covered repositories, modules and projects; partial or scan-only coverage stays unmarked.

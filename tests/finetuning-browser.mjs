@@ -14,7 +14,7 @@ await page.addInitScript(()=>{
 });
 const button=name=>page.getByRole('button',{name,exact:true});const tick=async s=>{await page.clock.runFor(s*1000);await page.waitForTimeout(20)};
 try{
- await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');
+ await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();
  const credits=await page.locator('.operation-strip').innerText();await tick(90);await page.keyboard.press('Escape');
  assert.equal(await page.getByRole('dialog').count(),1);assert.equal(await page.locator('.operation-strip').innerText(),credits);assert.equal(await page.locator('.world-time time').innerText(),'00:00');
  await button('Start game').click();assert.equal(await button('Chapter sound').getAttribute('aria-pressed'),'false');assert.match(await page.locator('.medal-target').innerText(),/Gold/);

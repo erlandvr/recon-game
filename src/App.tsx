@@ -4,25 +4,15 @@ import VictorySummary from './VictorySummary.tsx';
 import { CHAPTER_COMPLETION_MS, completedChapter, type ChapterCompletion } from './chapterCompletion.ts';
 import { CHAPTERS, chapterGoal, chapterIndex, nextMove } from './story.ts';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
+import Modal from './Modal.tsx';
 import Workspace from './Workspace.tsx';
 import EcosystemSession from './EcosystemSession.tsx';
 import { RULES, autonomyStatus, act, advance, formatTime, newGame } from './game.ts';
 import type { Action } from './game.ts';
 import { DEBUG_STARTS, debugGame, type DebugStart } from './debug.ts';
 
-function Modal({ title, children, onDismiss, className = '' }: { title: string; children: ReactNode; onDismiss: () => void; className?: string }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => { const dialog = ref.current!; const previous = document.activeElement as HTMLElement | null; dialog.showModal(); return () => { dialog.close(); previous?.focus(); }; }, []);
-  return <dialog ref={ref} className={`modal ${className}`} aria-label={title} onCancel={e => { e.preventDefault(); onDismiss(); }} onKeyDown={e => {
-    if (e.key !== 'Tab') return;
-    const controls = Array.from(ref.current!.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]')).filter(el => el.getClientRects().length > 0);
-    const first = controls[0]; const last = controls[controls.length - 1];
-    if (first && (e.shiftKey ? document.activeElement === first : document.activeElement === last)) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
-  }}><h2>{title}</h2>{children}</dialog>;
-}
 
-export default function App() {
+export default function App({onChooseMode}:{onChooseMode?:()=>void}) {
   const [s, setState] = useState(() => newGame(Math.floor(Math.random() * 0x100000000)));
   const current = useRef(s);
   const [started,setStarted]=useState(false);
@@ -150,6 +140,7 @@ export default function App() {
       {started&&storyChapter!==5&&<section className="story-advice" aria-label="Next move"><h3>{nextMove(s).title}</h3><p>{nextMove(s).detail}</p></section>}
       {started&&<p className="story-live-note">Game paused · Take your time. Close this briefing to resume.</p>}
       <button className={`primary ${storyChapter===0?'start-game-button':''}`} onClick={()=>{if(!started)startGame();else setPanel(null);}}>{storyChapter === 0 ? 'Start game' : storyChapter===5 ? 'Keep playing' : 'Start Next Chapter'}</button>
+      {!started&&onChooseMode&&<button className="mode-back" onClick={onChooseMode}>Choose another mode</button>}
     </Modal>}
     {panel === 'debug' && <Modal title="Debug · choose a starting point" onDismiss={() => setPanel(null)}>
       <p>Jump to any gameplay stage. This replaces the run, keeping its layout and speed. A coached run earns healthy-time goals using paid scans, fixes and upgrades. Credits, work and elapsed time reflect that progress. Later-stage starts show a practice medal preview; restart for an earned medal.</p>
@@ -166,7 +157,7 @@ export default function App() {
       <p>Manual work or a broken condition resets the trial. Purchases are allowed. Victory remains recorded once earned.</p></>}
       <button className="primary" onClick={()=>setPanel(null)}>Back to ecosystem</button>
     </Modal>}
-    {panel === 'restart' && <Modal title="Start a fresh ecosystem?" onDismiss={() => setPanel(null)}><p>This replaces the current run. The ecosystem keeps running while you decide.</p><div className="modal-actions"><button onClick={() => setPanel(null)}>Cancel</button><button className="primary" onClick={restart}>Start fresh</button></div></Modal>}
+    {panel === 'restart' && <Modal title="Start a fresh ecosystem?" onDismiss={() => setPanel(null)}><p>This replaces the current run. The ecosystem keeps running while you decide.</p><div className="modal-actions"><button onClick={() => setPanel(null)}>Cancel</button><button className="primary" onClick={restart}>Start fresh</button>{onChooseMode&&<button onClick={onChooseMode}>Choose game mode</button>}</div></Modal>}
     {panel === 'log' && <Modal title="Operation log" onDismiss={() => setPanel(null)}><p>The ecosystem keeps running.</p><ol className="full-log">{s.events.slice().reverse().map(e => <li key={e.id}><time>{formatTime(e.at)}</time><span>{e.text}</span></li>)}</ol><button className="primary" onClick={() => setPanel(null)}>Close log</button></Modal>}
     {panel === 'results' && <Modal title="Ecosystem milestones" onDismiss={() => setPanel(null)}><p>The ecosystem keeps running. These snapshots record earlier milestones.</p>
       {s.results && <section className="milestone-result"><h3>First {RULES.resultAt/60} healthy minutes</h3><p>Reached at {formatTime(s.results.at)} elapsed · {s.results.health}% health · {s.results.stats.repairs} fixes · {s.results.credits.toFixed(1)} credits</p></section>}

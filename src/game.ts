@@ -1,5 +1,6 @@
+import { SPEED, SPEED_EFFICIENCY, SPEED_MEDALS, SPEED_BEATS, type SpeedState } from './speedRules.ts';
 import { medalForTime } from './medals.ts';
-import { createOrganization, repository, scopeRepositories, CORPORATE, type Organization, type Scope } from './organization.ts';
+import { createOrganization, createSpeedOrganization, repository, scopeRepositories, CORPORATE, type Organization, type Scope } from './organization.ts';
 import { activeServices, AUTOMATION_COST, AUTO_REPAIR_COST, AUTONOMY_SECONDS, newAutonomy, kindOf, serviceHealth, serviceOf, startCampaign } from './campaign.ts';
 import type { Campaign, ServiceId, FindingKind } from './campaign.ts';
 /** Deterministic, half-second simulation. No browser or React dependencies. */
@@ -19,12 +20,17 @@ export const EFFICIENCY = [
   { cost: 20, scanCost: 4, setupMultiplier:1 }, { cost: 100, scanCost: 3, setupMultiplier:.95 }, { cost: 500, scanCost: 2, setupMultiplier:.8 },
   { cost: 2500, scanCost: 1, setupMultiplier:.5 }, { cost: 6000, scanCost: 0.25, setupMultiplier:.15 },
 ] as const;
-export const scanCost = (s: GameState) => s.efficiency ? EFFICIENCY[s.efficiency - 1].scanCost : RULES.scanCost;
-export const automationCost = (s: GameState) => Math.round(AUTOMATION_COST*(s.efficiency?EFFICIENCY[s.efficiency-1].setupMultiplier:1)*100)/100;
+export const efficiencyTiers = (s:GameState) => s.speed ? SPEED_EFFICIENCY : EFFICIENCY;
+export const autoRepairCost = (s:GameState) => s.speed ? SPEED.fixSetup : AUTO_REPAIR_COST;
+export const autonomyTarget = (s:GameState) => s.speed ? SPEED.repositories : 100;
+export const autonomySeconds = (s:GameState) => s.speed ? SPEED.trialSeconds : AUTONOMY_SECONDS;
+export const scanCost = (s: GameState) => s.efficiency ? efficiencyTiers(s)[s.efficiency - 1].scanCost : RULES.scanCost;
+export const automationCost = (s: GameState) => Math.round((s.speed?SPEED.scanSetup:AUTOMATION_COST)*(s.efficiency?efficiencyTiers(s)[s.efficiency-1].setupMultiplier:1)*100)/100;
 export function efficiencyQuote(s: GameState) {
-  const next = EFFICIENCY[s.efficiency];
-  return next ? { ...next, automationCost:Math.round(AUTOMATION_COST*next.setupMultiplier*100)/100, tier: s.efficiency + 1, payback: Math.ceil(next.cost / (scanCost(s) - next.scanCost)), reason: s.credits < next.cost ? `Need ${next.cost} credits.` : null } : null;
+  const next = efficiencyTiers(s)[s.efficiency];
+  return next ? { ...next, automationCost:Math.round((s.speed?SPEED.scanSetup:AUTOMATION_COST)*next.setupMultiplier*100)/100, tier: s.efficiency + 1, payback: Math.ceil(next.cost / (scanCost(s) - next.scanCost)), reason: s.credits < next.cost ? `Need ${next.cost} credits.` : null } : null;
 }
+export const upgradeCost = (s:GameState,upgrade:Upgrade) => s.speed ? {capacity:100,scanning:70,remediation:90}[upgrade] : UPGRADES[upgrade].cost;
 export type Upgrade = keyof typeof UPGRADES;
 export type Finding = { id: number; title: string; description: string; bornAt: number; known: boolean; repairedAt: number | null; serviceId?: ServiceId; kind?: FindingKind; deadline?: number; escalated?: boolean };
 export type Job = { id: number; type: 'scan' | 'repair'; startedAt: number; endsAt: number; findingId: number | null; capturedIds: number[]; revision: number; serviceId?: ServiceId; automated?: boolean };
@@ -33,7 +39,7 @@ export type GameEvent = { id: number; at: number; text: string; kind: 'info' | '
 export type Stats = { scans: number; repairs: number; earned: number; spent: { scans: number; repairs: number; upgrades: number }; healthSum: number };
 export type Summary = { workSlots?: number; at: number; healthyTime: number; efficiency: number; credits: number; health: number; stage: number; upgrades: Upgrade[]; stats: Stats };
 export type GameState = {
-  organization: Organization; practice: boolean; workSlots: number; campaign?: Campaign; time: number; healthyTime: number; efficiency: number; credits: number; stage: number; queue: QueuedAction[];
+  speed?: SpeedState; organization: Organization; practice: boolean; workSlots: number; campaign?: Campaign; time: number; healthyTime: number; efficiency: number; credits: number; stage: number; queue: QueuedAction[];
   firstRepairDone: boolean; nextBugAt: number | null; findings: Finding[]; jobs: Job[];
   upgrades: Record<Upgrade, boolean>; lastScanAt: number | null; scanRevision: number | null;
   revision: number; stats: Stats; events: GameEvent[]; sequence: number;
@@ -100,7 +106,7 @@ export function repairReason(s: GameState, id: number): string | null {
 }
 export function upgradeReason(s: GameState, upgrade: Upgrade): string | null {
   if (upgrade === 'capacity' ? slots(s) >= RULES.maxSlots : s.upgrades[upgrade]) return upgrade === 'capacity' ? 'Maximum capacity: 5 work slots.' : 'Installed';
-  if (s.credits < UPGRADES[upgrade].cost) return `Save ${Math.ceil(UPGRADES[upgrade].cost - s.credits)} more credits.`;
+  if (s.credits < upgradeCost(s,upgrade)) return `Save ${Math.ceil(upgradeCost(s,upgrade) - s.credits)} more credits.`;
   return null;
 }
 export function automationReason(s: GameState, id: ServiceId): string | null {
@@ -127,7 +133,7 @@ export function autoRepairReason(s:GameState,id:ServiceId):string|null {
   if(!s.campaign)return 'Automatic fixes unlock with ecosystem expansion.';
   if(!activeServices(s).includes(id))return 'This system is not connected yet.';
   if(s.campaign.remediation.includes(id))return 'Fixes already automated.';
-  return s.credits<AUTO_REPAIR_COST?`Need ${AUTO_REPAIR_COST} credits to automate fixes.`:null;
+  return s.credits<autoRepairCost(s)?`Need ${autoRepairCost(s)} credits to automate fixes.`:null;
 }
 export function autoRepairStatus(s:GameState,id:ServiceId) {
   if(s.jobs.some(j=>j.automated&&j.type==='repair'&&j.serviceId===id))return 'Fixing';
@@ -142,7 +148,8 @@ const serviceFindingsForAutomation=(s:GameState,id:ServiceId)=>openFindings(s).s
 export function autonomyStatus(s:GameState) {
   const c=s.campaign,active=activeServices(s);
   const scans=active.filter(id=>c?.automated.includes(id)).length,repairs=active.filter(id=>c?.remediation.includes(id)).length;
-  const reason=active.length<100?'Grow to 100 repositories.' : scans<100||repairs<100?'Enable scans and fixes for every repository.'
+  const target=autonomyTarget(s);
+  const reason=active.length<target?`Grow to ${target} repositories.` : scans<target||repairs<target?'Enable scans and fixes for every repository.'
     : s.queue.length||s.jobs.some(j=>!j.automated)?'Wait for manual work to finish.'
     : averageHealth(s)<90?'Restore average health to 90%.'
     : active.some(id=>serviceHealth(s,id)<60)?'Restore every repository to at least 60% health.'
@@ -166,12 +173,12 @@ function tickAutonomy(s:GameState,eligibleBefore:boolean) {
   if(a.startedAt===null){a.startedAt=s.time;a.earnedStart=s.stats.earned;a.spentStart=s.stats.spent.scans+s.stats.spent.repairs;a.scansStart=c.autoScans;a.repairsStart=c.autoRepairs;return;}
   if(!eligibleBefore)return;
   a.elapsed+=RULES.tickSeconds;
-  if(a.elapsed<AUTONOMY_SECONDS)return;
+  if(a.elapsed<autonomySeconds(s))return;
   const netIncome=round(s.stats.earned-a.earnedStart-(s.stats.spent.scans+s.stats.spent.repairs-a.spentStart));
   if(netIncome<0){resetAutonomy(s,'Operating costs exceeded income.');return;}
   if(c.autoScans===a.scansStart||c.autoRepairs===a.repairsStart)return;
-  a.victory={at:s.time,medal:medalForTime(s.time),practice:s.practice,duration:a.elapsed,health:health(s),credits:s.credits,autoScans:c.autoScans-a.scansStart,autoRepairs:c.autoRepairs-a.repairsStart,netIncome};
-  log(s,'Full autonomy achieved! All 100 repositories are maintained by automatic scans and fixes. Your ecosystem keeps running.','success');
+  a.victory={at:s.time,medal:s.speed?(SPEED_MEDALS.find(m=>s.time<=m.through)?.id??null):medalForTime(s.time),practice:s.practice,duration:a.elapsed,health:health(s),credits:s.credits,autoScans:c.autoScans-a.scansStart,autoRepairs:c.autoRepairs-a.repairsStart,netIncome};
+  log(s,`Full autonomy achieved! All ${autonomyTarget(s)} repositories are maintained by automatic scans and fixes.`,'success');
 }
 export function scopeQuote(s: GameState, scope: Scope, operation: 'scan' | 'repair' | 'automate' | 'auto-repair') {
   const ids = scopeRepositories(s, scope).filter(id => activeServices(s).includes(id));
@@ -180,7 +187,7 @@ export function scopeQuote(s: GameState, scope: Scope, operation: 'scan' | 'repa
     : operation === 'repair'
     ? knownFindings(s).filter(f => ids.includes(serviceOf(f)) && ![...s.jobs, ...s.queue].some(j => j.findingId === f.id)).sort((a,b)=>(a.deadline ?? Infinity)-(b.deadline ?? Infinity) || a.bornAt-b.bornAt).map(f => ({type:'repair',findingId:f.id}))
     : ids.filter(id => !(operation==='automate'?s.campaign?.automated:s.campaign?.remediation)?.includes(id)).map(serviceId => ({type:operation==='automate'?'automate':'auto-repair',serviceId}));
-  const cost = actions.length * (operation === 'scan' ? scanCost(s) : operation === 'repair' ? RULES.repairCost : operation === 'automate' ? automationCost(s) : AUTO_REPAIR_COST);
+  const cost = actions.length * (operation === 'scan' ? scanCost(s) : operation === 'repair' ? RULES.repairCost : operation === 'automate' ? automationCost(s) : autoRepairCost(s));
   const reason = !s.campaign?.result ? 'Group actions unlock after the release milestone.' : !actions.length ? 'No eligible work in this scope.' : s.credits < cost ? `Need ${cost} credits for ${actions.length} actions.` : null;
   return {actions, cost, reason};
 }
@@ -198,6 +205,7 @@ export function repositoryRepairQuote(s: GameState, serviceId: ServiceId) {
   return {findings, cost, reason, total:eligible.length, remaining:eligible.length-findings.length};
 }
 export function act(state: GameState, action: Action, automated = false): ActionResult {
+  if(state.speed?.result&&!state.speed.continuing)return {state,ok:false,message:'Run complete. Try again or continue practising.'};
   if (action.type === 'repair-repository') {
     const quote = repositoryRepairQuote(state, action.serviceId);
     if (quote.reason) return {state, ok:false, message:quote.reason};
@@ -235,12 +243,12 @@ export function act(state: GameState, action: Action, automated = false): Action
     case 'efficiency': {
       const quote = efficiencyQuote(s)!;
       s.credits = round(s.credits - quote.cost); s.stats.spent.upgrades += quote.cost; s.efficiency++;
-      message = `Scan efficiency ${s.efficiency}/5 installed. New scans cost ${scanCost(s)} credits; new automatic-scan setups cost ${automationCost(s)} credits per repository.`;
+      message = `Scan efficiency ${s.efficiency}/${efficiencyTiers(s).length} installed. New scans cost ${scanCost(s)} credits; new automatic-scan setups cost ${automationCost(s)} credits per repository.`;
       log(s, message, 'success'); break;
     }
     case 'auto-repair': {
-      s.credits=round(s.credits-AUTO_REPAIR_COST);s.stats.spent.upgrades+=AUTO_REPAIR_COST;s.campaign!.remediation.push(action.serviceId);
-      message=`${repository(s,action.serviceId).name}: automatic fixes enabled. ${AUTO_REPAIR_COST} credits paid; each fix costs 15 credits.`;log(s,message,'success');break;
+      s.credits=round(s.credits-autoRepairCost(s));s.stats.spent.upgrades+=autoRepairCost(s);s.campaign!.remediation.push(action.serviceId);
+      message=`${repository(s,action.serviceId).name}: automatic fixes enabled. ${autoRepairCost(s)} credits paid; each fix costs 15 credits.`;log(s,message,'success');break;
     }
     case 'automate': {
       const cost=automationCost(s);
@@ -264,8 +272,8 @@ export function act(state: GameState, action: Action, automated = false): Action
       log(s, message); drainQueue(s); break;
     }
     case 'upgrade':
-      s.credits = round(s.credits - UPGRADES[action.upgrade].cost);
-      s.stats.spent.upgrades += UPGRADES[action.upgrade].cost;
+      s.credits = round(s.credits - upgradeCost(s,action.upgrade));
+      s.stats.spent.upgrades += upgradeCost(s,action.upgrade);
       if (action.upgrade === 'capacity') s.workSlots = slots(s) + 1;
       s.upgrades[action.upgrade] = true;
       message = action.upgrade === 'capacity' ? `Work slot added: ${slots(s) - 1} → ${slots(s)} slots. Up to ${slots(s)} jobs can run together.` : `${UPGRADES[action.upgrade].name} installed: ${UPGRADES[action.upgrade].before} → ${UPGRADES[action.upgrade].after}.`;
@@ -306,6 +314,7 @@ export function advance(state: GameState, seconds = 1): GameState {
   if (seconds === 0) return state;
   const s = copy(state);
   for (let step = 0; step < steps; step++) {
+    if(s.speed?.result&&!s.speed.continuing)break;
     const eligibleBefore=!!s.campaign&&autonomyStatus(s).reason===null;
     const currentHealth = health(s);
     const earned = round(income(s) * RULES.tickSeconds);
@@ -334,24 +343,24 @@ export function advance(state: GameState, seconds = 1): GameState {
         }
       }
     }
-    grow(s);
+    if(!s.speed)grow(s);
     if (s.nextBugAt !== null && s.time >= s.nextBugAt) {
       const systems = activeServices(s);
-      addBug(s, systems[s.findings.length % systems.length]); s.nextBugAt = s.time + (s.campaign ? s.campaign.result ? Math.max(2.5, Math.round(150 / activeServices(s).length) / 2) : 25 : bugInterval(s.stage));
+      addBug(s, systems[s.findings.length % systems.length]); s.nextBugAt = s.time + (s.speed ? (activeServices(s).length===1?22:activeServices(s).length<8?16:8) : s.campaign ? s.campaign.result ? Math.max(2.5, Math.round(150 / activeServices(s).length) / 2) : 25 : bugInterval(s.stage));
     }
-    if (RULES.growthAt.some(t => s.time === t - 15)) {
+    if (!s.speed && RULES.growthAt.some(t => s.time === t - 15)) {
       log(s, `Release forecast: development advances in 15 seconds. Prepare your capacity.`, 'info');
     }
-    if (!s.results && s.healthyTime >= RULES.resultAt) {
+    if (!s.speed && !s.results && s.healthyTime >= RULES.resultAt) {
       s.results = summary(s);
       log(s, `${RULES.resultAt/60} healthy minutes earned. Expansion begins; your ecosystem keeps running.`, 'success');
       startCampaign(s);
     }
     drainQueue(s);
-    campaignTick(s);
+    if(s.speed)speedTick(s);else campaignTick(s);
     // Evaluate after arrivals, escalation and repairs; earned chapters never regress.
     const c=s.campaign;
-    if(c?.result && healthyEnough(s)) {
+    if(!s.speed && c?.result && healthyEnough(s)) {
       if(c.repositoryCount>=25 && c.companyAt==null) {
         c.companyAt=s.time;
         log(s, `Chapter 3 complete: 25 repositories connected and ecosystem health at least ${RULES.healthyThreshold}%.`, 'success');
@@ -362,6 +371,9 @@ export function advance(state: GameState, seconds = 1): GameState {
       }
     }
     tickAutonomy(s,eligibleBefore);
+    if(s.speed&&!s.speed.result&&s.campaign?.autonomy.victory){
+      s.speed.result={at:s.time,won:true,covered:autonomyStatus(s).covered,health:health(s),modules:s.organization.modules.filter(m=>m.repositoryIds.every(id=>fullyAutomated(s,[id]))).length};
+    }
   }
   return s;
 }
@@ -403,6 +415,9 @@ function campaignTick(s: GameState) {
     log(s, `${repo.name} joined ${module.name}. ${c.repositoryCount}/100 repositories connected.`, 'info');
     if (c.repositoryCount === CORPORATE.maxRepositories) log(s, 'Corporate scale reached: 100 repositories. Growth in repository count is complete; development and maintenance continue.', 'success');
   }
+  automationTick(s);
+}
+function automationTick(s:GameState){
   // Manual queue first; alternate discovery and resolution so neither can starve.
   for(let attempt=0;attempt<slots(s);attempt++){
     if(s.queue.length||s.jobs.length>=slots(s))break;
@@ -416,4 +431,46 @@ function campaignTick(s: GameState) {
     s.campaign!.nextAutomation=repair?'scan':'repair';
     if(!repair){s.campaign!.nextScan[target!]=s.time+15;s.campaign!.autoScans++;}
   }
+}
+
+
+export function newSpeedGame(seed=1):GameState {
+  const s=newGame(seed);s.organization=createSpeedOrganization(seed);
+  s.speed={phase:0,phaseAt:0,complianceAt:null,result:null,continuing:false,expansion:null};
+  s.nextBugAt=22;addBug(s);return s;
+}
+export function continueSpeedPractice(state:GameState):GameState {
+  if(!state.speed?.result||state.speed.continuing)return state;
+  const s=copy(state);s.speed!.continuing=true;s.practice=true;return s;
+}
+function speedTick(s:GameState){
+  const sprint=s.speed!;
+  if(!s.campaign&&s.firstRepairDone){
+    s.results=summary(s);startCampaign(s);s.campaign!.connected=true;
+    s.campaign!.result={at:s.time,healthyTime:s.healthyTime,health:health(s),resolved:1,total:1,missed:0,autoScans:0};
+    connectSpeedTeam(s,4,1);
+  }
+  const c=s.campaign;if(!c)return;
+  if(!sprint.expansion&&sprint.phase===1&&c.automated.length>=2&&s.stats.repairs>=4){
+    connectSpeedTeam(s,8,2);sprint.complianceAt=s.time+15;
+    log(s,'Compliance review in 15 seconds. Be ready to scan Commerce.','warning');
+  }
+  if(!sprint.expansion&&sprint.phase===2&&fullyAutomated(s,s.organization.modules[0].repositoryIds))connectSpeedTeam(s,12,3);
+  if(sprint.expansion&&s.time>=sprint.expansion.nextAt){
+    const repo=s.organization.repositories[c.repositoryCount];c.repositoryCount++;
+    if((c.repositoryCount-1)%2===1)addBug(s,repo.id);
+    log(s,`${repo.name} connected. ${c.repositoryCount}/12 repositories online.`,'success');
+    if(c.repositoryCount>=sprint.expansion.target)sprint.expansion=null;
+    else sprint.expansion.nextAt=s.time+2.5;
+  }
+  if(sprint.complianceAt!==null&&s.time>=sprint.complianceAt){
+    addBug(s,'repo-5','compliance','Customer data retention review',s.time+40);sprint.complianceAt=null;
+  }
+  for(const f of openFindings(s))if(f.deadline&&!f.escalated&&s.time>=f.deadline){f.escalated=true;c.missed++;log(s,'Compliance deadline missed. Fix the finding to recover.','warning');}
+  automationTick(s);
+}
+function connectSpeedTeam(s:GameState,count:number,phase:1|2|3){
+  s.speed!.phase=phase;s.speed!.phaseAt=s.time;
+  s.speed!.expansion={target:count,nextAt:s.time+2.5};
+  log(s,`${SPEED_BEATS[phase].title}. A new team is joining, one repository at a time.`,'success');
 }

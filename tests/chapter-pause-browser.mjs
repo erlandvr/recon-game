@@ -22,7 +22,7 @@ async function debug(name){
  await page.getByRole('button',{name:new RegExp(`^${name} `)}).click();await page.getByRole('dialog').waitFor();
 }
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto('http://127.0.0.1:5173');
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();
  assert.match(await page.getByRole('dialog').innerText(),/new Recon operator/);
  assert.equal(await page.locator('.opening-medals,.chapter-list,.story-advice').count(),0);
  for(const [width,height] of [[1280,800],[800,700],[390,844]]){

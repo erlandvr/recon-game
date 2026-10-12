@@ -30,7 +30,7 @@ async function layout(name){
  await page.screenshot({path:`test-results/${name}.png`,fullPage:true});assert.deepEqual(bad,[],name);evidence.push(name);
 }
 try{
- await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173');await chapter(1);await layout('chapter-entry-1280');
+ await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto(process.env.GAME_URL||'http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await chapter(1);await layout('chapter-entry-1280');
  await tick(15);assert.equal(await page.locator('.world-time time').innerText(),'00:00');await close();
  assert.equal(await page.locator('.health-status').innerText(),'');await tick(16);assert.equal(Number(await page.locator('[data-healthy-time]').getAttribute('data-healthy-time')),16);await tick(29);
  assert.match(await page.locator('.health-status').innerText(),/System failure[\s\S]*Goal time held/);assert.equal((await page.locator('.income-penalty').innerText()).trim(),'−25%');assert.match(await page.locator('.income-metric dd').innerText(),/1.35/);

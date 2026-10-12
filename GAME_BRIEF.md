@@ -16,6 +16,14 @@ When a chapter goal is reached, show a 3.6-second celebration before the next ch
 
 Fully automated repositories have a gold outline and Automated label. Modules and projects display a glowing gold circle and the same label once every connected member has both scan and fix automation. New uncovered members remove the group marker. Gold indicates purchased coverage, independent of health or temporary work delays; health retains its own colours (D100).
 
+## Game modes (D101–D105)
+
+Choose **Speed Game · 5 min** or **Long Game · ~20 min** before starting. Long Game is the current 100-repository experience described below; its economy, chapter progression, paused briefings and speed toggle are unchanged.
+
+Speed Game is a race to autonomy across 12 repositories in three modules, aiming for under five minutes. Its elapsed timer includes unhealthy time and keeps running beyond 05:00 until victory. First fix, scan coverage and module automation unlock successive teams. Repositories connect one at a time every 2.5 seconds on the same map. The first automation unlock pauses for a short explanation; Dive Back In resumes, excluding reading time from the finish time. Later phases use brief banners. Two efficiency tiers and lower setup costs support the shorter run. All 12 must become fully automated and pass a 20-second autonomy trial. Record actual finish time; Gold ≤04:00, Silver ≤04:30, Bronze ≤05:00, with later completion still valid but no time medal. Retry and unranked continued play are available. A future scoreboard will compare fastest finish times; it is not implemented yet. See [Speed Game rules and calibration](SPEED_MODE.md).
+
+In both modes, new repositories trigger automatic Fit all, including while inspecting a repository or group. Browser/overview width changes also refit the whole ecosystem. Animate the camera smoothly, or immediately with reduced motion. Manual navigation is available between arrivals; normal gameplay ticks do not reset the camera.
+
 ## Supported devices
 
 **Desktop and laptop browsers only (D94).** The game is not expected to work on mobile. Mobile layouts, touch-specific adaptations and mobile validation are outside the product requirements. Validate desktop/laptop readability, mouse/trackpad controls and keyboard use. Earlier phone screenshots and test results are historical evidence, not ongoing acceptance criteria. Existing mobile styles may remain, but do not spend work maintaining them.
