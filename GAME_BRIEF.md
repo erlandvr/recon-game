@@ -16,15 +16,23 @@ When a chapter goal is reached, show a 3.6-second celebration before the next ch
 
 Fully automated repositories have a gold outline and Automated label. Modules and projects display a glowing gold circle and the same label once every connected member has both scan and fix automation. New uncovered members remove the group marker. Gold indicates purchased coverage, independent of health or temporary work delays; health retains its own colours (D100).
 
-## Game modes (D101–D108)
+## Game modes (current Speed: D129)
 
-Choose **Speed Game · 5 min** or **Long Game · ~20 min** before starting. Long Game is the current 100-repository experience described below; its economy, chapter progression, paused briefings and speed toggle are unchanged.
+Choose **Speed Game · 5–8 min** or **Long Game · ~20 min** before starting. Long Game is the current 100-repository experience described below; its economy, chapter progression, paused briefings and speed toggle are unchanged.
 
-Speed Game is a race to autonomy across 12 repositories in three modules, aiming for under five minutes. Its elapsed timer includes unhealthy time and keeps running beyond 05:00 until victory. First fix, scan coverage and module automation unlock successive teams. Repositories connect one at a time every 2.5 seconds on the same map. Automation purchases unlock after two active minutes and the first fix. The unlock pauses for a short explanation; Dive Back In resumes, excluding reading time from the finish time. Later phases use brief banners. Two efficiency tiers and lower setup costs support the shorter run. All 12 must become fully automated and pass a 20-second autonomy trial. Record actual finish time; Gold ≤04:30, Silver ≤04:45, Bronze ≤05:00, with later completion still valid but no time medal. Retry and unranked continued play are available. A future scoreboard will compare fastest finish times; it is not implemented yet. See [Speed Game rules and calibration](SPEED_MODE.md).
+Speed Game begins with one broken system. Its first restoration triggers waves of +2, +4 and +8 systems, 20 active seconds apart. Model benefits combine across both branches: intermediates improve manual work, while Speedy Scanner (225 cr) and Fixing Master (300 cr) automate their speciality. Current deterioration is 3.92× the original frequency; automatic scans have a 2-second cooldown. Models stay left, the growing map centre and workers right; Pause & plan freezes gameplay.
+
+D129: roll back instant golden-map victory. Restore average health ≥90%, each system ≥60%, no overdue/manual work, 35 credits, nonnegative operating income and five stable seconds; both automatic job types must have run. Upgrade final scan/fix job durations from 0.5 to 0.25 seconds and Speed automatic-scan cooldown from 7.5 to 2 seconds. Use quarter-second ticks only in Speed so faster work is real. Keep model prices, incident rate, waves, workers and all Long Game rules unchanged. Show recovery feedback before the restored countdown. Current rules and evidence: [Speed Game](SPEED_MODE.md).
+
+The remaining campaign rules below describe **Long Game** unless explicitly stated otherwise.
+
+Speed's opening **LET’S GO** begins an arcade 3–2–1 countdown. Gameplay, input and scored time begin when GO! appears, with its sparks fading over 0.8 seconds. Hidden tabs hold the countdown; reduced motion keeps the timing with static text. Pausing/resuming and practice do not replay it.
+
+After a Speed victory, players may enter a 1–30-character name/nickname and explicitly save the original result to the shared Supabase scoreboard. Skipping sends nothing. Public ranks compare exact quarter-second finish times within the same rules version; equal times share rank. A name is not a verified identity, and repeated names remain separate runs. Failed opted-in saves can be retried or discarded after reload. This is a casual scoreboard, not authoritative gameplay verification or resumable game storage. See [SCOREBOARD_PLAN.md](SCOREBOARD_PLAN.md).
 
 In both modes, the whole-ecosystem overview automatically fits new repositories. Selecting a repository or group, zooming or panning preserves that view during growth. Resizing preserves manual zoom or reframes the selected group. Fit all or the Ecosystem breadcrumb re-enables automatic overview framing. Animate framing smoothly, or immediately with reduced motion (D106).
 
-Bundled controls live on module/application nodes, using the same Scan/Fix and stacked automation order as repositories. Click a compact group to open its inline action card. Counts, exact costs and purchased coverage apply only to that group; View repos or View modules opens its members. There is no top bundled-action bar. Scope pricing, affordability and job queues remain unchanged (D107).
+Long Game bundled controls live on module/application nodes, using the same Scan/Fix and stacked automation order as repositories. Speed Game keeps group Scan/Fix only; automation comes from the model tree. Click a compact group to open its inline action card. Counts, exact costs and purchased coverage apply only to that group; View repos or View modules opens its members. There is no top bundled-action bar. Scope pricing, affordability and job queues remain unchanged (D107).
 
 ## Supported devices
 

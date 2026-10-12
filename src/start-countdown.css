@@ -1,0 +1,16 @@
+.start-count-dialog{inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0;background:transparent;color:#fff;overflow:hidden;box-shadow:none}
+.start-count-dialog::backdrop{background:rgb(8 24 42 / 78%);backdrop-filter:blur(2px)}
+.start-count-overlay{position:fixed;inset:0;z-index:1000;pointer-events:none;overflow:hidden;color:#fff}
+.start-count-visual{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.start-count-label{font:700 12px 'Space Mono',monospace;letter-spacing:.32em;margin-bottom:10px;text-shadow:0 2px 6px #10273c}
+.start-count-number,.start-count-go{font-family:'Space Grotesk',sans-serif;font-size:clamp(150px,23vw,260px);font-weight:700;line-height:1;letter-spacing:-.08em;transform:skew(-9deg);text-shadow:3px 3px 0 #49bed5,6px 6px 0 #268198,9px 9px 0 #174354,0 0 40px #69d8ef;animation:count-impact .9s both}
+.start-count-go{font-size:clamp(140px,22vw,230px);color:#ffe384;text-shadow:3px 3px 0 #d6a339,6px 6px 0 #986325,9px 9px 0 #513e2b,0 0 45px #ffd76b;animation:count-go .8s both}
+.start-count-beats{display:flex;gap:12px;margin-top:28px}.start-count-beats i{width:28px;height:5px;background:#476171;transform:skew(-18deg)}.start-count-beats .lit{background:#ffe384;box-shadow:0 0 10px #ffd76b}
+.start-count-sparks{position:absolute;inset:50% auto auto 50%}.start-count-sparks i{position:absolute;width:9px;height:9px;background:#ffe384;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:count-spark .75s var(--delay) both}
+.start-count-overlay .start-count-label{animation:count-label .8s both}
+.start-count-visual[data-hidden=true] *{animation-play-state:paused!important}
+@keyframes count-impact{0%{opacity:0;transform:scale(1.7) skew(-9deg)}18%{opacity:1;transform:scale(.92) skew(-9deg)}32%,75%{opacity:1;transform:scale(1) skew(-9deg)}100%{opacity:0;transform:scale(.9) skew(-9deg)}}
+@keyframes count-go{0%{opacity:0;transform:scale(.55) skew(-9deg)}18%{opacity:1;transform:scale(1.12) skew(-9deg)}35%,55%{opacity:1;transform:scale(1) skew(-9deg)}100%{opacity:0;transform:scale(1.22) skew(-9deg)}}
+@keyframes count-spark{0%{opacity:0;transform:rotate(var(--angle)) translateX(50px) scale(0)}15%{opacity:1}100%{opacity:0;transform:rotate(var(--angle)) translateX(var(--reach)) scale(.3)}}
+@keyframes count-label{0%,55%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.start-count-number,.start-count-go,.start-count-overlay .start-count-label{animation:none;transform:none}.start-count-sparks{display:none}}

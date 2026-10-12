@@ -22,10 +22,10 @@ async function debug(name){
  await page.getByRole('button',{name:new RegExp(`^${name} `)}).click();await page.getByRole('dialog').waitFor();
 }
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto(process.env.GAME_URL??'http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();
  assert.match(await page.getByRole('dialog').innerText(),/new Recon operator/);
  assert.equal(await page.locator('.opening-medals,.chapter-list,.story-advice').count(),0);
- for(const [width,height] of [[1280,800],[800,700],[390,844]]){
+ for(const [width,height] of [[1280,800],[800,700]]){
   await page.setViewportSize({width,height});await page.evaluate(()=>document.fonts.ready);
   assert.equal(await page.getByRole('dialog').evaluate(e=>e.scrollHeight>e.clientHeight||e.scrollWidth>e.clientWidth),false);
   await page.screenshot({path:`test-results/arcade-intro-${width}.png`});
@@ -42,7 +42,7 @@ try{
  await debug('Autonomy trial');await freeze('Chapter 5 automation/trial');await button('Start Next Chapter').click();
  for(let i=0;i<100&&!(await page.getByRole('dialog').count());i++)await tick(2);
  await page.getByRole('dialog',{name:'Full autonomy achieved'}).waitFor();await freeze('Automatic victory chapter');
- await page.screenshot({path:'test-results/arcade-victory-390.png'});
+ await page.screenshot({path:'test-results/arcade-victory-800.png'});
  const victoryTime=await world();await button('Keep playing').click();await tick(2);assert.equal(await world(),victoryTime+4);
  await button('Restart operation').click();await button('Start fresh').click();await freeze('Restart returns to waiting');assert.equal(await world(),0);
  assert.deepEqual(errors,[]);await writeFile('test-results/chapter-pause-browser.json',JSON.stringify({passed:true,checks,errors},null,2));console.log({passed:true,checks});

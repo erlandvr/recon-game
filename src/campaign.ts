@@ -23,12 +23,13 @@ export type Campaign = {
 };
 export const serviceOf = (f: Finding) => f.serviceId ?? 'backend';
 export const kindOf = (f: Finding) => f.kind ?? 'bug';
-export const activeServices = (s: GameState): ServiceId[] => s.speed ? s.organization.repositories.slice(0,s.campaign?.repositoryCount??1).map(r=>r.id) : s.campaign?.connected ? (s.campaign.repositoryCount <= 3 ? ['backend', 'frontend', 'auth'] : s.organization.repositories.slice(0, s.campaign.repositoryCount).map(r => r.id)) : ['backend'];
+export const activeServices = (s: GameState): ServiceId[] => s.speed ? s.speed.owned : s.campaign?.connected ? (s.campaign.repositoryCount <= 3 ? ['backend', 'frontend', 'auth'] : s.organization.repositories.slice(0, s.campaign.repositoryCount).map(r => r.id)) : ['backend'];
 export const serviceFindings = (s: GameState, id: ServiceId) => s.findings.filter(f => f.repairedAt === null && serviceOf(f) === id);
 export function impact(f: Finding) {
   return kindOf(f) === 'bug' ? 20 : kindOf(f) === 'security' ? (f.escalated ? 40 : 10) : f.escalated ? 20 : 0;
 }
 export function serviceHealth(s: GameState, id: ServiceId): number {
+  if(s.speed&&!s.speed.activated.includes(id))return 0;
   const local = serviceFindings(s, id).reduce((n, f) => n + impact(f), 0);
   const active = new Set(activeServices(s));
   const shared = Math.min(20, repository(s, id).dependencies.filter(dependency => active.has(dependency)).reduce((n, dependency) => n + serviceFindings(s, dependency).reduce((sum, f) => sum + impact(f), 0), 0));

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+<title>Speedy Scanner</title>
+<defs><linearGradient id="ink" x1="30" y1="20" x2="132" y2="144" gradientUnits="userSpaceOnUse"><stop stop-color="#65EDFF"/><stop offset="1" stop-color="#9C61FF"/></linearGradient><radialGradient id="core"><stop stop-color="#65EDFF" stop-opacity=".2"/><stop offset="1" stop-color="#9C61FF" stop-opacity=".04"/></radialGradient></defs>
+<g stroke="url(#ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M27 49A61 61 0 0 1 133 47M127 28L135 49L114 48M133 112A61 61 0 0 1 27 113M46 113L25 112L33 134"/><circle cx="18" cy="80" r="5"/><circle cx="142" cy="80" r="5"/></g>
+<path d="M80 32L119 55V103L80 128L41 103V55Z" fill="url(#core)" stroke="url(#ink)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M48 80Q80 41 112 80Q80 119 48 80Z" stroke="url(#ink)" stroke-width="4"/>
+<path d="M86 55L67 82H79L73 105L95 75H82Z" fill="url(#ink)" stroke="url(#ink)" stroke-width="2" stroke-linejoin="round"/>
+<path d="M57 47L80 34L103 47" stroke="#d5e7ff" stroke-width="2" stroke-linecap="round"/>
+</svg>
