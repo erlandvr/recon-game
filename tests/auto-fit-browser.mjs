@@ -17,11 +17,18 @@ try{
   await page.getByLabel('Find repository').selectOption('backend');assert.equal(Number(await canvas.getAttribute('data-zoom')),1);
   for(let i=0;i<120&&await page.locator('.repo-dot').count()===count;i++)await tick(.5);
   assert.ok(await page.locator('.repo-dot').count()>count,'A real corporate growth event occurred');await tick(1);
-  assert.ok(Number(await canvas.getAttribute('data-zoom'))<1,'Growth overrides focused repo');
-  assert.equal(await page.locator('.scope-path button').count(),1,'Breadcrumb returns to whole ecosystem');
-  const contained=await canvas.evaluate(el=>{const v=el.getBoundingClientRect();return [...el.querySelectorAll('.repo-dot')].every(dot=>{const r=dot.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;return x>=v.left&&x<=v.right&&y>=v.top&&y<=v.bottom;});});assert.ok(contained,'All repositories are in view');
-  await page.getByLabel('Find repository').selectOption('backend');await tick(1);assert.equal(Number(await canvas.getAttribute('data-zoom')),1,'Ordinary ticks do not reset focus');
-  await page.setViewportSize({width:1024,height:768});await page.waitForTimeout(100);await tick(1);assert.ok(Number(await canvas.getAttribute('data-zoom'))<1,'Resize overrides focus');
+  assert.equal(Number(await canvas.getAttribute('data-zoom')),1,'Growth preserves focused repo');
+  assert.equal(await page.locator('.scope-path button').count(),3,'Focused breadcrumb remains');
+  await page.setViewportSize({width:1024,height:768});await page.waitForTimeout(100);await tick(1);assert.equal(Number(await canvas.getAttribute('data-zoom')),1,'Resize preserves focus');
+  await button('Fit all').click();await tick(1);
+  const fittedCount=await page.locator('.repo-dot').count();
+  for(let i=0;i<120&&await page.locator('.repo-dot').count()===fittedCount;i++)await tick(.5);
+  assert.ok(await page.locator('.repo-dot').count()>fittedCount);await tick(1);
+  assert.equal(await page.locator('.scope-path button').count(),1);
+  const contained=await canvas.evaluate(el=>{const v=el.getBoundingClientRect();return [...el.querySelectorAll('.repo-dot')].every(dot=>{const r=dot.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;return x>=v.left&&x<=v.right&&y>=v.top&&y<=v.bottom;});});assert.ok(contained,'Fit all re-enables automatic framing of new repositories');
+  await button('Zoom in').click();const manualZoom=Number(await canvas.getAttribute('data-zoom')),manualCount=await page.locator('.repo-dot').count();
+  for(let i=0;i<120&&await page.locator('.repo-dot').count()===manualCount;i++)await tick(.5);
+  assert.ok(await page.locator('.repo-dot').count()>manualCount);await tick(1);assert.equal(Number(await canvas.getAttribute('data-zoom')),manualZoom,'Manual zoom survives growth');
   await page.screenshot({path:`test-results/auto-fit-long-${reduced?'reduced':'animated'}.png`});evidence.push({mode:'long',reduced,growth:true,resize:true});await page.close();
  }
  assert.deepEqual(errors,[]);await writeFile('test-results/auto-fit-browser.json',JSON.stringify({passed:true,evidence,errors},null,2));console.log({passed:true,evidence});

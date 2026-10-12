@@ -9,17 +9,17 @@ try{
   const page=await browser.newPage({viewport:{width,height},reducedMotion:reduced?'reduce':'no-preference'});page.on('pageerror',e=>errors.push(e.message));
   const button=name=>page.getByRole('button',{name,exact:true}),tick=async n=>{await page.clock.runFor(n*1000);await page.waitForTimeout(30);};
   await page.clock.install({time:new Date('2026-10-12T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-12T12:00:00Z'));await page.goto('http://127.0.0.1:5173/');await button('Choose Speed Game').click();await button('Start Speed Game').click();
-  const canvas=await page.getByRole('region',{name:'Zoomable ecosystem'}).elementHandle();const initialZoom=Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom'));
-  await button('Scan Backend').click();await tick(3);await button('Fix Backend').click();await tick(5);await button('Dive Back In').click();
+  const canvas=await page.getByRole('region',{name:'Zoomable ecosystem'}).elementHandle();const camera=()=>page.locator('.ecosystem-canvas').evaluate(el=>({zoom:Number(el.dataset.zoom),x:Number(el.dataset.cameraX),y:Number(el.dataset.cameraY)}));const initialCamera=await camera();
+  await button('Scan Backend').click();await tick(3);await button('Fix Backend').click();await tick(5);
   assert.equal(await page.locator('.repo-dot').count(),1);assert.ok(await canvas.evaluate(el=>el===document.querySelector('.ecosystem-canvas')));
   await tick(2.5);assert.equal(await page.locator('.repo-dot').count(),2);await tick(.4);
-  const middle=Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom'));await tick(.5);const end=Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom'));
-  if(!reduced){assert.ok(middle<initialZoom);assert.ok(middle>end);}else assert.equal(middle,end);
+  const middle=await camera();await tick(.5);const end=await camera();
+  assert.notDeepEqual(end,initialCamera,'Arrival reframes the overview');if(!reduced)assert.notDeepEqual(middle,end,'Camera interpolates during arrival');else assert.deepEqual(middle,end);
   await page.getByLabel('Find repository').selectOption('backend');assert.equal(Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom')),1);
   await tick(4.1);assert.equal(await page.locator('.repo-dot').count(),4);assert.ok(await canvas.evaluate(el=>el===document.querySelector('.ecosystem-canvas')));
-  await tick(1);assert.ok(Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom'))<1,'Arrival overrides repository focus');assert.equal(await page.locator('.scope-path button').count(),1);
+  await tick(1);assert.equal(Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom')),1,'Arrivals preserve repository focus');assert.equal(await page.locator('.scope-path button').count(),3);
   await page.getByLabel('Find repository').selectOption('backend');await tick(1);assert.equal(Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom')),1,'Ordinary ticks preserve manual focus');
-  await page.setViewportSize({width:width+40,height});await page.waitForTimeout(100);await tick(1);assert.ok(Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom'))<1,'Resize returns to Fit all');await page.setViewportSize({width,height});await page.waitForTimeout(100);await tick(1);
+  await page.setViewportSize({width:width+40,height});await page.waitForTimeout(100);await tick(1);assert.equal(Number(await page.locator('.ecosystem-canvas').getAttribute('data-zoom')),1,'Resize preserves manual zoom');await page.setViewportSize({width,height});await page.waitForTimeout(100);await tick(1);
   await page.screenshot({path:`test-results/speed-arrivals-${width}.png`});
   await page.getByLabel('Find repository').selectOption('backend');await page.waitForTimeout(50);
   const issues=await page.evaluate(()=>{

@@ -59,7 +59,7 @@ export default function SpeedGame({onChooseMode}:{onChooseMode:()=>void}){
     while(left>0){
      const step=automationBriefed.current?left:.5;
      next=advance(next,step);left-=step;
-     if(!automationBriefed.current&&next.campaign){
+     if(!automationBriefed.current&&next.campaign&&next.time>=SPEED.automationAt){
       automationBriefed.current=true;running.current=false;pending=0;epoch.current++;
       setPanel('automation');break;
      }
@@ -73,7 +73,7 @@ export default function SpeedGame({onChooseMode}:{onChooseMode:()=>void}){
  const sprint=s.speed!,phase=SPEED_BEATS[sprint.phase],a=autonomyStatus(s),next=suggested(s),active=activeServices(s);
  const practice=sprint.continuing,overTarget=s.time>SPEED.target,medal=s.campaign?.autonomy.victory?.medal;
  const lastReset=s.campaign?.autonomy.lastReset;
- const phaseGoal=sprint.phase===1?`Automatic scans ${Math.min(2,s.campaign?.automated.length??0)}/2 · Fixes ${Math.min(4,s.stats.repairs)}/4 to unlock the next team.`:phase.goal;
+ const phaseGoal=sprint.phase===1&&s.time<SPEED.automationAt?'Scan and fix your team. Automation unlocks at 02:00.':sprint.phase===1?`Automatic scans ${Math.min(2,s.campaign?.automated.length??0)}/2 · Fixes ${Math.min(4,s.stats.repairs)}/4 to unlock the next team.`:phase.goal;
  const trialDetail=a.covered===12?(a.reason??'Hands off. Recon is proving it can run the company.'):phaseGoal;
  return <div className="app speed-game">
   <a className="skip-link" href="#main">Skip to game</a>
@@ -101,10 +101,10 @@ export default function SpeedGame({onChooseMode}:{onChooseMode:()=>void}){
    </div>
    <div className="event-ticker" role="status"><span key={sprint.phase} className={s.time-sprint.phaseAt<7?'speed-beat':''}>{s.time-sprint.phaseAt<7?`✓ ${phase.story}`:notice||s.events[s.events.length-1].text}</span></div>
   </main>
-  <footer><span>{practice?'Practice · no new medal':`${active.length}/12 repositories · Gold ≤4:00 · Silver ≤4:30`}</span><div className="footer-controls"><button aria-pressed={sound.enabled} onClick={sound.toggle}>Sound {sound.enabled?'on':'off'}</button>{result&&<button onClick={()=>setResultOpen(true)}>View result</button>}</div></footer>
+  <footer><span>{practice?'Practice · no new medal':`${active.length}/12 repositories · Gold ≤4:30 · Silver ≤4:45`}</span><div className="footer-controls"><button aria-pressed={sound.enabled} onClick={sound.toggle}>Sound {sound.enabled?'on':'off'}</button>{result&&<button onClick={()=>setResultOpen(true)}>View result</button>}</div></footer>
   {panel==='intro'&&<Modal title="Beat five minutes. Make it autonomous." className="chapter-modal" onDismiss={()=>{}}><p>You’re SumZero’s Recon operator. Keep the company healthy while new teams join.</p><section className="chapter-rules arcade-rules"><h3>SCAN → FIX → AUTOMATE</h3><p>Grow to <strong>12 repositories</strong>. Automate scans and fixes, then let Recon run them for <strong>20 seconds</strong>.</p></section><p>Aim for under five minutes. Keep playing until autonomy, however long it takes.</p><button className="primary start-game-button" onClick={start}>Start Speed Game</button><button className="mode-back" onClick={onChooseMode}>Choose another mode</button></Modal>}
   {panel==='automation'&&<Modal title="Let Recon do the routine work" className="chapter-modal automation-briefing" onDismiss={()=>{}}>
-   <p>Your first fix unlocked automation. Buy it directly on each repository, or use the team buttons.</p>
+   <p>Automation is now unlocked. Buy it on a repository, or open a team node to automate its repos together.</p>
    <section className="chapter-rules"><p><strong>Auto scans</strong> discover new findings for you. Setup costs {automationCost(s)} credits per repo.</p><p><strong>Auto fixes</strong> resolve discovered findings. Setup costs {autoRepairCost(s)} credits per repo.</p><p>Jobs still use work slots and credits: {scanCost(s)} per scan, 15 per fix. Scan efficiency upgrades reduce scan costs.</p></section>
    <p>Automate both to turn a system gold. Cover all 12, then let Recon prove itself for 20 seconds.</p><p className="game-paused">Game paused. Reading time does not count.</p>
    <button className="primary start-game-button" onClick={start}>Dive Back In</button>

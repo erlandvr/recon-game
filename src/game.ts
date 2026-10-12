@@ -110,6 +110,7 @@ export function upgradeReason(s: GameState, upgrade: Upgrade): string | null {
   return null;
 }
 export function automationReason(s: GameState, id: ServiceId): string | null {
+  if(s.speed&&s.time<SPEED.automationAt)return 'Automation unlocks at 02:00.';
   if (!s.campaign) return `Automation unlocks after ${RULES.resultAt/60} healthy minutes.`;
   if (!activeServices(s).includes(id)) return 'This system is not connected yet.';
   if (s.campaign.automated.includes(id)) return 'Scans already automated.';
@@ -130,6 +131,7 @@ export function fullyAutomated(s: GameState, ids: readonly ServiceId[]): boolean
   return ids.length > 0 && ids.every(id => !!s.campaign?.automated.includes(id) && s.campaign.remediation.includes(id));
 }
 export function autoRepairReason(s:GameState,id:ServiceId):string|null {
+  if(s.speed&&s.time<SPEED.automationAt)return 'Automation unlocks at 02:00.';
   if(!s.campaign)return 'Automatic fixes unlock with ecosystem expansion.';
   if(!activeServices(s).includes(id))return 'This system is not connected yet.';
   if(s.campaign.remediation.includes(id))return 'Fixes already automated.';
@@ -188,7 +190,7 @@ export function scopeQuote(s: GameState, scope: Scope, operation: 'scan' | 'repa
     ? knownFindings(s).filter(f => ids.includes(serviceOf(f)) && ![...s.jobs, ...s.queue].some(j => j.findingId === f.id)).sort((a,b)=>(a.deadline ?? Infinity)-(b.deadline ?? Infinity) || a.bornAt-b.bornAt).map(f => ({type:'repair',findingId:f.id}))
     : ids.filter(id => !(operation==='automate'?s.campaign?.automated:s.campaign?.remediation)?.includes(id)).map(serviceId => ({type:operation==='automate'?'automate':'auto-repair',serviceId}));
   const cost = actions.length * (operation === 'scan' ? scanCost(s) : operation === 'repair' ? RULES.repairCost : operation === 'automate' ? automationCost(s) : autoRepairCost(s));
-  const reason = !s.campaign?.result ? 'Group actions unlock after the release milestone.' : !actions.length ? 'No eligible work in this scope.' : s.credits < cost ? `Need ${cost} credits for ${actions.length} actions.` : null;
+  const reason = s.speed&&s.time<SPEED.automationAt&&(operation==='automate'||operation==='auto-repair') ? 'Automation unlocks at 02:00.' : !s.campaign?.result ? 'Group actions unlock after the release milestone.' : !actions.length ? 'No eligible work in this scope.' : s.credits < cost ? `Need ${cost} credits for ${actions.length} actions.` : null;
   return {actions, cost, reason};
 }
 /** Unsubmitted findings retain their order; submitted work moves to the end in submission order. */

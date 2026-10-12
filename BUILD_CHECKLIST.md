@@ -6,16 +6,23 @@ Earlier sections record delivery at that time. Pause/save checks and full-slot r
 
 Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
 
-## Speed Game (D101–D105)
+## Speed Game (D101–D108)
 
 - [x] Mode selection, independent 12-repo speed rules, two efficiency tiers, elapsed finish timer, five-minute target and 20-second autonomy trial.
 - [x] Earned team growth, sequential 2.5-second arrivals, one persistent map and smooth framing with reduced-motion support.
 - [x] Frozen victory result, medals within target times, late completion, restart and unranked practice; preserve Long Game rules.
-- [x] Paid benchmark: 27 policies finish in 230.5–285.5 seconds; slower one-action-at-a-time limits documented in SPEED_MODE.md.
-- [x] All 80 unit tests and production build pass. Full sprint browser journey passes at 1280×800; first-expansion and reduced-motion checks pass at 1280×800 / 800×700. Long Game chapter-completion regression passes.
-- [x] First automation unlock pauses on the exact tick; Dive Back In resumes, excluding reading time.
-- [x] Both modes automatically return to Fit all on growth, including from focused repos; resize and reduced-motion checks pass.
-- [x] Full paid sprint replay at 800×700: 230.5s victory; briefing pause/resume, restart, continued play beyond 05:00, post-target layouts at 1024×768 / 800×700 and Long Game entry pass. Long Game automation layout passes 20 desktop views. Final production build and source/diff review pass.
+- [x] Paid benchmark: 27 policies finish in 256.5–310.5 seconds with the two-minute unlock; 22 beat five minutes. Speed medals recalibrated to 4:30 / 4:45 / 5:00.
+- [x] All 81 unit tests and production build pass. Full sprint browser journey passes at 1280×800; first-expansion and reduced-motion checks pass at 1280×800 / 800×700. Long Game chapter-completion regression passes.
+- [x] Automation requires two active minutes and a completed first fix; the unlock pauses on the exact tick; Dive Back In resumes, excluding reading time.
+- [x] D106: both modes auto-fit growth in the overview while preserving focused/manual views. Fit all restores automatic overview framing.
+- [x] Full paid sprint replay at 800×700: 256.5s victory; briefing pause/resume, restart, continued play beyond 05:00, post-target layouts at 1024×768 / 800×700 and Long Game entry pass. Long Game automation layout passes 20 desktop views. Final production build and source/diff review pass.
+
+## In-map bundled actions (D107)
+
+- [x] Replace top action bar with inline module/project action cards, matching repository control order and original status colours.
+- [x] Reuse scope quotes and dispatch: exact prices, eligible counts, affordability, queue and automation coverage remain unchanged.
+- [x] View repos/View modules opens group members; Close returns to overview. Cards preserve keyboard focus and hide obscured member labels.
+- [x] Desktop browser checks pass: paid group Scan/Fix/scan-automation purchases, 02:00 unlock and paused reading at 1280×800 / 800×700; full-coverage Long Game group cards and navigation fit at 800×700. Both-mode framing and reduced-motion regressions pass. Screenshots inspected.
 
 ## Automation coverage markers (D100)
 

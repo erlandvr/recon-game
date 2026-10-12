@@ -1,12 +1,12 @@
 /** Speed Game has independent tuning. Long Game constants remain unchanged. */
-export const SPEED = { target:300, repositories:12, trialSeconds:20, scanSetup:80, fixSetup:140 } as const;
+export const SPEED = { target:300, automationAt:120, repositories:12, trialSeconds:20, scanSetup:80, fixSetup:140 } as const;
 export const SPEED_EFFICIENCY = [
   {cost:60,scanCost:3,setupMultiplier:.8},
   {cost:140,scanCost:1,setupMultiplier:.5},
 ] as const;
 export const SPEED_MEDALS = [
-  {id:'gold',name:'Gold',through:240},
-  {id:'silver',name:'Silver',through:270},
+  {id:'gold',name:'Gold',through:270},
+  {id:'silver',name:'Silver',through:285},
   {id:'bronze',name:'Bronze',through:300},
 ] as const;
 export const SPEED_BEATS = [

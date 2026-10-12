@@ -585,3 +585,20 @@ button:not(:disabled) .node-warning{color:#822b16!important}
  .speed-game .health-status .health-reason{display:none}
  .speed-game .health-status .health-reason-compact{display:block}
 }
+
+/* Group actions belong to their node, with the same stacked automation order. */
+.map-group-detail{z-index:4}
+.group-card .node-actions button,.group-card .repair-automation button{display:flex;flex-direction:column;gap:1px}
+.group-card .node-actions button span,.group-card .repair-automation button span{font-size:calc(10px * var(--text-scale));font-weight:400}
+.group-navigation{grid-column:1/-1;display:flex;gap:4px;padding:2px 6px}
+.group-navigation button{flex:1;min-height:24px;padding:3px;font-size:calc(10px * var(--text-scale))}
+@media(min-width:651px) and (max-height:850px){.session-layout:has(.investments) .map-group-detail .system-card{width:290px;grid-template-columns:minmax(0,1fr) 132px}.group-card .system-inspect strong{font-size:calc(14px * var(--text-scale))}}
+
+@media(min-width:651px) and (max-height:850px){
+ .map-group-detail .group-card .system-inspect{padding:3px;gap:1px}
+ .map-group-detail .group-card .system-inspect strong{line-height:1.1}
+ .map-group-detail .group-card .system-inspect small{display:none}
+ .group-card .group-navigation{padding:2px;gap:2px}
+ .group-card .group-navigation button{padding:2px;font-size:calc(9px * var(--text-scale))}
+ .group-card .group-navigation button:last-child{flex:0 0 auto}
+}
