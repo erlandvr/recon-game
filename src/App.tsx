@@ -1,7 +1,7 @@
 import useChapterSound from './useChapterSound.ts';
 import VictorySummary from './VictorySummary.tsx';
 import { CHAPTER_COMPLETION_MS, completedChapter, type ChapterCompletion } from './chapterCompletion.ts';
-import { CHAPTERS, chapterIndex, nextMove } from './story.ts';
+import { CHAPTERS, chapterGoal, chapterIndex, nextMove } from './story.ts';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import Workspace from './Workspace.tsx';
@@ -67,6 +67,15 @@ export default function App() {
   const [speed, setSpeed] = useState<1 | 2>(1);
   const rate = useRef<1 | 2>(1);
   const tickClock = useRef<() => void>(() => {});
+  const chapterPaused = useRef(true);
+  const storyOpen = panel === 'story';
+  useLayoutEffect(() => {
+    // Settle active time on entry; discard only reading time on exit.
+    // Tick both sides of the boundary so a throttled callback cannot catch it up.
+    tickClock.current();
+    chapterPaused.current = storyOpen;
+    tickClock.current();
+  }, [storyOpen]);
   function clickLogo() {
     const now = Date.now();
     const sequence = logoClicks.current;
@@ -105,6 +114,7 @@ export default function App() {
       const now = Date.now();
       if(!running.current){previous=now;pendingMs=0;return;}
       if (epoch !== clockEpoch.current) { previous = now; pendingMs = 0; epoch = clockEpoch.current; }
+      if (chapterPaused.current) { previous = now; return; }
       pendingMs += Math.max(0, now - previous) * rate.current; previous = now;
       // Background browser throttling delays callbacks, not ecosystem time.
       // Process long gaps in bounded batches, retaining the remainder.
@@ -120,24 +130,23 @@ export default function App() {
   return <div className="app">
     <Board key={clockEpoch.current} state={s} completion={panel===null&&visible?completion:null} dispatch={dispatch} speed={speed} onToggleSpeed={toggleSpeed} onRestart={() => setPanel('restart')} onLog={() => setPanel('log')} onResults={() => setPanel('results')} onStory={openStory} onAutonomy={() => setPanel('autonomy')} onLogo={clickLogo} onDebug={() => setPanel('debug')} debugEnabled={debugEnabled} soundEnabled={sound.enabled} onToggleSound={sound.toggle} />
     <div className="notice" key={notice} role="status" aria-live="polite" aria-atomic="true">{notice}</div>
-    {panel === 'story' && <Modal title={storyChapter===5?'Full autonomy achieved':'Your company story'} onDismiss={() => {if(started)setPanel(null);}}>
+    {panel === 'story' && <Modal title={storyChapter===5?'Full autonomy achieved':storyChapter===0?'Recon · First assignment':'Your company story'} onDismiss={() => {if(started)setPanel(null);}}>
       <h3 className="story-title">Chapter {storyChapter+1} · {CHAPTERS[storyChapter].title}</h3>
-      {storyChapter===5&&s.campaign?.autonomy.victory ? <VictorySummary victory={s.campaign.autonomy.victory}/> : <p className="story-current">{CHAPTERS[storyChapter].story}</p>}
-      {storyChapter===0 ? <section className="chapter-rules" aria-label="How to play">
-        <h3>How to play</h3>
-        <ol>
-          <li><strong>Maintain health.</strong> Keep your system at {RULES.healthyThreshold}% or higher.</li>
-          <li><strong>Scan for issues.</strong> Click Scan on your system to reveal findings.</li>
-          <li><strong>Repair findings.</strong> Click Repair to restore health.</li>
-          <li><strong>Reach the target.</strong> Earn {RULES.resultAt/60} healthy minutes to enter the next chapter.</li>
-        </ol>
-        <p className="opening-medals">Medal targets: Gold ≤25 minutes · Silver ≤30 minutes · Bronze for every later finish.</p>
-        <p>Below {RULES.healthyThreshold}%, the goal timer stops. Restore health to resume. You keep the time already earned. Income is reduced by {Math.round((1-RULES.failureIncomeMultiplier)*100)}% until health recovers.</p>
-      </section> : storyChapter!==5 && <>
-      <ol className="chapter-list">{CHAPTERS.map((chapter,index)=><li key={chapter.title} aria-current={index===storyChapter?'step':undefined} className={index<storyChapter?'completed':''}><span>{index<storyChapter?'✓':String(index+1).padStart(2,'0')}</span><div><strong>{chapter.title}</strong><small>{index===storyChapter?'Current chapter':index<storyChapter?'Reached':chapter.unlock}</small></div></li>)}</ol>
+      {storyChapter===5&&s.campaign?.autonomy.victory ? <VictorySummary victory={s.campaign.autonomy.victory}/> : storyChapter===0 ? <>
+        <p>Welcome to SumZero. We build software—and keep it running.</p>
+        <p className="mission-role"><strong>You’re our new Recon operator.</strong></p>
+        <p>One startup. One backend. You’re in charge.</p>
+        <p>Find hidden problems before repair bills and compliance threats overwhelm the team. Keep the system healthy as the company grows.</p>
+        <section className="chapter-rules arcade-rules" aria-label="How to play">
+          <h3>SCAN → FIX → UPGRADE</h3>
+          <p>Keep health at <strong>{RULES.healthyThreshold}% or higher.</strong><br/>Hold it for <strong>{RULES.resultAt/60} healthy minutes</strong> to unlock the next chapter.</p>
+        </section>
+      </> : <>
+        <p className="story-current">{CHAPTERS[storyChapter].story}</p>
+        <section className="chapter-rules" aria-label="Chapter target"><h3>Your target</h3><p>{chapterGoal(s)}</p></section>
       </>}
-      {storyChapter!==5&&<section className="story-advice" aria-label="Next move"><h3>{nextMove(s).title}</h3><p>{nextMove(s).detail}</p></section>}
-      <p className="story-live-note">{started?'The ecosystem keeps running while you read.':'Take your time. The ecosystem and medal timer begin when you press Start game.'}</p>
+      {started&&storyChapter!==5&&<section className="story-advice" aria-label="Next move"><h3>{nextMove(s).title}</h3><p>{nextMove(s).detail}</p></section>}
+      <p className="story-live-note">{started?'Game paused · Take your time. Close this briefing to resume.':'Ready? Your timer starts when you do.'}</p>
       <button className="primary" onClick={()=>{if(!started)startGame();else setPanel(null);}}>{storyChapter === 0 ? 'Start game' : storyChapter===5 ? 'Keep playing' : 'Start Next Chapter'}</button>
     </Modal>}
     {panel === 'debug' && <Modal title="Debug · choose a starting point" onDismiss={() => setPanel(null)}>

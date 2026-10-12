@@ -30,7 +30,7 @@ try{
  assert.equal(await page.locator('.story-guide').getAttribute('data-chapter'),'1');await dismissStory();
  for(const [w,h] of [[1280,800],[800,700],[390,844]]){await page.setViewportSize({width:w,height:h});await bounds(`story-start-${w}`);await button('Plan investment').click();assert.match(await page.getByRole('dialog').innerText(),/Keep 20 cr/);await bounds(`story-plan-${w}`);await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();}
  await tick(15);await button('Open Backend').click();assert.equal(await page.getByLabel('Backend actions',{exact:true}).count(),1);await page.keyboard.press('Escape');
- await button('Open company story').click();await tick(3);assert.equal(await page.locator('.world-time time').innerText(),'00:18');await page.keyboard.press('Escape');assert.equal(await button('Open company story').evaluate(e=>e===document.activeElement),true);
+ await button('Open company story').click();await tick(3);assert.equal(await page.locator('.world-time time').innerText(),'00:15');await page.keyboard.press('Escape');assert.equal(await button('Open company story').evaluate(e=>e===document.activeElement),true);
  for(const [name,chapter] of [['Growing backend',1],['Connected systems',2],['Corporate expansion',3],['100-repository company',5],['Autonomy trial',5]]){
   await debug(name);assert.equal(await page.locator('.story-guide').getAttribute('data-chapter'),String(chapter));
   if(name==='Connected systems'){await button('Find Backend').click();assert.equal(await button('Inspect Backend').evaluate(e=>e===document.activeElement),true);}

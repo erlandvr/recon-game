@@ -29,11 +29,11 @@ try{
  }
  assert.equal(await page.evaluate(()=>window.audioNotes),3);await tick(5);assert.equal(await page.evaluate(()=>window.audioNotes),3);
  await button('Start Next Chapter').click();await button('Chapter sound').click();assert.equal(await button('Chapter sound').getAttribute('aria-pressed'),'false');
- await button('Open company story').click();const before=await page.locator('.world-time time').innerText();await tick(2);assert.notEqual(await page.locator('.world-time time').innerText(),before);await page.keyboard.press('Escape');
+ await button('Open company story').click();const before=await page.locator('.world-time time').innerText();await tick(2);assert.equal(await page.locator('.world-time time').innerText(),before);await page.keyboard.press('Escape');
  await button('Restart operation').click();await button('Start fresh').click();await tick(20);assert.equal(await page.locator('.world-time time').innerText(),'00:00');
  await button('Start game').click();await page.clock.fastForward(1500*1000);await tick(2);assert.match(await page.locator('.medal-target').innerText(),/Silver/);
  await page.clock.fastForward(300*1000);await tick(2);assert.match(await page.locator('.medal-target').innerText(),/Bronze/);
  for(let i=0;i<3;i++)await button('Recon logo').click();await page.getByRole('button',{name:/^Connected systems /}).click();await button('Start Next Chapter').click();await tick(100);
  await button('Automate Backend scans for 210 credits').click();await page.waitForTimeout(50);assert.equal(await page.locator('.node-backend').getAttribute('data-feedback'),'Automation enabled');await tick(1);assert.equal(await page.locator('.node-backend').getAttribute('data-feedback'),null);
- assert.deepEqual(errors,[]);await writeFile('test-results/finetuning-browser.json',JSON.stringify({passed:true,checks:['opening waits without earnings or elapsed time','Escape cannot skip start','repair feedback and reduced motion','sound opt-in, once per completion, opt-out','later story stays live','restart returns to waiting','medal targets advance to silver and bronze','automation purchase confirmation'],errors},null,2));console.log('Finetuning browser checks passed');
+ assert.deepEqual(errors,[]);await writeFile('test-results/finetuning-browser.json',JSON.stringify({passed:true,checks:['opening waits without earnings or elapsed time','Escape cannot skip start','repair feedback and reduced motion','sound opt-in, once per completion, opt-out','later story pauses','restart returns to waiting','medal targets advance to silver and bronze','automation purchase confirmation'],errors},null,2));console.log('Finetuning browser checks passed');
 }finally{await browser.close()}

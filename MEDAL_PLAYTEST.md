@@ -2,7 +2,7 @@
 
 ## Current calibration — D87, 2026-10-10
 
-Simulation and scoring now begin together on **Start game**. Initial rules reading is free; later reading and unhealthy time still count. Normal game time remains the scoring unit at 1× and 2×.
+Simulation and scoring now begin together on **Start game**. D91 (2026-10-12): all chapter briefing reading is now free, including reopened chapters; unhealthy active time still counts. The full simulation pauses while a chapter briefing is open, at either speed. Engine policy benchmarks and medal thresholds below are unchanged; the recorded browser replay predates this presentation change. Normal game time remains the scoring unit at 1× and 2×.
 
 Efficiency now discounts new automatic-scan setups as well as recurring scans. Tier prices are 20/100/500/2500/6000; setup prices after each tier are 210/199.5/168/105/31.5. Already purchased coverage receives no refund. Automatic repair setup remains 480. The former D86 economic lower bound and investment advice below no longer apply.
 
@@ -51,7 +51,7 @@ The fastest **tested** strategy reached autonomy in 1,312.5 game seconds (21:52.
 
 These margins are design choices informed by the benchmark, not measured human completion-time percentiles. Human difficulty/enjoyment testing remains outstanding.
 
-The clock is the existing total ecosystem time, from a fresh run until the immutable victory tick. It includes unhealthy periods, open-story reading time and the autonomy trial. It does not use healthy time or just the last chapter. 2× changes wall-clock duration, not the scoring unit; reading/interaction while running at 2× consumes game time at that rate. No saving/offline progression was added. Compare exact half-second time against inclusive thresholds; round the displayed finish time upward to a whole second so a silver finish at 25:00.5 displays 25:01, not 25:00.
+The clock is the existing total ecosystem time, from a fresh run until the immutable victory tick. It includes unhealthy periods and the autonomy trial. D91 excludes paused chapter reading. It does not use healthy time or just the last chapter. 2× changes wall-clock duration, not the scoring unit; interaction and non-chapter dialogs while running at 2× consume game time at that rate; chapter briefings consume none. No saving/offline progression was added. Compare exact half-second time against inclusive thresholds; round the displayed finish time upward to a whole second so a silver finish at 25:00.5 displays 25:01, not 25:00.
 
 ## Search method and results
 

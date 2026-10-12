@@ -460,3 +460,13 @@ button.primary:disabled{color:var(--primary-foreground);background:var(--primary
 .notice:not(:empty){background:var(--neutral-12);border-color:var(--primary-border)}
 @media(max-width:650px){.brand-mark{width:22px;height:34px}.brand{gap:9px}.brand strong{font-size:14px}.brand strong span{font-size:10px}.brand small{font-size:10px}}
 @media(prefers-reduced-motion:reduce){button,select{transition:none}}
+
+/* Arcade briefing: one clear assignment before the clock starts. */
+.modal .mission-role{color:var(--primary)}
+.arcade-rules{border:1px solid var(--primary-border);border-radius:var(--radius-card);background:var(--primary-soft);padding:14px}
+.arcade-rules h3{letter-spacing:.08em;font-size:13px}
+.arcade-rules p{line-height:1.7}
+.story-live-note{font-size:11px!important;color:var(--muted-foreground)!important}
+@media(max-width:650px){.arcade-rules{padding:12px}.modal:has(.arcade-rules) h2{font-size:22px}}
+/* Deadline labels need a little more map room on short laptops. */
+@media(min-width:651px) and (max-height:850px){.session-layout:has(.session-network.connected) .map-world{row-gap:4px}}

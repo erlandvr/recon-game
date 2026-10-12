@@ -356,3 +356,13 @@ Only mark implementation complete after inspecting or exercising it. Record test
 - [x] Record provenance/adaptations and review screenshots in DESIGN_SYSTEM.md.
 - [x] Push branch and open [GitHub PR #1](https://github.com/erlandvr/recon-game/pull/1). Main publication stays unchanged pending merge.
 - Remote Node 24 test/build status is tracked on PR #1; browser checks above were run locally.
+
+
+## D90–D91 — arcade lore and chapter pauses (2026-10-12)
+
+- [x] Implement approved short SumZero/Recon operator opening, one action, two-minute/80% target and first-problem cue.
+- [x] Shorten later chapter stories and replace roadmap with the current target; keep post-start investment advice.
+- [x] Pause all simulation during every chapter briefing; explicitly label pause and resume without reading-time catch-up at 1×/2×.
+- [x] Preserve free initial start, completion celebration and live non-chapter dialogs.
+- [x] Pass 70 tests, production build, dedicated pause, story and completion browser checks; inspect desktop/phone opening screenshots.
+- [x] Full gameplay, health-feedback and finishing/sound regressions pass. Fix short-laptop deadline-card clipping and pass five-size automation-layout checks; inspect the corrected 1024×768 view.

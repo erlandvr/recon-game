@@ -8,7 +8,7 @@ await context.addInitScript(()=>{for(const key of ['localStorage','sessionStorag
 const page=await context.newPage(),errors=[],evidence=[];page.on('pageerror',e=>errors.push(e.message));
 const button=name=>page.getByRole('button',{name,exact:true});
 const tick=async s=>page.clock.runFor(s*1000);
-const chapter=async n=>{await page.getByRole('dialog',{name:n===6?'Full autonomy achieved':'Your company story'}).waitFor();assert.match(await page.locator('.story-title').innerText(),new RegExp(`^Chapter ${n} ·`));};
+const chapter=async n=>{await page.getByRole('dialog',{name:n===6?'Full autonomy achieved':n===1?'Recon · First assignment':'Your company story'}).waitFor();assert.match(await page.locator('.story-title').innerText(),new RegExp(`^Chapter ${n} ·`));};
 const close=async()=>button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
 async function debug(name,n){if(!await button('Debug').count()){for(let i=0;i<3;i++)await button('Recon logo').click();}else await button('Debug').click();await page.getByRole('button',{name:new RegExp(`^${name} `)}).click();await chapter(n);}
 async function layout(name){

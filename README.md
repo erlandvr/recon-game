@@ -11,9 +11,9 @@ npm ci
 npm run dev
 ```
 
-Open the Local URL printed by Vite. Press **Start game** after reading the rules; simulation and medal time begin together and then continue while the page is open. No accounts, backend or live Recon connection are needed. Each reload starts a fresh run. Normal speed now uses the faster playtested pace with ordinary clock seconds. Use the **1×** button beside the timer to switch to **2×** for faster testing; click again to return to normal speed.
+Open the Local URL printed by Vite. Press **Start game** after reading the rules; simulation and medal time begin together and then continue while the page is open, except during chapter briefings. No accounts, backend or live Recon connection are needed. Each reload starts a fresh run. Normal speed now uses the faster playtested pace with ordinary clock seconds. Use the **1×** button beside the timer to switch to **2×** for faster testing; click again to return to normal speed.
 
-Follow your company from **the first team** to **full autonomy** in the guidance above the map. Each chapter opens its story automatically, starting with your first team. Dismiss it to play, or click the chapter title to reopen it. After Start game, time continues while reading; introductions wait behind other open dialogs. The next move points to a named system or offers **Plan investment** during quiet moments; it never spends credits for you. Goals explain the next unlock, while the ecosystem keeps running even when you read the story.
+Follow your company from **the first team** to **full autonomy** in the guidance above the map. Each chapter opens its story automatically, starting with your first team. Dismiss it to play, or click the chapter title to reopen it. Chapter briefings pause the whole game, including reopened stories; closing them resumes without counting reading time. Introductions wait behind other open dialogs. The next move points to a named system or offers **Plan investment** during quiet moments; it never spends credits for you. Goals explain the next unlock, and a visible Game paused note makes chapter-reading pauses explicit.
 
 Use **Scan** and **Repair** on each system. **Repair all (N) · total cr** submits all known findings when affordable, using available slots and queuing overflow. If credits cannot cover the total, it opens individual choices without spending. Clicking a system name always opens details. Selected findings move to the bottom, marked Repairing or Queued. Findings stay open while you submit repairs; click outside, Close or Escape to dismiss. Speed upgrades and five **Scan efficiency** tiers sit below the map. Efficiency reduces each new manual/group/automatic scan from 5 credits down to 0.25; each tier shows its price and next scan/setup cost. Tier prices rise: **20 / 100 / 500 / 2,500 / 6,000 credits**. Buy up to **five work slots**, at **150 credits each**, on the right. Full slots put manual actions into the **Queue**, which shows a waiting count and starts work in order as slots free up. Actions are charged once when submitted.
 
@@ -32,6 +32,7 @@ npm test          # deterministic engine, queue, accounting and automation
 npm run build     # strict TypeScript check and production bundle
 npm run preview   # serve the production bundle
 node tests/feedback-browser.mjs  # chapter entry, health holds and timer spacing
+node tests/chapter-pause-browser.mjs  # chapter pauses, jobs/queue, hidden reading, 2× and restart
 node tests/story-browser.mjs  # chapters, guidance and responsive layout; same runtime
 node tests/browser-smoke.mjs  # requires Playwright with Chromium and a running preview
 ```

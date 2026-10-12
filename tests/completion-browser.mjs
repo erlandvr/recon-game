@@ -50,7 +50,7 @@ try {
    await button('Close log').click();await page.locator('.chapter-completion').waitFor();await tick(1);assert.equal(await page.getByRole('dialog').count(),0);
    await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});await tick(4);assert.equal(await page.getByRole('dialog').count(),0);
    await page.evaluate(()=>{delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));});await page.locator('.chapter-completion').waitFor();await tick(1);assert.equal(await page.getByRole('dialog').count(),0);
-   await button('Restart operation').click();await button('Start fresh').click();await page.getByRole('dialog',{name:'Your company story'}).waitFor();assert.match(await page.locator('.story-title').innerText(),/Chapter 1/);await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();await tick(3);assert.equal(await page.getByRole('dialog').count(),0);
+   await button('Restart operation').click();await button('Start fresh').click();await page.getByRole('dialog',{name:'Recon · First assignment'}).waitFor();assert.match(await page.locator('.story-title').innerText(),/Chapter 1/);await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();await tick(3);assert.equal(await page.getByRole('dialog').count(),0);
    evidence.push('Reduced motion and 2×: same readable interval; other dialogs/hidden page defer feedback; restart cancels the old pending modal.');
   }
   await context.close();
