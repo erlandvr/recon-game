@@ -39,7 +39,7 @@ test('partial groups only target connected members, with stable ownership as new
  assert.deepEqual(scopeRepositories(s,{level:'project',id:'missing'}),[]);
  assert.equal(act(s,{type:'scope',scope:{level:'module',id:'missing'},operation:'scan'}).state,s);
 });
-test('group scans and repairs use ordinary prepaid jobs, same slots, exact costs and no duplicates',()=>{
+test('group scans and fixes use ordinary prepaid jobs, same slots, exact costs and no duplicates',()=>{
  let s=structuredClone(full);const scope={level:'project' as const,id:s.organization.projects[0].id};
  const ids=scopeRepositories(s,scope);const quote=scopeQuote(s,scope,'scan');assert.equal(quote.actions.length,ids.length);
  const credits=s.credits;s=action(s,{type:'scope',scope,operation:'scan'});assert.equal(s.credits,credits-ids.length*5);

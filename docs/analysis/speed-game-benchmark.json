@@ -1,0 +1,680 @@
+[
+  {
+    "route": "base",
+    "reaction": 1,
+    "beforeModel": 4,
+    "earlyAutomation": false,
+    "result": {
+      "at": 435.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": null,
+    "credits": 470.25,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 48
+  },
+  {
+    "route": "base",
+    "reaction": 1,
+    "beforeModel": 4,
+    "earlyAutomation": true,
+    "result": {
+      "at": 435.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": null,
+    "credits": 470.25,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 48
+  },
+  {
+    "route": "base",
+    "reaction": 3,
+    "beforeModel": 4,
+    "earlyAutomation": false,
+    "result": {
+      "at": 452.5,
+      "won": true,
+      "covered": 12,
+      "health": 96.7,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": null,
+    "credits": 497.8,
+    "coverage": 12,
+    "health": 96.7,
+    "manualActions": 46
+  },
+  {
+    "route": "base",
+    "reaction": 3,
+    "beforeModel": 4,
+    "earlyAutomation": true,
+    "result": {
+      "at": 452.5,
+      "won": true,
+      "covered": 12,
+      "health": 96.7,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": null,
+    "credits": 497.8,
+    "coverage": 12,
+    "health": 96.7,
+    "manualActions": 46
+  },
+  {
+    "route": "base",
+    "reaction": 5,
+    "beforeModel": 4,
+    "earlyAutomation": false,
+    "result": {
+      "at": 470.5,
+      "won": true,
+      "covered": 12,
+      "health": 93.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": null,
+    "credits": 435.7,
+    "coverage": 12,
+    "health": 93.3,
+    "manualActions": 43
+  },
+  {
+    "route": "base",
+    "reaction": 5,
+    "beforeModel": 4,
+    "earlyAutomation": true,
+    "result": {
+      "at": 470.5,
+      "won": true,
+      "covered": 12,
+      "health": 93.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": null,
+    "credits": 435.7,
+    "coverage": 12,
+    "health": 93.3,
+    "manualActions": 43
+  },
+  {
+    "route": "scanner",
+    "reaction": 1,
+    "beforeModel": 4,
+    "earlyAutomation": false,
+    "result": {
+      "at": 449.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": 95,
+    "credits": 443.9,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 51
+  },
+  {
+    "route": "scanner",
+    "reaction": 1,
+    "beforeModel": 7,
+    "earlyAutomation": false,
+    "result": {
+      "at": 423.5,
+      "won": true,
+      "covered": 12,
+      "health": 96.7,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": 137,
+    "credits": 449.1,
+    "coverage": 12,
+    "health": 96.7,
+    "manualActions": 58
+  },
+  {
+    "route": "scanner",
+    "reaction": 1,
+    "beforeModel": 4,
+    "earlyAutomation": true,
+    "result": {
+      "at": 461.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 167,
+    "credits": 414.35,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 47
+  },
+  {
+    "route": "scanner",
+    "reaction": 1,
+    "beforeModel": 7,
+    "earlyAutomation": true,
+    "result": {
+      "at": 445.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": 219,
+    "credits": 504.4,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 48
+  },
+  {
+    "route": "scanner",
+    "reaction": 3,
+    "beforeModel": 4,
+    "earlyAutomation": false,
+    "result": {
+      "at": 473.5,
+      "won": true,
+      "covered": 12,
+      "health": 93.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 99,
+    "credits": 476.15,
+    "coverage": 12,
+    "health": 93.3,
+    "manualActions": 46
+  },
+  {
+    "route": "scanner",
+    "reaction": 3,
+    "beforeModel": 7,
+    "earlyAutomation": false,
+    "result": {
+      "at": 437.5,
+      "won": true,
+      "covered": 12,
+      "health": 91.7,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": 159,
+    "credits": 484.45,
+    "coverage": 12,
+    "health": 91.7,
+    "manualActions": 60
+  },
+  {
+    "route": "scanner",
+    "reaction": 3,
+    "beforeModel": 4,
+    "earlyAutomation": true,
+    "result": {
+      "at": 479.5,
+      "won": true,
+      "covered": 12,
+      "health": 93.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 174,
+    "credits": 489.05,
+    "coverage": 12,
+    "health": 93.3,
+    "manualActions": 43
+  },
+  {
+    "route": "scanner",
+    "reaction": 3,
+    "beforeModel": 7,
+    "earlyAutomation": true,
+    "result": {
+      "at": 464.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 246,
+    "credits": 499.25,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 46
+  },
+  {
+    "route": "scanner",
+    "reaction": 5,
+    "beforeModel": 4,
+    "earlyAutomation": false,
+    "result": {
+      "at": 485.5,
+      "won": true,
+      "covered": 12,
+      "health": 93.3,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 105,
+    "credits": 470.6,
+    "coverage": 12,
+    "health": 93.3,
+    "manualActions": 46
+  },
+  {
+    "route": "scanner",
+    "reaction": 5,
+    "beforeModel": 7,
+    "earlyAutomation": false,
+    "result": {
+      "at": 465.5,
+      "won": true,
+      "covered": 12,
+      "health": 90,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 210,
+    "credits": 489.1,
+    "coverage": 12,
+    "health": 90,
+    "manualActions": 58
+  },
+  {
+    "route": "scanner",
+    "reaction": 5,
+    "beforeModel": 4,
+    "earlyAutomation": true,
+    "result": {
+      "at": 490.5,
+      "won": true,
+      "covered": 12,
+      "health": 90,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 180,
+    "credits": 486,
+    "coverage": 12,
+    "health": 90,
+    "manualActions": 42
+  },
+  {
+    "route": "scanner",
+    "reaction": 5,
+    "beforeModel": 7,
+    "earlyAutomation": true,
+    "result": {
+      "at": 485.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 260,
+    "credits": 544.85,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 43
+  },
+  {
+    "route": "master",
+    "reaction": 1,
+    "beforeModel": 5,
+    "earlyAutomation": false,
+    "result": {
+      "at": 452.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 189,
+    "credits": 527.35,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 57
+  },
+  {
+    "route": "master",
+    "reaction": 1,
+    "beforeModel": 7,
+    "earlyAutomation": false,
+    "result": {
+      "at": 419.5,
+      "won": true,
+      "covered": 12,
+      "health": 96.7,
+      "modules": 3
+    },
+    "medal": "gold",
+    "modelAt": 193,
+    "credits": 520.3,
+    "coverage": 12,
+    "health": 96.7,
+    "manualActions": 65
+  },
+  {
+    "route": "master",
+    "reaction": 1,
+    "beforeModel": 10,
+    "earlyAutomation": false,
+    "result": {
+      "at": 383.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "gold",
+    "modelAt": 221,
+    "credits": 523.7,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 79
+  },
+  {
+    "route": "master",
+    "reaction": 1,
+    "beforeModel": 5,
+    "earlyAutomation": true,
+    "result": {
+      "at": 487.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 276,
+    "credits": 508.1,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 42
+  },
+  {
+    "route": "master",
+    "reaction": 1,
+    "beforeModel": 7,
+    "earlyAutomation": true,
+    "result": {
+      "at": 469.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 316,
+    "credits": 526.5,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 43
+  },
+  {
+    "route": "master",
+    "reaction": 1,
+    "beforeModel": 10,
+    "earlyAutomation": true,
+    "result": {
+      "at": 465.5,
+      "won": true,
+      "covered": 12,
+      "health": 93.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 394,
+    "credits": 496.6,
+    "coverage": 12,
+    "health": 93.3,
+    "manualActions": 46
+  },
+  {
+    "route": "master",
+    "reaction": 3,
+    "beforeModel": 5,
+    "earlyAutomation": false,
+    "result": {
+      "at": 464.5,
+      "won": true,
+      "covered": 12,
+      "health": 91.7,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 198,
+    "credits": 534.05,
+    "coverage": 12,
+    "health": 91.7,
+    "manualActions": 58
+  },
+  {
+    "route": "master",
+    "reaction": 3,
+    "beforeModel": 7,
+    "earlyAutomation": false,
+    "result": {
+      "at": 431.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": 204,
+    "credits": 541.2,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 64
+  },
+  {
+    "route": "master",
+    "reaction": 3,
+    "beforeModel": 10,
+    "earlyAutomation": false,
+    "result": {
+      "at": 424,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "silver",
+    "modelAt": 237,
+    "credits": 1027.65,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 76
+  },
+  {
+    "route": "master",
+    "reaction": 3,
+    "beforeModel": 5,
+    "earlyAutomation": true,
+    "result": {
+      "at": 500.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 288,
+    "credits": 551.7,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 42
+  },
+  {
+    "route": "master",
+    "reaction": 3,
+    "beforeModel": 7,
+    "earlyAutomation": true,
+    "result": {
+      "at": 482.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 327,
+    "credits": 541.45,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 42
+  },
+  {
+    "route": "master",
+    "reaction": 3,
+    "beforeModel": 10,
+    "earlyAutomation": true,
+    "result": {
+      "at": 479.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 408,
+    "credits": 520.1,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 46
+  },
+  {
+    "route": "master",
+    "reaction": 5,
+    "beforeModel": 5,
+    "earlyAutomation": false,
+    "result": {
+      "at": 480.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 205,
+    "credits": 545.05,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 58
+  },
+  {
+    "route": "master",
+    "reaction": 5,
+    "beforeModel": 7,
+    "earlyAutomation": false,
+    "result": {
+      "at": 455.5,
+      "won": true,
+      "covered": 12,
+      "health": 98.3,
+      "modules": 3
+    },
+    "medal": "bronze",
+    "modelAt": 225,
+    "credits": 521.55,
+    "coverage": 12,
+    "health": 98.3,
+    "manualActions": 62
+  },
+  {
+    "route": "master",
+    "reaction": 5,
+    "beforeModel": 10,
+    "earlyAutomation": false,
+    "result": null,
+    "medal": null,
+    "modelAt": null,
+    "credits": 9681.6,
+    "coverage": 0,
+    "health": 74.3,
+    "manualActions": 234
+  },
+  {
+    "route": "master",
+    "reaction": 5,
+    "beforeModel": 5,
+    "earlyAutomation": true,
+    "result": {
+      "at": 510.5,
+      "won": true,
+      "covered": 12,
+      "health": 91.7,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 295,
+    "credits": 533.95,
+    "coverage": 12,
+    "health": 91.7,
+    "manualActions": 41
+  },
+  {
+    "route": "master",
+    "reaction": 5,
+    "beforeModel": 7,
+    "earlyAutomation": true,
+    "result": {
+      "at": 500.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 340,
+    "credits": 553.3,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 42
+  },
+  {
+    "route": "master",
+    "reaction": 5,
+    "beforeModel": 10,
+    "earlyAutomation": true,
+    "result": {
+      "at": 500.5,
+      "won": true,
+      "covered": 12,
+      "health": 100,
+      "modules": 3
+    },
+    "medal": null,
+    "modelAt": 430,
+    "credits": 519.9,
+    "coverage": 12,
+    "health": 100,
+    "manualActions": 43
+  }
+]

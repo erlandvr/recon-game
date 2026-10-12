@@ -60,6 +60,22 @@ export function repository(s: GameState, id: ServiceId): Repository {
 export function scopeRepositories(s: GameState, scope: Scope): ServiceId[] {
   const modules = scope.level === 'module' ? s.organization.modules.filter(m => m.id === scope.id) : s.organization.modules.filter(m => m.projectId === scope.id);
   const ids = new Set(modules.flatMap(m => m.repositoryIds));
-  const connected = new Set(s.organization.repositories.slice(0, s.campaign?.repositoryCount ?? 1).map(r => r.id));
+  const connected = new Set(s.speed?s.speed.owned:s.organization.repositories.slice(0, s.campaign?.repositoryCount ?? 1).map(r => r.id));
   return [...ids].filter(id => connected.has(id));
+}
+
+/** Fixed scope keeps the short race readable and comparable across runs. */
+export function createSpeedOrganization(seed:number):Organization {
+  const project:Project={id:'project-1',name:'Your company',moduleIds:[]};
+  const modules:Module[]=[],repositories:Repository[]=[];
+  for(let index=0;index<3;index++){
+    const module:Module={id:`module-${index+1}`,name:['Core experience','Commerce','Operations'][index],projectId:project.id,repositoryIds:[]};
+    for(let n=0;n<5;n++){
+      const count=repositories.length,id:ServiceId=count===0?'backend':count===1?'frontend':count===2?'auth':`repo-${count+1}`;
+      const name=['Backend','Frontend','Identity','Messages','Orders','Payments','Billing','Catalog','Analytics','Reports','Support','Workflow','Search','Alerts','Monitor'][count];
+      repositories.push({id,name,role:ROLES[n%ROLES.length],moduleId:module.id,baseIncome:2,dependencies:n?[module.repositoryIds[0]]:[]});module.repositoryIds.push(id);
+    }
+    modules.push(module);project.moduleIds.push(module.id);
+  }
+  return {seed:seed>>>0,repositories,modules,projects:[project]};
 }

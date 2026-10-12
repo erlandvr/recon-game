@@ -6,6 +6,7 @@
 
 :root {
   color-scheme: dark;
+  --text-scale: 1.2;
   --font-body: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-heading: var(--font-body);
   --font-micrographics: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;

@@ -4,6 +4,229 @@ Updated: 2026-10-12. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); th
 
 Earlier sections record delivery at that time. Pause/save checks and full-slot rejection were superseded by D42–D44; later sections record current verification. The earlier combined automation was superseded by D51; D69 now adds separately purchased automatic remediation. Fixed elapsed-time milestones and unattended debug presets are superseded by D65–D67.
 
+Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
+
+## Healthy recovery and stronger final models (D129)
+
+For subsequent remote deployment and scoreboard verification, see D130 below; D129's original no-deployment note describes that earlier task.
+
+- [x] Restore health/reserve/proof requirements and five-second trial; no immediate low-health victory.
+- [x] Final model jobs take 0.25s; automatic scan cooldown 2s. Speed-only quarter-second ticks make performance effective; Long Game unchanged.
+- [x] Recovery-before-win regressions include paused purchases, neglected systems, continuous incidents, one/two workers, and exact job completion.
+- [x] 27 paid strategies finish at 93.3–100% health; three Chromium routes verify exact charges, recovery/countdown and finish controls.
+- [x] Local score contract/migration accepts healthy quarter-second results and preserves historical score storage.
+- [x] All 97 tests and production build pass. No remote database or function deployment performed.
+
+## Shared scoreboard and arcade opening (D130)
+
+- [x] Optional name/save after finishing, skip, confirmed success, persistent failed-save retry/discard; no signup or submission before opt-in.
+- [x] Shared public board, competition ranks, exact quarter-second times, medals/dates, pagination, own-result highlight, refresh and distinct empty/error states.
+- [x] Frozen original result survives practice; one run ID prevents duplicate saves.
+- [x] 3–2–1–GO opening: frozen simulation/input, immediate play at GO, transparent fading sparks, hidden-tab hold and reduced-motion behavior.
+- [x] Supabase project configured; anonymous auth, three migrations, JWT-protected Edge Function, restricted writes, private ownership, body/rate limits and public build variables.
+- [x] PostgreSQL tests cover role permissions, owner/idempotency, rank ties/pages, versions and rate caps. All 97 tests and production build pass.
+- [x] Mocked browser flow passes. Live paid save appears in a second browser and after reload; duplicate/wrong-owner/direct-write/malformed-request tests pass. Exact setup records/accounts removed; player scores preserved.
+- [x] Countdown and finish/scoreboard screenshots reviewed at desktop/laptop sizes.
+- [ ] Independent pre-existing Long Game layout failure remains at `phase5-connected-1024`; reproduced with scoreboard UI/styles removed. Basic scan/fix, timing, speed and 1280px expansion checks pass, but the full Long browser suite is not green.
+
+## Golden-map victory (D128)
+
+- [x] Win when all 15 systems are active with both automations; no health, reserve, backlog, job-proof or stability gates.
+- [x] Final-model purchase checks victory immediately, including paused purchases; final restoration checks on completion.
+- [x] Remove countdown/progress UI and update the goal explanation. Preserve actual final health, frozen result and practice/retry.
+- [x] All 93 engine tests and production-base build pass, including low-health gold state, missing arrival/activation/coverage, and immediate paused purchase.
+- [x] 27/27 paid upgraded strategies win in 120–225s; final health 30.7–62.7%.
+- [x] Three paid Chromium replays verify 15 gold nodes, no trial bar, immediate finish, exact credits/time, freeze/practice/retry and four desktop layouts.
+
+## Doubled deterioration and faster automatic scans (D127)
+
+- [x] Double D126 incident frequency to 3.92× original, including first post-restoration grace.
+- [x] Approved Speed automatic-scan cooldown reduction to 7.5 seconds; Long Game retains 15 seconds.
+- [x] All 93 engine tests and production-base build pass; neglect-recovery fixture allows the larger backlog time to clear.
+- [x] 27/27 paid upgraded benchmark policies finish in 154.5–283s; without cooldown adjustment, none finished within 900s.
+- [x] Three paid Chromium replays pass at 227s / 154.5s / 166s; exact charges, countdown, victory/practice/retry and desktop layouts verified.
+- [x] Design, benchmark snapshot and handover updated.
+
+## Additional Speed pressure (D126)
+
+- [x] Speedy Scanner 225 cr; Fixing Master 300 cr; cumulative incident frequency 1.96× original.
+- [x] Engine checks pass after updating two timing/affordability fixtures and rerunning the Speed suite; production build passes.
+- [x] 27 paid upgrade strategies finish in 106.5–134.5s. Three paid Chromium replays finish in 120s / 108.5s / 110.5s with exact credits, countdown, results and four desktop layouts verified.
+- [x] Design, benchmark and handover updated; no Long Game changes.
+
+## Faster finish and stronger deterioration (D125)
+
+- [x] Five-second Speed check; completed automatic work counts across the run, with other eligibility requirements preserved.
+- [x] First and recurring Speed incident intervals divided by 1.4; purchased models and Long Game unchanged.
+- [x] Countdown and progress maximum use the configured duration; goal explanation updated.
+- [x] 92/92 engine tests and production-base build pass; 27 paid upgraded benchmark strategies finish in 96–116s.
+- [x] Three paid Chromium replays verify exact credits, five-second progress, countdown, finish modal, freeze/practice/retry and four desktop layouts.
+- [x] Current design, benchmark snapshot and handover updated. Human playtesting remains.
+
+## Doubling Speed waves (D124)
+
+- [x] Immediate +2 on first fix, then +4 and +8 at 20-second intervals; target and counters updated to 15.
+- [x] Free simultaneous arrivals, delayed-start anchoring, no fourth wave, pause/resume and inherited model coverage verified.
+- [x] Three groups of five on a stable growing map; wave-size countdown and brief arrival cue, with reduced motion.
+- [x] 89 engine tests pass (corrected autonomy fixture rerun with all Speed tests); production build and 27 paid strategies pass.
+- [x] Three paid UI replays reproduce exact charges, 15-system wins, victory freeze/practice/retry: 116.5s / 112s / 111s.
+- [x] Wave timing, camera, labels, compact zoom, opening, wallet, model ownership, coverage and four desktop layouts pass. Speed/Long Game group regression passes.
+- [x] Desktop/laptop map screenshots inspected. Current rules and handover updated; no commit, push or deployment.
+
+## Tripled Speed growth (D123)
+
+- [x] 25/3-second arrival schedule; no cumulative tick rounding; last arrival 92 seconds after restoration.
+- [x] 89 engine tests and production build pass, including exact arrival boundaries and pause/resume.
+- [x] Updated paid benchmark: 27/27 upgraded policies finish in 121–136.5s. No other gameplay tuning.
+- [x] Browser arrival/camera, opening guidance, wallet and Speed/Long group-action regressions pass at desktop/laptop sizes.
+
+## Natural arrivals and final-only automation (D122)
+
+- [x] Long Game's sequential timer pattern adapted to Speed: first restoration starts arrivals, every 25 active seconds, one at a time up to 12; no purchase charge/action.
+- [x] Show connected nodes/groups only, next-arrival countdown, retained canvas, manual camera and guided Scan/Fix opening.
+- [x] Prices halved to 50/90/175/250 cr; intermediates remain manual, Scanner only scans automatically, Master only fixes automatically; both required for autonomy.
+- [x] 88 engine tests, production build and 27 fully upgraded paid simulations pass (304–306s); 12 manual/intermediate controls remain incomplete.
+- [x] Three full paid browser replays match exact engine charges and 304s finishes, including pause, victory freeze, practice and retry.
+- [x] Browser model purchases, staged coverage, grey ownership, restoration, wallet, opening guidance and four desktop layouts pass; short-layout autonomy status overflow fixed.
+- [x] Natural-arrival auto-fit, manual camera preservation, canvas identity, compact zoom and selection survive growth/planning at 1280×800 and 800×700; screenshots inspected.
+- [x] Speed and Long Game group-action regression passes. Updated rules and historical decision overrides; no deployment.
+
+## Cumulative model upgrades (D121)
+
+- [x] Buy all four upgrades, retaining predecessor requirements, duplicate rejection and exact advertised charges.
+- [x] Combined speed/cost/automation survives cross-branch purchases in either order and covers future systems.
+- [x] Lower prices (100/180/350/500 cr); finals add 0.5s/2cr specialist work; no Long Game economy changes.
+- [x] Unowned models grey regardless of affordability; installed models colourful; enabled buttons remain distinct.
+- [x] All 88 engine tests and production-base build pass. Paid benchmark: 36/36 upgraded policies finish in 237.5–321.5s; three manual controls do not finish.
+- [x] Four complete paid UI replays with exact charges and finish times: Scanner 280.5s, Master 270.5s, combined intermediates 245s, all four 306.5s. Victory freeze/practice/retry pass.
+- [x] Both purchase orders, initial/owned greying, pause, comparison/camera, future coverage, restoration and four desktop layouts pass. Mixed-ownership and 800×700 screenshots inspected.
+- [x] Speed and Long Game group-action browser regression passes. Human balance remains for playtesting; optional finals are not currently the fastest benchmark strategy.
+
+## Minimal opening (D120)
+
+- [x] Only SPEED GAME, SCAN → FIX → EARN → EVOLVE → EXPAND and LET’S GO remain.
+- [x] Production build, exact browser text and start behavior pass; short desktop screenshot inspected.
+
+## Model identities (D119)
+
+- [x] Five original scalable SVG emblems, with cool scanning colours, warm repair colours and autonomous orbital arrows.
+- [x] Remove boxed card surfaces; retain labels, benefits, prices and explicit installed/other-branch states.
+- [x] Production build, asset loading, four desktop model layouts and purchase/pause/coverage checks pass; gallery and short-screen screenshot inspected.
+
+## Permanent model tree and automatic branches (D118)
+
+- [x] Five models, two paid steps per exclusive branch; direct purchases, exact charges and invalid-transition rejection.
+- [x] Partial automation at the intermediate stage; full coverage at final stage for owned and future systems, including restoration.
+- [x] Remove tabs and individual/group automation purchases; retain group Scan/Fix and all Long Game behavior.
+- [x] Models left, map centre, workers right; readable four-size desktop layouts, centred controls and retained camera/selection.
+- [x] Explicit Pause & plan, frozen jobs/time/income, paused model comparisons and preserved fractional active time.
+- [x] Gradual company-size/time pressure; retain income recovery and verify late-upgrade repair.
+- [x] 86 engine tests, production build, 18 paid upgraded policies completing in 327–374s, three manual controls.
+- [x] Full UI Scanner/Master routes with exact charges (338.5s / 330.5s), victory/practice/retry; targeted model/layout, opening, camera, group and purchase checks pass.
+- [x] Comparison dialog and relocated shimmer inspected; reduced motion and Long Game group regression pass.
+- [ ] First and repeat human playtests; recalibrate provisional medal difficulty after feedback.
+
+Earlier D109–D117 sections below are historical where superseded.
+
+## Upgrade tab shimmer (D117)
+
+- [x] Silver sweep every 4.5 seconds on the inactive Upgrades tab during map play; static reduced-motion alternative.
+- [x] Production build and browser verification of cadence, pause, clicks and keyboard tabs; screenshot inspected.
+
+## Direct model purchases (D116)
+
+- [x] Choose directly buys/installs; remove confirmation banner and keep the one-model rule visible.
+- [x] Both models verified for exact charges, installed/unavailable states and continued pause.
+- [x] Production build and upgrade browser checks at four desktop sizes; tighten two-worker padding to fix short-laptop overflow.
+
+## System action positioning (D115)
+
+- [x] Centre single-system controls horizontally and vertically beside the context; preserve group action layout.
+- [x] Production build; four desktop sizes checked for alignment, text overlap and page overflow, with screenshots inspected.
+
+## Opening action cues (D114)
+
+- [x] Sequential Scan/Fix/first-purchase cue; one available action or map node at a time.
+- [x] No cue during pause or active/queued opening work; stop after expansion.
+- [x] Production build and browser checks for group actions, selection, affordability, pause, completion and reduced motion; desktop screenshots inspected.
+
+## Centred page tabs (D113)
+
+- [x] Map/Upgrades on their own centred row with selected-tab styling and pause icon.
+- [x] Accessible tab panels and keyboard navigation, preserving paused planning and map context.
+- [x] Production build and desktop layout checks; maintain readable short-screen overview and worker panel.
+
+## Balance and purchase threshold (D112)
+
+- [x] Gold coin with larger balance and accessible credits text in both views; inspect four desktop sizes.
+- [x] Systems unlock at displayed cost after first activation; retain opening restoration protection and verify zero-wallet income recovery.
+- [x] All 85 tests, production-base build and targeted purchase/browser checks pass. Updated benchmark: 35/36 finish, 34 within eight minutes, 376.5–495.5s.
+
+## Automation purchase order (D111)
+
+- [x] Remove model/order prerequisites for individual and group automation; update mechanics copy and records.
+- [x] Verify either order across all three models, exact prices and no duplicate/free coverage; retain opening budget safeguards. All 85 tests and the production-base build pass. Browser purchase of Master scan automation with zero fix coverage passes.
+
+## Worker and action placement (D110)
+
+- [x] Large workers beside the map with running/idle activity, progress and queue count; buy worker here instead of Upgrades.
+- [x] Larger centred Scan/Fix and Back to game; remove the map Automation shortcut.
+- [x] Production build and complete paid Scanner/Master browser journeys pass; finish times unchanged.
+- [x] Desktop worker placement, paid capacity, centred action bounds and group layouts verified; rules and Long Game unchanged.
+
+## Fixed-map Speed Game (D109)
+
+- [x] Explicit ownership/activation, complete fixed 12-system map, paid restore→earn→expand lifecycle and protected first restoration.
+- [x] Separate paused Upgrades view; exact frozen simulation, preserved fractional active time, camera and selection.
+- [x] Per-system automation with live quotes/Select System/Buy, optional exclusive model tree, concise cards, deeper comparisons and model confirmation.
+- [x] Moving magnifier, male/female hammer workers, earning coins, reduced motion and concise bouncing opening.
+- [x] Paid Model 1/Scanner/Master policies; 35/36 complete, 25 within eight minutes. Full results and failed-policy explanation in docs/analysis/speed-game-implementation-review.md.
+- [x] 84 unit tests and production-base build pass. Paid UI Scanner/Master routes finish at 473.5 / 431.5 seconds; every purchase balance agrees with the engine.
+- [x] Four desktop layouts, fixed camera/zoom navigation, group quotes/purchases, pause, upgrade keyboard focus and confirmation, tier quotes, frozen result/practice/retry verified.
+- [x] Long Game automation layout passes 20 views; group controls and chapter pauses/hidden reading, 2×, jobs/queue, victory and restart pass.
+- [x] Rules, design checklist, decisions, README and handover updated. No push/publication/deployment.
+- [ ] Unassisted first and repeat human playtests; finalize balance and medals afterward.
+
+## Historical Speed Game (D101–D108; superseded by D109)
+
+
+- [x] Mode selection, independent 12-repo speed rules, two efficiency tiers, elapsed finish timer, five-minute target and 20-second autonomy trial.
+- [x] Earned team growth, sequential 2.5-second arrivals, one persistent map and smooth framing with reduced-motion support.
+- [x] Frozen victory result, medals within target times, late completion, restart and unranked practice; preserve Long Game rules.
+- [x] Paid benchmark: 27 policies finish in 256.5–310.5 seconds with the two-minute unlock; 22 beat five minutes. Speed medals recalibrated to 4:30 / 4:45 / 5:00.
+- [x] All 81 unit tests and production build pass. Full sprint browser journey passes at 1280×800; first-expansion and reduced-motion checks pass at 1280×800 / 800×700. Long Game chapter-completion regression passes.
+- [x] Automation requires two active minutes and a completed first fix; the unlock pauses on the exact tick; Dive Back In resumes, excluding reading time.
+- [x] D106: both modes auto-fit growth in the overview while preserving focused/manual views. Fit all restores automatic overview framing.
+- [x] Full paid sprint replay at 800×700: 256.5s victory; briefing pause/resume, restart, continued play beyond 05:00, post-target layouts at 1024×768 / 800×700 and Long Game entry pass. Long Game automation layout passes 20 desktop views. Final production build and source/diff review pass.
+
+## In-map bundled actions (D107)
+
+- [x] Replace top action bar with inline module/project action cards, matching repository control order and original status colours.
+- [x] Reuse scope quotes and dispatch: exact prices, eligible counts, affordability, queue and automation coverage remain unchanged.
+- [x] View repos/View modules opens group members; Close returns to overview. Cards preserve keyboard focus and hide obscured member labels.
+- [x] Desktop browser checks pass: paid group Scan/Fix/scan-automation purchases, 02:00 unlock and paused reading at 1280×800 / 800×700; full-coverage Long Game group cards and navigation fit at 800×700. Both-mode framing and reduced-motion regressions pass. Screenshots inspected.
+
+## Automation coverage markers (D100)
+
+- [x] Gold outlines/glow and Automated labels on fully covered repositories, modules and projects; partial or scan-only coverage stays unmarked.
+- [x] Focused unit tests cover both-automation requirements, partial/empty groups, degraded health and new uncovered members. Production build passes. Desktop browser checks cover unautomated starts, complete project/module labels, full repository cards and compact repository labels; screenshots inspected. Automation layout regression passes 20 views across four desktop sizes.
+
+## Chapter celebration (D99)
+
+- [x] Show a prominent 3.6-second completion animation before the next briefing, with the completed goal and upcoming chapter. Preserve reduced motion, dialog/visibility deferral and the briefing pause.
+- [x] Production build passes; the real-control first-chapter browser journey checks the completed 02:00 timer, delayed Chapter 2 modal, pause on entry, once-only delivery, reduced motion/2×, hidden-tab and other-dialog deferral, restart cancellation and desktop bounds.
+
+## Desktop UX follow-up (D92–D98)
+
+- [x] Simplify opening copy and oversize Start game.
+- [x] Record desktop/laptop-only scope; stop mobile validation.
+- [x] Scale lore to 150% and other text to 120% of original sizes.
+- [x] Apply Start game green to action buttons; retain original colours for chapter navigation, work slots, logo, map labels and system summaries.
+- [x] Replace player-facing Repair language with Fix.
+- [x] Remove system-heading buttons and details/findings popups; retain direct map actions and repository navigation.
+- [x] Submit affordable deadline-first fixes, displaying partial count and exact cost. Existing queue/prepayment rules remain.
+- [x] Production build and 71 engine/map tests pass. Desktop direct-actions browser check passes at 1280×800, 1024×768 and 800×700, including colour exceptions, no popup, partial spending, later remaining fix and guidance focus. Expanded ecosystem layout checks also pass at four desktop sizes (1440, 1280, 1024 and 800px wide), across connected/corporate/autonomy stages and focused/zoomed views. No mobile checks run.
+
 ## Stage 1 — establish the design baseline
 
 - [x] Capture the user's intent and distinguish it from working design choices.
@@ -356,3 +579,22 @@ Only mark implementation complete after inspecting or exercising it. Record test
 - [x] Record provenance/adaptations and review screenshots in DESIGN_SYSTEM.md.
 - [x] Push branch and open [GitHub PR #1](https://github.com/erlandvr/recon-game/pull/1). Main publication stays unchanged pending merge.
 - Remote Node 24 test/build status is tracked on PR #1; browser checks above were run locally.
+
+
+## D90–D91 — arcade lore and chapter pauses (2026-10-12)
+
+- [x] Implement approved short SumZero/Recon operator opening, one action, two-minute/80% target and first-problem cue.
+- [x] Shorten later chapter stories and replace roadmap with the current target; keep post-start investment advice.
+- [x] Pause all simulation during every chapter briefing; explicitly label pause and resume without reading-time catch-up at 1×/2×.
+- [x] Preserve free initial start, completion celebration and live non-chapter dialogs.
+- [x] Pass 70 tests, production build, dedicated pause, story and completion browser checks; inspect desktop/phone opening screenshots.
+- [x] Full gameplay, health-feedback and finishing/sound regressions pass. Fix short-laptop deadline-card clipping and pass five-size automation-layout checks; inspect the corrected 1024×768 view.
+
+## D92 — opening copy cleanup (2026-10-12)
+
+- [x] Remove opening em dash, Chapter 1 subtitle and pre-start timer sentence; retain later labels and pause explanation.
+- [x] Update affected browser selectors. Production build and direct Chromium opening-copy check pass.
+
+## D93 — oversized Start game (2026-10-12)
+
+- [x] Full-width 64px button, bold 22px uppercase label. Build passes; direct Chromium checks at 1280×800 and 390×844 confirm no modal scrolling and successful start.

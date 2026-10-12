@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+<title>Scan Scout</title>
+<defs><linearGradient id="ink" x1="30" y1="20" x2="132" y2="144" gradientUnits="userSpaceOnUse"><stop stop-color="#61F0E4"/><stop offset="1" stop-color="#2886FF"/></linearGradient><radialGradient id="core"><stop stop-color="#61F0E4" stop-opacity=".2"/><stop offset="1" stop-color="#2886FF" stop-opacity=".04"/></radialGradient></defs>
+<g stroke="url(#ink)" stroke-width="4" stroke-linecap="round"><path d="M73 31V18M37 42L27 31M28 75H14M38 107L27 119M111 40L124 27M122 73H139"/><g fill="#101419"><circle cx="73" cy="14" r="5"/><circle cx="23" cy="27" r="5"/><circle cx="10" cy="75" r="5"/><circle cx="23" cy="123" r="5"/><circle cx="128" cy="23" r="5"/><circle cx="144" cy="73" r="5"/></g></g>
+<circle cx="74" cy="75" r="43" fill="url(#core)" stroke="url(#ink)" stroke-width="6"/>
+<path d="M105 107L135 137" stroke="url(#ink)" stroke-width="16" stroke-linecap="round"/><path d="M114 117L133 136" stroke="#d3fbff" stroke-opacity=".65" stroke-width="3" stroke-linecap="round"/>
+<path d="M44 75Q74 38 104 75Q74 112 44 75Z" stroke="url(#ink)" stroke-width="4"/><circle cx="74" cy="75" r="12" fill="url(#ink)"/><circle cx="78" cy="71" r="4" fill="#e2ffff"/>
+</svg>

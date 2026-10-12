@@ -17,7 +17,7 @@ test('four paid capacity purchases reach five; limit and budget reject without s
  assert.equal(act(s,{type:'upgrade',upgrade:'capacity'}).state,s);
  assert.equal(act(newGame(),{type:'upgrade',upgrade:'capacity'}).ok,false);
 });
-test('five repairs run; sixth and seventh queue FIFO, prepaid once, then start on completion',()=>{
+test('five fixes run; sixth and seventh queue FIFO, prepaid once, then start on completion',()=>{
  let s=scanned();for(let n=0;n<4;n++)s=action(s,{type:'upgrade',upgrade:'capacity'});
  const ids=known(s).slice(0,7).map(f=>f.id);assert.equal(ids.length,7);const credits=s.credits;
  for(const id of ids)s=action(s,{type:'repair',findingId:id});
@@ -53,7 +53,7 @@ test('manual queue starts before automatic scans and scan-only work respects sha
  const automatic=s.jobs.filter(j=>j.automated);assert.ok(automatic.length>=2);assert.ok(automatic.every(j=>j.type==='scan'));
  assert.equal(new Set(automatic.map(j=>j.serviceId)).size,automatic.length);assert.ok(s.jobs.length<=5);ledger(s);
 });
-test('insufficient funds and unrevealed repairs cannot enter the queue',()=>{
+test('insufficient funds and unrevealed fixes cannot enter the queue',()=>{
  let s=advance(newGame(),15);assert.equal(act(s,{type:'repair',findingId:1}).state,s);
  s=advance(action(s,{type:'scan'}),3);s=action(s,{type:'repair',findingId:1});s.credits=4;
  assert.equal(act(s,{type:'scan'}).state,s);assert.equal(s.queue.length,0);

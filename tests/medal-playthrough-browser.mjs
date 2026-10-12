@@ -17,7 +17,7 @@ let expected=newGame(data.report.seed),now=0;
 async function dismiss(){const next=button(/^(Start game|Start Next Chapter)$/);if(await next.isVisible())await next.click();}
 async function to(at){if(at>now){await page.clock.runFor((at-now)*1000);expected=advance(expected,at-now);now=at;}await dismiss();}
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await dismiss();
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await dismiss();
  for(const [index,item] of data.plan.entries()){
   await to(item.at);const a=item.action;
   const id=a.serviceId??(a.type==='repair'?serviceOf(expected.findings.find(f=>f.id===a.findingId)):'backend');
@@ -26,10 +26,10 @@ try{
   if(a.type==='efficiency'){const q=efficiencyQuote(expected);await button(`Buy scan efficiency tier ${q.tier} for ${q.cost} credits`).click();}
   else if(a.type==='upgrade')await button(`Invest ${UPGRADES[a.upgrade].cost} credits`).click();
   else if(a.type==='scan')await button(`Scan ${name}`).click();
-  else if(a.type==='repair-repository')await button(`Repair ${name}`).click();
+  else if(a.type==='repair-repository')await button(`Fix ${name}`).click();
   else if(a.type==='automate')await button(`Automate ${name} scans for ${automationCost(expected)} credits`).click();
-  else if(a.type==='auto-repair')await button(`Automate ${name} repairs for 480 credits`).click();
-  else if(a.type==='repair'){await button(`Inspect ${name}`).click();await button(`Repair finding ${a.findingId}`).click();await page.keyboard.press('Escape');}
+  else if(a.type==='auto-repair')await button(`Automate ${name} fixes for 480 credits`).click();
+  else if(a.type==='repair'){await button(`Inspect ${name}`).click();await button(`Fix finding ${a.findingId}`).click();await page.keyboard.press('Escape');}
   else throw Error(`Unexpected action ${a.type}`);
   const result=act(expected,a);assert.ok(result.ok);expected=result.state;
   if(index%100===0){assert.equal(Number(await page.locator('[data-credits]').getAttribute('data-credits')),expected.credits);console.log(`Paid actions ${index}/${data.plan.length}; elapsed ${now}s`);}

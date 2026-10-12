@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+<title>Recon Model 1</title>
+<defs><linearGradient id="ink" x1="30" y1="20" x2="132" y2="144" gradientUnits="userSpaceOnUse"><stop stop-color="#D5DEFF"/><stop offset="1" stop-color="#9776F5"/></linearGradient><radialGradient id="core"><stop stop-color="#D5DEFF" stop-opacity=".2"/><stop offset="1" stop-color="#9776F5" stop-opacity=".04"/></radialGradient></defs>
+<g stroke="url(#ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M80 39V22M51 49L37 35M39 80H22M51 111L37 125M80 121V138M109 111L123 125M121 80H138M109 49L123 35"/><g fill="#101419"><circle cx="80" cy="17" r="5"/><circle cx="33" cy="31" r="5"/><circle cx="17" cy="80" r="5"/><circle cx="33" cy="129" r="5"/><circle cx="80" cy="143" r="5"/><circle cx="127" cy="129" r="5"/><circle cx="143" cy="80" r="5"/><circle cx="127" cy="31" r="5"/></g></g><path d="M80 36L116 57V102L80 124L44 102V57Z" fill="url(#core)" stroke="url(#ink)" stroke-width="5" stroke-linejoin="round"/>
+<g stroke="url(#ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M80 105V80L64 65M80 81L98 64M63 91H80M80 80V55"/></g><g fill="url(#ink)"><circle cx="80" cy="55" r="5"/><circle cx="64" cy="64" r="6"/><circle cx="98" cy="64" r="6"/><circle cx="63" cy="91" r="5"/><circle cx="80" cy="105" r="5"/></g>
+</svg>

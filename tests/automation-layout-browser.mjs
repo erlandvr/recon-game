@@ -16,7 +16,7 @@ async function check(label,focused){
   for(const card of visible){const scan=card.querySelector('.node-automation'),repair=card.querySelector('.repair-automation');if(!scan||!repair)continue;
    const a=box(scan),b=box(repair),c=box(card);
    if(b.top<a.bottom-1||Math.abs(a.left-b.left)>1||Math.abs(a.right-b.right)>1)issues.push(`Automations not stacked: ${card.ariaLabel}`);
-   for(const el of card.querySelectorAll('button,.automation-state,.repair-auto-state')){const r=box(el);if(r.left<c.left||r.right>c.right||r.bottom>c.bottom||el.scrollWidth>el.clientWidth+2||el.scrollHeight>el.clientHeight+2)issues.push(`Control overflow: ${el.textContent}`);}
+   for(const el of card.querySelectorAll('button,.automation-state,.fix-auto-state')){const r=box(el);if(r.left<c.left||r.right>c.right||r.bottom>c.bottom||el.scrollWidth>el.clientWidth+2||el.scrollHeight>el.clientHeight+2)issues.push(`Control overflow: ${el.textContent}`);}
   }
   for(let i=0;i<visible.length;i++)for(let j=i+1;j<visible.length;j++){const a=box(visible[i]),b=box(visible[j]);if(a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top)issues.push(`Cards overlap: ${visible[i].ariaLabel}, ${visible[j].ariaLabel}`);}
   if(focused){const card=cards.find(e=>e.ariaLabel===`${focused} system`);if(!card)issues.push(`Missing focused card: ${focused}`);else{const c=box(card),v=box(canvas);if(c.top<v.top||c.bottom>v.bottom||c.left<v.left||c.right>v.right)issues.push({clipped:focused,card:c.toJSON(),canvas:v.toJSON()});}}
@@ -27,10 +27,10 @@ async function check(label,focused){
  await page.screenshot({path:`test-results/automation-${label}.png`});assert.deepEqual(issues,[],label);evidence.push(label);
 }
 try{
- await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto('http://127.0.0.1:5173');await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
+ await mkdir('test-results',{recursive:true});await page.clock.install({time:new Date('2026-10-10T12:00:00Z')});await page.clock.pauseAt(new Date('2026-10-10T12:00:00Z'));await page.goto(process.env.GAME_URL??'http://127.0.0.1:5173');await page.getByRole('button',{name:'Choose Long Game',exact:true}).click();await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
  for(const checkpoint of ['Connected systems','Corporate expansion','Autonomy trial']){
   await debug(checkpoint);await page.clock.runFor(100000);if(await button(/^(Start game|Start Next Chapter|Keep playing)$/).isVisible())await button(/^(Start game|Start Next Chapter|Keep playing)$/).click();
-  for(const [width,height] of [[1440,1000],[1280,800],[1024,768],[800,700],[390,844]]){
+  for(const [width,height] of [[1440,1000],[1280,800],[1024,768],[800,700]]){
    await page.setViewportSize({width,height});await page.clock.runFor(50);await page.waitForTimeout(150);
    const corporate=checkpoint!=='Connected systems';if(corporate)await page.getByLabel('Find repository').selectOption('backend');
    await check(`${checkpoint.replaceAll(' ','-')}-${width}`,corporate?'Backend':null);

@@ -11,3 +11,6 @@ test-results/
 .codex/
 .agents/
 *.log
+supabase/.temp/
+__pycache__/
+*.py[cod]

@@ -25,7 +25,7 @@ test('system scans have isolated start-time coverage and can run in parallel',()
   assert.ok(s.findings.filter(f=>scanned.includes(f.id)).every(f=>f.known));
   assert.ok(serviceFindings(s,'frontend').every(f=>!f.known));
 });
-test('security warning escalates through shared Identity; repairing it restores dependent health',()=>{
+test('security warning escalates through shared Identity; fixing it restores dependent health',()=>{
   let s=advance(expanded(),60);const security=s.findings.find(f=>kindOf(f)==='security')!;
   const before=serviceHealth(s,'frontend');s=advance(s,45);
   assert.equal(s.findings.find(f=>f.id===security.id)!.escalated,true);assert.equal(s.campaign!.missed,1);
@@ -62,7 +62,7 @@ test('automation rejects locked, disconnected and unaffordable purchases without
   s=expanded();assert.equal(act(s,{type:'automate',serviceId:'auth'}).state,s);
   s=advance(s,30);s.credits=209;assert.equal(act(s,{type:'automate',serviceId:'backend'}).state,s);
 });
-test('automatic scans protect the reserve and resume when income recovers, leaving repairs manual',()=>{
+test('automatic scans protect the reserve and resume when income recovers, leaving fixes manual',()=>{
   let s=advance(expanded(),60);s=action(s,{type:'automate',serviceId:'backend'});
   s.credits=24-income(s)/2;s=advance(s,0.5);assert.equal(s.jobs.length,0);
   s.credits=25-income(s)/2;s=advance(s,0.5);assert.equal(s.jobs[0].type,'scan');assert.equal(s.credits,20);
@@ -91,7 +91,7 @@ test('full coached first session recovers a neglected introduction, beats the re
   assert.equal(s.time,result!.at+15);assert.deepEqual(s.campaign!.result,result);
 });
 
-test('automated scans reveal all finding types but never repair any of them',()=>{
+test('automated scans reveal all finding types but never fix any of them',()=>{
  let s=timelineFixture(360);s.credits=2000;
  for(const id of activeServices(s))s=action(s,{type:'automate',serviceId:id});
  for(let i=0;i<4;i++)s=action(s,{type:'upgrade',upgrade:'capacity'});

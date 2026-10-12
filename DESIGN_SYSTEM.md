@@ -48,3 +48,7 @@ Run browser scripts with `PLAYWRIGHT_MODULE_DIR` pointing to an installed Playwr
 ![Chapter dialog](docs/design-preview/chapter-dialog.png)
 
 [Phone ecosystem preview](docs/design-preview/ecosystem-phone.png)
+
+## Desktop readability follow-up (D94–D96)
+
+Desktop/laptop is the supported product scope; no further mobile validation is required. Original font sizes now use a shared 1.2 scale; chapter/story dialogs override it to 1.5, rather than multiplying both scales. Action buttons share the Start game primary sage fill and dark foreground (D96), with the same hover treatment. Chapter navigation, work-slot cards, map labels and the Recon logo retain their original colours. Repository headings are non-interactive status summaries with health-based colours (D98). Disabled controls remain muted. Blue and stronger-border experiments were rejected and removed.

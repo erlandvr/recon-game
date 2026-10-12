@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+<title>Repair Specialist</title>
+<defs><linearGradient id="ink" x1="30" y1="20" x2="132" y2="144" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD17A"/><stop offset="1" stop-color="#FF637B"/></linearGradient><radialGradient id="core"><stop stop-color="#FFD17A" stop-opacity=".2"/><stop offset="1" stop-color="#FF637B" stop-opacity=".04"/></radialGradient></defs>
+<path d="M66 21H94L98 37L112 44L128 39L142 63L130 75V90L142 102L128 126L111 122L98 130L94 146H66L62 130L49 122L32 126L18 102L30 90V75L18 63L32 39L48 44L62 37Z" fill="url(#core)" stroke="url(#ink)" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="80" cy="83" r="35" stroke="url(#ink)" stroke-opacity=".4" stroke-width="3"/>
+<path d="M91 54C76 52 67 65 72 78L49 101Q44 107 51 114Q58 120 64 113L87 90C102 94 114 81 109 66L97 78L86 67Z" fill="url(#ink)"/><circle cx="57" cy="107" r="3" fill="#2a1720"/>
+<g fill="url(#ink)"><circle cx="80" cy="31" r="3"/><circle cx="126" cy="57" r="3"/><circle cx="127" cy="110" r="3"/><circle cx="80" cy="137" r="3"/><circle cx="34" cy="110" r="3"/><circle cx="34" cy="57" r="3"/></g>
+</svg>
