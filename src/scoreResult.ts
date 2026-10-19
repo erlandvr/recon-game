@@ -1,8 +1,10 @@
 import type {GameState} from './game.ts';
-import {SCORE_RULES,scoreName,validSubmission,type ScoreSubmission} from '../supabase/functions/_shared/scoreboard.ts';
-export function resultSubmission(s:GameState,runId:string,name:string):ScoreSubmission|null{
- const r=s.speed?.result,v=s.campaign?.autonomy.victory;
- if(!r||!v||v.practice)return null;
- const score:ScoreSubmission={runId,name:scoreName(name),mode:'speed',rulesVersion:SCORE_RULES.id,finishMs:Math.round(r.at*1000),seed:s.organization.seed,covered:r.covered,modules:r.modules,health:r.health,trialSeconds:v.duration,autoScans:v.autoScans,autoRepairs:v.autoRepairs,credits:v.credits,netIncome:v.netIncome,practice:false};
+import {validSubmission,type ScoreSubmission} from '../supabase/functions/_shared/scoreboard.ts';
+import {completedScore} from '../supabase/functions/_shared/scoreFacts.ts';
+import type {ReplayEvent} from '../supabase/functions/_shared/replayContract.ts';
+export function resultSubmission(s:GameState,runId:string,name:string,replay:ReplayEvent[]|null):ScoreSubmission|null{
+ const facts=completedScore(s,runId,name);
+ if(!facts||!replay)return null;
+ const score={...facts,replay:structuredClone(replay)};
  return validSubmission(score)?score:null;
 }

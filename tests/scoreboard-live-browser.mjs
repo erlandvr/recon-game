@@ -31,7 +31,7 @@ try{
  const checks=await p.evaluate(async({api,key,submitted})=>{
   const token=JSON.parse(localStorage.getItem('recon-scoreboard-auth-v1')).access_token;
   const send=(body,auth=token)=>fetch(api+'/functions/v1/submit-score',{method:'POST',headers:{apikey:key,Authorization:`Bearer ${auth}`,'Content-Type':'application/json'},body:JSON.stringify(body)});
-  const duplicate=await send(submitted),malformed=await send({...submitted,name:''}),oversized=await send({...submitted,name:'x'.repeat(5000)}),unknownVersion=await send({...submitted,rulesVersion:'unsupported'}),badSession=await send(submitted,'invalid');
+  const duplicate=await send(submitted),malformed=await send({...submitted,name:''}),oversized=await send({...submitted,name:'x'.repeat(262145)}),unknownVersion=await send({...submitted,rulesVersion:'unsupported'}),badSession=await send(submitted,'invalid');
   const direct=await fetch(api+'/rest/v1/scoreboard_scores',{method:'POST',headers:{apikey:key,Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({run_id:crypto.randomUUID(),rules_version:submitted.rulesVersion,display_name:'disallowed',finish_ms:1000})});
   return {duplicate:duplicate.status,malformed:malformed.status,oversized:oversized.status,unknownVersion:unknownVersion.status,badSession:badSession.status,direct:direct.status};
  },{api,key,submitted});

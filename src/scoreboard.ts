@@ -1,14 +1,14 @@
 import type {SupabaseClient} from '@supabase/supabase-js';
 import {useSyncExternalStore} from 'react';
-import {SCORE_RULES,validSubmission,validStoredSubmission,type ScoreSubmission,type ScorePage} from '../supabase/functions/_shared/scoreboard.ts';
+import {SCORE_RULES,validSubmission,validStoredSubmission,type StoredScoreSubmission,type ScorePage} from '../supabase/functions/_shared/scoreboard.ts';
 export {resultSubmission} from './scoreResult.ts';
-export {SCORE_RULES,scoreTime,validName} from '../supabase/functions/_shared/scoreboard.ts';
+export {SCORE_RULES,LEGACY_SCORE_RULES,scoreTime,validName} from '../supabase/functions/_shared/scoreboard.ts';
 export type {ScoreSubmission,ScoreRow,ScorePage} from '../supabase/functions/_shared/scoreboard.ts';
 
 const url=import.meta.env.VITE_SUPABASE_URL??'',key=import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY??'';
 export const scoreboardConfigured=!!url&&!!key;
 const STORAGE='recon-scoreboard-pending-v1';
-type Pending={score:ScoreSubmission;ownerId:string|null};
+type Pending={score:StoredScoreSubmission;ownerId:string|null};
 type Receipt={run_id:string;display_name:string;finish_ms:number;submitted_at:string};
 type State={pending:Pending[];saved:Record<string,Receipt>;busy:Record<string,boolean>;errors:Record<string,string>;durable:boolean};
 let state:State={pending:[],saved:{},busy:{},errors:{},durable:true};
@@ -26,7 +26,7 @@ async function authClient(){
  return client??=import('@supabase/supabase-js').then(({createClient})=>createClient(url,key,{auth:{storageKey:'recon-scoreboard-auth-v1',persistSession:true,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:boundedFetch}})).catch(error=>{client=undefined;throw error;});
 }
 async function boundedFetch(input:RequestInfo|URL,init?:RequestInit){const timeout=AbortSignal.timeout(12000);return fetch(input,{...init,signal:init?.signal?AbortSignal.any([init.signal,timeout]):timeout});}
-export async function saveScore(score:ScoreSubmission){
+export async function saveScore(score:StoredScoreSubmission){
  const id=score.runId;if(state.busy[id]||state.saved[id])return;
  if(!validSubmission(score)){state.errors={...state.errors,[id]:'This result uses unsupported game rules and cannot be saved. You can discard it.'};emit();return;}
  // Persist intent before any network operation; never automatically retry.
@@ -53,9 +53,9 @@ export async function saveScore(score:ScoreSubmission){
  }catch(error){state.errors={...state.errors,[id]:error instanceof Error&&!['TypeError','TimeoutError','AbortError'].includes(error.name)?error.message:'Could not reach the scoreboard. Your score is ready to retry.'};}
  finally{state.busy={...state.busy,[id]:false};emit();}
 }
-export async function getScorePage(page:number,highlight:string|null,signal?:AbortSignal):Promise<ScorePage>{
+export async function getScorePage(page:number,highlight:string|null,signal?:AbortSignal,version:string=SCORE_RULES.id):Promise<ScorePage>{
  if(!scoreboardConfigured)throw new Error('The shared scoreboard is not connected yet. Please try again later.');
- const response=await boundedFetch(`${url}/rest/v1/rpc/scoreboard_page`,{method:'POST',headers:{'Content-Type':'application/json',apikey:key},body:JSON.stringify({p_version:SCORE_RULES.id,p_page:page,p_highlight:highlight}),signal});
+ const response=await boundedFetch(`${url}/rest/v1/rpc/scoreboard_page`,{method:'POST',headers:{'Content-Type':'application/json',apikey:key},body:JSON.stringify({p_version:version,p_page:page,p_highlight:highlight}),signal});
  if(!response.ok)throw new Error('Could not load the scoreboard. Please try again.');
  const result=await response.json();if(!Array.isArray(result.entries)||typeof result.total!=='number')throw new Error('Could not read the scoreboard. Please try again.');
  return result;

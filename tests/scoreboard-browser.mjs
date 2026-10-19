@@ -2,9 +2,14 @@ import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {playSpeed} from '../scripts/speed-benchmark.ts';
+import {createSubmitScoreHandler} from '../supabase/functions/_shared/submitScoreHandler.ts';
+import {SCORE_RULES} from '../supabase/functions/_shared/scoreboard.ts';
+import {databaseBackend,scoreboardDb} from './helpers/scoreboard.ts';
 const require=createRequire(import.meta.url),{chromium}=require(`${process.env.PLAYWRIGHT_MODULE_DIR}/playwright`);
 const url=process.env.GAME_URL??'http://127.0.0.1:5176',browser=await chromium.launch(),errors=[],requests=[],rows=new Map();
 const button=(p,name)=>p.getByRole('button',{name,exact:true}),time=async p=>Number(await p.locator('[data-speed-time]').getAttribute('data-speed-time'));
+const db=await scoreboardDb(),backend=databaseBackend(db),submitted=[];
+const handler=createSubmitScoreHandler({...backend,authenticate:token=>backend.authenticate(token==='test.session.token'?'valid-test-session':token)});
 let loseResponse=true,boardFailure=false,authCalls=0;
 async function fresh(motion='no-preference'){
  const p=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:motion});p.on('pageerror',e=>errors.push(e.message));
@@ -12,8 +17,8 @@ async function fresh(motion='no-preference'){
   const req=route.request(),path=new URL(req.url()).pathname;requests.push(path);
   const json=body=>route.fulfill({contentType:'application/json',body:JSON.stringify(body)});
   if(path.startsWith('/auth/')){authCalls++;return json({access_token:'test.session.token',refresh_token:'test-refresh',token_type:'bearer',expires_in:3600,user:{id:'73c9aa1d-7760-4c64-b610-1e5f0bf59830',aud:'authenticated',role:'authenticated',is_anonymous:true,created_at:new Date().toISOString()}});}
-  if(path.includes('submit-score')){const s=req.postDataJSON();if(!rows.has(s.runId))rows.set(s.runId,{run_id:s.runId,display_name:s.name,finish_ms:s.finishMs,submitted_at:'2026-10-12T12:00:00Z',rank:1,medal:'gold'});if(loseResponse){loseResponse=false;return route.abort();}return json({saved:rows.get(s.runId)});}
-  if(path.includes('scoreboard_page')){if(boardFailure)return route.fulfill({status:503,body:'unavailable'});const input=req.postDataJSON();return json({entries:[...rows.values()],total:rows.size,page:input.p_page,pageSize:20,highlight:rows.get(input.p_highlight)??null});}
+  if(path.includes('submit-score')){const s=req.postDataJSON();submitted.push(s);const response=await handler(new Request(req.url(),{method:'POST',headers:req.headers(),body:req.postData()}));const result=await response.json();if(response.ok){rows.set(s.runId,result.saved);if(loseResponse){loseResponse=false;return route.abort();}}return route.fulfill({status:response.status,contentType:'application/json',body:JSON.stringify(result)});}
+  if(path.includes('scoreboard_page')){if(boardFailure)return route.fulfill({status:503,body:'unavailable'});const input=req.postDataJSON();const result=await db.query('select public.scoreboard_page($1,$2,$3) as page',[input.p_version,input.p_page,input.p_highlight]);return json(result.rows[0].page);}
   return route.abort();
  });
  const start=new Date('2026-10-12T12:00:00Z');await p.clock.install({time:start});await p.clock.pauseAt(start);await p.goto(url);return p;
@@ -52,9 +57,10 @@ try{
  await button(p,'Skip').click();assert.equal(authCalls,0);await button(p,'Continue practising').click();await p.clock.runFor(20000);await button(p,'View result').click();
  await p.getByLabel('Name or nickname',{exact:true}).fill('   ');assert.ok(await button(p,'Save score').isDisabled());
  await p.getByLabel('Name or nickname',{exact:true}).fill('Élodie <b>李</b>');await button(p,'Save score').click();await p.getByRole('alert').waitFor();assert.equal(rows.size,1);assert.equal([...rows.values()][0].finish_ms,plan.result.at*1000);
- await p.reload();await p.getByRole('region',{name:'Scores waiting to save'}).waitFor();const beforeRetry=authCalls;await button(p,'Retry save').click();await p.getByRole('region',{name:'Scores waiting to save'}).waitFor({state:'detached'});assert.equal(authCalls,beforeRetry);assert.equal(rows.size,1);
+ await p.reload();await p.getByRole('region',{name:'Scores waiting to save'}).waitFor();const beforeRetry=authCalls;await button(p,'Retry save').click();await p.getByRole('region',{name:'Scores waiting to save'}).waitFor({state:'detached'});assert.equal(authCalls,beforeRetry);assert.equal(rows.size,1);assert.deepEqual(submitted[1],submitted[0]);assert.equal(submitted[0].rulesVersion,SCORE_RULES.id);assert.ok(submitted[0].replay.length>10);assert.ok(submitted[0].replay.every(e=>e.atMs<submitted[0].finishMs));
  const other=await fresh();await button(other,'View scoreboard').click();await other.getByRole('rowheader',{name:'Élodie <b>李</b>'}).waitFor();assert.equal(await other.locator('.sb-modal tbody b').count(),0);await other.screenshot({path:'test-results/scoreboard-shared.png'});
+ await db.query("insert into public.scoreboard_scores values($1,'speed-d129-v1','Archive only',60000,now())",[crypto.randomUUID()]);await button(other,'View previous scores').click();await other.getByRole('rowheader',{name:'Archive only',exact:true}).waitFor();assert.equal(await other.getByRole('rowheader',{name:'Élodie <b>李</b>'}).count(),0);await button(other,'View verified scores').click();await other.getByRole('rowheader',{name:'Élodie <b>李</b>'}).waitFor();assert.equal(await other.getByRole('rowheader',{name:'Archive only'}).count(),0);
  boardFailure=true;await button(other,'Refresh').click();await other.getByRole('alert').waitFor();assert.equal(await other.getByText('No scores yet. Finish a Speed Game to add yours.').count(),0);boardFailure=false;await button(other,'Try again').click();await other.getByRole('rowheader',{name:'Élodie <b>李</b>'}).waitFor();
  await p.evaluate(()=>localStorage.setItem('recon-scoreboard-pending-v1',JSON.stringify([{score:{runId:crypto.randomUUID(),name:'Discard me',mode:'speed',rulesVersion:'old',finishMs:500000,seed:1,covered:15,modules:3,health:90,trialSeconds:5,autoScans:1,autoRepairs:1,credits:50,netIncome:5,practice:false},ownerId:null}])));await p.reload();await button(p,'Retry save').click();await p.getByRole('alert').waitFor();await button(p,'Discard').click();assert.equal(await p.getByRole('region',{name:'Scores waiting to save'}).count(),0);
- assert.deepEqual(errors,[]);await writeFile('test-results/scoreboard-browser.json',JSON.stringify({passed:true,backend:'mock HTTP plus separate PostgreSQL tests',authCalls,rows:rows.size,finishMs:plan.result.at*1000,errors},null,2));console.log('Scoreboard browser checks pass: countdown, hidden tab, reduced motion, opt-in, frozen practice score, lost response, reload retry, cross-session display, text escaping, error and discard.');
-}finally{await browser.close();}
+ assert.deepEqual(errors,[]);await writeFile('test-results/scoreboard-browser.json',JSON.stringify({passed:true,backend:'isolated HTTP handler with authoritative replay and local PostgreSQL; mocked auth',authCalls,rows:rows.size,finishMs:plan.result.at*1000,errors},null,2));console.log('Scoreboard browser checks pass: countdown, hidden tab, reduced motion, opt-in, frozen practice score, lost response, reload retry, cross-session display, text escaping, error and discard.');
+}finally{await browser.close();await db.close();}
