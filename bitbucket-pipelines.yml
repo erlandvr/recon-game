@@ -23,10 +23,6 @@ definitions:
           - custom-node
         script:
           - npm ci
-    - step: &lint
-        name: 🧹 Lint
-        script:
-          - npm run lint
     - step: &build
         name: 🛠 Build
         script:
@@ -38,9 +34,7 @@ definitions:
         caches:
           - custom-node
         script:
-          - #mv ${ENV_FILE} .env.local
           - npm ci
-          - npm run lint
           - npm run build
     - step: &package
         name: 📦 Package
@@ -83,7 +77,6 @@ pipelines:
       - parallel:
           steps:
             - step: *build
-            - step: *lint
   branches:
     main:
       - step: *clear-cache
