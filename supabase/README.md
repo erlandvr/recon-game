@@ -2,7 +2,9 @@
 
 The scoreboard records opted-in Speed Game finishes after replaying their actions on the server. It verifies legal simulation results, not human play, real-world elapsed time or unique identity. It does not save resumable games. Anonymous accounts identify browser retries; nicknames can repeat.
 
-D131 is a repository change awaiting deployment. The prior hosted version accepts self-reported summaries until the migration below is applied.
+D131 is deployed: remote migration `20261019143504`, `submit-score` version 4 (2026-10-19). Its local migration source is `20261019133603_verified_score_replay.sql`; do not reapply it.
+
+D132 combines existing and new D129 results in one public ranking, as requested by the owner. `20261019144108_unified_scoreboard.sql` was deployed on 2026-10-19 as remote migration `20261019144359`, before publishing the updated frontend. Do not reapply the local source migration. It only replaces the read function; no score rows, verification facts, write permissions or Edge Functions change. Both D129 request IDs return the same combined ranking for compatibility with existing tabs.
 
 ## Configuration
 
@@ -29,14 +31,14 @@ Review project Database/Auth/Edge usage and billing limits in the Supabase dashb
 
 The security advisor also reports disabled [leaked-password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection). The scoreboard uses anonymous sign-ins and has no password login; review this setting before adding password-based accounts. Performance advisors reported no findings at verification.
 
-## D131 deployment order
+## D131 deployment order (completed)
 
 1. Review/apply `migrations/20261019133603_verified_score_replay.sql` to the intended project. It preserves all scores, closes both historical boards, creates `speed-d129-verified-v1`, and removes the unsafe write RPC. Old browser tabs can no longer save summary-only scores. There is a short save outage until the new function/frontend are available; playing and reading scores still work.
 2. Deploy `submit-score` from this checkout, including `_shared/engine`, `_shared/replayContract.ts`, `_shared/scoreFacts.ts`, `_shared/scoreboard.ts`, `_shared/verifyScore.ts` and `_shared/submitScoreHandler.ts`. Keep JWT verification enabled. Use the Supabase CLI or the plugin; never deploy only `index.ts` with old shared files.
 3. Check database/function logs and advisors, then merge/publish the frontend. The GitHub Pages workflow publishes frontend assets only; **merging the PR does not deploy Supabase**.
-4. In an isolated test/pre-release project, run the opt-in live browser check and verify a played result, same-owner retry, wrong-owner conflict, forbidden direct write, and historical/verified separation. Then smoke-check the published site. Clean up only the test IDs reported by the script.
+4. In an isolated test/pre-release project, run the opt-in live browser check and verify a played result, same-owner retry, wrong-owner conflict, forbidden direct write, and combined historical/new ranking. Then smoke-check the published site. Clean up only the test IDs reported by the script.
 
-Rollback: keep historical writes closed. To temporarily stop new saves, set `accepting=false` for `speed-d129-verified-v1`; reads and already-saved receipts remain available. Do not restore the old summary-only RPC or mark historical rows verified. Pending old-version submissions cannot be promoted; players may discard them and start a fresh run. The unverified archive remains accessible through **View previous scores**.
+Rollback: keep historical writes closed. To temporarily stop new saves, set `accepting=false` for `speed-d129-verified-v1`; reads and already-saved receipts remain available. Do not restore the old summary-only RPC or mark historical rows verified. Pending old-version submissions cannot be promoted; players may discard them and start a fresh run. D132 displays historical D129 entries alongside new results.
 
 ## Inspect, export and moderate
 
@@ -58,10 +60,10 @@ Do not mix incomparable gameplay on one board. Add a new explicit rules ID and t
 
 - `npm test`: engine tests plus real PostgreSQL in PGlite for permissions, duplicate retries, ownership, ranks/ties, pagination, versions and rate limits; no cloud score writes.
 - `npm run build -- --base=/recon-game/`: production path and TypeScript checks.
-- `tests/scoreboard-browser.mjs`: point `GAME_URL` at a local build configured with `https://scoreboard-test.invalid` and any public test key. Requests are intercepted locally, authentication is mocked, and submissions use the actual HTTP handler, replay verifier and a PGlite database. No cloud data is created. Covers the countdown, hidden tab, reduced motion, optional saving, frozen result after practice, lost response, identical reload/retry, verified/archive separation, text escaping and failures.
+- `tests/scoreboard-browser.mjs`: point `GAME_URL` at a local build configured with `https://scoreboard-test.invalid` and any public test key. Requests are intercepted locally, authentication is mocked, and submissions use the actual HTTP handler, replay verifier and a PGlite database. No cloud data is created. Covers the countdown, hidden tab, reduced motion, optional saving, frozen result after practice, lost response, identical reload/retry, combined ranking, text escaping and failures.
 - `tests/scoreboard-live-browser.mjs`: explicit `SCOREBOARD_LIVE_TEST=1` only against a test or pre-release board. Plays a real paid route and saves a marked setup result; verifies it in two independent browser contexts. It records only the run ID and test account ID in ignored `test-results/scoreboard-live-browser.json`. Remove exactly those test records/accounts after testing, before launching the public board. Never bulk-delete scores or accounts.
 - Browser scripts require `PLAYWRIGHT_MODULE_DIR` pointing to a directory containing Playwright. Test server builds must stay stable during a run; concurrent gameplay edits can invalidate timing and rule assertions.
 
-Local D131 verification: 107 automated tests pass, the production-base build passes, and Chromium saved a played 144-second run through the actual verifier/local database, retried after reload without a duplicate, and displayed a separate historical archive. Screenshots were inspected at 1280×800 and 800×700. The hosted D131 function has not been deployed or tested by the implementation task.
+Local D131 verification: 107 automated tests pass, the production-base build passes, and Chromium saved a played 144-second run through the actual verifier/local database, retried after reload without a duplicate, and displayed the historical archive (superseded by D132’s combined ranking). Screenshots were inspected at 1280×800 and 800×700. The later approved rollout deployed version 4 and verified the live body-size limits and database permissions; Thomas’s subsequent saved score is visible.
 
 No operator moderation UI, resumable games, permanent account login or anti-bot proof is included.
