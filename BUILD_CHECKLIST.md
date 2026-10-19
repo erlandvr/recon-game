@@ -6,6 +6,15 @@ Earlier sections record delivery at that time. Pause/save checks and full-slot r
 
 Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
 
+## Single scoreboard (D132)
+
+- [x] Existing and new D129 scores share ranks, ties, pagination and highlights; original records remain intact.
+- [x] Remove archive switch and ranking labels that separate existing scores.
+- [x] Keep server replay, idempotency, write permissions and rate limits unchanged.
+- [x] 107 automated tests and production-base build pass.
+- [x] Chromium/local PostgreSQL: existing and new rows appear together, split controls absent; save/retry regressions pass and screenshot inspected.
+- [x] Read migration deployed as `20261019144359`; public API returns the same 10-score ranking for both D129 IDs. Security advisors unchanged.
+
 ## Server replay validation (D131)
 
 - [x] Shared engine, successful-action recording, first-victory freeze and opt-in replay upload.
@@ -15,7 +24,7 @@ Current device scope (D94): desktop/laptop only. Do not run mobile validation or
 - [x] Local HTTP/PostgreSQL integration rejects fabricated five/60-second results and altered completion facts; authentic runs and idempotent retries succeed.
 - [x] Full automated suite: 107 passing tests; production-base build and shared-server TypeScript checks pass.
 - [x] Chromium/local PostgreSQL: played 144-second result verified, practice/frozen transcript retained, identical reload retry, archive isolation, escaped names and error/discard flows; desktop screenshots inspected.
-- [ ] Deploy migration and function, publish frontend, then verify the hosted flow. No production change made by this PR task.
+- [x] Subsequent approved deployment on 2026-10-19: migration applied, function v4 active, body-size limits and database permissions checked; Thomas’s saved result confirmed in the UI.
 
 ## Healthy recovery and stronger final models (D129)
 

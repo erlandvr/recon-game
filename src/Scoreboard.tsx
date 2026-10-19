@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react';
 import Modal from './Modal.tsx';
-import {SCORE_RULES,LEGACY_SCORE_RULES,scoreTime,getScorePage,saveScore,discardScore,useScores,resultSubmission,validName,type ScoreRow} from './scoreboard.ts';
+import {scoreTime,getScorePage,saveScore,discardScore,useScores,resultSubmission,validName,type ScoreRow} from './scoreboard.ts';
 import type {GameState} from './game.ts';
 import {REPLAY_LIMITS,type ReplayEvent} from '../supabase/functions/_shared/replayContract.ts';
 import './scoreboard.css';
@@ -26,14 +26,11 @@ export function SaveScore({state:s,runId,replay,onScoreboard}:{state:GameState;r
 }
 
 export default function Scoreboard({onClose,highlight=null}:{onClose:()=>void;highlight?:string|null}){
- const [legacy,setLegacy]=useState(false),rules=legacy?LEGACY_SCORE_RULES:SCORE_RULES;
  const [page,setPage]=useState(0),[refresh,setRefresh]=useState(0),[data,setData]=useState<Awaited<ReturnType<typeof getScorePage>>|null>(null),[error,setError]=useState(''),[loading,setLoading]=useState(true);
- useEffect(()=>{const controller=new AbortController();setLoading(true);setError('');setData(null);getScorePage(page,highlight,controller.signal,rules.id).then(value=>{if(!controller.signal.aborted)setData(value);}).catch(()=>{if(!controller.signal.aborted)setError('Could not load the scoreboard. Please try again.');}).finally(()=>{if(!controller.signal.aborted)setLoading(false);});return()=>controller.abort();},[page,refresh,highlight,rules.id]);
+ useEffect(()=>{const controller=new AbortController();setLoading(true);setError('');setData(null);getScorePage(page,highlight,controller.signal).then(value=>{if(!controller.signal.aborted)setData(value);}).catch(()=>{if(!controller.signal.aborted)setError('Could not load the scoreboard. Please try again.');}).finally(()=>{if(!controller.signal.aborted)setLoading(false);});return()=>controller.abort();},[page,refresh,highlight]);
  function row(entry:ScoreRow){return <tr key={entry.run_id} className={entry.run_id===highlight?'sb-highlight':''}><td>{entry.rank}</td><th scope="row">{entry.display_name}{entry.run_id===highlight&&<small> Your result</small>}</th><td>{scoreTime(entry.finish_ms)}</td><td className={entry.medal?`sb-${entry.medal}`:''}>{entry.medal??'—'}</td><td>{new Date(entry.submitted_at).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}</td></tr>;}
  return <Modal title="Speed Game scoreboard" className="sb-modal" onDismiss={onClose}>
-  <div className="sb-toolbar"><p>{rules.label} · Fastest finishes</p><button disabled={loading} onClick={()=>setRefresh(r=>r+1)}>Refresh</button></div>
-  <button onClick={()=>{setLegacy(v=>!v);setPage(0);}}>{legacy?'View verified scores':'View previous scores'}</button>
-  {legacy&&<p>These historical results were submitted without gameplay verification. This board is closed to new scores.</p>}
+  <div className="sb-toolbar"><p>Speed Game · Fastest finishes</p><button disabled={loading} onClick={()=>setRefresh(r=>r+1)}>Refresh</button></div>
   <p className="sb-caption">One entry per submitted run. Matching names may belong to different players.</p>
   {loading?<p role="status">Loading scores…</p>:error?<div role="alert"><p>{error}</p><button onClick={()=>setRefresh(r=>r+1)}>Try again</button></div>:data&&<>
    {data.highlight&&!data.entries.some(e=>e.run_id===highlight)&&<p className="sb-own">Your result: #{data.highlight.rank} · {data.highlight.display_name} · {scoreTime(data.highlight.finish_ms)}</p>}

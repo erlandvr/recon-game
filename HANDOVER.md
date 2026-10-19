@@ -1,16 +1,22 @@
 # Recon Game — current handover
 
-Updated: 2026-10-19. **D131 replay-verified scoreboard is implemented locally for PR review; the hosted backend still runs D130 until the migration and Edge Function are deployed.**
+Updated: 2026-10-19. **D131 replay verification is deployed. D132 restores one public ranking for existing and new D129 scores.**
+
+## D132 — single scoreboard
+
+The owner trusts all existing scores and requested removal of the split. `scoreboard_page` combines `speed-d129-v1` and `speed-d129-verified-v1` before computing ranks, pagination and highlights. The UI has one scoreboard without an archive switch. Original score versions/facts remain intact; new submissions still require server replay. The read migration is deployed as `20261019144359` (local source `20261019144108`); public API verification returned all 10 scores together. No Edge Function redeployment is needed. Validation: 107 tests, production-base build and local Chromium save/retry/combined-ranking journey pass.
+
+The D131 migration was applied to production on 2026-10-19 as remote version `20261019143504` (local source `20261019133603`); `submit-score` version 4 is active. Do not reapply the D131 source migration.
 
 ## D131 — verified scoreboard
 
 The browser records successful actions through the first victory. On Save, `submit-score` authenticates, reserves a rate-limited verification attempt, replays the transcript using the shared deterministic engine, and stores only recomputed result facts. Forged summaries, altered times, illegal actions and post-victory actions fail. Identical saved-run retries return the existing receipt without consuming another verification attempt.
 
-New scores use `speed-d129-verified-v1`. The migration closes historical versions and removes the old summary-only RPC; historical scores remain in a clearly labelled archive. Replay logs stay private. No game data is sent before Save/Retry. Planning, countdown, first-result freeze and local play retain their existing behavior.
+New scores use `speed-d129-verified-v1`. The migration closes historical versions and removes the old summary-only RPC; D132 now includes historical D129 scores in the same ranking. Replay logs stay private. No game data is sent before Save/Retry. Planning, countdown, first-result freeze and local play retain their existing behavior.
 
 The engine implementation now lives in `supabase/functions/_shared/engine/`; `src` modules re-export it so browser and server use one source. No gameplay tuning changed. Limits: 256 KiB request, 2,000 actions, 30 active minutes and a one-second verification processing budget. Replay proves a legal simulated run; it does not prove human play, wall-clock timing or unique identity.
 
-Validation and deployment order: see [operator instructions](supabase/README.md). Deploy the migration and function before merging/publishing the frontend; merging the PR alone does not deploy Supabase. No hosted data was changed during implementation.
+Validation and deployment order: see [operator instructions](supabase/README.md). Deploy the migration and function before merging/publishing the frontend; merging the PR alone does not deploy Supabase. The later approved production deployment completed on 2026-10-19.
 
 ## Previous D130 handover (historical deployment evidence)
 
