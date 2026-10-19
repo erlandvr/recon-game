@@ -30,7 +30,7 @@ definitions:
     - step: &install-build
         name: 🛠 Install & Build
         artifacts:
-          - build/**
+          - dist/**
         caches:
           - custom-node
         script:
