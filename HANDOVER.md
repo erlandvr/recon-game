@@ -1,6 +1,18 @@
 # Recon Game — current handover
 
-Updated: 2026-10-13. **D130 shared scoreboard and opening countdown are implemented; the Supabase backend is deployed and verified.** D129 gameplay is preserved. Website publication is tracked separately from backend deployment.
+Updated: 2026-10-19. **D131 replay-verified scoreboard is implemented locally for PR review; the hosted backend still runs D130 until the migration and Edge Function are deployed.**
+
+## D131 — verified scoreboard
+
+The browser records successful actions through the first victory. On Save, `submit-score` authenticates, reserves a rate-limited verification attempt, replays the transcript using the shared deterministic engine, and stores only recomputed result facts. Forged summaries, altered times, illegal actions and post-victory actions fail. Identical saved-run retries return the existing receipt without consuming another verification attempt.
+
+New scores use `speed-d129-verified-v1`. The migration closes historical versions and removes the old summary-only RPC; historical scores remain in a clearly labelled archive. Replay logs stay private. No game data is sent before Save/Retry. Planning, countdown, first-result freeze and local play retain their existing behavior.
+
+The engine implementation now lives in `supabase/functions/_shared/engine/`; `src` modules re-export it so browser and server use one source. No gameplay tuning changed. Limits: 256 KiB request, 2,000 actions, 30 active minutes and a one-second verification processing budget. Replay proves a legal simulated run; it does not prove human play, wall-clock timing or unique identity.
+
+Validation and deployment order: see [operator instructions](supabase/README.md). Deploy the migration and function before merging/publishing the frontend; merging the PR alone does not deploy Supabase. No hosted data was changed during implementation.
+
+## Previous D130 handover (historical deployment evidence)
 
 ## Resume here
 

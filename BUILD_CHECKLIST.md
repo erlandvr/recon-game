@@ -1,10 +1,21 @@
 # Recon Game — build checklist
 
-Updated: 2026-10-12. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); this file tracks delivery evidence, not a second set of rules.
+Updated: 2026-10-19. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); this file tracks delivery evidence, not a second set of rules.
 
 Earlier sections record delivery at that time. Pause/save checks and full-slot rejection were superseded by D42–D44; later sections record current verification. The earlier combined automation was superseded by D51; D69 now adds separately purchased automatic remediation. Fixed elapsed-time milestones and unattended debug presets are superseded by D65–D67.
 
 Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
+
+## Server replay validation (D131)
+
+- [x] Shared engine, successful-action recording, first-victory freeze and opt-in replay upload.
+- [x] Server verifies legal actions, timestamps and victory; stored facts come from replay.
+- [x] New verified board; historical board remains readable and closes to new writes.
+- [x] Authentication and attempt limits precede replay; body/action/time/processing limits bound work.
+- [x] Local HTTP/PostgreSQL integration rejects fabricated five/60-second results and altered completion facts; authentic runs and idempotent retries succeed.
+- [x] Full automated suite: 107 passing tests; production-base build and shared-server TypeScript checks pass.
+- [x] Chromium/local PostgreSQL: played 144-second result verified, practice/frozen transcript retained, identical reload retry, archive isolation, escaped names and error/discard flows; desktop screenshots inspected.
+- [ ] Deploy migration and function, publish frontend, then verify the hosted flow. No production change made by this PR task.
 
 ## Healthy recovery and stronger final models (D129)
 

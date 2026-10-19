@@ -6,7 +6,8 @@ import {SPEED,SPEED_MEDALS} from '../src/speedRules.ts';
 import {newSpeedGame,act,advance,continueSpeedPractice} from '../src/game.ts';
 import {playSpeed} from '../scripts/speed-benchmark.ts';
 import {resultSubmission} from '../src/scoreResult.ts';
-export const sample=():ScoreSubmission=>({runId:randomUUID(),name:'Élodie 李',mode:'speed',rulesVersion:SCORE_RULES.id,finishMs:500500,seed:1,covered:15,modules:3,health:95,trialSeconds:5,autoScans:1,autoRepairs:1,credits:35,netIncome:10,practice:false});
+import {paidScore} from './helpers/scoreboard.ts';
+export const sample=():ScoreSubmission=>({runId:randomUUID(),name:'Élodie 李',mode:'speed',rulesVersion:SCORE_RULES.id,finishMs:500500,seed:1,covered:15,modules:3,health:95,trialSeconds:5,autoScans:1,autoRepairs:1,credits:35,netIncome:10,practice:false,replay:[{atMs:0,action:{type:'speed-pause',paused:false}}]});
 test('score contract matches current engine and supports exact long finishes and international names',()=>{
  assert.equal(SCORE_RULES.repositories,SPEED.repositories);assert.equal(SCORE_RULES.trialSeconds,SPEED.trialSeconds);
  assert.deepEqual([SCORE_RULES.goldMs,SCORE_RULES.silverMs,SCORE_RULES.bronzeMs],SPEED_MEDALS.map(m=>m.through*1000));
@@ -21,8 +22,8 @@ test('paid victory yields a valid frozen submission after continued practice; in
  const plan=playSpeed({route:'all',reaction:3,beforeModel:4});assert.ok(plan.result);
  let s=act(newSpeedGame(),{type:'speed-pause',paused:false}).state;
  for(const item of plan.actions){s=advance(s,item.at-s.time);s=act(s,item.action).state;}
- s=advance(s,plan.result.at-s.time);const id=randomUUID(),before=resultSubmission(s,id,' Élodie ');assert.ok(before);assert.equal(before.name,'Élodie');
- assert.deepEqual(resultSubmission(advance(continueSpeedPractice(s),60),id,'Élodie'),before);
- assert.equal(resultSubmission(newSpeedGame(),randomUUID(),'Player'),null);
- s.campaign!.autonomy.victory!.practice=true;assert.equal(resultSubmission(s,id,'Player'),null);
+ s=advance(s,plan.result.at-s.time);const id=randomUUID(),replay=paidScore().score.replay,before=resultSubmission(s,id,' Élodie ',replay);assert.ok(before);assert.equal(before.name,'Élodie');
+ assert.deepEqual(resultSubmission(advance(continueSpeedPractice(s),60),id,'Élodie',replay),before);
+ assert.equal(resultSubmission(newSpeedGame(),randomUUID(),'Player',[]),null);
+ s.campaign!.autonomy.victory!.practice=true;assert.equal(resultSubmission(s,id,'Player',replay),null);
 });

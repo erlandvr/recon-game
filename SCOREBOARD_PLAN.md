@@ -1,7 +1,7 @@
 # Shared scoreboard plan
 
-Date: 2026-10-12\
-Status: Implemented locally and connected to Supabase, verified 2026-10-13. Website publication is not part of this implementation turn.
+Updated: 2026-10-19\
+Status: D131 server replay verification is implemented locally for PR review. The D130 backend deployment below is historical; D131 requires its migration and function deployment before frontend publication.
 
 Connection verified: 2026-10-13. The `recon-game` project is active in Momos, EU `eu-west-1`. Anonymous sign-in, database migrations and the submission endpoint are configured and verified. Local and GitHub Pages build settings are present. Operations: [supabase/README.md](supabase/README.md).
 
@@ -13,7 +13,7 @@ This records shared results, not resumable game progress. Previous unsaved games
 
 ## Implemented first release
 
-Speed Game ranks the fastest time to full autonomy. Long Game remains outside this first implementation. The active board is `speed-d129-v1`, matching the completed D129 healthy-recovery rules and quarter-second simulation.
+Speed Game ranks the fastest time to full autonomy. Long Game remains outside this first implementation. D131 uses `speed-d129-verified-v1`, matching the D129 healthy-recovery rules and quarter-second simulation while requiring server replay. The currently hosted D130 board remains `speed-d129-v1` until deployment.
 
 ### Finish and save
 
@@ -43,7 +43,7 @@ Rank submitted runs by finish time, fastest first. Equal exact times share a ran
 
 **Identity default:** one entry per submitted run. The same nickname may appear more than once. A typed name does not establish identity, so do not merge entries or promise a personal best across devices. A best-per-person board would require an additional identity decision, such as accounts or a recoverable player code. A technical anonymous session is not proof of a unique person.
 
-Separate rankings by game mode and gameplay rules version. Economy, victory or timer changes that affect comparability start a new board version while retaining historical results. Current gameplay is documented in [SPEED_MODE.md](SPEED_MODE.md). D128 was superseded during implementation; its board is closed to new scores.
+Separate rankings by game mode and gameplay rules version. Economy, victory or timer changes that affect comparability start a new board version while retaining historical results. Current gameplay is documented in [SPEED_MODE.md](SPEED_MODE.md). D131 keeps the D129 gameplay but starts a separate verified board; both earlier versions are closed to new scores after migration.
 
 ## Additional Speed Game opening countdown
 
@@ -70,7 +70,7 @@ The existing website can remain on GitHub Pages. The browser reads leaderboard d
 | Result context | Scenario seed and frozen completion facts needed for basic validation, such as completed autonomy, automated repository/module counts and final health |
 | Rules version | Eligible mode/scenario, scoring precision, finish conditions and medal thresholds for that version |
 
-Derive medals and ranks from the stored time and versioned rules. Do not accept a client-supplied rank or medal as authoritative. Do not store email addresses, a full game save or gameplay activity before opt-in as part of this feature.
+Derive medals and ranks from the stored time and versioned rules. Do not accept a client-supplied rank or medal as authoritative. Do not store email addresses, a full game save or gameplay activity before opt-in as part of this feature. D131 retains opted-in action transcripts privately with the verified completion facts.
 
 ### Access and validation
 
@@ -80,7 +80,9 @@ Derive medals and ranks from the stored time and versioned rules. Do not accept 
 - Enable Row Level Security, deny direct browser inserts/updates/deletes, and permit writes only through the controlled endpoint. The frontend uses the project URL and a publishable API key; any secret or elevated database credential stays on the server. The submission endpoint verifies the player's session JWT: the publishable key alone does not establish player identity.
 - Use the run ID as an idempotency key. A repeat request from its owner returns the existing saved result; another identity cannot overwrite or claim it. A fresh run receives a fresh ID.
 - Add server-side rate limits and request-size limits. An anonymous identity can be replaced, so per-identity limits alone do not prevent abuse.
-- Treat this as a casual scoreboard. Browser-computed times and completion facts can be forged; authentication and validation of fields do not verify gameplay. Replay validation or authoritative server simulation is a separate future scope for serious competitions.
+- D131 replaces summary-only validation with server replay. Record successful actions at quarter-second simulation times, freeze the transcript at first victory, and submit it only on Save/Retry. Replay from a fresh seeded state with the shared engine; reject illegal actions, impossible timing and any mismatch in finish facts. Store the independently calculated result. This proves a legal simulated run, not human play or unique identity.
+- Use `speed-d129-verified-v1` for verified results. Close the old write path and keep `speed-d129-v1` in an explicitly unverified archive. Do not promote old rows.
+- Bound requests to 256 KiB, 2,000 actions and 30 active minutes, with a one-second processing budget checked during replay. Apply per-owner/global verification-attempt limits before replay, including failures; exempt already-saved retries.
 
 ### Availability and operations
 
