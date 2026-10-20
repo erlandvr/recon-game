@@ -7,8 +7,19 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.ts",
+    "v3:test": "node --test experiments/v3/engine.test.mjs",
+    "v3:benchmark": "node experiments/v3/benchmark.mjs",
+    "v3:sandbox": "vite --host 127.0.0.1 --port 5183",
     "build": "npm run typecheck && vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "v3:mvp:test": "node --test tests/v3*.test.ts",
+    "v3:mvp:benchmark": "node scripts/v3-benchmark.ts",
+    "v3:mvp:browser": "node tests/v3-browser.ts && node tests/v3-layout-browser.ts",
+    "v3:workshop:browser": "node tests/v3-workshop-browser.ts",
+    "v3:journey:browser": "node tests/v3-journey-browser.ts",
+    "v3:p1:browser": "node tests/v3-p1-browser.ts",
+    "v3:features:browser": "node tests/v3-features-browser.ts",
+    "v3:event:browser": "node tests/v3-event-browser.ts"
   },
   "dependencies": {
     "@fontsource/space-grotesk": "5.3.0",
