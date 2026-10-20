@@ -1,6 +1,6 @@
-# Recon Game
+# Recon — Active Animation
 
-A standalone browser management game about keeping a growing software ecosystem healthy. Current rules and scope: [GAME_BRIEF.md](GAME_BRIEF.md).
+An interactive workshop experience: build your team, keep systems running, and discover what automation makes possible. Current rules: [V3_MODE.md](V3_MODE.md).
 
 ## Run locally
 
@@ -11,7 +11,11 @@ npm ci
 npm run dev
 ```
 
-Open the Local URL printed by Vite. Choose **Speed Game** or **Long Game**. Speed Game uses a map that grows in waves of 2, 4 and 8 additions to 15 systems, a persistent model tree beside the map and Pause & plan. Aim for 5–8 active minutes; see [Speed Game rules](SPEED_MODE.md). Reload starts a fresh run.
+Open the Local URL printed by Vite. **Recon — Active Animation** opens directly with its introduction and **Start experience** button. Build, hire or automate to reach 1,200 spendable credits. Recon costs 180 credits and Plus costs another 260. Reload or Play again starts a fresh run; there is no mode chooser or public scoreboard.
+
+## Historical modes (source only)
+
+Speed and Long remain in the repository but are hidden from visitors. The following notes describe their historical behaviour and tooling, not the current entry experience.
 
 Speed Game starts with **3–2–1–GO!** after its briefing. After finishing, optionally enter a nickname and save your time to the shared scoreboard. The server replays submitted actions before accepting a score. Existing and new scores share one ranking. View it from the mode-selection or result screen. Skipped scores are never submitted; failed saves remain available for deliberate Retry/Discard after reload. Game progress itself is not saved. Supabase setup and operator instructions: [supabase/README.md](supabase/README.md). Local play works without Supabase; shared saves require the two public values shown in `.env.example`.
 
@@ -45,6 +49,8 @@ The browser runner accepts `GAME_URL` and `PLAYWRIGHT_MODULE_DIR` for an externa
 
 ## Project records
 
+V3 has a local experimental [balance sandbox](experiments/v3/README.md), runnable with `npm run v3:sandbox` at `/experiments/v3/`. Maintenance visibly takes developers away from building, and Recon returns that capacity. Its rules and results are experimental; see [current V3 specification](V3_MODE.md). A separate [spatial study](docs/analysis/v3-layout-study.html) checks proposed scene scale; its [review](docs/analysis/v3-layout-review.md) records fit and readability limits. The production entry opens Active Animation directly (internally V3). The current engine is separate from that older sandbox; run `npm run v3:mvp:test`, `npm run v3:mvp:benchmark`, and `npm run v3:mvp:browser` (with the browser runtime variables above) for current mechanics evidence. The V3.2 workshop adds a central radar with three explicit repair bays and an illustrated purchase shelf; see [workshop review](docs/analysis/v3-workshop-review.md). Run `npm run v3:workshop:browser` for the focused bay/coin/layout checks. V3.3 adds workshop lamps, contextual hints, Help and a frozen-result worker party; see [journey review](docs/analysis/v3-journey-review.md) and run `npm run v3:journey:browser` for its paid checks. The confirmed P1 update adds urgent system fires, developer interruption with retained work and Recon priority. See [P1 review](docs/analysis/v3-p1-review.md); run `npm run v3:p1:browser` for the paid emergency/resumption checks. The shared blue feature backlog now uses low-priority desk work: builds and repairs interrupt it, and completed features immediately raise a random installed system’s income. Developers collect cards but no longer deliver features to systems. Developers now head directly to the next queued repair after installation or repair, avoiding unnecessary desk detours; see [direct-repair review](docs/analysis/v3-direct-repair-review.md). See the [desk-feature review](docs/analysis/v3-desk-features-review.md) and [original feature review](docs/analysis/v3-features-review.md) and run `npm run v3:features:browser`.
+
 Read [HANDOVER.md](HANDOVER.md), the brief, [BUILD_CHECKLIST.md](BUILD_CHECKLIST.md) and [DECISIONS.md](DECISIONS.md) before continuing work. `src/game.ts`, `src/campaign.ts` and `src/organization.ts` own simulation rules; `src/App.tsx` owns the in-memory lifecycle. The two boards share `src/SystemNode.tsx` for direct system actions.
 
 This is a fictional prototype. Real repository connections, final balancing and endless-mode variety remain later scope.
@@ -60,3 +66,5 @@ GitHub Pages address: https://erlandvr.github.io/recon-game/
 The `Test and publish game` workflow checks every pull request and publishes successful `main` builds. It runs Node 24, installs the lockfile with `npm ci`, runs engine tests, and builds with the `/recon-game/` asset base. Only `dist` is deployed. In repository Settings → Pages, the source must be GitHub Actions. Local development continues at `/`.
 
 Workflow follows the [Vite GitHub Pages guide](https://vite.dev/guide/static-deploy.html#github-pages). No accounts, server or API credentials are required to play. Runs are kept in memory and reset on reload.
+
+V3.4 adds uneven system islands and clear space around Recon. Following owner feedback, its opening now contains only the gameplay explanation and Start experience; the live demo is removed. See [event review](docs/analysis/v3-event-review.md) and use `npm run v3:event:browser` for opening/replay/layout checks. The current benchmark includes the longer measured walking routes; human venue validation is still pending.
