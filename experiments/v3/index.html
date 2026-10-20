@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Recon V3 · Balance sandbox</title><link rel="stylesheet" href="./sandbox.css"></head>
+<body>
+<a class="skip" href="#board">Skip to ecosystem</a>
+<header><div><p class="eyebrow">Recon / Experimental V3</p><h1>Build. Maintain. Make room.</h1></div><p class="scope">Local balance sandbox<br><span>Candidate rules · no shared scores</span></p></header>
+<main>
+ <section class="workspace" aria-label="Ecosystem and results">
+  <div class="metrics">
+   <div><span>Active time</span><strong id="time">0:00</strong></div>
+   <div><span>Credits</span><strong id="credits">90</strong></div>
+   <div><span>Net / second</span><strong id="net">+2.65</strong></div>
+   <div><span>Systems built</span><strong id="built">1 / 15</strong></div>
+   <div><span>Recon jobs</span><strong id="slots">Not installed</strong></div>
+  </div>
+  <p id="ledger" class="ledger"></p>
+  <div class="board-header"><div><h2>Your ecosystem</h2><p id="state-label">Ready to build</p></div><div class="buttons"><button id="play">Start</button><button id="reset" class="secondary">New run</button></div></div>
+  <svg id="board" viewBox="0 0 960 490" role="img" aria-label="Ecosystem: systems on the left, developers on the right. Text status is available below." tabindex="0"></svg>
+  <div class="legend"><span><i class="healthy"></i>Operating</span><span><i class="building"></i>Constructing</span><span><i class="failed"></i>Maintenance</span><span><i class="automated"></i>Recon working</span></div>
+  <div id="result" hidden role="status"></div>
+  <div class="explanation"><h2>What is being tested</h2><p>Developers earn their keep by constructing systems. Maintenance takes them away. Recon takes over one job; Plus takes three. Watch developers turn back and return to building.</p><p id="rules"></p></div>
+  <details><summary>System status and developer assignments</summary><div id="accessible-status"></div></details>
+  <details><summary>Recent events</summary><ol id="events"></ol></details>
+ </section>
+ <aside aria-label="Investments and experiment controls">
+  <h2>Choose your investment</h2>
+  <p class="muted">Systems need construction time. Hiring adds a recurring wage.</p>
+  <div id="purchases"></div>
+  <p id="notice" role="status" class="notice">Start, then choose an investment.</p>
+  <section class="controls"><h2>Experiment controls</h2>
+   <label for="scenario">Environment</label><select id="scenario"><option value="candidate">Candidate · 15 systems</option><option value="baseline">Initial model · slow Recon</option><option value="pressure">Stress · faster ageing</option></select>
+   <label for="policy">Play mode</label><select id="policy"><option value="manual">Manual decisions</option></select>
+   <div class="fields"><div><label for="seed">Seed</label><input id="seed" type="number" value="1" min="1" max="99999"></div><div><label for="reaction">Policy reaction</label><select id="reaction"><option value="1">1 second</option><option value="3" selected>3 seconds</option><option value="5">5 seconds</option></select></div></div>
+   <label for="rate">Playback speed</label><select id="rate"><option value="1">1×</option><option value="4">4×</option><option value="12">12×</option></select>
+   <button id="download" class="secondary">Download run evidence</button>
+   <p class="muted small">Environment and seed apply on New run. Policy can change during a run. Hidden tabs pause.</p>
+  </section>
+ </aside>
+</main>
+<footer>Experimental values and win condition. Simulations test feasibility; enjoyment still needs human playtesting. <a href="../../">Back to the current game</a></footer>
+<script type="module" src="./sandbox.mjs"></script>
+</body></html>

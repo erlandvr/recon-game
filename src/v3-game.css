@@ -1,0 +1,159 @@
+/* V3 workshop layout and shared controls. */
+.v3-game{height:100dvh;min-height:580px;display:flex;flex-direction:column;background:#131711;color:#eef0e9;font-size:14px;overflow:hidden}
+.v3-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;border-bottom:1px solid #354030;flex-shrink:0}
+.v3-header nav{display:flex;gap:8px}.v3-game button{font-size:13px;min-height:38px}.v3-main{display:flex;flex-direction:column;flex:1;min-height:0;padding:0 22px}
+.v3-hud{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:22px;padding:16px 0 12px;border-bottom:1px solid #354030;flex-shrink:0}
+.v3-hud>div{display:flex;flex-direction:column;gap:4px}.v3-hud span{color:#c0c9b8;font-size:13px}.v3-hud strong{font-size:30px;line-height:1.1;letter-spacing:-1px}.v3-hud small{font-size:12px;color:#b5c0ab;font-weight:400;letter-spacing:0}.v3-hud strong small{font-size:17px}.v3-hud .v3-time{font-family:var(--font-micrographics);font-size:26px;color:#dce5cf}
+.v3-cash strong{color:#edd293}.v3-cash progress{height:5px;width:100%;max-width:280px;border:0;appearance:none;background:#333c2e}.v3-cash progress::-webkit-progress-bar{background:#333c2e}.v3-cash progress::-webkit-progress-value{background:#d6ba79}.v3-cash progress::-moz-progress-bar{background:#d6ba79}
+.v3-world{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}.v3-world-summary{display:flex;align-items:center;justify-content:space-between;padding:8px 0;gap:12px;color:#aebca3;font-size:12px;flex-shrink:0}.v3-world svg{width:100%;flex:1;min-height:0;cursor:default;user-select:none}.v3-world svg text{font-family:var(--font-body);fill:#dce3d4;font-size:15px}.v3-world svg .v3-area-label{font-size:13px;fill:#95a18c;letter-spacing:2px}.v3-link{stroke:#7c9c68;stroke-width:2;opacity:.6}.v3-link[data-live=false]{opacity:.16;stroke-dasharray:4 6}
+[data-v3-system]{color:#b8d4a3}.v3-machine{fill:#293725;stroke:currentColor;stroke-width:2}[data-installed=false]{opacity:.55}[data-installed=false] .v3-machine{fill:#1a2017;stroke-dasharray:5 5}[data-broken=true]{color:#e5a48c}[data-broken=true] .v3-machine{fill:#392d26}.v3-open-panel{fill:#593e2c;stroke:#dfaa8f}.v3-world svg .v3-fault{font-size:20px;fill:#ffe2ae;font-weight:700}.v3-world svg .v3-system-state{font-size:12px;fill:#bbc7b0}.v3-system-name{font-weight:700}.v3-bench>rect{fill:#3f4a35;stroke:#7b876b;stroke-width:2}.v3-bench[data-occupied=false]{opacity:.3}.v3-world svg .v3-bench text{font-size:12px;fill:#a5b396}.v3-assembly rect{fill:#a7bb91;stroke:#1b2917;stroke-width:2}.v3-cargo rect{fill:#9bb787;stroke:#e0eacb;stroke-width:2}.v3-cargo path{stroke:#46583c;stroke-width:3}.v3-world svg .v3-worker-label{font-size:12px;fill:#ead9b4;paint-order:stroke;stroke:#131711;stroke-width:4px}.v3-recon[data-owned=false]{opacity:.4}.v3-crew{display:flex;gap:10px;justify-content:space-between;border-top:1px solid #2b3526;padding:8px 0;color:#bcc8b2;font-size:12px;flex-shrink:0}.v3-crew b{color:#e2d1b1;margin-right:5px}
+.v3-purchases{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 0;border-top:1px solid #46513a;flex-shrink:0}.v3-purchases button{text-align:left;justify-content:flex-start;padding:12px;gap:10px;border-radius:4px;background:#232c1e;border-color:#58664a;min-width:0}.v3-purchases button>span:last-child{flex:1;min-width:0}.v3-purchases strong{display:flex;justify-content:space-between;gap:6px;font-size:14px}.v3-purchases strong b{color:#e4c985;white-space:nowrap}.v3-purchases small{display:block;font-size:11px;line-height:1.5;font-weight:400;color:#c3cdb9}.v3-purchases .v3-affordability{color:#bbd4a6}.v3-purchases button:disabled{background:#1b2118;border-color:#343f2d}.v3-purchases button:disabled strong{color:#a6b19b}.v3-purchases button:disabled .v3-affordability{color:#a5ad9e}.v3-purchase-mark{font-size:29px;color:#d1c29b;line-height:1}.v3-footer{display:flex;align-items:center;justify-content:space-between;min-height:34px;padding-bottom:8px;gap:10px;color:#b1bfa6;font-size:12px;flex-shrink:0}
+.v3-plan{display:flex;gap:16px;align-items:center;padding:10px 14px;background:#303b24;border:1px solid #5c7047;font-size:13px;flex-shrink:0}.v3-plan strong{white-space:nowrap}.v3-plan span{color:#d4dfc5;line-height:1.4}
+.v3-modal{max-width:540px}.v3-modal p{margin:14px 0;color:#c1ccb7;line-height:1.6}.v3-modal .v3-goal{font-size:27px;line-height:1.25;color:#f0e3ba}.v3-modal button{margin:8px 8px 0 0}.v3-modal .v3-result-time{font-size:48px;font-family:var(--font-micrographics);color:#e9cd8f}.v3-recap{display:flex;gap:25px;margin:24px 0}.v3-recap dt{font-size:12px;color:#aebba3}.v3-recap dd{margin:6px 0 0;font-size:18px}
+.v3-walking .v3-worker-leg{animation:v3-step .35s ease-in-out infinite alternate}.v3-tool{transform-origin:10px -12px;animation:v3-tool .6s ease-in-out infinite alternate}@keyframes v3-step{to{transform:translateY(-2px)}}@keyframes v3-tool{to{transform:rotate(25deg)}}
+.v3-world[data-running=false] *{animation-play-state:paused!important}.v3-world[data-reduced=true] *{animation:none!important}.start-count-visual[data-reduced=true] *{animation:none!important}.start-count-visual[data-reduced=true] .start-count-sparks{display:none}
+@media(prefers-reduced-motion:reduce){.v3-world *{animation:none!important}}
+@media(max-width:1100px){.v3-main{padding:0 14px}.v3-header{padding:10px 14px}.v3-purchase-mark{display:none}.v3-hud{gap:14px}.v3-purchases button{padding:10px 8px}.v3-purchases strong{font-size:13px}.v3-header .brand-subtitle{display:none}}
+@media(max-height:760px){.v3-header{padding-top:7px;padding-bottom:7px}.v3-hud{padding:10px 0 8px}.v3-hud strong{font-size:25px}.v3-purchases{padding:8px 0}.v3-purchases button{padding-top:8px;padding-bottom:8px}.v3-world-summary{padding:4px 0}}
+.mode-entry .mode-options{grid-template-columns:repeat(3,minmax(0,1fr))}.mode-options article{display:flex;flex-direction:column}.mode-options article button{margin-top:auto}.mode-options .mode-duration{align-self:flex-end}.mode-options .v3-mode-card{border-top-color:#d6ba79}.v3-mode-card .mode-duration{color:#e2c785}
+
+/* Isolate V3 from the campaign's global !important sage-button overrides. */
+.v3-game #v3-main .v3-purchases button{background:#232c1e!important;color:#eef0e9!important;border-color:#667954!important;opacity:1}
+.v3-game #v3-main .v3-purchases button *{color:inherit!important}
+.v3-game #v3-main .v3-purchases button strong b{color:#e4c985!important}
+.v3-game #v3-main .v3-purchases button small{color:#c3cdb9!important}
+.v3-game #v3-main .v3-purchases button:hover:not(:disabled){background:#33422a!important;border-color:#b7d09e!important}
+.v3-game #v3-main .v3-purchases button:disabled{background:#1b2118!important;color:#adb9a3!important;border-color:#343f2d!important}
+
+
+.v3-cash[data-negative=true] strong{color:#efb49c}
+
+/* V3.2: a workshop instrument, with physical repair bays and a prop shelf. */
+.v3-world{background:radial-gradient(ellipse at 41% 45%,#26372745,transparent 55%)}
+.v3-world svg .v3-recon-title{font-size:21px;letter-spacing:3px;font-weight:700;fill:#e2ebcd}
+.v3-world svg .v3-recon-caption{font-size:9px;letter-spacing:1.2px;fill:#afc9b7}
+.v3-recon-housing{fill:#344d3d;stroke:#a4bb91;stroke-width:2}
+.v3-recon[data-owned=false]{opacity:.65}.v3-recon[data-owned=false] .v3-recon-housing{fill:#283329;stroke:#63755a}
+.v3-recon-signal path{fill:none;stroke:#b9dba4;stroke-width:1.5;stroke-dasharray:3 7;opacity:.35}
+.v3-recon-signal circle{fill:none;stroke:#a9d2a2;stroke-width:2;stroke-dasharray:4 9;opacity:.65}
+.v3-bay-shell{fill:#13251e;stroke:#728a6a;stroke-width:1.5}
+[data-recon-bay]{color:#8da18b}[data-recon-bay][data-state=locked] .v3-bay-shell{fill:#27372c;stroke:#596b53}
+[data-recon-bay][data-state=repairing] .v3-bay-shell{stroke:#d1dda9;fill:#1c392b}
+.v3-world svg .v3-bay-number{font-size:9px;fill:#a6ba98;font-family:var(--font-micrographics)}
+.v3-world svg .v3-bay-name{font-size:13px;font-weight:700;fill:#e4eccf}
+.v3-world svg .v3-bay-status{font-size:11px;fill:#b5c9ad}
+.v3-bay-token rect{fill:#ddc383;stroke:#eae9bd;stroke-width:1.5}.v3-bay-token path{stroke:#5c643a;stroke-width:1.5}
+.v3-world svg .v3-recon-footer{font-size:10px;fill:#cad8bb}
+.v3-world svg .v3-reserved{font-family:var(--font-micrographics);font-size:19px;fill:#97a98a}
+.v3-world svg .v3-bench text{font-size:10px;letter-spacing:.6px}.v3-world svg .v3-bench .v3-bench-job{font-size:11px;letter-spacing:0;fill:#d4c59c}
+.v3-live-light{opacity:.8;animation:v3-operating 2s ease-in-out infinite alternate}
+@keyframes v3-operating{to{opacity:.35}}
+.v3-coin-layer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible}.v3-coin-layer text{fill:#e9d49f;font:12px var(--font-body);paint-order:stroke;stroke:#131711;stroke-width:4px}
+.v3-purchases{gap:12px;padding:4px 0 9px;border-top:0;border-bottom:9px solid #494b33;box-shadow:0 3px 0 #242b1c;background:linear-gradient(transparent calc(100% - 12px),#7b7850 calc(100% - 12px));position:relative}
+.v3-game #v3-main .v3-purchases button{display:flex;align-items:center;gap:4px;border:0;border-bottom:2px solid #839166!important;border-radius:6px 6px 0 0;background:transparent!important;padding:4px 7px 10px;position:relative}
+.v3-game #v3-main .v3-purchases button:disabled{background:transparent!important;border-color:#424b36!important}
+.v3-game #v3-main .v3-purchases button:hover:not(:disabled){background:#31402a!important}
+.v3-game #v3-main .v3-purchases button:focus-visible{outline:3px solid #ead49a;outline-offset:2px}
+.v3-game #v3-main .v3-purchases button:disabled .v3-supply-prop{opacity:.4;filter:saturate(.3)}
+.v3-supply-prop{width:74px;height:70px;flex:none;overflow:visible;transition:transform .15s ease}
+.v3-purchases button:hover:not(:disabled) .v3-supply-prop{transform:translateY(-4px)}
+.v3-purchases strong{display:block;line-height:1.4}.v3-purchases strong b{display:block;font-family:var(--font-micrographics);font-size:12px}.v3-purchases strong b:before{content:'●';font-size:10px;margin-right:5px}
+.v3-purchases small{font-size:10px;line-height:1.5}.v3-footer{padding-top:7px;min-height:34px}
+@media(max-width:1100px){.v3-supply-prop{width:51px;height:64px}.v3-purchases{gap:6px}.v3-purchases strong{font-size:12px}.v3-purchases small{font-size:10px}.v3-game #v3-main .v3-purchases button{padding-left:2px;padding-right:2px;gap:2px}}
+@media(prefers-reduced-motion:reduce){.v3-supply-prop{transition:none}.v3-purchases button:hover:not(:disabled) .v3-supply-prop{transform:none}}
+.v3-game[data-reduced=true] .v3-supply-prop{transition:none}.v3-game[data-reduced=true] .v3-purchases button:hover:not(:disabled) .v3-supply-prop{transform:none}
+
+/* V3.3: a short, local explanation and a workshop start/finish. */
+.v3-count-dialog::backdrop{background:#10190de0;backdrop-filter:blur(3px)}
+.start-count-visual[data-theme=workshop]{inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(560px,85vw);height:370px;border:3px solid #91a97a;border-radius:24px;background:#263824;box-shadow:inset 0 -14px #152511,0 18px 0 -8px #0d170b,0 30px 80px #0007}
+.start-count-visual[data-theme=workshop]:before,.start-count-visual[data-theme=workshop]:after{content:'';position:absolute;width:10px;height:10px;border-radius:50%;background:#c6cea4;top:18px;box-shadow:0 316px #c6cea4}.start-count-visual[data-theme=workshop]:before{left:18px}.start-count-visual[data-theme=workshop]:after{right:18px}
+.start-count-visual[data-theme=workshop] .start-count-label{font:700 13px var(--font-body);letter-spacing:2px;color:#c6d6b3;text-shadow:none;animation:none}
+.start-count-visual[data-theme=workshop] .start-count-number,.start-count-visual[data-theme=workshop] .start-count-go{font-family:var(--font-micrographics);font-size:136px;letter-spacing:-8px;line-height:1.25;transform:none;text-shadow:none;color:#ead398;animation:none}
+.start-count-visual[data-theme=workshop] .start-count-beats{gap:30px;margin-top:12px;padding:16px 28px;background:#142310;border:1px solid #4a633b;border-radius:12px}
+.start-count-visual[data-theme=workshop] .start-count-beats i{width:32px;height:32px;border:4px solid #73875c;border-radius:50%;transform:none;background:#293624;box-shadow:none}
+.start-count-visual[data-theme=workshop] .start-count-beats i.lit{background:#d7c384;border-color:#bbaa6c;box-shadow:0 0 18px #e8cf7455}
+.start-count-overlay .start-count-visual[data-theme=workshop]{height:270px;background:#263824f2;animation:v3-go-fade .8s both}.start-count-overlay .start-count-visual[data-theme=workshop]:after,.start-count-overlay .start-count-visual[data-theme=workshop]:before{box-shadow:0 216px #c6cea4}
+@keyframes v3-go-fade{0%,50%{opacity:1}100%{opacity:0}}
+.v3-footer{min-height:57px;padding:7px 0;gap:10px}.v3-footer>div{display:flex;flex-direction:column;gap:3px;min-width:0;max-width:1050px;line-height:1.35}.v3-footer strong{font-size:13px;color:#e5d39c}.v3-footer span{white-space:normal;font-size:12px}
+.v3-game #v3-main .v3-dismiss-hint{margin-left:auto;background:transparent!important;color:#bdcba9!important;border:1px solid #526144!important;min-width:30px;min-height:30px;padding:0;font-size:20px;flex:none}
+.v3-game #v3-main .v3-purchases button[data-guided=true]:not(:disabled){background:#34402a!important;outline:2px solid #d5bc79;outline-offset:-2px}
+[data-v3-system][data-guided=true] .v3-machine{stroke:#f2d19c;stroke-width:4}
+.v3-help{max-width:680px}.v3-help .v3-help-goal{font-size:22px;color:#e8d299}.v3-help-items{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-block:1px solid #43533a;padding:18px 0}.v3-help-items>div{display:flex;gap:12px}.v3-help-items .v3-supply-prop{width:58px;height:62px}.v3-help-items p{margin:4px 0 0;font-size:13px;line-height:1.5}.v3-help-note{font-size:12px}
+.v3-results{max-width:740px;width:calc(100vw - 64px)}.v3-result-hero{display:grid;grid-template-columns:1fr 1.25fr;align-items:center;gap:16px}.v3-result-hero .v3-result-time{font-size:56px;white-space:nowrap;margin:20px 0 0}.v3-result-hero p{font-size:14px}.v3-victory-crew{width:100%;overflow:visible}.v3-results .v3-recap{justify-content:space-between;border-block:1px solid #47543c;padding:16px 0;margin:15px 0}.v3-run-recap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:11px;color:#b9c6ad;margin:0 0 22px}.v3-run-recap b{display:block;font-size:16px;color:#e3dcc2;margin-top:5px}
+.v3-dancing{transform-origin:0 0;animation:v3-celebrate .5s ease-in-out 10 alternate!important}
+@keyframes v3-celebrate{0%{transform:translate(5px,0) rotate(-9deg)}50%{transform:translate(8px,-9px) rotate(0)}100%{transform:translate(11px,0) rotate(9deg)}}
+.v3-world[data-celebrating=true]{background:radial-gradient(ellipse at 45% 60%,#bca86728,transparent 70%)}
+.v3-world[data-celebrating=true] .v3-dancing{animation-play-state:running!important}
+.v3-game[data-hidden=true] .v3-dancing,.v3-victory-crew[data-hidden=true] .v3-dancing{animation-play-state:paused!important}
+.v3-game[data-reduced=true] .v3-dancing,.v3-victory-crew[data-reduced=true] .v3-dancing{animation:none!important}
+@media(prefers-reduced-motion:reduce){.v3-dancing{animation:none!important}.start-count-overlay .start-count-visual[data-theme=workshop]{animation:none}}
+@media(max-height:760px){.v3-help{padding:20px}.v3-help p{margin:8px 0}.v3-help-items{gap:12px;padding:12px 0}.v3-results{padding:24px}.v3-results h2{font-size:30px}.v3-result-hero .v3-result-time{font-size:44px}.v3-results .v3-recap{padding:12px 0;margin:10px 0}.v3-run-recap{margin-bottom:12px}}
+.start-count-visual[data-theme=workshop][data-reduced=true]{animation:none!important}
+.modal.v3-results{max-width:740px;width:calc(100vw - 64px)}
+.modal.v3-help{max-width:680px}
+
+/* P1 is readable without motion or colour; fire lasts until the repair completes. */
+.v3-p1-label { fill: #fff0d7; font: 700 16px 'Space Grotesk', sans-serif; }
+[data-v3-system][data-p1="true"] .v3-machine { stroke: #f69764; stroke-width: 3; }
+[data-v3-system][data-p1="true"] .v3-system-state { fill: #ffb384; font-size: 11px; }
+.v3-flame, .v3-flame-core { transform-box: fill-box; transform-origin: center bottom; animation: v3-flame 1.2s ease-in-out infinite alternate; }
+.v3-flame-core { animation-delay: -.6s; }
+@keyframes v3-flame { to { transform: scale(.92, 1.08) rotate(3deg); } }
+[data-recon-bay][data-p1="true"] .v3-bay-number { fill: #ffc68f; }
+[data-recon-bay][data-p1="true"] .v3-bay-shell { stroke: #c78a56; }
+.v3-paused-cargo { opacity: .8; }
+
+/* Shared, replenishing feature work uses blue cards and small plug-in modules. */
+.v3-world svg .v3-backlog-heading { font-size: 12px; letter-spacing: 1px; fill: #acd8f0; }
+.v3-world svg .v3-backlog-title { font-size: 13px; font-weight: 700; fill: #e1f4ff; }
+.v3-world svg .v3-backlog-caption { font-size: 11px; fill: #b6d1df; }
+.v3-feature-piece rect { fill: #4a9ecb; stroke: #b9eaff; stroke-width: 2; }
+.v3-feature-piece path { fill: none; stroke: #d5f4ff; stroke-width: 2; }
+.v3-assembly[data-feature=true] rect { fill: #61afd7; stroke: #244f69; }
+.v3-system-features rect { fill: #244c63; stroke: #7ac6ed; }
+.v3-world svg .v3-system-features text { font-size: 12px; fill: #c3eaff; }
+
+/* V3.4: uneven islands and a quiet clearing around the repair tower. */
+.v3-island{fill:#61794b12}.v3-island path{stroke:#61794b12;stroke-width:108;stroke-linejoin:round;stroke-linecap:round}
+.v3-recon-clearing{fill:#96b38305;stroke:#abc69616;stroke-dasharray:3 10}
+.v3-link{fill:none;stroke-width:1.5;opacity:.38}
+.v3-system-name,.v3-system-state{paint-order:stroke;stroke:#131711;stroke-width:3px;stroke-linejoin:round}
+.v3-game[data-opening=true]>.v3-header,.v3-game[data-opening=true]>.v3-main{visibility:hidden}
+.v3-game .modal.v3-opening{width:calc(100vw - 48px);max-width:580px;padding:32px}
+.v3-opening h2{font-size:28px;line-height:1.15;margin:0 0 20px}
+.v3-opening .v3-opening-slogan{font-size:20px;color:#f0e3ba;line-height:1.3}
+.v3-opening .v3-goal{font-size:26px;line-height:1.3;margin:0 0 24px}
+.v3-opening-explanation{border-top:1px solid #354030;padding-top:8px;margin-bottom:24px}
+.v3-opening .v3-opening-explanation p{font-size:15px;line-height:1.6;margin:14px 0;color:#bdc8b3}
+.v3-opening-explanation strong{color:#e1e8d8}
+.v3-opening .primary{width:100%;margin:0;min-height:48px;font-size:16px}
+.v3-tile-preview{width:100%;height:60px;flex-shrink:0;background:#182015;border-radius:4px}.v3-tile-carrier{transform:translate(200px,49px);animation:v3-tile-deliver 7s ease-in-out infinite alternate}@keyframes v3-tile-deliver{to{transform:translate(75px,49px)}}
+@media(prefers-reduced-motion:reduce){.v3-tile-carrier{animation:none}}
+@media(max-height:760px){.v3-game .modal.v3-opening{padding:26px}.v3-opening h2{font-size:26px}.v3-opening .v3-goal{font-size:24px}.v3-tile-preview{height:42px}}
+
+/* Features ship from the desk; a blue outline marks the actual recipient. */
+[data-v3-system][data-feature-received=true] .v3-machine{stroke:#a6dcff;stroke-width:4}
+[data-v3-system][data-feature-received=true] .v3-system-features rect{fill:#346a8b;stroke:#d1eeff;stroke-width:2}
+.v3-feature-finished{color:#a6dcff}
+
+/* Affordable automation is the shelf's primary action, independent of tutorial timers. */
+.v3-game #v3-main .v3-purchases button[data-upgrade-ready]{--upgrade-light:#b8efab;--upgrade-glow:#9ae6a444;background:linear-gradient(110deg,#345a39,#233c2d)!important;border:1px solid var(--upgrade-light)!important;border-bottom-width:3px!important;box-shadow:0 0 18px var(--upgrade-glow),inset 0 0 20px #b9ecaa12;animation:v3-upgrade-glow 3s ease-in-out infinite}
+.v3-game #v3-main .v3-purchases button[data-upgrade-ready=plus]{--upgrade-light:#ffe09a;--upgrade-glow:#f4c85a55;background:linear-gradient(115deg,#655027,#3e351f)!important}
+.v3-game #v3-main .v3-purchases button[data-upgrade-ready]:hover{background:#3e6543!important;box-shadow:0 0 25px var(--upgrade-glow),inset 0 0 24px #ddffbb20}
+.v3-game #v3-main .v3-purchases button[data-upgrade-ready=plus]:hover{background:#71592a!important}
+.v3-game #v3-main .v3-purchases button[data-upgrade-ready] .v3-affordability{color:var(--upgrade-light)!important;font-weight:700}
+.v3-game #v3-main .v3-purchases button[data-upgrade-ready] .v3-supply-prop{filter:drop-shadow(0 0 6px var(--upgrade-glow))}
+.v3-upgrade-sparks{position:absolute;left:7px;top:4px;width:72px;height:64px;pointer-events:none;fill:#ffe6a6;filter:drop-shadow(0 0 4px #ffcf68);overflow:visible}
+.v3-upgrade-sparks path{transform-box:fill-box;transform-origin:center;animation:v3-upgrade-spark 3.2s ease-in-out infinite}
+.v3-upgrade-sparks path:nth-child(2){animation-delay:-1s}.v3-upgrade-sparks path:nth-child(3){animation-delay:-2s}
+@keyframes v3-upgrade-glow{50%{box-shadow:0 0 27px var(--upgrade-glow),inset 0 0 24px #dcfbb822}}
+@keyframes v3-upgrade-spark{50%{opacity:.55;transform:scale(.75) rotate(12deg)}}
+.v3-game[data-status=paused] [data-upgrade-ready],.v3-game[data-hidden=true] [data-upgrade-ready],.v3-game[data-status=paused] .v3-upgrade-sparks path,.v3-game[data-hidden=true] .v3-upgrade-sparks path{animation-play-state:paused!important}
+.v3-game[data-reduced=true] [data-upgrade-ready],.v3-game[data-reduced=true] .v3-upgrade-sparks path{animation:none!important}
+@media(prefers-reduced-motion:reduce){.v3-game [data-upgrade-ready],.v3-game .v3-upgrade-sparks path{animation:none!important}}
+@media(max-width:1100px){.v3-upgrade-sparks{left:2px;width:51px}}
+
+/* Persistent growth counters on the build/hire controls. */
+.v3-purchase-count{display:inline-flex;align-items:center;gap:8px;padding:2px 7px;margin-bottom:5px;border:1px solid #78916a;border-radius:4px;background:#293923;line-height:1.3;white-space:nowrap}
+.v3-purchase-count>span{font-size:10px;font-weight:500}.v3-purchase-count>b{font-family:var(--font-micrographics);font-size:15px;font-variant-numeric:tabular-nums}
+.v3-purchases button:disabled .v3-purchase-count{border-color:#526148;background:#222c1e}

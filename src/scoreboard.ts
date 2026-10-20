@@ -2,7 +2,7 @@ import type {SupabaseClient} from '@supabase/supabase-js';
 import {useSyncExternalStore} from 'react';
 import {SCORE_RULES,validSubmission,validStoredSubmission,type StoredScoreSubmission,type ScorePage} from '../supabase/functions/_shared/scoreboard.ts';
 export {resultSubmission} from './scoreResult.ts';
-export {SCORE_RULES,LEGACY_SCORE_RULES,scoreTime,validName} from '../supabase/functions/_shared/scoreboard.ts';
+export {SCORE_RULES,scoreTime,validName} from '../supabase/functions/_shared/scoreboard.ts';
 export type {ScoreSubmission,ScoreRow,ScorePage} from '../supabase/functions/_shared/scoreboard.ts';
 
 const url=import.meta.env.VITE_SUPABASE_URL??'',key=import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY??'';

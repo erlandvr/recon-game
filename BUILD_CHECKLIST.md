@@ -1,10 +1,151 @@
 # Recon Game — build checklist
 
-Updated: 2026-10-19. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); this file tracks delivery evidence, not a second set of rules.
+Updated: 2026-10-20. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); this file tracks delivery evidence, not a second set of rules.
 
 Earlier sections record delivery at that time. Pause/save checks and full-slot rejection were superseded by D42–D44; later sections record current verification. The earlier combined automation was superseded by D51; D69 now adds separately purchased automatic remediation. Fixed elapsed-time milestones and unattended debug presets are superseded by D65–D67.
 
 Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
+
+## V3.4 build and hire counters (D176 / V3-F020)
+
+- [x] Persistent Systems N/12 and Developers N/4 badges; queued/busy included, accessible button descriptions.
+- [x] Build and paid purchase/reset/cap checks, four desktop layouts and compact screenshot inspection pass.
+
+## V3.4 restored prices and maintenance adjustment (D175 / V3-F019)
+
+- [x] Restore Recon 180 / Plus 260; trial young/mature intervals 32/24, opening failure unchanged at 22s.
+- [x] 62 V3 tests, build, 80 paid/9 delayed wins and 20 capacity fixtures; archive former 600/680 benchmark.
+- [x] Paid upgrade and full-run/takeover browser checks; price/receipt deductions, affordability effects, results/replay and restart hold/cancel pass.
+- [ ] Owner review of modestly increased maintenance frequency.
+
+## V3.4 restart-only toolbar (D174 / V3-F018)
+
+- [x] Only Restart in toolbar; silent experience, automatic OS reduced motion, contextual hints retained.
+- [x] Cancelling restart or pressing Escape resumes the held run; Start fresh resets to introduction.
+- [x] Build and focused toolbar/restart/reduced-motion/journey browser checks pass; screenshot inspected, preview rebuilt.
+
+## V3.4 single Active Animation experience (D173 / V3-F017)
+
+- [x] Direct workshop introduction, new identity and Start experience; chooser and mode-switching actions removed.
+- [x] Legacy Speed/Long source retained; no visitor navigation or old scoreboard entry.
+- [x] Production build, four-size opening, journey and full-run/replay checks; opening and compact header screenshots inspected.
+- [x] Unit suite: 168/169 passed under concurrent load; legacy score-replay budget timeout passed on isolated rerun (6/6).
+
+## V3.4 later automation price trial (D171 / V3-F015)
+
+- [x] Recon 600 / additional Plus 680; controls, Help and receipts agree; effectiveness and cash threshold unchanged.
+- [x] 169 tests, build, paid upgrade, full gameplay and takeover/layout browser checks pass; current 80 paid/9 delayed/20 capacity benchmark regenerated and prior configuration archived.
+- [x] Owner accepted the adjusted prices after playtesting on 2026-10-21; no further changes requested.
+- [x] Conditional D172 / V3-F016 closed without implementation after owner acceptance; current Plus effectiveness and price retained.
+
+## V3.4 result headline (D170 / V3-F014)
+
+- [x] Rename the victory headline to “Peak productivity reached!” and update accessible dialog selectors; retain the existing win condition.
+
+## V3.4 fixed workshop view (D169 / V3-F013)
+
+- [x] Remove zoom/fit controls, camera state, drag handlers and grab cursor; preserve full-world responsive sizing and the system/feature summary.
+- [x] Build and full paid browser regression pass: drag/wheel cannot reposition the scene, stable positions during growth, four desktop sizes, victory/replay and Recon takeovers. Dense 1024 screenshot inspected.
+- [ ] Owner review of fixed workshop presentation.
+
+## V3.4 direct repair travel (D168 / V3-F012)
+
+- [x] Installation/repair completion and return walks can lead directly to the next queued repair; preserve FIFO builds, P1 resumption, Recon ownership and saved features.
+- [x] 169 unit tests, build, paid one-worker path, full gameplay and P1 browser checks; exact coordinates, coin feedback, pause and repair completion. Screenshot inspected.
+- [x] Archive desk-feature benchmark; regenerate 80 paid/9 delayed/20 capacity cases. See [direct-repair review](docs/analysis/v3-direct-repair-review.md).
+- [ ] Owner review of worker behaviour and changed developer-only pacing.
+
+## V3.4 affordable automation spotlight (D167 / V3-F011)
+
+- [x] Persistent eligible Recon mint light and Plus gold light/sparkles, visually ahead of other purchase hints.
+- [x] Affordability loss/recovery, single purchase and installed states verified in a paid browser route; pause and reduced-motion treatment; four desktop sizes and screenshot inspection.
+- [x] Production build passes; existing preview rebuilt. No mechanics or balance changes.
+- [ ] Owner review of the upgrade anticipation and visual prominence.
+
+## V3.4 early hiring hint (D166 / V3-F010)
+
+- [x] Recommend an affordable second developer while the first has unfinished construction; remove repeat-build highlighting from purchase receipts.
+- [x] Preserve initial guidance, P1 precedence, dismissal/expiry, pause and keyboard focus. 57 V3 unit tests, production build and focused paid browser check pass; screenshot inspected.
+- [ ] Owner review of the updated early-game cue.
+
+## V3.4 desk feature feedback (D165 / V3-F009)
+
+- [x] Builds and repairs preempt all feature phases; saved progress survives nested P1 interruptions and higher-priority queues.
+- [x] Shared pickup, desk completion, random installed recipient and immediate truthful bonus; remove feature delivery/installation trips.
+- [x] Desk recipient cue, system highlight, paused blue props, updated Help/counters/recap; four-size browser verification.
+- [x] 162 unit tests, production build, feature/gameplay/workshop/journey/P1/opening browser checks and updated 80 paid/9 delayed/20 capacity benchmark. Prior island benchmark archived.
+- [ ] Owner review of early pacing and Recon's benefit; see [desk-feature evidence](docs/analysis/v3-desk-features-review.md).
+
+## V3.4 event experience (D163 / V3-F007)
+
+- [x] Four uneven connected islands, central Recon clearance, stable destinations and real loaded routes around the tower.
+- [x] D164 replaces the initial demo with gameplay explanation and one Start game button. Background hidden until countdown; settings available in gameplay; no demo simulation.
+- [x] Living chooser illustration, desktop opening, preserved guidance and frozen celebration/replay.
+- [x] Rebenchmark 80 paid routes, nine delayed starts and 20 capacity fixtures; archive the pre-layout feature benchmark.
+- [x] Initial V3.4: 155 tests, production build and gameplay/workshop/journey/feature/P1/spacing browser checks pass; D164 removes the obsolete demo test and updates opening/journey checks; see [event review](docs/analysis/v3-event-review.md).
+- [ ] Owner layout/pacing review; unassisted visitors and spectators; Safari and physical input observation.
+
+## V3.1 playable MVP (D133–D158)
+
+- [x] Independent cash-goal engine, V3 entry, purchases/wages, FIFO construction/maintenance, bounded ageing and local binary income.
+- [x] Stable destinations, measured travel, assembly/delivery/installation/return, basic original workers and oversized cargo.
+- [x] Immediate exclusive Recon takeovers during outward travel and repair, retained work, one/three-slot capacity.
+- [x] GO/countdown, pause-and-buy, hidden-tab hold, local frozen results/retry, manual camera preservation, reduced motion and basic keyboard controls.
+- [x] Owner-approved visible negative balance with continuing work/wages, documented and regression-tested (D156).
+- [x] 120 tests, production-base build, four exact paid V3 browser routes, both handoffs, desktop screenshots and inherited Speed opening checks pass.
+- [x] 80 strategy runs, nine delayed starts, 20 mature-capacity cases and requirement traceability recorded in [MVP evidence](docs/analysis/v3-mvp-review.md) and [delivery tracker](V3_DELIVERY.md).
+- [x] D158: compare four maintenance frequencies (320 paid / 80 capacity fixtures), select 36/26s, regenerate current benchmark; 121 tests, build, four paid browser routes, handoffs and negative-balance recovery pass. See [maintenance review](docs/analysis/v3-maintenance-review.md).
+- [x] Owner accepted candidate B by requesting V3.2. V3.1 is Complete.
+- [ ] Unassisted novice and bystander checks remain outstanding.
+
+## V3.2 living workshop (D133–D134, D141, D143, D145–D152, D159)
+
+- [x] Central radar tower, three numbered bays with real ownership/progress, stable job positions, offline/locked/ready states and completion cues.
+- [x] Personal benches, cube assembly, oversized lift/carry/set-down, expressive takeover/greeting and installation income coin.
+- [x] Original supply-shelf props with accessible purchase buttons, prices, wages and affordability/cap feedback.
+- [x] Candidate B mechanics and routes preserved; 121 tests, production build and four paid browser routes pass with matching results.
+- [x] Final focused paid bay/coin/freeze/reduced-motion/reset/layout check passes at all four sizes; see [workshop review](docs/analysis/v3-workshop-review.md).
+- [x] Owner accepted V3.2 when requesting V3.3.
+- [ ] Unassisted spectator comprehension remains unverified.
+
+## V3.3 player journey (D138, D144, D147, D152–D155, D160)
+
+- [x] Workshop lamp countdown, preserved GO/hidden timing and keyboard focus; Speed default unchanged.
+- [x] One dismissible event-based hint, first-action/hesitation/alternate-purchase handling, actual failure, affordable Recon and queue-based hire/Plus advice.
+- [x] Deliberate Help with pause, keyboard containment, Escape/focus return and explicit resume; paused purchase feedback retained.
+- [x] Immediate frozen result/recap and separate worker party, safe prop/tool set-down, static reduced motion and session-only opt-in finish sound.
+- [x] 126 tests/build, four exact paid V3 routes, both handoffs, Speed opening and dedicated journey checks pass; [evidence](docs/analysis/v3-journey-review.md).
+- [x] Paid no-Recon win during delivery freezes the unfinished fifth system; four-size results/help, sound opt-in, dance completion and reset verified.
+- [x] Owner accepted V3.3 when requesting V3.4.
+- [ ] Unassisted novice/spectator sessions; [observation sheet](docs/analysis/v3-human-playtest.md) prepared.
+- [x] V3.4 attract demo implemented; final human event validation remains below.
+
+## V3.3 P1 feedback (D161 / V3-F005)
+
+- [x] Confirmed P1 interruption/fire requirement reconciled into specification, decisions and delivery traceability.
+- [x] One responder per P1, idle/nearest selection, urgent FIFO, reserved paused jobs and exact progress/position resumption; no interruption of active P1s.
+- [x] Free Recon bays prioritise P1, preserve partial work and prevent obsolete paused repairs from being resumed.
+- [x] Fire plus P1 text, frozen assembly/parked cargo, crew/bay status, Help and one dismissible emergency hint.
+- [x] 141 automated tests and production-base build; paid P1, full V3, workshop and journey browser checks. See [P1 review](docs/analysis/v3-p1-review.md).
+- [x] Regenerated 80 paid routes, nine delayed starts and 20 mature-capacity cases; preserved pre-P1 benchmark separately.
+- [ ] Owner review of P1 frequency, interruption feel and fire readability; unassisted human validation remains pending.
+
+## V3.3 shared feature trial (D162 / V3-F006)
+
+- [x] One shared replenishing column beside all workbenches, with top pickup, blue cards/modules and real routes back to individual benches.
+- [x] Background feature jobs yield the next assignment to queued builds/repairs; faster assembly and permanent income bonuses only on delivery. Bonuses survive outages but do not earn while broken.
+- [x] P1 saves/restores every feature phase, progress, destination and prop; Recon remains repair-only. Pause, victory and reset preserve existing guarantees.
+- [x] 152 tests/build; paid feature, gameplay, workshop and journey browser checks; four-size visual inspection and current 80-run benchmark. See [feature review](docs/analysis/v3-features-review.md).
+- [ ] Owner review of shared-column layout, pickup motion, feature value and timing; unassisted human validation remains pending.
+
+## Single scoreboard (D132)
+
+- [x] Existing and new D129 scores share ranks, ties, pagination and highlights; original records remain intact.
+- [x] Remove archive switch and ranking labels that separate existing scores.
+- [x] Keep server replay, idempotency, write permissions and rate limits unchanged.
+- [x] 107 automated tests and production-base build pass.
+- [x] Chromium/local PostgreSQL: existing and new rows appear together, split controls absent; save/retry regressions pass and screenshot inspected.
+- [x] Read migration deployed as `20261019144359`; public API returns the same 10-score ranking for both D129 IDs. Security advisors unchanged.
 
 ## Server replay validation (D131)
 
@@ -15,7 +156,7 @@ Current device scope (D94): desktop/laptop only. Do not run mobile validation or
 - [x] Local HTTP/PostgreSQL integration rejects fabricated five/60-second results and altered completion facts; authentic runs and idempotent retries succeed.
 - [x] Full automated suite: 107 passing tests; production-base build and shared-server TypeScript checks pass.
 - [x] Chromium/local PostgreSQL: played 144-second result verified, practice/frozen transcript retained, identical reload retry, archive isolation, escaped names and error/discard flows; desktop screenshots inspected.
-- [ ] Deploy migration and function, publish frontend, then verify the hosted flow. No production change made by this PR task.
+- [x] Subsequent approved deployment on 2026-10-19: migration applied, function v4 active, body-size limits and database permissions checked; Thomas’s saved result confirmed in the UI.
 
 ## Healthy recovery and stronger final models (D129)
 

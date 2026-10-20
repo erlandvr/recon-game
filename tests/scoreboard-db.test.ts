@@ -6,7 +6,7 @@ import {verifyScore} from '../supabase/functions/_shared/verifyScore.ts';
 import {databaseBackend,paidScore,scoreboardDb} from './helpers/scoreboard.ts';
 
 const verified=verifyScore(paidScore().score)!;
-test('verified storage: least privilege, historical separation, ties, pagination and idempotency',async()=>{
+test('verified storage: least privilege, combined ranking, ties, pagination and idempotency',async()=>{
  const db=await scoreboardDb();try{
   const api=databaseBackend(db),owner=randomUUID(),id=randomUUID();
   // The RPC trusts its service-role caller; gameplay verification is tested at the HTTP boundary.
@@ -30,9 +30,11 @@ test('verified storage: least privilege, historical separation, ties, pagination
   const page=async(n=0,version:string=SCORE_RULES.id)=>(await db.query<{page:ScorePage}>('select public.scoreboard_page($1,$2,$3) as page',[version,n,id])).rows[0].page;
   for(const role of ['anon','authenticated']){
    await db.exec(`set role ${role}`);
-   const first=await page();assert.equal(first.total,25);assert.equal(first.entries.length,20);assert.deepEqual(first.entries.slice(0,3).map(s=>s.rank),[1,1,3]);assert.equal(first.highlight?.rank,25);assert.equal(first.highlight?.medal,null);
+   const first=await page();assert.equal(first.total,26);assert.equal(first.entries.length,20);assert.deepEqual(first.entries.slice(0,4).map(s=>s.rank),[1,2,2,4]);assert.equal(first.highlight?.rank,26);assert.equal(first.highlight?.medal,null);
    assert.deepEqual(Object.keys(first.entries[0]).sort(),['display_name','finish_ms','medal','rank','run_id','submitted_at']);
-   assert.equal((await page(1)).entries.length,5);assert.equal((await page(0,'speed-d129-v1')).total,1);
+   assert.equal((await page(1)).entries.length,6);assert.deepEqual(await page(0,'speed-d129-v1'),first);
+   const historical=(await db.query<{page:ScorePage}>('select public.scoreboard_page($1,0,$2) as page',[SCORE_RULES.id,legacyId])).rows[0].page;assert.equal(historical.highlight?.rank,1);assert.equal(historical.highlight?.medal,'gold');
+   assert.equal((await page(0,'speed-d128-v1')).total,0);assert.equal((await page(0,'unknown')).total,0);
    await assert.rejects(api.prepare(owner,id),/permission denied/);
    await assert.rejects(api.store(owner,score()),/permission denied/);
    for(const table of ['submissions','verification_attempts'])await assert.rejects(db.query(`select * from scoreboard_private.${table}`),/permission denied/);
