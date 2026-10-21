@@ -10,8 +10,20 @@
 .v3-purchases{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 0;border-top:1px solid #46513a;flex-shrink:0}.v3-purchases button{text-align:left;justify-content:flex-start;padding:12px;gap:10px;border-radius:4px;background:#232c1e;border-color:#58664a;min-width:0}.v3-purchases button>span:last-child{flex:1;min-width:0}.v3-purchases strong{display:flex;justify-content:space-between;gap:6px;font-size:14px}.v3-purchases strong b{color:#e4c985;white-space:nowrap}.v3-purchases small{display:block;font-size:11px;line-height:1.5;font-weight:400;color:#c3cdb9}.v3-purchases .v3-affordability{color:#bbd4a6}.v3-purchases button:disabled{background:#1b2118;border-color:#343f2d}.v3-purchases button:disabled strong{color:#a6b19b}.v3-purchases button:disabled .v3-affordability{color:#a5ad9e}.v3-purchase-mark{font-size:29px;color:#d1c29b;line-height:1}.v3-footer{display:flex;align-items:center;justify-content:space-between;min-height:34px;padding-bottom:8px;gap:10px;color:#b1bfa6;font-size:12px;flex-shrink:0}
 .v3-plan{display:flex;gap:16px;align-items:center;padding:10px 14px;background:#303b24;border:1px solid #5c7047;font-size:13px;flex-shrink:0}.v3-plan strong{white-space:nowrap}.v3-plan span{color:#d4dfc5;line-height:1.4}
 .v3-modal{max-width:540px}.v3-modal p{margin:14px 0;color:#c1ccb7;line-height:1.6}.v3-modal .v3-goal{font-size:27px;line-height:1.25;color:#f0e3ba}.v3-modal button{margin:8px 8px 0 0}.v3-modal .v3-result-time{font-size:48px;font-family:var(--font-micrographics);color:#e9cd8f}.v3-recap{display:flex;gap:25px;margin:24px 0}.v3-recap dt{font-size:12px;color:#aebba3}.v3-recap dd{margin:6px 0 0;font-size:18px}
-.v3-walking .v3-worker-leg{animation:v3-step .35s ease-in-out infinite alternate}.v3-tool{transform-origin:10px -12px;animation:v3-tool .6s ease-in-out infinite alternate}@keyframes v3-step{to{transform:translateY(-2px)}}@keyframes v3-tool{to{transform:rotate(25deg)}}
-.v3-world[data-running=false] *{animation-play-state:paused!important}.v3-world[data-reduced=true] *{animation:none!important}.start-count-visual[data-reduced=true] *{animation:none!important}.start-count-visual[data-reduced=true] .start-count-sparks{display:none}
+/* Separate hips keep the stride opposite; only the upper body bobs. */
+.v3-walking .v3-worker-leg{transform-origin:0 0;animation:v3-step .64s linear infinite}
+.v3-walking .v3-worker-leg-back{animation-delay:-.32s}
+.v3-walking .v3-worker-body{animation:v3-walk-bob .32s ease-in-out infinite}
+.v3-walking[data-loaded=true] .v3-worker-body{animation-name:v3-loaded-bob}
+@keyframes v3-step{0%,100%{transform:rotate(28deg)}25%{transform:translateY(-1.5px) rotate(0)}50%{transform:rotate(-28deg)}75%{transform:rotate(0)}}
+@keyframes v3-walk-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+@keyframes v3-loaded-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-.8px)}}
+.v3-tool{transform-origin:10px -12px;animation:v3-tool .6s ease-in-out infinite alternate}@keyframes v3-tool{to{transform:rotate(25deg)}}
+/* Bridge the fixed 50ms world updates; the simulation remains authoritative. */
+.v3-world[data-running=true] [data-worker],.v3-world[data-running=true] [data-coffee-waiter]{transition:transform 50ms linear}
+.v3-world[data-running=false] [data-worker],.v3-world[data-running=false] [data-coffee-waiter],.v3-game[data-hidden=true] .v3-world [data-worker],.v3-game[data-hidden=true] .v3-world [data-coffee-waiter],.v3-world[data-reduced=true] [data-worker],.v3-world[data-reduced=true] [data-coffee-waiter]{transition:none}
+@media(prefers-reduced-motion:reduce){.v3-world [data-worker],.v3-world [data-coffee-waiter]{transition:none!important}}
+.v3-world[data-running=false] *,.v3-game[data-hidden=true] .v3-world *{animation-play-state:paused!important}.v3-world[data-reduced=true] *{animation:none!important}.start-count-visual[data-reduced=true] *{animation:none!important}.start-count-visual[data-reduced=true] .start-count-sparks{display:none}
 @media(prefers-reduced-motion:reduce){.v3-world *{animation:none!important}}
 @media(max-width:1100px){.v3-main{padding:0 14px}.v3-header{padding:10px 14px}.v3-purchase-mark{display:none}.v3-hud{gap:14px}.v3-purchases button{padding:10px 8px}.v3-purchases strong{font-size:13px}.v3-header .brand-subtitle{display:none}}
 @media(max-height:760px){.v3-header{padding-top:7px;padding-bottom:7px}.v3-hud{padding:10px 0 8px}.v3-hud strong{font-size:25px}.v3-purchases{padding:8px 0}.v3-purchases button{padding-top:8px;padding-bottom:8px}.v3-world-summary{padding:4px 0}}
@@ -80,8 +92,10 @@
 [data-v3-system][data-guided=true] .v3-machine{stroke:#f2d19c;stroke-width:4}
 .v3-help{max-width:680px}.v3-help .v3-help-goal{font-size:22px;color:#e8d299}.v3-help-items{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-block:1px solid #43533a;padding:18px 0}.v3-help-items>div{display:flex;gap:12px}.v3-help-items .v3-supply-prop{width:58px;height:62px}.v3-help-items p{margin:4px 0 0;font-size:13px;line-height:1.5}.v3-help-note{font-size:12px}
 .v3-results{max-width:740px;width:calc(100vw - 64px)}.v3-result-hero{display:grid;grid-template-columns:1fr 1.25fr;align-items:center;gap:16px}.v3-result-hero .v3-result-time{font-size:56px;white-space:nowrap;margin:20px 0 0}.v3-result-hero p{font-size:14px}.v3-victory-crew{width:100%;overflow:visible}.v3-results .v3-recap{justify-content:space-between;border-block:1px solid #47543c;padding:16px 0;margin:15px 0}.v3-run-recap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:11px;color:#b9c6ad;margin:0 0 22px}.v3-run-recap b{display:block;font-size:16px;color:#e3dcc2;margin-top:5px}
-.v3-dancing{transform-origin:0 0;animation:v3-celebrate .5s ease-in-out 10 alternate!important}
-@keyframes v3-celebrate{0%{transform:translate(5px,0) rotate(-9deg)}50%{transform:translate(8px,-9px) rotate(0)}100%{transform:translate(11px,0) rotate(9deg)}}
+.v3-dancing{transform-origin:0 0;animation:v3-celebrate .7s ease-in-out infinite!important}
+.v3-champagne-waiter{transition:transform 50ms linear}
+.v3-victory-crew[data-hidden=true] .v3-champagne-waiter,.v3-victory-crew[data-reduced=true] .v3-champagne-waiter{transition:none}
+@keyframes v3-celebrate{0%,100%{transform:translate(8px,0) rotate(-3deg)}25%{transform:translate(8px,-3px) rotate(0)}50%{transform:translate(8px,0) rotate(3deg)}75%{transform:translate(8px,-3px) rotate(0)}}
 .v3-world[data-celebrating=true]{background:radial-gradient(ellipse at 45% 60%,#bca86728,transparent 70%)}
 .v3-world[data-celebrating=true] .v3-dancing{animation-play-state:running!important}
 .v3-game[data-hidden=true] .v3-dancing,.v3-victory-crew[data-hidden=true] .v3-dancing{animation-play-state:paused!important}
@@ -104,21 +118,21 @@
 .v3-paused-cargo { opacity: .8; }
 
 /* Shared, replenishing feature work uses blue cards and small plug-in modules. */
-.v3-world svg .v3-backlog-heading { font-size: 12px; letter-spacing: 1px; fill: #acd8f0; }
-.v3-world svg .v3-backlog-title { font-size: 13px; font-weight: 700; fill: #e1f4ff; }
-.v3-world svg .v3-backlog-caption { font-size: 11px; fill: #b6d1df; }
-.v3-feature-piece rect { fill: #4a9ecb; stroke: #b9eaff; stroke-width: 2; }
-.v3-feature-piece path { fill: none; stroke: #d5f4ff; stroke-width: 2; }
-.v3-assembly[data-feature=true] rect { fill: #61afd7; stroke: #244f69; }
-.v3-system-features rect { fill: #244c63; stroke: #7ac6ed; }
-.v3-world svg .v3-system-features text { font-size: 12px; fill: #c3eaff; }
+.v3-world svg .v3-backlog-heading { font-size: 12px; letter-spacing: 1px; fill: #b0c0c5; }
+.v3-world svg .v3-backlog-title { font-size: 13px; font-weight: 700; fill: #dce4e6; }
+.v3-world svg .v3-backlog-caption { font-size: 11px; fill: #bac9ce; }
+.v3-feature-piece rect { fill: #536f7a; stroke: #95aeb8; stroke-width: 2; }
+.v3-feature-piece path { fill: none; stroke: #c8d6db; stroke-width: 2; }
+.v3-assembly[data-feature=true] rect { fill: #6b8791; stroke: #354b53; }
+.v3-system-features rect { fill: #34464e; stroke: #7e99a4; }
+.v3-world svg .v3-system-features text { font-size: 12px; fill: #c6d5db; }
 
 /* V3.4: uneven islands and a quiet clearing around the repair tower. */
 .v3-island{fill:#61794b12}.v3-island path{stroke:#61794b12;stroke-width:108;stroke-linejoin:round;stroke-linecap:round}
 .v3-recon-clearing{fill:#96b38305;stroke:#abc69616;stroke-dasharray:3 10}
 .v3-link{fill:none;stroke-width:1.5;opacity:.38}
 .v3-system-name,.v3-system-state{paint-order:stroke;stroke:#131711;stroke-width:3px;stroke-linejoin:round}
-.v3-game[data-opening=true]>.v3-header,.v3-game[data-opening=true]>.v3-main{visibility:hidden}
+
 .v3-game .modal.v3-opening{width:calc(100vw - 48px);max-width:580px;padding:32px}
 .v3-opening h2{font-size:28px;line-height:1.15;margin:0 0 20px}
 .v3-opening .v3-opening-slogan{font-size:20px;color:#f0e3ba;line-height:1.3}
@@ -132,9 +146,9 @@
 @media(max-height:760px){.v3-game .modal.v3-opening{padding:26px}.v3-opening h2{font-size:26px}.v3-opening .v3-goal{font-size:24px}.v3-tile-preview{height:42px}}
 
 /* Features ship from the desk; a blue outline marks the actual recipient. */
-[data-v3-system][data-feature-received=true] .v3-machine{stroke:#a6dcff;stroke-width:4}
-[data-v3-system][data-feature-received=true] .v3-system-features rect{fill:#346a8b;stroke:#d1eeff;stroke-width:2}
-.v3-feature-finished{color:#a6dcff}
+[data-v3-system][data-feature-received=true] .v3-machine{stroke:#a4bec9;stroke-width:4}
+[data-v3-system][data-feature-received=true] .v3-system-features rect{fill:#3d535d;stroke:#c5d6dd;stroke-width:2}
+.v3-feature-finished{color:#a4bec9}
 
 /* Affordable automation is the shelf's primary action, independent of tutorial timers. */
 .v3-game #v3-main .v3-purchases button[data-upgrade-ready]{--upgrade-light:#b8efab;--upgrade-glow:#9ae6a444;background:linear-gradient(110deg,#345a39,#233c2d)!important;border:1px solid var(--upgrade-light)!important;border-bottom-width:3px!important;box-shadow:0 0 18px var(--upgrade-glow),inset 0 0 20px #b9ecaa12;animation:v3-upgrade-glow 3s ease-in-out infinite}
@@ -157,3 +171,39 @@
 .v3-purchase-count{display:inline-flex;align-items:center;gap:8px;padding:2px 7px;margin-bottom:5px;border:1px solid #78916a;border-radius:4px;background:#293923;line-height:1.3;white-space:nowrap}
 .v3-purchase-count>span{font-size:10px;font-weight:500}.v3-purchase-count>b{font-family:var(--font-micrographics);font-size:15px;font-variant-numeric:tabular-nums}
 .v3-purchases button:disabled .v3-purchase-count{border-color:#526148;background:#222c1e}
+
+/* D178: one teaching focus, with quieter secondary information. */
+.v3-hud>div:nth-child(n+3)>strong{font-size:22px;color:#bcc8b2;letter-spacing:0}
+.v3-hud>div:nth-child(n+3)>span{font-size:12px}
+.v3-hud .v3-income[data-guided=true]{outline:2px solid #e3c990;outline-offset:5px;border-radius:3px}
+.v3-bench[data-guided=true]>rect{stroke:#eed29a;stroke-width:4}
+[data-guidance-worker=true] [data-worker]>ellipse{fill:#e3c99066;stroke:#eed29a;stroke-width:2}
+[data-guidance-recon=true] .v3-recon-housing{stroke:#eed29a;stroke-width:4}
+[data-guidance-backlog=true] .v3-backlog>path:first-of-type{stroke:#eed29a;stroke-width:3}
+.v3-game #v3-main .v3-purchases button .v3-purchase-receipt{color:#f0dfb4!important;font-size:10px;min-height:15px;line-height:1.5}
+.v3-game #v3-main .v3-hide-guidance{background:transparent!important;border:0!important;color:#bdcba9!important;font-size:11px;padding:5px;flex:none;white-space:nowrap}
+.v3-footer>div{flex:1}
+
+/* D190: three quick location pointers, with only an explicit Start control. */
+.v3-game [hidden]{display:none!important}
+.v3-world svg .v3-orientation-label{font-size:23px;font-weight:700;fill:#fff3cf}
+.v3-orientation-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.v3-controls-pointer{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);padding:14px 22px;background:#293322;border:2px solid #f1d58d;border-radius:6px;color:#fff3cf;font-size:20px;font-weight:700;white-space:nowrap}
+.v3-controls-pointer::after{content:"";position:absolute;left:50%;top:100%;height:28px;border-left:3px solid #f1d58d}
+.v3-game[data-opening=true] .v3-world-summary,.v3-game[data-opening=true] .v3-crew{opacity:.4}
+.v3-game[data-tour=systems] .v3-purchases,.v3-game[data-tour=developers] .v3-purchases{opacity:.3}
+.v3-game[data-tour=purchases] .v3-world>svg{opacity:.3}
+.v3-game[data-tour=purchases] .v3-purchases{outline:3px solid #f1d58d;outline-offset:3px;border-radius:5px;animation:v3-tour-pulse 1.2s ease-in-out 1}
+@keyframes v3-tour-pulse{0%,100%{box-shadow:0 0 0 0 #f1d58d00}50%{box-shadow:0 0 0 8px #f1d58d40}}
+.v3-game[data-hidden=true] .v3-purchases{animation-play-state:paused}
+.v3-game[data-reduced=true] .v3-purchases{animation:none}
+
+/* D191: visitor-triggered intro, then one continuous path into play. */
+.v3-game[data-welcome=true]>.v3-header,.v3-game[data-welcome=true]>.v3-main{visibility:hidden}
+.v3-game[data-opening=true] .v3-main{padding-bottom:14px}
+.v3-game .modal.v3-welcome{max-width:620px;padding:38px;border-color:#596446}
+.v3-game .v3-welcome h2{font-size:30px;max-width:440px;line-height:1.2;margin-bottom:20px}
+.v3-game .v3-welcome .primary{display:flex;align-items:center;justify-content:space-between;min-height:78px;margin-top:28px;padding:18px 24px;font-size:27px;font-weight:700;background:#e5cb86!important;color:#172011!important;border:2px solid #f4dfa8!important;box-shadow:0 4px 0 #786b3e;transition:background .15s,box-shadow .15s}
+.v3-game .v3-welcome .primary:hover{background:#f5df9c!important;box-shadow:0 5px 0 #786b3e,0 0 24px #e5cb8620}
+.v3-game .v3-welcome .primary:focus-visible{outline:3px solid #fff4d2;outline-offset:5px}
+.v3-game .v3-welcome .primary span{font-size:32px;color:inherit!important}

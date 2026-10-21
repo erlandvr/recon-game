@@ -50,10 +50,10 @@ if (process.argv[1]?.endsWith('v3-benchmark.ts')) {
   let lateSpending = advanceV3(startV3(newV3()), 21);
   for (const action of ['developer', 'system', 'system'] as const) lateSpending = buyV3(lateSpending, action);
   lateSpending = advanceV3(lateSpending, 30);
-  const shortageCase = {description: 'Former deficit case, now solvent with desk features: at 21 seconds buy one developer and two systems; continue through second 51.', minimumCash: lateSpending.metrics.minCash, endingCash: lateSpending.cash, rule: 'Owner approved visible negative cash with continuing wages/work on 2026-10-20.'};
+  const shortageCase = {description: 'Former deficit case, with recovery with desk features: at 21 seconds buy one developer and two systems; continue through second 51.', minimumCash: lateSpending.metrics.minCash, endingCash: lateSpending.cash, rule: 'Owner approved visible negative cash with continuing wages/work on 2026-10-20.'};
   const negativeRun = runs.reduce((lowest, run) => run.metrics.minCash < lowest.metrics.minCash ? run : lowest);
   const negativeBalanceCase = {policy: negativeRun.policy, seed: negativeRun.seed, reaction: negativeRun.reaction, minimumCash: negativeRun.metrics.minCash, result: negativeRun.result};
-  const evidence = {shortageCase, negativeBalanceCase, configuration: 'V3.4 D175: restored Recon 180 / Plus 260; modestly faster maintenance 32/24; opening failure 22, automation effectiveness and cash target unchanged, 2026-10-21', rules: V3, walks: {min: walks[0], median: (walks[23] + walks[24]) / 2, max: walks.at(-1)}, summaries, runs, capacities, delayed};
+  const evidence = {shortageCase, negativeBalanceCase, configuration: 'V3.4 D178: features unlock four active seconds after the first purchased installation; other D175 prices/maintenance unchanged, 2026-10-21', rules: V3, walks: {min: walks[0], median: (walks[23] + walks[24]) / 2, max: walks.at(-1)}, summaries, runs, capacities, delayed};
   writeFileSync('docs/analysis/v3-mvp-benchmark.json', JSON.stringify(evidence, null, 2) + '\n');
   console.table(summaries); console.log('Walk seconds:', evidence.walks); console.table(capacities); console.table(delayed.map(r => ({...r, result: r.result?.at})));
 }

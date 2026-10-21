@@ -3,6 +3,7 @@ import Modal from './Modal.tsx';
 import {Mechanic} from './V3Board.tsx';
 import {SupplyProp} from './V3WorkshopProps.tsx';
 import {V3, purchaseInfo, type V3State} from './v3Game.ts';
+import V3Champagne from './V3Champagne.tsx';
 
 // Separate presentation clock: never advances the frozen simulation or score.
 export function useV3Celebration(won: boolean, reduced: boolean) {
@@ -21,13 +22,14 @@ export function useV3Celebration(won: boolean, reduced: boolean) {
   return won ? reduced ? 6 : elapsed : null;
 }
 export function VictoryCrew({state, celebration, reduced, hidden}: {state: V3State; celebration: number | null; reduced: boolean; hidden: boolean}) {
-  return <svg className="v3-victory-crew" viewBox="0 0 370 160" role="img" aria-label={`${state.developers.length} developers celebrating. Tools and carried systems are set down; your result is frozen.`} data-reduced={reduced} data-hidden={hidden}>
+  return <svg className="v3-victory-crew" viewBox={`0 0 ${state.recon ? 430 : 370} 160`} role="img" aria-label={`${state.developers.length} developers celebrating.${state.recon ? ' Recon’s waiter celebrates with champagne.' : ''} Tools and carried systems are set down; your result is frozen.`} data-reduced={reduced} data-hidden={hidden}>
     <ellipse cx="185" cy="143" rx="175" ry="12" fill="#6d714d33"/>
     <path d="M15 15Q185 54 355 15" stroke="#7d8d66" fill="none"/>
     {[40, 100, 160, 220, 280, 340].map((x, i) => <path key={x} d={`M${x - 7} ${i === 0 || i === 5 ? 20 : 29}l14 2l-7 13Z`} fill={i % 2 ? '#b4c89d' : '#d9bd7a'}/>)}
     {state.developers.map((w, i) => <g key={w.id} transform={`translate(${185 + (i - (state.developers.length - 1) / 2) * 82} 138) scale(1.35)`}>
       <Mechanic worker={w} time={state.time} celebration={celebration} position={{x: 0, y: 0}}/>
     </g>)}
+    {!!state.recon && <V3Champagne elapsed={celebration ?? 0} reduced={reduced}/>}
   </svg>;
 }
 export function V3Help({state, onClose, onResume}: {state: V3State; onClose: () => void; onResume: () => void}) {

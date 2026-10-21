@@ -10,7 +10,7 @@ try{
   const date=new Date('2026-10-21T10:00:00Z');await page.clock.install({time:date});await page.clock.pauseAt(date);
   await page.goto(process.env.GAME_URL??'http://127.0.0.1:5175/recon-game/');
   const button=(name:string)=>page.getByRole('button',{name,exact:true});
-  await button('Start experience').click();await page.clock.runFor(13000);
+  await button('Get your intro').click();await page.clock.runFor(20000);
   let s=advanceV3(startV3(newV3()),10);await page.locator('[data-purchase="system"]').click();s=buyV3(s,'system');
   async function check(){const w=s.developers[0],p=workerPosition(w);assert.equal(await page.locator('.v3-world [data-worker="0"]').getAttribute('transform'),`translate(${p.x} ${p.y})`);assert.equal(await page.locator('.v3-world [data-worker="0"]').getAttribute('data-phase'),w.phase);assert.equal(Number(await page.locator('.v3-game').getAttribute('data-time')),s.time);assert.ok(Math.abs(Number(await page.locator('.v3-game').getAttribute('data-cash'))-s.cash)<1e-7);}
   async function step(ms:number){await page.clock.runFor(ms);s=advanceV3(s,ms/1000);await check();}

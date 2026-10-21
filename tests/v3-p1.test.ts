@@ -111,7 +111,7 @@ test('P1: ordinary failures never interrupt; emergency, saved work and progress 
   assert.equal(normal.developers[0].phase, 'assembly'); assert.equal(normal.jobs.at(-1)!.priority, undefined);
   let s = emergency(fixture('delivery')); const paused = pauseV3(s);
   assert.equal(advanceV3(paused, 100), paused);
-  assert.equal(selectGuidance(s, {})!.id, 'p1'); assert.match(selectGuidance(s, {})!.text, /progress/);
+  assert.equal(selectGuidance(s)!.id, 'p1'); assert.match(selectGuidance(s)!.text, /progress/);
   s.cash = 1200; s = advanceV3(s, .05); assert.equal(s.status, 'won');
   assert.equal(advanceV3(s, 100), s); assert.ok(s.developers[0].suspended);
 });

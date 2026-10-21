@@ -25,7 +25,7 @@ async function buy(action: 'system' | 'recon') {await page.locator(`[data-purcha
 try {
   const date = new Date('2026-10-20T10:00:00Z'); await page.clock.install({time: date}); await page.clock.pauseAt(date);
   await page.goto(process.env.GAME_URL ?? 'http://127.0.0.1:5175/recon-game/');
-  await button('Start experience').click(); await page.clock.runFor(3000); s = startV3(s);
+  await button('Get your intro').click(); await page.clock.runFor(10000); s = startV3(s);
   while (!(s.developers[0].suspended?.phase === 'delivery' && !s.developers[0].suspended.feature) && s.time < 180) {
     if (s.time >= 34 && (s.time - 34) % 15 === 0 && s.systems.length < 5 && await page.locator('[data-purchase="system"]').isEnabled()) await buy('system');
     await advance(250);

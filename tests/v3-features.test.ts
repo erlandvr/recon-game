@@ -6,7 +6,7 @@ function until(s: V3State, fn: (s: V3State) => boolean, seconds = 180) {
   for (let t = 0; !fn(s) && t < seconds; t += .05) s = advanceV3(s,.05);
   assert.ok(fn(s),`timed out: ${s.time}, ${s.developers[0].phase}`); return s;
 }
-function fixture() {const s = startV3(newV3()); s.cash = 0; s.systems[0].threshold = 9999; return s;}
+function fixture() {const s = startV3(newV3()); s.cash = 0; s.featuresAvailableAt = 0; /* Isolated post-onboarding feature fixture. */ s.systems[0].threshold = 9999; return s;}
 function fail(s: V3State, urgent = false) {
   s.systems[0].broken = true;
   s.jobs.push({id:s.nextJob++,type:'repair',system:0,owner:null,progress:0,at:s.time,priority:urgent?'p1':undefined});
