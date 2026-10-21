@@ -1,0 +1,103 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+  namespace: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}
+  labels:
+    app: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+    environment: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+    environment: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+  namespace: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}
+spec:
+  minReadySeconds: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+        environment: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}
+    spec:
+      containers:
+        - name: frontend
+          image: ${TAG_LATEST}
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 300Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 3
+            periodSeconds: 3
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+  namespace: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}
+  annotations:
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/backend-protocol-version: HTTP1
+    alb.ingress.kubernetes.io/certificate-arn: ${AWS_CERTIFICATE}
+    alb.ingress.kubernetes.io/group.name: ${AWS_ACCOUNT_NAME}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/load-balancer-attributes: routing.http2.enabled=true
+    alb.ingress.kubernetes.io/load-balancer-name: ${AWS_ACCOUNT_NAME}-ingress
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-FS-1-2-Res-2019-08
+    alb.ingress.kubernetes.io/ssl-ports: https
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/target-type: ip
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+    - host: ${HOSTNAME}
+      http:
+        paths:
+          - path: '/*'
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ${BITBUCKET_DEPLOYMENT_ENVIRONMENT}-${NAMESPACE}-frontend
+                port:
+                  number: 8080

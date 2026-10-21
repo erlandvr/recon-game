@@ -14,3 +14,4 @@ test-results/
 supabase/.temp/
 __pycache__/
 *.py[cod]
+.idea/

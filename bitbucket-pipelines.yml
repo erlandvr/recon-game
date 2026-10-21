@@ -1,0 +1,117 @@
+image: node:26-bookworm-slim
+
+definitions:
+  caches:
+    custom-node: node_modules
+  steps:
+    - step: &clear-cache
+        name: 🧽 Clear cache
+        script:
+          - pipe: atlassian/bitbucket-clear-cache:3.6.3
+            variables:
+              BITBUCKET_ACCESS_TOKEN: $BITBUCKET_ACCESS_TOKEN
+              CACHES: [ custom-node ]
+        condition:
+          changesets:
+            includePaths:
+              - package-lock.json
+    - step: &install
+        name: 🛠 Install
+        artifacts:
+          - node_modules/**
+        caches:
+          - custom-node
+        script:
+          - npm ci
+    - step: &build
+        name: 🛠 Build
+        script:
+          - npm run build
+    - step: &install-build
+        name: 🛠 Install & Build
+        artifacts:
+          - dist/**
+        caches:
+          - custom-node
+        script:
+          - npm ci
+          - npm run build
+    - step: &package
+        name: 📦 Package
+        image: icappsdev/bitbucket:bookworm-slim
+        oidc: true
+        services:
+          - docker
+        script:
+          - aws_oidc_init
+          - aws_assume_role # Assumes role by mapping deployment => cluster
+          - aws_container_tag_init
+          - aws_container_repository_init
+          - aws_container_build
+    - step: &deploy
+        name: 🚀 Deploy
+        image: icappsdev/bitbucket:bookworm-slim
+        oidc: true
+        script:
+          - aws_oidc_init
+          - aws_assume_role # Assumes role by mapping deployment => cluster
+          - aws_container_tag_init
+          - aws_kubernetes_init
+          - aws_kubernetes_set_image --deployment-suffix frontend
+    - step: &deploy-infra
+        name: 🚀 Deploy Infra
+        image: icappsdev/bitbucket:bookworm-slim
+        oidc: true
+        script:
+          - aws_oidc_init
+          - aws_assume_role # Assumes role by mapping deployment => cluster
+          - aws_container_tag_init
+          - aws_kubernetes_init
+          - aws_kubernetes_apply
+
+pipelines:
+  pull-requests:
+    '**':
+      - step: *clear-cache
+      - step: *install
+      - parallel:
+          steps:
+            - step: *build
+  branches:
+    main:
+      - step: *clear-cache
+      - stage:
+          name: DEV Package & Deploy
+          deployment: DEV
+          steps:
+            - step: *install-build
+            - step: *package
+            - step: *deploy
+    release/**:
+      - step: *clear-cache
+      - stage:
+          name: PRD Package & Deploy
+          deployment: PRD
+          steps:
+            - step: *install-build
+            - step: *package
+            - step: *deploy
+  custom:
+    vuln-scanners:
+      import: shared_pipelines:main:vuln-scanners
+    infra-development:
+      - stage:
+          name: DEV Deploy Infra
+          deployment: DEV
+          steps:
+            - step: *deploy-infra
+    infra-production:
+      - stage:
+          name: PRD Deploy Infra
+          deployment: PRD
+          steps:
+            - step: *deploy-infra
+    uptime-kuma-development:
+      import: shared_pipelines:main:uptime-kuma-http-development
+    uptime-kuma-production:
+      import: shared_pipelines:main:uptime-kuma-http-production
