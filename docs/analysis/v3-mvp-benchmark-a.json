@@ -1,0 +1,6964 @@
+{
+  "shortageCase": {
+    "description": "At 21 seconds buy one developer and two systems; continue through second 51.",
+    "minimumCash": -3.9100000000028707,
+    "endingCash": 104.7499999999976,
+    "rule": "Owner approved visible negative cash with continuing wages/work on 2026-10-20."
+  },
+  "configuration": "V3.1 candidate A, 2026-10-20",
+  "rules": {
+    "step": 0.05,
+    "startCash": 90,
+    "target": 1200,
+    "maxSystems": 12,
+    "maxDevelopers": 4,
+    "systemCost": 45,
+    "developerCost": 55,
+    "wage": 0.35,
+    "income": 3,
+    "assembly": 5,
+    "install": 1,
+    "repair": 6,
+    "reconRepair": 4,
+    "reconCost": 180,
+    "plusCost": 260,
+    "youngInterval": 60,
+    "matureInterval": 40,
+    "matureAge": 90,
+    "openingFailure": 22
+  },
+  "walks": {
+    "min": 1.6666666666666667,
+    "median": 4.3933333333333335,
+    "max": 7.56
+  },
+  "summaries": [
+    {
+      "policy": "save",
+      "wins": 10,
+      "min": 553.05,
+      "median": 566.45,
+      "max": 566.45,
+      "minCash": 90
+    },
+    {
+      "policy": "small-estate",
+      "wins": 10,
+      "min": 178.15,
+      "median": 186.5,
+      "max": 190.95,
+      "minCash": 1.6999999999999815
+    },
+    {
+      "policy": "expand-only",
+      "wins": 10,
+      "min": 184.9,
+      "median": 187.4,
+      "max": 192.6,
+      "minCash": 0
+    },
+    {
+      "policy": "hire-first",
+      "wins": 10,
+      "min": 152,
+      "median": 154,
+      "max": 156.15,
+      "minCash": 0.10000000000025011
+    },
+    {
+      "policy": "balanced",
+      "wins": 10,
+      "min": 122.15,
+      "median": 122.625,
+      "max": 123.1,
+      "minCash": 0.4500000000007134
+    },
+    {
+      "policy": "recon-first",
+      "wins": 10,
+      "min": 197.75,
+      "median": 198.675,
+      "max": 199.8,
+      "minCash": 0.04999999999202487
+    },
+    {
+      "policy": "plus-first",
+      "wins": 10,
+      "min": 295.2,
+      "median": 299.95,
+      "max": 300.75,
+      "minCash": 0.19999999998112372
+    },
+    {
+      "policy": "four-developers",
+      "wins": 10,
+      "min": 218.35,
+      "median": 220.225,
+      "max": 224.15,
+      "minCash": 0
+    }
+  ],
+  "runs": [
+    {
+      "policy": "save",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.042500000084,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 371.70000000005024,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 64.34999999999849,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.042500000084,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 371.70000000005024,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 64.34999999999849,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.0425000000844,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 371.70000000005024,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 64.34999999999849,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.0425000000844,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 371.70000000005024,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 64.34999999999849,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.0425000000844,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 372.3000000000504,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 63.749999999998515,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.0425000000844,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 372.3000000000504,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 63.749999999998515,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.0425000000844,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 371.70000000005024,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 64.34999999999849,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 566.45,
+        "cash": 1200.0425000000844,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1308.300000000063,
+        "wages": 198.25750000003936,
+        "minCash": 90,
+        "idle": 371.70000000005024,
+        "construction": 0,
+        "maintenance": 130.3499999999954,
+        "return": 64.34999999999849,
+        "queueWait": 0,
+        "jobsStarted": 11,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 553.05,
+        "cash": 1200.082500000069,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1303.6500000000601,
+        "wages": 193.567500000036,
+        "minCash": 90,
+        "idle": 376.0000000000512,
+        "construction": 0,
+        "maintenance": 118.49999999999541,
+        "return": 58.49999999999881,
+        "queueWait": 0,
+        "jobsStarted": 10,
+        "failures": 10,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "save",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 553.05,
+        "cash": 1200.082500000069,
+        "systems": 1,
+        "installed": 1,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 1,
+      "metrics": {
+        "income": 1303.6500000000601,
+        "wages": 193.567500000036,
+        "minCash": 90,
+        "idle": 376.0000000000512,
+        "construction": 0,
+        "maintenance": 118.49999999999541,
+        "return": 58.49999999999881,
+        "queueWait": 0,
+        "jobsStarted": 10,
+        "failures": 10,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": []
+    },
+    {
+      "policy": "small-estate",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 186.6,
+        "cash": 1200.0900000000204,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1310.3999999999878,
+        "wages": 65.30999999999526,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.9999999999968,
+        "return": 57.399999999998876,
+        "queueWait": 152.1,
+        "jobsStarted": 11,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 186.6,
+        "cash": 1200.0900000000204,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1310.3999999999878,
+        "wages": 65.30999999999526,
+        "minCash": 7.349999999999966,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.9999999999968,
+        "return": 57.399999999998876,
+        "queueWait": 149.1,
+        "jobsStarted": 11,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 190.95,
+        "cash": 1200.2175000000373,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1312.0499999999809,
+        "wages": 66.83249999999511,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.9999999999968,
+        "return": 61.74999999999863,
+        "queueWait": 157.2,
+        "jobsStarted": 11,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 190.95,
+        "cash": 1200.2175000000373,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1312.0499999999809,
+        "wages": 66.83249999999511,
+        "minCash": 7.349999999999966,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.9999999999968,
+        "return": 61.74999999999863,
+        "queueWait": 154.2,
+        "jobsStarted": 11,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 186.5,
+        "cash": 1200.2750000000128,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1310.5499999999774,
+        "wages": 65.27499999999526,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.9999999999968,
+        "return": 57.29999999999888,
+        "queueWait": 156.79999999999998,
+        "jobsStarted": 11,
+        "failures": 9,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 186.5,
+        "cash": 1200.2750000000128,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1310.5499999999774,
+        "wages": 65.27499999999526,
+        "minCash": 7.349999999999966,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.9999999999968,
+        "return": 57.29999999999888,
+        "queueWait": 153.79999999999998,
+        "jobsStarted": 11,
+        "failures": 9,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 184.7,
+        "cash": 1200.1550000000134,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1309.7999999999886,
+        "wages": 64.64499999999532,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.04999999999686,
+        "return": 56.44999999999893,
+        "queueWait": 152.04999999999995,
+        "jobsStarted": 11,
+        "failures": 9,
+        "repairs": 7,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 184.7,
+        "cash": 1200.1550000000134,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1309.7999999999886,
+        "wages": 64.64499999999532,
+        "minCash": 7.349999999999966,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 93.04999999999686,
+        "return": 56.44999999999893,
+        "queueWait": 149.04999999999995,
+        "jobsStarted": 11,
+        "failures": 9,
+        "repairs": 7,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 178.15,
+        "cash": 1200.0474999999929,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1307.3999999999994,
+        "wages": 62.352499999995544,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 86.49999999999723,
+        "return": 56.44999999999893,
+        "queueWait": 140.1,
+        "jobsStarted": 11,
+        "failures": 8,
+        "repairs": 7,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        }
+      ]
+    },
+    {
+      "policy": "small-estate",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 178.15,
+        "cash": 1200.0474999999929,
+        "systems": 4,
+        "installed": 4,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 4,
+      "metrics": {
+        "income": 1307.3999999999994,
+        "wages": 62.352499999995544,
+        "minCash": 7.349999999999966,
+        "idle": 0,
+        "construction": 35.15000000000014,
+        "maintenance": 86.49999999999723,
+        "return": 56.44999999999893,
+        "queueWait": 137.1,
+        "jobsStarted": 11,
+        "failures": 8,
+        "repairs": 7,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 187.4,
+        "cash": 1200.109999999955,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1670.7000000000212,
+        "wages": 65.58999999999523,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 22.650000000000187,
+        "return": 56.04999999999895,
+        "queueWait": 610.2,
+        "jobsStarted": 12,
+        "failures": 10,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        },
+        {
+          "at": 22,
+          "action": "system",
+          "cash": 1.8999999999998778
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.29999999999977
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 3.499999999999652
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.24999999999951
+        },
+        {
+          "at": 53,
+          "action": "system",
+          "cash": 3.4999999999994316
+        },
+        {
+          "at": 58,
+          "action": "system",
+          "cash": 1.7499999999993676
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 7.249999999999261
+        },
+        {
+          "at": 70,
+          "action": "system",
+          "cash": 5.499999999999176
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 187.4,
+        "cash": 1200.1099999999549,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1670.7000000000212,
+        "wages": 65.58999999999523,
+        "minCash": 3.2999999999997627,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 22.650000000000187,
+        "return": 56.04999999999895,
+        "queueWait": 600.2,
+        "jobsStarted": 12,
+        "failures": 10,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        },
+        {
+          "at": 24,
+          "action": "system",
+          "cash": 7.199999999999875
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.2999999999997627
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 9.149999999999622
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.249999999999481
+        },
+        {
+          "at": 54,
+          "action": "system",
+          "cash": 12.149999999999352
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 19.0499999999992
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 15.899999999999046
+        },
+        {
+          "at": 72,
+          "action": "system",
+          "cash": 22.79999999999893
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 192.6,
+        "cash": 1200.0899999999547,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1672.5000000000198,
+        "wages": 67.40999999999505,
+        "minCash": 1.6999999999999815,
+        "idle": 0,
+        "construction": 110.59999999999586,
+        "maintenance": 22.650000000000187,
+        "return": 59.29999999999877,
+        "queueWait": 730.6500000000001,
+        "jobsStarted": 13,
+        "failures": 10,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        },
+        {
+          "at": 22,
+          "action": "system",
+          "cash": 1.8999999999998778
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.29999999999977
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 3.499999999999652
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.24999999999951
+        },
+        {
+          "at": 53,
+          "action": "system",
+          "cash": 3.4999999999994316
+        },
+        {
+          "at": 58,
+          "action": "system",
+          "cash": 1.7499999999993676
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 7.699999999999264
+        },
+        {
+          "at": 70,
+          "action": "system",
+          "cash": 5.9499999999991715
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 192.6,
+        "cash": 1200.0899999999544,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1672.5000000000198,
+        "wages": 67.40999999999505,
+        "minCash": 3.2999999999997627,
+        "idle": 0,
+        "construction": 110.59999999999586,
+        "maintenance": 22.650000000000187,
+        "return": 59.29999999999877,
+        "queueWait": 718.6500000000001,
+        "jobsStarted": 13,
+        "failures": 10,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        },
+        {
+          "at": 24,
+          "action": "system",
+          "cash": 7.199999999999875
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.2999999999997627
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 9.149999999999622
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.249999999999481
+        },
+        {
+          "at": 54,
+          "action": "system",
+          "cash": 12.149999999999352
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 19.0499999999992
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 16.349999999999056
+        },
+        {
+          "at": 72,
+          "action": "system",
+          "cash": 23.24999999999895
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 187.3,
+        "cash": 1200.4449999999533,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1671.0000000000084,
+        "wages": 65.55499999999523,
+        "minCash": 0.5499999999993292,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 22.650000000000187,
+        "return": 55.94999999999896,
+        "queueWait": 610.7,
+        "jobsStarted": 12,
+        "failures": 9,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        },
+        {
+          "at": 22,
+          "action": "system",
+          "cash": 1.8999999999998778
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.29999999999977
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 3.499999999999652
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.24999999999951
+        },
+        {
+          "at": 53,
+          "action": "system",
+          "cash": 3.4999999999994316
+        },
+        {
+          "at": 58,
+          "action": "system",
+          "cash": 1.7499999999993676
+        },
+        {
+          "at": 64,
+          "action": "system",
+          "cash": 0.5499999999993292
+        },
+        {
+          "at": 70,
+          "action": "system",
+          "cash": 6.999999999999233
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 187.5,
+        "cash": 1200.224999999954,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1670.850000000009,
+        "wages": 65.62499999999523,
+        "minCash": 3.2999999999997627,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 22.650000000000187,
+        "return": 56.14999999999895,
+        "queueWait": 599.7,
+        "jobsStarted": 12,
+        "failures": 9,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        },
+        {
+          "at": 24,
+          "action": "system",
+          "cash": 7.199999999999875
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.2999999999997627
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 9.149999999999622
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.249999999999481
+        },
+        {
+          "at": 54,
+          "action": "system",
+          "cash": 12.149999999999352
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 19.0499999999992
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 17.399999999999068
+        },
+        {
+          "at": 72,
+          "action": "system",
+          "cash": 24.299999999998974
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 187.2,
+        "cash": 1200.3299999999563,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1670.8499999999988,
+        "wages": 65.51999999999524,
+        "minCash": 0.14999999999926672,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 22.650000000000187,
+        "return": 55.849999999998964,
+        "queueWait": 610.1,
+        "jobsStarted": 12,
+        "failures": 9,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        },
+        {
+          "at": 22,
+          "action": "system",
+          "cash": 1.8999999999998778
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.29999999999977
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 3.499999999999652
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.24999999999951
+        },
+        {
+          "at": 53,
+          "action": "system",
+          "cash": 3.4999999999994316
+        },
+        {
+          "at": 58,
+          "action": "system",
+          "cash": 1.7499999999993676
+        },
+        {
+          "at": 64,
+          "action": "system",
+          "cash": 2.3499999999993193
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 0.14999999999926672
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 188.65,
+        "cash": 1200.4224999999583,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1671.4500000000012,
+        "wages": 66.02749999999519,
+        "minCash": 0.14999999999901803,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 22.650000000000187,
+        "return": 57.29999999999888,
+        "queueWait": 599.1,
+        "jobsStarted": 12,
+        "failures": 9,
+        "repairs": 2,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        },
+        {
+          "at": 24,
+          "action": "system",
+          "cash": 7.199999999999875
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.2999999999997627
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 9.149999999999622
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.249999999999481
+        },
+        {
+          "at": 54,
+          "action": "system",
+          "cash": 12.149999999999352
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 19.0499999999992
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 19.199999999999065
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 0.14999999999901803
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 184.9,
+        "cash": 1200.3849999999563,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1670.099999999998,
+        "wages": 64.71499999999531,
+        "minCash": 0,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 21.700000000000173,
+        "return": 54.49999999999904,
+        "queueWait": 612.3000000000001,
+        "jobsStarted": 12,
+        "failures": 9,
+        "repairs": 1,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 14,
+          "action": "system",
+          "cash": 1.6999999999999815
+        },
+        {
+          "at": 22,
+          "action": "system",
+          "cash": 1.8999999999998778
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.29999999999977
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 3.499999999999652
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.24999999999951
+        },
+        {
+          "at": 53,
+          "action": "system",
+          "cash": 3.4999999999994316
+        },
+        {
+          "at": 58,
+          "action": "system",
+          "cash": 1.7499999999993676
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 68,
+          "action": "system",
+          "cash": 4.6999999999999105
+        }
+      ]
+    },
+    {
+      "policy": "expand-only",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 184.9,
+        "cash": 1200.3849999999563,
+        "systems": 12,
+        "installed": 11,
+        "developers": 1,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1670.099999999998,
+        "wages": 64.71499999999531,
+        "minCash": 0,
+        "idle": 0,
+        "construction": 108.64999999999597,
+        "maintenance": 21.700000000000173,
+        "return": 54.49999999999904,
+        "queueWait": 603.3000000000001,
+        "jobsStarted": 12,
+        "failures": 9,
+        "repairs": 1,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 15,
+          "action": "system",
+          "cash": 7.349999999999966
+        },
+        {
+          "at": 24,
+          "action": "system",
+          "cash": 7.199999999999875
+        },
+        {
+          "at": 33,
+          "action": "system",
+          "cash": 3.2999999999997627
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 9.149999999999622
+        },
+        {
+          "at": 48,
+          "action": "system",
+          "cash": 5.249999999999481
+        },
+        {
+          "at": 54,
+          "action": "system",
+          "cash": 12.149999999999352
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 19.0499999999992
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 13.34999999999986
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 152.1,
+        "cash": 1201.4950000000044,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1873.0500000000122,
+        "wages": 156.5549999999995,
+        "minCash": 0.10000000000025011,
+        "idle": 183.1500000000074,
+        "construction": 114.04999999999566,
+        "maintenance": 71.99999999999805,
+        "return": 77.94999999999771,
+        "queueWait": 36.75,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 50,
+          "action": "system",
+          "cash": 0.10000000000025011
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 1.900000000000361
+        },
+        {
+          "at": 75,
+          "action": "system",
+          "cash": 1.450000000000422
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 0.7000000000004718
+        },
+        {
+          "at": 91,
+          "action": "system",
+          "cash": 6.550000000000502
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 10.600000000000414
+        },
+        {
+          "at": 98,
+          "action": "system",
+          "cash": 7.4500000000003865
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 4.600000000000371
+        },
+        {
+          "at": 104,
+          "action": "system",
+          "cash": 12.55000000000036
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 7.4500000000003865
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 2.6500000000004036
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 155.3,
+        "cash": 1200.8350000000044,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1875.7500000000068,
+        "wages": 159.91500000000008,
+        "minCash": 0.7000000000003581,
+        "idle": 198.1500000000108,
+        "construction": 112.84999999999573,
+        "maintenance": 69.99999999999817,
+        "return": 75.74999999999784,
+        "queueWait": 38.44999999999999,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 51,
+          "action": "system",
+          "cash": 2.050000000000182
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 13.750000000000412
+        },
+        {
+          "at": 78,
+          "action": "system",
+          "cash": 11.950000000000529
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 3.5500000000006082
+        },
+        {
+          "at": 93,
+          "action": "system",
+          "cash": 11.050000000000587
+        },
+        {
+          "at": 99,
+          "action": "system",
+          "cash": 40.000000000000654
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 37.00000000000071
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 42.850000000000506
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 52.15000000000043
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 67.00000000000057
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 87.40000000000038
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 152.7,
+        "cash": 1200.4150000000002,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1872.6000000000054,
+        "wages": 157.1849999999996,
+        "minCash": 0.10000000000025011,
+        "idle": 181.60000000000704,
+        "construction": 114.04999999999566,
+        "maintenance": 74.7499999999979,
+        "return": 78.54999999999768,
+        "queueWait": 41.29999999999998,
+        "jobsStarted": 19,
+        "failures": 8,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 50,
+          "action": "system",
+          "cash": 0.10000000000025011
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 1.900000000000361
+        },
+        {
+          "at": 75,
+          "action": "system",
+          "cash": 1.450000000000422
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 1.1500000000004817
+        },
+        {
+          "at": 91,
+          "action": "system",
+          "cash": 6.550000000000516
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 10.600000000000428
+        },
+        {
+          "at": 98,
+          "action": "system",
+          "cash": 7.450000000000401
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 4.600000000000385
+        },
+        {
+          "at": 104,
+          "action": "system",
+          "cash": 12.100000000000357
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 7.000000000000384
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 2.2000000000004007
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 155.55,
+        "cash": 1200.7225000000042,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1875.9,
+        "wages": 160.17750000000012,
+        "minCash": 0.7000000000003581,
+        "idle": 194.90000000001007,
+        "construction": 112.24999999999577,
+        "maintenance": 73.74999999999795,
+        "return": 76.59999999999779,
+        "queueWait": 38.2,
+        "jobsStarted": 19,
+        "failures": 8,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 51,
+          "action": "system",
+          "cash": 2.050000000000182
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 13.750000000000412
+        },
+        {
+          "at": 78,
+          "action": "system",
+          "cash": 12.400000000000546
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 4.000000000000632
+        },
+        {
+          "at": 93,
+          "action": "system",
+          "cash": 11.050000000000608
+        },
+        {
+          "at": 99,
+          "action": "system",
+          "cash": 40.00000000000068
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 36.85000000000075
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 42.400000000000546
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 51.70000000000047
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 62.500000000000455
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 74.65000000000049
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 152.3,
+        "cash": 1200.835000000007,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1872.5999999999983,
+        "wages": 156.76499999999953,
+        "minCash": 0.10000000000025011,
+        "idle": 180.90000000000688,
+        "construction": 114.04999999999566,
+        "maintenance": 74.34999999999792,
+        "return": 78.44999999999769,
+        "queueWait": 36.95000000000003,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 50,
+          "action": "system",
+          "cash": 0.10000000000025011
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 1.900000000000361
+        },
+        {
+          "at": 75,
+          "action": "system",
+          "cash": 1.450000000000422
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 2.2000000000005002
+        },
+        {
+          "at": 91,
+          "action": "system",
+          "cash": 6.550000000000537
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 10.600000000000449
+        },
+        {
+          "at": 98,
+          "action": "system",
+          "cash": 7.450000000000422
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 4.600000000000406
+        },
+        {
+          "at": 104,
+          "action": "system",
+          "cash": 11.050000000000338
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 5.950000000000358
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 1.150000000000368
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 156.15,
+        "cash": 1200.242500000004,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1876.0500000000036,
+        "wages": 160.80750000000023,
+        "minCash": 0.7000000000003581,
+        "idle": 190.55000000000908,
+        "construction": 114.64999999999563,
+        "maintenance": 76.04999999999782,
+        "return": 78.04999999999771,
+        "queueWait": 40.70000000000002,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 51,
+          "action": "system",
+          "cash": 2.050000000000182
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 13.750000000000412
+        },
+        {
+          "at": 78,
+          "action": "system",
+          "cash": 13.30000000000058
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 5.050000000000679
+        },
+        {
+          "at": 93,
+          "action": "system",
+          "cash": 7.450000000000642
+        },
+        {
+          "at": 99,
+          "action": "system",
+          "cash": 36.400000000000674
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 33.250000000000696
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 32.35000000000056
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 39.85000000000042
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 54.70000000000056
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 75.85000000000034
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 152.25,
+        "cash": 1200.137500000008,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1871.8500000000088,
+        "wages": 156.71249999999952,
+        "minCash": 0.10000000000025011,
+        "idle": 183.6000000000075,
+        "construction": 114.04999999999566,
+        "maintenance": 71.79999999999806,
+        "return": 78.1499999999977,
+        "queueWait": 38.150000000000034,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 50,
+          "action": "system",
+          "cash": 0.10000000000025011
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 1.900000000000361
+        },
+        {
+          "at": 75,
+          "action": "system",
+          "cash": 1.450000000000422
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 3.700000000000543
+        },
+        {
+          "at": 91,
+          "action": "system",
+          "cash": 6.550000000000587
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 10.600000000000499
+        },
+        {
+          "at": 98,
+          "action": "system",
+          "cash": 7.450000000000472
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 4.600000000000456
+        },
+        {
+          "at": 104,
+          "action": "system",
+          "cash": 10.450000000000365
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 4.4500000000003865
+        },
+        {
+          "at": 109,
+          "action": "system",
+          "cash": 22.600000000000392
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 155.4,
+        "cash": 1201.1800000000057,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1876.2000000000116,
+        "wages": 160.0200000000001,
+        "minCash": 0.7000000000003581,
+        "idle": 192.15000000000944,
+        "construction": 114.04999999999566,
+        "maintenance": 71.94999999999806,
+        "return": 78.89999999999766,
+        "queueWait": 36.35000000000001,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 51,
+          "action": "system",
+          "cash": 2.050000000000182
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 13.750000000000412
+        },
+        {
+          "at": 78,
+          "action": "system",
+          "cash": 13.30000000000058
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 6.550000000000708
+        },
+        {
+          "at": 93,
+          "action": "system",
+          "cash": 7.450000000000671
+        },
+        {
+          "at": 99,
+          "action": "system",
+          "cash": 36.4000000000007
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 33.250000000000725
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 33.400000000000574
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 42.7000000000005
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 57.55000000000064
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 78.70000000000041
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 152,
+        "cash": 1200.8499999999915,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1872.3000000000013,
+        "wages": 156.44999999999948,
+        "minCash": 0.10000000000025011,
+        "idle": 187.1500000000083,
+        "construction": 114.14999999999566,
+        "maintenance": 72.849999999998,
+        "return": 72.69999999999801,
+        "queueWait": 39.85000000000001,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 6,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 50,
+          "action": "system",
+          "cash": 0.10000000000025011
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 1.900000000000361
+        },
+        {
+          "at": 75,
+          "action": "system",
+          "cash": 1.450000000000422
+        },
+        {
+          "at": 82,
+          "action": "system",
+          "cash": 4.150000000000503
+        },
+        {
+          "at": 89,
+          "action": "system",
+          "cash": 0.7000000000004718
+        },
+        {
+          "at": 94,
+          "action": "system",
+          "cash": 3.4000000000004675
+        },
+        {
+          "at": 98,
+          "action": "system",
+          "cash": 10.750000000000426
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 7.9000000000003965
+        },
+        {
+          "at": 104,
+          "action": "system",
+          "cash": 18.100000000000456
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 13.000000000000497
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 7.900000000000524
+        }
+      ]
+    },
+    {
+      "policy": "hire-first",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 155.45,
+        "cash": 1200.2274999999997,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 1875.300000000015,
+        "wages": 160.0725000000001,
+        "minCash": 0.7000000000003581,
+        "idle": 197.40000000001064,
+        "construction": 114.04999999999566,
+        "maintenance": 70.29999999999815,
+        "return": 75.44999999999786,
+        "queueWait": 41.84999999999998,
+        "jobsStarted": 18,
+        "failures": 7,
+        "repairs": 5,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 51,
+          "action": "system",
+          "cash": 2.050000000000182
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 13.750000000000412
+        },
+        {
+          "at": 78,
+          "action": "system",
+          "cash": 13.30000000000058
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 3.2500000000006324
+        },
+        {
+          "at": 93,
+          "action": "system",
+          "cash": 11.500000000000618
+        },
+        {
+          "at": 99,
+          "action": "system",
+          "cash": 38.50000000000068
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 35.35000000000073
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 35.50000000000058
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 41.35000000000038
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 56.95000000000046
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 80.80000000000013
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 122.15,
+        "cash": 1200.7950000000087,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.7000000000094,
+        "wages": 79.90499999999545,
+        "minCash": 1.300000000000189,
+        "idle": 45.59999999999955,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 61.599999999999994,
+        "jobsStarted": 19,
+        "failures": 8,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 16,
+          "action": "developer",
+          "cash": 2.999999999999936
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 1.300000000000189
+        },
+        {
+          "at": 35,
+          "action": "system",
+          "cash": 2.9000000000002117
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 7.700000000000124
+        },
+        {
+          "at": 56,
+          "action": "recon",
+          "cash": 9.050000000000551
+        },
+        {
+          "at": 59,
+          "action": "system",
+          "cash": 10.250000000000611
+        },
+        {
+          "at": 62,
+          "action": "system",
+          "cash": 13.550000000000686
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 12.050000000000793
+        },
+        {
+          "at": 67,
+          "action": "system",
+          "cash": 1.6500000000007944
+        },
+        {
+          "at": 79,
+          "action": "plus",
+          "cash": 5.20000000000033
+        },
+        {
+          "at": 81,
+          "action": "system",
+          "cash": 1.4000000000003467
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 22.700000000000358
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 122.65,
+        "cash": 1201.145000000009,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.700000000003,
+        "wages": 79.55499999999549,
+        "minCash": 2.000000000000142,
+        "idle": 44.5999999999996,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 52.599999999999994,
+        "jobsStarted": 19,
+        "failures": 8,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 18,
+          "action": "developer",
+          "cash": 14.299999999999898
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 2.000000000000142
+        },
+        {
+          "at": 36,
+          "action": "system",
+          "cash": 11.900000000000148
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 16.700000000000045
+        },
+        {
+          "at": 57,
+          "action": "recon",
+          "cash": 24.05000000000055
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 28.250000000000583
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 28.55000000000075
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 30.05000000000082
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 36.950000000000784
+        },
+        {
+          "at": 81,
+          "action": "plus",
+          "cash": 41.09999999999974
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 59.399999999999864
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 84.30000000000018
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 122.5,
+        "cash": 1201.1499999999965,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2181.2999999999993,
+        "wages": 80.14999999999543,
+        "minCash": 1.300000000000189,
+        "idle": 46.29999999999951,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 60.599999999999994,
+        "jobsStarted": 20,
+        "failures": 9,
+        "repairs": 9,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 16,
+          "action": "developer",
+          "cash": 2.999999999999936
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 1.300000000000189
+        },
+        {
+          "at": 35,
+          "action": "system",
+          "cash": 2.9000000000002117
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 7.700000000000124
+        },
+        {
+          "at": 56,
+          "action": "recon",
+          "cash": 9.050000000000551
+        },
+        {
+          "at": 59,
+          "action": "system",
+          "cash": 10.250000000000611
+        },
+        {
+          "at": 62,
+          "action": "system",
+          "cash": 14.000000000000682
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 12.050000000000793
+        },
+        {
+          "at": 67,
+          "action": "system",
+          "cash": 1.6500000000007944
+        },
+        {
+          "at": 80,
+          "action": "plus",
+          "cash": 16.5
+        },
+        {
+          "at": 82,
+          "action": "system",
+          "cash": 18.099999999999966
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 25.399999999999906
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 122.95,
+        "cash": 1201.0849999999984,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.8500000000045,
+        "wages": 79.76499999999547,
+        "minCash": 2.000000000000142,
+        "idle": 45.19999999999957,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 52.599999999999994,
+        "jobsStarted": 20,
+        "failures": 9,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 18,
+          "action": "developer",
+          "cash": 14.299999999999898
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 2.000000000000142
+        },
+        {
+          "at": 36,
+          "action": "system",
+          "cash": 11.900000000000148
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 16.700000000000045
+        },
+        {
+          "at": 57,
+          "action": "recon",
+          "cash": 24.05000000000055
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 28.250000000000583
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 29.00000000000074
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 30.050000000000807
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 36.95000000000077
+        },
+        {
+          "at": 81,
+          "action": "plus",
+          "cash": 34.50000000000023
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 62.100000000000264
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 88.3500000000005
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 122.6,
+        "cash": 1200.4799999999984,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.700000000008,
+        "wages": 80.21999999999542,
+        "minCash": 1.300000000000189,
+        "idle": 46.499999999999496,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 60.599999999999994,
+        "jobsStarted": 21,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 16,
+          "action": "developer",
+          "cash": 2.999999999999936
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 1.300000000000189
+        },
+        {
+          "at": 35,
+          "action": "system",
+          "cash": 2.9000000000002117
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 7.700000000000124
+        },
+        {
+          "at": 56,
+          "action": "recon",
+          "cash": 9.050000000000551
+        },
+        {
+          "at": 59,
+          "action": "system",
+          "cash": 10.250000000000611
+        },
+        {
+          "at": 62,
+          "action": "system",
+          "cash": 15.050000000000672
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 12.950000000000792
+        },
+        {
+          "at": 67,
+          "action": "system",
+          "cash": 1.6500000000007944
+        },
+        {
+          "at": 80,
+          "action": "plus",
+          "cash": 16.499999999999773
+        },
+        {
+          "at": 82,
+          "action": "system",
+          "cash": 18.09999999999974
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 25.39999999999968
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 123.1,
+        "cash": 1201.2800000000007,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2181.1500000000106,
+        "wages": 79.86999999999546,
+        "minCash": 2.000000000000142,
+        "idle": 45.49999999999955,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 52.599999999999994,
+        "jobsStarted": 21,
+        "failures": 10,
+        "repairs": 9,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 18,
+          "action": "developer",
+          "cash": 14.299999999999898
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 2.000000000000142
+        },
+        {
+          "at": 36,
+          "action": "system",
+          "cash": 11.900000000000148
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 16.700000000000045
+        },
+        {
+          "at": 57,
+          "action": "recon",
+          "cash": 24.05000000000055
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 28.250000000000583
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 30.050000000000736
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 30.05000000000082
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 36.950000000000784
+        },
+        {
+          "at": 81,
+          "action": "plus",
+          "cash": 34.500000000000114
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 62.10000000000015
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 87.45000000000044
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 122.2,
+        "cash": 1200.3100000000081,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.250000000002,
+        "wages": 79.93999999999545,
+        "minCash": 0.4500000000007134,
+        "idle": 44.99999999999958,
+        "construction": 115.94999999999555,
+        "maintenance": 11.700000000000031,
+        "return": 55.649999999998975,
+        "queueWait": 61.599999999999994,
+        "jobsStarted": 20,
+        "failures": 9,
+        "repairs": 8,
+        "takeovers": 1
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 16,
+          "action": "developer",
+          "cash": 2.999999999999936
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 1.300000000000189
+        },
+        {
+          "at": 35,
+          "action": "system",
+          "cash": 2.9000000000002117
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 7.700000000000124
+        },
+        {
+          "at": 56,
+          "action": "recon",
+          "cash": 9.050000000000551
+        },
+        {
+          "at": 59,
+          "action": "system",
+          "cash": 10.250000000000611
+        },
+        {
+          "at": 62,
+          "action": "system",
+          "cash": 16.850000000000655
+        },
+        {
+          "at": 64,
+          "action": "system",
+          "cash": 0.4500000000007134
+        },
+        {
+          "at": 67,
+          "action": "system",
+          "cash": 1.6500000000007375
+        },
+        {
+          "at": 80,
+          "action": "plus",
+          "cash": 16.199999999999875
+        },
+        {
+          "at": 82,
+          "action": "system",
+          "cash": 11.799999999999898
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 13.399999999999864
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 122.75,
+        "cash": 1200.7750000000067,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.399999999997,
+        "wages": 79.62499999999548,
+        "minCash": 2.000000000000142,
+        "idle": 44.09999999999963,
+        "construction": 115.94999999999555,
+        "maintenance": 11.700000000000031,
+        "return": 55.649999999998975,
+        "queueWait": 52.599999999999994,
+        "jobsStarted": 20,
+        "failures": 9,
+        "repairs": 8,
+        "takeovers": 1
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 18,
+          "action": "developer",
+          "cash": 14.299999999999898
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 2.000000000000142
+        },
+        {
+          "at": 36,
+          "action": "system",
+          "cash": 11.900000000000148
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 16.700000000000045
+        },
+        {
+          "at": 57,
+          "action": "recon",
+          "cash": 24.05000000000055
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 28.250000000000583
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 31.85000000000072
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 30.050000000000907
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 36.95000000000087
+        },
+        {
+          "at": 81,
+          "action": "plus",
+          "cash": 31.199999999999534
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 50.09999999999965
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 83.99999999999952
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 122.15,
+        "cash": 1200.7950000000055,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.700000000001,
+        "wages": 79.90499999999545,
+        "minCash": 1.300000000000189,
+        "idle": 45.59999999999955,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 61.599999999999994,
+        "jobsStarted": 19,
+        "failures": 8,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 1,
+          "action": "system",
+          "cash": 2.6500000000000057
+        },
+        {
+          "at": 16,
+          "action": "developer",
+          "cash": 2.999999999999936
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 1.300000000000189
+        },
+        {
+          "at": 35,
+          "action": "system",
+          "cash": 2.9000000000002117
+        },
+        {
+          "at": 41,
+          "action": "system",
+          "cash": 7.700000000000124
+        },
+        {
+          "at": 56,
+          "action": "recon",
+          "cash": 9.050000000000551
+        },
+        {
+          "at": 59,
+          "action": "system",
+          "cash": 10.250000000000611
+        },
+        {
+          "at": 62,
+          "action": "system",
+          "cash": 17.150000000000652
+        },
+        {
+          "at": 64,
+          "action": "system",
+          "cash": 6.750000000000668
+        },
+        {
+          "at": 67,
+          "action": "system",
+          "cash": 11.550000000000722
+        },
+        {
+          "at": 80,
+          "action": "plus",
+          "cash": 18.749999999999545
+        },
+        {
+          "at": 82,
+          "action": "system",
+          "cash": 18.099999999999532
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 25.39999999999948
+        }
+      ]
+    },
+    {
+      "policy": "balanced",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 122.65,
+        "cash": 1201.145000000007,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2180.699999999999,
+        "wages": 79.55499999999549,
+        "minCash": 2.000000000000142,
+        "idle": 44.5999999999996,
+        "construction": 115.94999999999555,
+        "maintenance": 11.350000000000026,
+        "return": 55.299999999998995,
+        "queueWait": 52.599999999999994,
+        "jobsStarted": 19,
+        "failures": 8,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "system",
+          "cash": 45
+        },
+        {
+          "at": 3,
+          "action": "system",
+          "cash": 7.950000000000017
+        },
+        {
+          "at": 18,
+          "action": "developer",
+          "cash": 14.299999999999898
+        },
+        {
+          "at": 27,
+          "action": "system",
+          "cash": 2.000000000000142
+        },
+        {
+          "at": 36,
+          "action": "system",
+          "cash": 11.900000000000148
+        },
+        {
+          "at": 42,
+          "action": "system",
+          "cash": 16.700000000000045
+        },
+        {
+          "at": 57,
+          "action": "recon",
+          "cash": 24.05000000000055
+        },
+        {
+          "at": 60,
+          "action": "system",
+          "cash": 28.250000000000583
+        },
+        {
+          "at": 63,
+          "action": "system",
+          "cash": 35.15000000000056
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 42.050000000000495
+        },
+        {
+          "at": 69,
+          "action": "system",
+          "cash": 40.85000000000069
+        },
+        {
+          "at": 81,
+          "action": "plus",
+          "cash": 34.499999999999375
+        },
+        {
+          "at": 84,
+          "action": "system",
+          "cash": 62.09999999999941
+        },
+        {
+          "at": 87,
+          "action": "system",
+          "cash": 91.19999999999945
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 197.75,
+        "cash": 1200.3374999999946,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.549999999994,
+        "wages": 69.21249999999488,
+        "minCash": 0.04999999999205329,
+        "idle": 47.29999999999945,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.499999999999666,
+        "queueWait": 207.75,
+        "jobsStarted": 19,
+        "failures": 10,
+        "repairs": 9,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 1.699999999992194
+        },
+        {
+          "at": 80,
+          "action": "system",
+          "cash": 1.6999999999922224
+        },
+        {
+          "at": 89,
+          "action": "system",
+          "cash": 2.8999999999921116
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 0.04999999999205329
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 6.9499999999919595
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 5.199999999991874
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 4.6499999999918415
+        },
+        {
+          "at": 134,
+          "action": "plus",
+          "cash": 9.599999999993486
+        },
+        {
+          "at": 137,
+          "action": "system",
+          "cash": 8.549999999993574
+        },
+        {
+          "at": 140,
+          "action": "system",
+          "cash": 13.499999999993598
+        },
+        {
+          "at": 142,
+          "action": "system",
+          "cash": 3.7999999999936094
+        },
+        {
+          "at": 145,
+          "action": "system",
+          "cash": 11.749999999993626
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 198.6,
+        "cash": 1200.339999999994,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.849999999991,
+        "wages": 69.50999999999485,
+        "minCash": 1.3499999999922636,
+        "idle": 48.29999999999939,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.349999999999675,
+        "queueWait": 204.3,
+        "jobsStarted": 19,
+        "failures": 10,
+        "repairs": 9,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 4.3499999999922
+        },
+        {
+          "at": 81,
+          "action": "system",
+          "cash": 1.3499999999922636
+        },
+        {
+          "at": 90,
+          "action": "system",
+          "cash": 5.5499999999921386
+        },
+        {
+          "at": 96,
+          "action": "system",
+          "cash": 2.6999999999920448
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 9.599999999991937
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 16.499999999991786
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 30.599999999991738
+        },
+        {
+          "at": 135,
+          "action": "plus",
+          "cash": 13.599999999993088
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 12.549999999993183
+        },
+        {
+          "at": 141,
+          "action": "system",
+          "cash": 17.49999999999322
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 25.44999999999318
+        },
+        {
+          "at": 147,
+          "action": "system",
+          "cash": 33.399999999993085
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 198.75,
+        "cash": 1200.2874999999892,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.849999999993,
+        "wages": 69.56249999999484,
+        "minCash": 0.04999999999205329,
+        "idle": 47.29999999999945,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 44.49999999999961,
+        "queueWait": 209.25,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 1.699999999992194
+        },
+        {
+          "at": 80,
+          "action": "system",
+          "cash": 2.149999999992218
+        },
+        {
+          "at": 89,
+          "action": "system",
+          "cash": 2.8999999999921116
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 0.04999999999205329
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 6.9499999999919595
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 5.199999999991874
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 4.6499999999918415
+        },
+        {
+          "at": 134,
+          "action": "plus",
+          "cash": 5.0999999999928605
+        },
+        {
+          "at": 137,
+          "action": "system",
+          "cash": 4.049999999992934
+        },
+        {
+          "at": 140,
+          "action": "system",
+          "cash": 7.1999999999929685
+        },
+        {
+          "at": 143,
+          "action": "system",
+          "cash": 6.1499999999930495
+        },
+        {
+          "at": 146,
+          "action": "system",
+          "cash": 12.899999999993064
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 199.8,
+        "cash": 1201.269999999989,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2116.1999999999916,
+        "wages": 69.9299999999948,
+        "minCash": 1.6499999999921044,
+        "idle": 48.29999999999939,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 44.549999999999606,
+        "queueWait": 207.25,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 4.3499999999922
+        },
+        {
+          "at": 81,
+          "action": "system",
+          "cash": 1.7999999999922593
+        },
+        {
+          "at": 90,
+          "action": "system",
+          "cash": 5.5499999999921314
+        },
+        {
+          "at": 96,
+          "action": "system",
+          "cash": 2.6999999999920377
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 9.59999999999193
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 16.49999999999178
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 30.599999999991738
+        },
+        {
+          "at": 135,
+          "action": "plus",
+          "cash": 4.749999999992667
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 3.699999999992741
+        },
+        {
+          "at": 141,
+          "action": "system",
+          "cash": 6.849999999992775
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 5.799999999992856
+        },
+        {
+          "at": 147,
+          "action": "system",
+          "cash": 12.54999999999287
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 198,
+        "cash": 1200.099999999993,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.3999999999887,
+        "wages": 69.29999999999487,
+        "minCash": 0.04999999999203908,
+        "idle": 47.29999999999945,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.74999999999965,
+        "queueWait": 208.3,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 1.699999999992194
+        },
+        {
+          "at": 79,
+          "action": "system",
+          "cash": 0.5499999999922025
+        },
+        {
+          "at": 89,
+          "action": "system",
+          "cash": 2.8999999999920973
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 0.04999999999203908
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 6.949999999991945
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 5.19999999999186
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 4.649999999991827
+        },
+        {
+          "at": 133,
+          "action": "plus",
+          "cash": 7.399999999991621
+        },
+        {
+          "at": 137,
+          "action": "system",
+          "cash": 9.899999999991714
+        },
+        {
+          "at": 140,
+          "action": "system",
+          "cash": 14.849999999991745
+        },
+        {
+          "at": 142,
+          "action": "system",
+          "cash": 5.149999999991756
+        },
+        {
+          "at": 145,
+          "action": "system",
+          "cash": 13.099999999991773
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 198.9,
+        "cash": 1200.0849999999916,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.6999999999925,
+        "wages": 69.61499999999484,
+        "minCash": 1.6499999999921044,
+        "idle": 48.29999999999939,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.64999999999966,
+        "queueWait": 204.3,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 4.3499999999922
+        },
+        {
+          "at": 81,
+          "action": "system",
+          "cash": 2.8499999999922494
+        },
+        {
+          "at": 90,
+          "action": "system",
+          "cash": 5.5499999999921314
+        },
+        {
+          "at": 96,
+          "action": "system",
+          "cash": 2.6999999999920377
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 9.59999999999193
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 16.49999999999178
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 30.599999999991738
+        },
+        {
+          "at": 135,
+          "action": "plus",
+          "cash": 21.69999999999135
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 12.549999999991464
+        },
+        {
+          "at": 141,
+          "action": "system",
+          "cash": 17.499999999991502
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 25.449999999991462
+        },
+        {
+          "at": 147,
+          "action": "system",
+          "cash": 33.399999999991365
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 197.9,
+        "cash": 1200.1349999999911,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.399999999996,
+        "wages": 69.26499999999487,
+        "minCash": 0.04999999999202487,
+        "idle": 47.29999999999945,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.64999999999966,
+        "queueWait": 208.3,
+        "jobsStarted": 19,
+        "failures": 10,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 1.699999999992194
+        },
+        {
+          "at": 79,
+          "action": "system",
+          "cash": 2.0499999999921883
+        },
+        {
+          "at": 89,
+          "action": "system",
+          "cash": 2.899999999992083
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 0.04999999999202487
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 6.949999999991931
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 5.199999999991846
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 4.649999999991813
+        },
+        {
+          "at": 134,
+          "action": "plus",
+          "cash": 10.949999999993452
+        },
+        {
+          "at": 137,
+          "action": "system",
+          "cash": 9.89999999999354
+        },
+        {
+          "at": 140,
+          "action": "system",
+          "cash": 14.849999999993571
+        },
+        {
+          "at": 142,
+          "action": "system",
+          "cash": 5.149999999993582
+        },
+        {
+          "at": 145,
+          "action": "system",
+          "cash": 13.0999999999936
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 198.85,
+        "cash": 1200.5524999999911,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2115.149999999996,
+        "wages": 69.59749999999484,
+        "minCash": 1.6499999999921044,
+        "idle": 48.29999999999939,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.59999999999966,
+        "queueWait": 204.3,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 4.3499999999922
+        },
+        {
+          "at": 81,
+          "action": "system",
+          "cash": 4.349999999992235
+        },
+        {
+          "at": 90,
+          "action": "system",
+          "cash": 5.549999999992124
+        },
+        {
+          "at": 96,
+          "action": "system",
+          "cash": 2.6999999999920306
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 9.599999999991923
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 16.499999999991772
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 30.599999999991724
+        },
+        {
+          "at": 135,
+          "action": "plus",
+          "cash": 13.599999999993543
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 12.549999999993638
+        },
+        {
+          "at": 141,
+          "action": "system",
+          "cash": 17.499999999993676
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 25.449999999993636
+        },
+        {
+          "at": 147,
+          "action": "system",
+          "cash": 33.39999999999354
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 198.05,
+        "cash": 1200.232499999988,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2114.549999999973,
+        "wages": 69.31749999999487,
+        "minCash": 0.0499999999920675,
+        "idle": 47.29999999999945,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.79999999999965,
+        "queueWait": 209.3,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 9,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 65,
+          "action": "system",
+          "cash": 1.699999999992194
+        },
+        {
+          "at": 79,
+          "action": "system",
+          "cash": 3.3999999999921755
+        },
+        {
+          "at": 89,
+          "action": "system",
+          "cash": 2.8999999999921258
+        },
+        {
+          "at": 95,
+          "action": "system",
+          "cash": 0.0499999999920675
+        },
+        {
+          "at": 101,
+          "action": "system",
+          "cash": 6.949999999991974
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 5.1999999999918884
+        },
+        {
+          "at": 111,
+          "action": "system",
+          "cash": 4.649999999991856
+        },
+        {
+          "at": 133,
+          "action": "plus",
+          "cash": 8.2999999999912
+        },
+        {
+          "at": 136,
+          "action": "system",
+          "cash": 1.099999999991283
+        },
+        {
+          "at": 140,
+          "action": "system",
+          "cash": 14.849999999991283
+        },
+        {
+          "at": 142,
+          "action": "system",
+          "cash": 5.149999999991294
+        },
+        {
+          "at": 145,
+          "action": "system",
+          "cash": 13.099999999991311
+        }
+      ]
+    },
+    {
+      "policy": "recon-first",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 198.95,
+        "cash": 1200.5174999999876,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2115.149999999976,
+        "wages": 69.63249999999483,
+        "minCash": 1.6499999999921044,
+        "idle": 48.29999999999939,
+        "construction": 95.04999999999674,
+        "maintenance": 11.850000000000033,
+        "return": 43.699999999999655,
+        "queueWait": 204.3,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 9,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 66,
+          "action": "system",
+          "cash": 4.3499999999922
+        },
+        {
+          "at": 81,
+          "action": "system",
+          "cash": 11.699999999992166
+        },
+        {
+          "at": 90,
+          "action": "system",
+          "cash": 5.549999999992103
+        },
+        {
+          "at": 96,
+          "action": "system",
+          "cash": 2.6999999999920092
+        },
+        {
+          "at": 102,
+          "action": "system",
+          "cash": 9.599999999991901
+        },
+        {
+          "at": 108,
+          "action": "system",
+          "cash": 16.49999999999175
+        },
+        {
+          "at": 114,
+          "action": "system",
+          "cash": 30.59999999999171
+        },
+        {
+          "at": 135,
+          "action": "plus",
+          "cash": 25.44999999999129
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 15.399999999991437
+        },
+        {
+          "at": 141,
+          "action": "system",
+          "cash": 17.499999999991438
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 25.449999999991405
+        },
+        {
+          "at": 147,
+          "action": "system",
+          "cash": 33.39999999999131
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 299.95,
+        "cash": 1200.2674999999758,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.2499999999627,
+        "wages": 104.98249999999139,
+        "minCash": 1.1999999999811166,
+        "idle": 159.30000000000197,
+        "construction": 88.34999999999712,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 256.30000000000007,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 155,
+          "action": "plus",
+          "cash": 1.1999999999811166
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981341
+        },
+        {
+          "at": 191,
+          "action": "system",
+          "cash": 4.199999999981323
+        },
+        {
+          "at": 199,
+          "action": "system",
+          "cash": 4.399999999981205
+        },
+        {
+          "at": 206,
+          "action": "system",
+          "cash": 4.19999999998106
+        },
+        {
+          "at": 211,
+          "action": "system",
+          "cash": 1.8499999999809944
+        },
+        {
+          "at": 218,
+          "action": "system",
+          "cash": 5.9999999999808935
+        },
+        {
+          "at": 223,
+          "action": "system",
+          "cash": 5.449999999980861
+        },
+        {
+          "at": 227,
+          "action": "system",
+          "cash": 7.0499999999809475
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999981048
+        },
+        {
+          "at": 235,
+          "action": "system",
+          "cash": 10.249999999981156
+        },
+        {
+          "at": 239,
+          "action": "system",
+          "cash": 1.3499999999811578
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 299.95,
+        "cash": 1200.2674999999756,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.2499999999695,
+        "wages": 104.98249999999139,
+        "minCash": 1.6499999999921044,
+        "idle": 159.30000000000197,
+        "construction": 88.34999999999712,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 246.30000000000007,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 156,
+          "action": "plus",
+          "cash": 3.84999999998098
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981206
+        },
+        {
+          "at": 192,
+          "action": "system",
+          "cash": 9.849999999981165
+        },
+        {
+          "at": 201,
+          "action": "system",
+          "cash": 15.699999999981003
+        },
+        {
+          "at": 207,
+          "action": "system",
+          "cash": 12.849999999980795
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 13.149999999980693
+        },
+        {
+          "at": 219,
+          "action": "system",
+          "cash": 14.64999999998053
+        },
+        {
+          "at": 225,
+          "action": "system",
+          "cash": 28.749999999980517
+        },
+        {
+          "at": 228,
+          "action": "system",
+          "cash": 18.699999999980683
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980793
+        },
+        {
+          "at": 237,
+          "action": "system",
+          "cash": 27.699999999980946
+        },
+        {
+          "at": 240,
+          "action": "system",
+          "cash": 15.849999999980966
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 300.05,
+        "cash": 1200.5324999999812,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.549999999995,
+        "wages": 105.01749999999139,
+        "minCash": 1.1999999999810385,
+        "idle": 159.30000000000197,
+        "construction": 88.44999999999712,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 253.30000000000007,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 12,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 155,
+          "action": "plus",
+          "cash": 1.1999999999811166
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981199
+        },
+        {
+          "at": 191,
+          "action": "system",
+          "cash": 4.199999999981181
+        },
+        {
+          "at": 199,
+          "action": "system",
+          "cash": 4.399999999981063
+        },
+        {
+          "at": 207,
+          "action": "system",
+          "cash": 1.8999999999809702
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 7.749999999980872
+        },
+        {
+          "at": 218,
+          "action": "system",
+          "cash": 5.99999999998078
+        },
+        {
+          "at": 223,
+          "action": "system",
+          "cash": 5.449999999980747
+        },
+        {
+          "at": 227,
+          "action": "system",
+          "cash": 7.049999999980834
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980935
+        },
+        {
+          "at": 235,
+          "action": "system",
+          "cash": 10.099999999981037
+        },
+        {
+          "at": 239,
+          "action": "system",
+          "cash": 1.1999999999810385
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 300.05,
+        "cash": 1200.5324999999814,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.549999999995,
+        "wages": 105.01749999999139,
+        "minCash": 1.2574999999811798,
+        "idle": 159.30000000000197,
+        "construction": 88.44999999999712,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 246.30000000000007,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 12,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 156,
+          "action": "plus",
+          "cash": 2.499999999981185
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.49999999998127
+        },
+        {
+          "at": 192,
+          "action": "system",
+          "cash": 9.849999999981229
+        },
+        {
+          "at": 201,
+          "action": "system",
+          "cash": 15.699999999981067
+        },
+        {
+          "at": 207,
+          "action": "system",
+          "cash": 1.8999999999809631
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 7.749999999980865
+        },
+        {
+          "at": 219,
+          "action": "system",
+          "cash": 14.649999999980722
+        },
+        {
+          "at": 225,
+          "action": "system",
+          "cash": 28.7499999999807
+        },
+        {
+          "at": 228,
+          "action": "system",
+          "cash": 18.699999999980868
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980977
+        },
+        {
+          "at": 237,
+          "action": "system",
+          "cash": 27.39999999998112
+        },
+        {
+          "at": 240,
+          "action": "system",
+          "cash": 15.849999999981137
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 299.9,
+        "cash": 1200.5849999999796,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.5499999999797,
+        "wages": 104.96499999999139,
+        "minCash": 0.19999999998115214,
+        "idle": 159.30000000000197,
+        "construction": 88.29999999999713,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 254.30000000000007,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 155,
+          "action": "plus",
+          "cash": 1.1999999999811166
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981341
+        },
+        {
+          "at": 191,
+          "action": "system",
+          "cash": 4.199999999981323
+        },
+        {
+          "at": 199,
+          "action": "system",
+          "cash": 4.399999999981205
+        },
+        {
+          "at": 206,
+          "action": "system",
+          "cash": 4.19999999998106
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 7.749999999980929
+        },
+        {
+          "at": 218,
+          "action": "system",
+          "cash": 5.999999999980837
+        },
+        {
+          "at": 223,
+          "action": "system",
+          "cash": 5.449999999980804
+        },
+        {
+          "at": 227,
+          "action": "system",
+          "cash": 7.049999999980891
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980992
+        },
+        {
+          "at": 235,
+          "action": "system",
+          "cash": 10.2499999999811
+        },
+        {
+          "at": 238,
+          "action": "system",
+          "cash": 0.19999999998115214
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 299.9,
+        "cash": 1200.5849999999793,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.5499999999797,
+        "wages": 104.96499999999139,
+        "minCash": 1.6499999999921044,
+        "idle": 159.30000000000197,
+        "construction": 88.29999999999713,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 246.30000000000007,
+        "jobsStarted": 21,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 156,
+          "action": "plus",
+          "cash": 3.84999999998098
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981206
+        },
+        {
+          "at": 192,
+          "action": "system",
+          "cash": 9.849999999981165
+        },
+        {
+          "at": 201,
+          "action": "system",
+          "cash": 15.699999999981003
+        },
+        {
+          "at": 207,
+          "action": "system",
+          "cash": 12.849999999980795
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 7.749999999980673
+        },
+        {
+          "at": 219,
+          "action": "system",
+          "cash": 14.64999999998053
+        },
+        {
+          "at": 225,
+          "action": "system",
+          "cash": 28.749999999980517
+        },
+        {
+          "at": 228,
+          "action": "system",
+          "cash": 18.699999999980683
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980793
+        },
+        {
+          "at": 237,
+          "action": "system",
+          "cash": 33.549999999980855
+        },
+        {
+          "at": 240,
+          "action": "system",
+          "cash": 26.799999999980955
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 300.75,
+        "cash": 1200.2874999999792,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.549999999973,
+        "wages": 105.26249999999136,
+        "minCash": 0.19999999998112372,
+        "idle": 159.30000000000197,
+        "construction": 89.14999999999708,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 254.30000000000007,
+        "jobsStarted": 23,
+        "failures": 14,
+        "repairs": 12,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 155,
+          "action": "plus",
+          "cash": 1.1999999999811166
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981341
+        },
+        {
+          "at": 191,
+          "action": "system",
+          "cash": 4.199999999981323
+        },
+        {
+          "at": 199,
+          "action": "system",
+          "cash": 4.399999999981205
+        },
+        {
+          "at": 206,
+          "action": "system",
+          "cash": 4.19999999998106
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 7.749999999980901
+        },
+        {
+          "at": 218,
+          "action": "system",
+          "cash": 5.999999999980808
+        },
+        {
+          "at": 223,
+          "action": "system",
+          "cash": 5.4499999999807756
+        },
+        {
+          "at": 227,
+          "action": "system",
+          "cash": 7.049999999980862
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980963
+        },
+        {
+          "at": 235,
+          "action": "system",
+          "cash": 10.249999999981071
+        },
+        {
+          "at": 238,
+          "action": "system",
+          "cash": 0.19999999998112372
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 300.75,
+        "cash": 1200.287499999979,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2150.549999999973,
+        "wages": 105.26249999999136,
+        "minCash": 1.6499999999921044,
+        "idle": 159.30000000000197,
+        "construction": 89.14999999999708,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 246.30000000000007,
+        "jobsStarted": 23,
+        "failures": 14,
+        "repairs": 12,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 156,
+          "action": "plus",
+          "cash": 3.84999999998098
+        },
+        {
+          "at": 177,
+          "action": "system",
+          "cash": 2.499999999981206
+        },
+        {
+          "at": 192,
+          "action": "system",
+          "cash": 9.849999999981165
+        },
+        {
+          "at": 201,
+          "action": "system",
+          "cash": 15.699999999981003
+        },
+        {
+          "at": 207,
+          "action": "system",
+          "cash": 12.849999999980795
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 7.749999999980645
+        },
+        {
+          "at": 219,
+          "action": "system",
+          "cash": 14.649999999980501
+        },
+        {
+          "at": 225,
+          "action": "system",
+          "cash": 28.74999999998049
+        },
+        {
+          "at": 228,
+          "action": "system",
+          "cash": 18.699999999980655
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 8.649999999980764
+        },
+        {
+          "at": 237,
+          "action": "system",
+          "cash": 33.54999999998083
+        },
+        {
+          "at": 240,
+          "action": "system",
+          "cash": 27.849999999980966
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 295.2,
+        "cash": 1200.87999999998,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2149.200000000003,
+        "wages": 103.31999999999155,
+        "minCash": 1.1999999999811166,
+        "idle": 154.70000000000093,
+        "construction": 88.19999999999713,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 248.49999999999997,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 155,
+          "action": "plus",
+          "cash": 1.1999999999811166
+        },
+        {
+          "at": 172,
+          "action": "system",
+          "cash": 1.249999999981199
+        },
+        {
+          "at": 188,
+          "action": "system",
+          "cash": 2.2499999999811067
+        },
+        {
+          "at": 196,
+          "action": "system",
+          "cash": 2.449999999980996
+        },
+        {
+          "at": 203,
+          "action": "system",
+          "cash": 7.049999999980884
+        },
+        {
+          "at": 208,
+          "action": "system",
+          "cash": 5.299999999980798
+        },
+        {
+          "at": 213,
+          "action": "system",
+          "cash": 3.54999999998072
+        },
+        {
+          "at": 219,
+          "action": "system",
+          "cash": 4.149999999980636
+        },
+        {
+          "at": 223,
+          "action": "system",
+          "cash": 3.049999999980699
+        },
+        {
+          "at": 227,
+          "action": "system",
+          "cash": 4.649999999980778
+        },
+        {
+          "at": 231,
+          "action": "system",
+          "cash": 6.249999999980865
+        },
+        {
+          "at": 235,
+          "action": "system",
+          "cash": 2.8999999999809205
+        }
+      ]
+    },
+    {
+      "policy": "plus-first",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 296.65,
+        "cash": 1200.3724999999795,
+        "systems": 12,
+        "installed": 9,
+        "developers": 1,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2149.2000000000003,
+        "wages": 103.8274999999915,
+        "minCash": 0.6999999999806761,
+        "idle": 156.3000000000013,
+        "construction": 88.04999999999714,
+        "maintenance": 11.850000000000033,
+        "return": 40.39999999999984,
+        "queueWait": 246.30000000000007,
+        "jobsStarted": 20,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 48,
+          "action": "recon",
+          "cash": 1.6499999999921044
+        },
+        {
+          "at": 156,
+          "action": "plus",
+          "cash": 3.84999999998098
+        },
+        {
+          "at": 174,
+          "action": "system",
+          "cash": 6.549999999981075
+        },
+        {
+          "at": 189,
+          "action": "system",
+          "cash": 1.8999999999810129
+        },
+        {
+          "at": 198,
+          "action": "system",
+          "cash": 7.749999999980879
+        },
+        {
+          "at": 204,
+          "action": "system",
+          "cash": 4.899999999980764
+        },
+        {
+          "at": 210,
+          "action": "system",
+          "cash": 11.799999999980642
+        },
+        {
+          "at": 216,
+          "action": "system",
+          "cash": 18.399999999980487
+        },
+        {
+          "at": 222,
+          "action": "system",
+          "cash": 20.7999999999805
+        },
+        {
+          "at": 225,
+          "action": "system",
+          "cash": 10.749999999980616
+        },
+        {
+          "at": 228,
+          "action": "system",
+          "cash": 0.6999999999806761
+        },
+        {
+          "at": 234,
+          "action": "system",
+          "cash": 25.59999999998078
+        },
+        {
+          "at": 237,
+          "action": "system",
+          "cash": 11.799999999980827
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 1,
+      "reaction": 1,
+      "result": {
+        "at": 220.45,
+        "cash": 1200.1199999999924,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2496.0000000000277,
+        "wages": 285.8799999999789,
+        "minCash": 0.7000000000003581,
+        "idle": 602.8999999999994,
+        "construction": 112.24999999999577,
+        "maintenance": 36.60000000000006,
+        "return": 64.84999999999846,
+        "queueWait": 7.900000000000034,
+        "jobsStarted": 22,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 2
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 56,
+          "action": "developer",
+          "cash": 1.7999999999998408
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 1.249999999998792
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 2.049999999998569
+        },
+        {
+          "at": 137,
+          "action": "system",
+          "cash": 1.049999999998228
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 2.6499999999983146
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 7.7499999999983515
+        },
+        {
+          "at": 154,
+          "action": "system",
+          "cash": 7.399999999998393
+        },
+        {
+          "at": 157,
+          "action": "system",
+          "cash": 3.1999999999983757
+        },
+        {
+          "at": 160,
+          "action": "system",
+          "cash": 5.8999999999983
+        },
+        {
+          "at": 163,
+          "action": "system",
+          "cash": 14.149999999998187
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 8.349999999998126
+        },
+        {
+          "at": 167,
+          "action": "system",
+          "cash": 2.849999999998097
+        },
+        {
+          "at": 175,
+          "action": "recon",
+          "cash": 8.449999999997885
+        },
+        {
+          "at": 184,
+          "action": "plus",
+          "cash": 6.8999999999987836
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 1,
+      "reaction": 3,
+      "result": {
+        "at": 222.35,
+        "cash": 1201.1099999999974,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2499.3000000000266,
+        "wages": 288.18999999997874,
+        "minCash": 0,
+        "idle": 604.1999999999982,
+        "construction": 111.6499999999958,
+        "maintenance": 39.84999999999987,
+        "return": 67.49999999999831,
+        "queueWait": 11.650000000000034,
+        "jobsStarted": 22,
+        "failures": 11,
+        "repairs": 10,
+        "takeovers": 2
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 57,
+          "action": "developer",
+          "cash": 3.7499999999997726
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 5.399999999999757
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 8.99999999999936
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 5.99999999999946
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 8.099999999999554
+        },
+        {
+          "at": 156,
+          "action": "system",
+          "cash": 34.94999999999975
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 34.64999999999969
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 39.44999999999959
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 47.69999999999962
+        },
+        {
+          "at": 168,
+          "action": "system",
+          "cash": 61.499999999999744
+        },
+        {
+          "at": 171,
+          "action": "system",
+          "cash": 77.69999999999983
+        },
+        {
+          "at": 177,
+          "action": "recon",
+          "cash": 32.99999999999969
+        },
+        {
+          "at": 186,
+          "action": "plus",
+          "cash": 13.150000000000034
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 31,
+      "reaction": 1,
+      "result": {
+        "at": 222.7,
+        "cash": 1200.5699999999927,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2499.599999999999,
+        "wages": 289.0299999999786,
+        "minCash": 0.1999999999986528,
+        "idle": 595.3000000000063,
+        "construction": 113.59999999999569,
+        "maintenance": 46.54999999999949,
+        "return": 70.14999999999816,
+        "queueWait": 19.100000000000023,
+        "jobsStarted": 23,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 56,
+          "action": "developer",
+          "cash": 1.7999999999998408
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 1.249999999998792
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 2.049999999998569
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 2.049999999998491
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 2.6499999999985704
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 4.749999999998636
+        },
+        {
+          "at": 154,
+          "action": "system",
+          "cash": 4.39999999999867
+        },
+        {
+          "at": 157,
+          "action": "system",
+          "cash": 0.1999999999986528
+        },
+        {
+          "at": 160,
+          "action": "system",
+          "cash": 2.8999999999985846
+        },
+        {
+          "at": 163,
+          "action": "system",
+          "cash": 10.699999999998482
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 1.7499999999984581
+        },
+        {
+          "at": 168,
+          "action": "system",
+          "cash": 9.84999999999836
+        },
+        {
+          "at": 177,
+          "action": "recon",
+          "cash": 19.29999999999842
+        },
+        {
+          "at": 186,
+          "action": "plus",
+          "cash": 14.599999999998943
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 31,
+      "reaction": 3,
+      "result": {
+        "at": 224.15,
+        "cash": 1200.989999999997,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2501.7000000000144,
+        "wages": 290.7099999999785,
+        "minCash": 0,
+        "idle": 594.8000000000068,
+        "construction": 113.04999999999572,
+        "maintenance": 49.74999999999931,
+        "return": 72.79999999999801,
+        "queueWait": 20.69999999999999,
+        "jobsStarted": 23,
+        "failures": 12,
+        "repairs": 11,
+        "takeovers": 1
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 57,
+          "action": "developer",
+          "cash": 3.7499999999997726
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 5.399999999999757
+        },
+        {
+          "at": 138,
+          "action": "system",
+          "cash": 5.399999999999565
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 5.999999999999666
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 8.09999999999976
+        },
+        {
+          "at": 156,
+          "action": "system",
+          "cash": 34.94999999999996
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 34.649999999999906
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 39.449999999999804
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 41.54999999999977
+        },
+        {
+          "at": 168,
+          "action": "system",
+          "cash": 46.34999999999967
+        },
+        {
+          "at": 171,
+          "action": "system",
+          "cash": 56.09999999999974
+        },
+        {
+          "at": 180,
+          "action": "recon",
+          "cash": 73.9499999999997
+        },
+        {
+          "at": 189,
+          "action": "plus",
+          "cash": 67.14999999999947
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 93,
+      "reaction": 1,
+      "result": {
+        "at": 218.55,
+        "cash": 1200.3800000000108,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2493.600000000054,
+        "wages": 283.21999999997917,
+        "minCash": 0.6999999999983615,
+        "idle": 596.800000000005,
+        "construction": 112.84999999999573,
+        "maintenance": 35.250000000000135,
+        "return": 64.0999999999985,
+        "queueWait": 3.8000000000000114,
+        "jobsStarted": 21,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 1
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 56,
+          "action": "developer",
+          "cash": 1.7999999999998408
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 1.249999999998792
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 2.049999999998569
+        },
+        {
+          "at": 133,
+          "action": "system",
+          "cash": 1.5499999999984198
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 2.649999999998279
+        },
+        {
+          "at": 149,
+          "action": "system",
+          "cash": 9.14999999999835
+        },
+        {
+          "at": 153,
+          "action": "system",
+          "cash": 6.54999999999842
+        },
+        {
+          "at": 156,
+          "action": "system",
+          "cash": 1.5999999999984027
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 0.6999999999983615
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 7.149999999998279
+        },
+        {
+          "at": 164,
+          "action": "system",
+          "cash": 1.3499999999982464
+        },
+        {
+          "at": 167,
+          "action": "system",
+          "cash": 22.049999999998306
+        },
+        {
+          "at": 174,
+          "action": "recon",
+          "cash": 5.949999999998141
+        },
+        {
+          "at": 183,
+          "action": "plus",
+          "cash": 19.24999999999841
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 93,
+      "reaction": 3,
+      "result": {
+        "at": 218.75,
+        "cash": 1201.2000000000098,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2494.3500000000586,
+        "wages": 283.14999999997923,
+        "minCash": 0,
+        "idle": 594.600000000007,
+        "construction": 113.4499999999957,
+        "maintenance": 35.65000000000011,
+        "return": 65.09999999999845,
+        "queueWait": 4.400000000000006,
+        "jobsStarted": 21,
+        "failures": 10,
+        "repairs": 8,
+        "takeovers": 0
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 57,
+          "action": "developer",
+          "cash": 3.7499999999997726
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 5.399999999999757
+        },
+        {
+          "at": 132,
+          "action": "system",
+          "cash": 1.7999999999996064
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 5.5499999999994
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 22.499999999999503
+        },
+        {
+          "at": 153,
+          "action": "system",
+          "cash": 9.29999999999957
+        },
+        {
+          "at": 156,
+          "action": "system",
+          "cash": 4.349999999999554
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 0.4499999999995339
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 6.8999999999994515
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 21.59999999999937
+        },
+        {
+          "at": 168,
+          "action": "system",
+          "cash": 44.399999999999324
+        },
+        {
+          "at": 174,
+          "action": "recon",
+          "cash": 2.699999999999136
+        },
+        {
+          "at": 183,
+          "action": "plus",
+          "cash": 20.79999999999876
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 200,
+      "reaction": 1,
+      "result": {
+        "at": 220,
+        "cash": 1201.3500000000133,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2496.600000000017,
+        "wages": 285.24999999997897,
+        "minCash": 0.14999999999849223,
+        "idle": 600.8000000000013,
+        "construction": 112.24999999999577,
+        "maintenance": 36.75000000000005,
+        "return": 64.99999999999845,
+        "queueWait": 3.8000000000000114,
+        "jobsStarted": 22,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 2
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 56,
+          "action": "developer",
+          "cash": 1.7999999999998408
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 1.249999999998792
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 2.049999999998569
+        },
+        {
+          "at": 136,
+          "action": "system",
+          "cash": 1.2499999999983586
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 2.649999999998478
+        },
+        {
+          "at": 149,
+          "action": "system",
+          "cash": 0.14999999999849223
+        },
+        {
+          "at": 154,
+          "action": "system",
+          "cash": 10.399999999998542
+        },
+        {
+          "at": 157,
+          "action": "system",
+          "cash": 7.099999999998516
+        },
+        {
+          "at": 160,
+          "action": "system",
+          "cash": 11.899999999998435
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 0.54999999999837
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 14.349999999998296
+        },
+        {
+          "at": 167,
+          "action": "system",
+          "cash": 8.849999999998246
+        },
+        {
+          "at": 174,
+          "action": "recon",
+          "cash": 1.7499999999984368
+        },
+        {
+          "at": 184,
+          "action": "plus",
+          "cash": 22.799999999999102
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 200,
+      "reaction": 3,
+      "result": {
+        "at": 221.6,
+        "cash": 1200.2100000000155,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2497.3500000000263,
+        "wages": 287.13999999997884,
+        "minCash": 0,
+        "idle": 596.0000000000057,
+        "construction": 112.24999999999577,
+        "maintenance": 41.84999999999976,
+        "return": 70.09999999999816,
+        "queueWait": 5.650000000000006,
+        "jobsStarted": 22,
+        "failures": 11,
+        "repairs": 11,
+        "takeovers": 3
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 57,
+          "action": "developer",
+          "cash": 3.7499999999997726
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 5.399999999999757
+        },
+        {
+          "at": 135,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 144,
+          "action": "system",
+          "cash": 6.000000000000156
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 17.10000000000023
+        },
+        {
+          "at": 153,
+          "action": "system",
+          "cash": 3.900000000000297
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 43.65000000000026
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 51.90000000000029
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 65.70000000000044
+        },
+        {
+          "at": 168,
+          "action": "system",
+          "cash": 79.50000000000068
+        },
+        {
+          "at": 171,
+          "action": "system",
+          "cash": 99.60000000000056
+        },
+        {
+          "at": 177,
+          "action": "recon",
+          "cash": 59.55000000000018
+        },
+        {
+          "at": 186,
+          "action": "plus",
+          "cash": 37.4500000000001
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 987,
+      "reaction": 1,
+      "result": {
+        "at": 218.35,
+        "cash": 1200.0600000000086,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2493.000000000021,
+        "wages": 282.9399999999792,
+        "minCash": 0,
+        "idle": 593.3500000000081,
+        "construction": 113.4499999999957,
+        "maintenance": 36.00000000000009,
+        "return": 65.39999999999843,
+        "queueWait": 1.950000000000017,
+        "jobsStarted": 23,
+        "failures": 12,
+        "repairs": 9,
+        "takeovers": 1
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 56,
+          "action": "developer",
+          "cash": 1.7999999999998408
+        },
+        {
+          "at": 106,
+          "action": "system",
+          "cash": 1.249999999998792
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 2.049999999998569
+        },
+        {
+          "at": 133,
+          "action": "system",
+          "cash": 3.0499999999984055
+        },
+        {
+          "at": 140,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 148,
+          "action": "system",
+          "cash": 0.5000000000000995
+        },
+        {
+          "at": 153,
+          "action": "system",
+          "cash": 12.100000000000094
+        },
+        {
+          "at": 156,
+          "action": "system",
+          "cash": 7.900000000000077
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 12.099999999999994
+        },
+        {
+          "at": 161,
+          "action": "system",
+          "cash": 0.2999999999999332
+        },
+        {
+          "at": 164,
+          "action": "system",
+          "cash": 12.749999999999858
+        },
+        {
+          "at": 166,
+          "action": "system",
+          "cash": 10.849999999999916
+        },
+        {
+          "at": 173,
+          "action": "recon",
+          "cash": 0.29999999999998295
+        },
+        {
+          "at": 182,
+          "action": "plus",
+          "cash": 17.79999999999967
+        }
+      ]
+    },
+    {
+      "policy": "four-developers",
+      "seed": 987,
+      "reaction": 3,
+      "result": {
+        "at": 218.75,
+        "cash": 1200.750000000012,
+        "systems": 12,
+        "installed": 12,
+        "developers": 4,
+        "recon": 3
+      },
+      "systems": 12,
+      "metrics": {
+        "income": 2493.90000000003,
+        "wages": 283.14999999997923,
+        "minCash": 0,
+        "idle": 589.050000000012,
+        "construction": 114.64999999999563,
+        "maintenance": 37.40000000000001,
+        "return": 67.6999999999983,
+        "queueWait": 2.950000000000017,
+        "jobsStarted": 23,
+        "failures": 12,
+        "repairs": 8,
+        "takeovers": 1
+      },
+      "purchases": [
+        {
+          "at": 0,
+          "action": "developer",
+          "cash": 35
+        },
+        {
+          "at": 9,
+          "action": "developer",
+          "cash": 0.7000000000003581
+        },
+        {
+          "at": 57,
+          "action": "developer",
+          "cash": 3.7499999999997726
+        },
+        {
+          "at": 105,
+          "action": "system",
+          "cash": 0
+        },
+        {
+          "at": 123,
+          "action": "system",
+          "cash": 5.399999999999757
+        },
+        {
+          "at": 132,
+          "action": "system",
+          "cash": 1.7999999999996064
+        },
+        {
+          "at": 141,
+          "action": "system",
+          "cash": 7.949999999999434
+        },
+        {
+          "at": 150,
+          "action": "system",
+          "cash": 22.49999999999963
+        },
+        {
+          "at": 153,
+          "action": "system",
+          "cash": 17.54999999999962
+        },
+        {
+          "at": 156,
+          "action": "system",
+          "cash": 13.349999999999604
+        },
+        {
+          "at": 159,
+          "action": "system",
+          "cash": 9.449999999999584
+        },
+        {
+          "at": 162,
+          "action": "system",
+          "cash": 15.89999999999948
+        },
+        {
+          "at": 165,
+          "action": "system",
+          "cash": 29.69999999999942
+        },
+        {
+          "at": 168,
+          "action": "system",
+          "cash": 49.79999999999929
+        },
+        {
+          "at": 174,
+          "action": "recon",
+          "cash": 17.24999999999926
+        },
+        {
+          "at": 183,
+          "action": "plus",
+          "cash": 26.94999999999959
+        }
+      ]
+    }
+  ],
+  "capacities": [
+    {
+      "seed": 1,
+      "recon": 1,
+      "burst": false,
+      "uptimePercent": 82.10262345679013,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 3,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 1,
+      "recon": 1,
+      "burst": true,
+      "uptimePercent": 82.12191358024691,
+      "maxBroken": 12,
+      "settledPeak": 4,
+      "peakQueue": 11,
+      "burstClearedAt": 108.25
+    },
+    {
+      "seed": 1,
+      "recon": 3,
+      "burst": false,
+      "uptimePercent": 90.75231481481481,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 1,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 1,
+      "recon": 3,
+      "burst": true,
+      "uptimePercent": 90.30864197530865,
+      "maxBroken": 12,
+      "settledPeak": 7,
+      "peakQueue": 9,
+      "burstClearedAt": 16.25
+    },
+    {
+      "seed": 31,
+      "recon": 1,
+      "burst": false,
+      "uptimePercent": 82.66203703703704,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 3,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 31,
+      "recon": 1,
+      "burst": true,
+      "uptimePercent": 82.7854938271605,
+      "maxBroken": 12,
+      "settledPeak": 4,
+      "peakQueue": 11,
+      "burstClearedAt": 88.25
+    },
+    {
+      "seed": 31,
+      "recon": 3,
+      "burst": false,
+      "uptimePercent": 90.9104938271605,
+      "maxBroken": 3,
+      "settledPeak": 3,
+      "peakQueue": 0,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 31,
+      "recon": 3,
+      "burst": true,
+      "uptimePercent": 90.81018518518519,
+      "maxBroken": 12,
+      "settledPeak": 5,
+      "peakQueue": 9,
+      "burstClearedAt": 16.25
+    },
+    {
+      "seed": 93,
+      "recon": 1,
+      "burst": false,
+      "uptimePercent": 83.12114197530865,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 3,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 93,
+      "recon": 1,
+      "burst": true,
+      "uptimePercent": 83.07098765432099,
+      "maxBroken": 12,
+      "settledPeak": 4,
+      "peakQueue": 11,
+      "burstClearedAt": 84.25
+    },
+    {
+      "seed": 93,
+      "recon": 3,
+      "burst": false,
+      "uptimePercent": 90.93364197530865,
+      "maxBroken": 5,
+      "settledPeak": 5,
+      "peakQueue": 2,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 93,
+      "recon": 3,
+      "burst": true,
+      "uptimePercent": 91.01851851851852,
+      "maxBroken": 12,
+      "settledPeak": 5,
+      "peakQueue": 9,
+      "burstClearedAt": 16.25
+    },
+    {
+      "seed": 200,
+      "recon": 1,
+      "burst": false,
+      "uptimePercent": 82.75077160493827,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 3,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 200,
+      "recon": 1,
+      "burst": true,
+      "uptimePercent": 82.62731481481481,
+      "maxBroken": 12,
+      "settledPeak": 4,
+      "peakQueue": 11,
+      "burstClearedAt": 192.25
+    },
+    {
+      "seed": 200,
+      "recon": 3,
+      "burst": false,
+      "uptimePercent": 90.85648148148148,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 1,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 200,
+      "recon": 3,
+      "burst": true,
+      "uptimePercent": 90.45524691358025,
+      "maxBroken": 12,
+      "settledPeak": 7,
+      "peakQueue": 9,
+      "burstClearedAt": 16.25
+    },
+    {
+      "seed": 987,
+      "recon": 1,
+      "burst": false,
+      "uptimePercent": 82.0871913580247,
+      "maxBroken": 4,
+      "settledPeak": 4,
+      "peakQueue": 3,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 987,
+      "recon": 1,
+      "burst": true,
+      "uptimePercent": 82.0949074074074,
+      "maxBroken": 12,
+      "settledPeak": 4,
+      "peakQueue": 11,
+      "burstClearedAt": 76.25
+    },
+    {
+      "seed": 987,
+      "recon": 3,
+      "burst": false,
+      "uptimePercent": 90.8449074074074,
+      "maxBroken": 5,
+      "settledPeak": 5,
+      "peakQueue": 2,
+      "burstClearedAt": null
+    },
+    {
+      "seed": 987,
+      "recon": 3,
+      "burst": true,
+      "uptimePercent": 90.2854938271605,
+      "maxBroken": 12,
+      "settledPeak": 6,
+      "peakQueue": 9,
+      "burstClearedAt": 16.25
+    }
+  ],
+  "delayed": [
+    {
+      "policy": "balanced",
+      "delay": 10,
+      "result": {
+        "at": 127.85,
+        "cash": 1200.354999999991,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "minCash": 0.29999999999841265
+    },
+    {
+      "policy": "hire-first",
+      "delay": 10,
+      "result": {
+        "at": 150.95,
+        "cash": 1200.1524999999967,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "minCash": 0.39999999999862723
+    },
+    {
+      "policy": "recon-first",
+      "delay": 10,
+      "result": {
+        "at": 198.75,
+        "cash": 1200.2874999999892,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "minCash": 0.04999999999205329
+    },
+    {
+      "policy": "balanced",
+      "delay": 30,
+      "result": {
+        "at": 141.15,
+        "cash": 1200.594999999999,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "minCash": 0.49999999999506883
+    },
+    {
+      "policy": "hire-first",
+      "delay": 30,
+      "result": {
+        "at": 144.65,
+        "cash": 1200.6675000000048,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "minCash": 0.7499999999944862
+    },
+    {
+      "policy": "recon-first",
+      "delay": 30,
+      "result": {
+        "at": 198.75,
+        "cash": 1200.2874999999892,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "minCash": 0.04999999999205329
+    },
+    {
+      "policy": "balanced",
+      "delay": 60,
+      "result": {
+        "at": 165.05,
+        "cash": 1201.1149999999932,
+        "systems": 12,
+        "installed": 12,
+        "developers": 2,
+        "recon": 3
+      },
+      "minCash": 0.04999999999026983
+    },
+    {
+      "policy": "hire-first",
+      "delay": 60,
+      "result": {
+        "at": 149.7,
+        "cash": 1200.164999999993,
+        "systems": 12,
+        "installed": 12,
+        "developers": 3,
+        "recon": 0
+      },
+      "minCash": 0.2999999999905114
+    },
+    {
+      "policy": "recon-first",
+      "delay": 60,
+      "result": {
+        "at": 198.75,
+        "cash": 1200.2874999999876,
+        "systems": 12,
+        "installed": 10,
+        "developers": 1,
+        "recon": 3
+      },
+      "minCash": 0.04999999999035509
+    }
+  ]
+}

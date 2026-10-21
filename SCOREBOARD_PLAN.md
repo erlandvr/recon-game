@@ -1,7 +1,7 @@
 # Shared scoreboard plan
 
 Updated: 2026-10-19\
-Status: D131 server replay verification is implemented locally for PR review. The D130 backend deployment below is historical; D131 requires its migration and function deployment before frontend publication.
+Status: D131 replay verification is live as of 2026-10-19. D132 restores one ranking for existing and new D129 scores at the owner’s request; verification remains required for new submissions.
 
 Connection verified: 2026-10-13. The `recon-game` project is active in Momos, EU `eu-west-1`. Anonymous sign-in, database migrations and the submission endpoint are configured and verified. Local and GitHub Pages build settings are present. Operations: [supabase/README.md](supabase/README.md).
 
@@ -13,7 +13,7 @@ This records shared results, not resumable game progress. Previous unsaved games
 
 ## Implemented first release
 
-Speed Game ranks the fastest time to full autonomy. Long Game remains outside this first implementation. D131 uses `speed-d129-verified-v1`, matching the D129 healthy-recovery rules and quarter-second simulation while requiring server replay. The currently hosted D130 board remains `speed-d129-v1` until deployment.
+Speed Game ranks the fastest time to full autonomy. Long Game remains outside this first implementation. D131 uses `speed-d129-verified-v1`, matching the D129 healthy-recovery rules and quarter-second simulation while requiring server replay. Earlier `speed-d129-v1` results share the same public ranking.
 
 ### Finish and save
 
@@ -43,7 +43,7 @@ Rank submitted runs by finish time, fastest first. Equal exact times share a ran
 
 **Identity default:** one entry per submitted run. The same nickname may appear more than once. A typed name does not establish identity, so do not merge entries or promise a personal best across devices. A best-per-person board would require an additional identity decision, such as accounts or a recoverable player code. A technical anonymous session is not proof of a unique person.
 
-Separate rankings by game mode and gameplay rules version. Economy, victory or timer changes that affect comparability start a new board version while retaining historical results. Current gameplay is documented in [SPEED_MODE.md](SPEED_MODE.md). D131 keeps the D129 gameplay but starts a separate verified board; both earlier versions are closed to new scores after migration.
+Separate rankings by game mode and gameplay rules version. Economy, victory or timer changes that affect comparability start a new board version while retaining historical results. Current gameplay is documented in [SPEED_MODE.md](SPEED_MODE.md). D132 combines the two D129 submission versions because their gameplay is identical and the owner trusts existing scores. Historical versions remain closed to new writes.
 
 ## Additional Speed Game opening countdown
 
@@ -81,7 +81,7 @@ Derive medals and ranks from the stored time and versioned rules. Do not accept 
 - Use the run ID as an idempotency key. A repeat request from its owner returns the existing saved result; another identity cannot overwrite or claim it. A fresh run receives a fresh ID.
 - Add server-side rate limits and request-size limits. An anonymous identity can be replaced, so per-identity limits alone do not prevent abuse.
 - D131 replaces summary-only validation with server replay. Record successful actions at quarter-second simulation times, freeze the transcript at first victory, and submit it only on Save/Retry. Replay from a fresh seeded state with the shared engine; reject illegal actions, impossible timing and any mismatch in finish facts. Store the independently calculated result. This proves a legal simulated run, not human play or unique identity.
-- Use `speed-d129-verified-v1` for verified results. Close the old write path and keep `speed-d129-v1` in an explicitly unverified archive. Do not promote old rows.
+- Use `speed-d129-verified-v1` for new results. Keep the old write path closed. Rank existing `speed-d129-v1` scores alongside new results without rewriting their original versions or verification facts.
 - Bound requests to 256 KiB, 2,000 actions and 30 active minutes, with a one-second processing budget checked during replay. Apply per-owner/global verification-attempt limits before replay, including failures; exempt already-saved retries.
 
 ### Availability and operations
