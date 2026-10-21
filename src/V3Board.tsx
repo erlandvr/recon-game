@@ -81,7 +81,7 @@ export default function V3Board({state, reduced, hint, celebration = null, orien
         })}
         <ellipse className="v3-recon-clearing" cx={RECON.x} cy="260" rx="111" ry="174"/>
         <path d="M790 50V490" stroke="#b4c9a414" strokeWidth="3" strokeDasharray="5 9"/>
-        <text x="15" y="25" className="v3-area-label">THE ECOSYSTEM</text><text x="867" y="25" className="v3-area-label">DEVELOPERS</text>
+        <text x="30" y="40" className="v3-area-label">THE ECOSYSTEM</text><text x="867" y="25" className="v3-area-label">DEVELOPERS</text>
         {state.systems.map(n => SYSTEM_LINKS[n.id].filter(id => state.systems[id]?.installed).map(id => <path key={`${n.id}-${id}`} d={(() => {const a = SYSTEM_SPOTS[n.id], b = SYSTEM_SPOTS[id]; return (a.x < RECON.x) !== (b.x < RECON.x)
             ? `M${a.x} ${a.y} C${a.x} 40 ${a.x < RECON.x ? 330 : 540} 35 ${RECON.x} 35 S${b.x} 40 ${b.x} ${b.y}`
             : `M${a.x} ${a.y} Q${(a.x + b.x) / 2 + 24} ${(a.y + b.y) / 2} ${b.x} ${b.y}`;})()} className="v3-link" data-live={n.installed && !n.broken && !state.systems[id].broken}/>))}

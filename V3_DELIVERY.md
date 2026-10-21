@@ -119,6 +119,10 @@ The owner rejected the four-stop banner tour: too many controls, slow text and w
 | Hidden/restart hold, reduced motion, fresh replay | Browser checks verify held sequence, static reduced-motion highlight, restart held during the final pointer, refresh/fresh-run welcome reset and first-build guidance after start. | Verified. |
 | Existing first-play flow | Build and all 65 V3 tests pass; event-opening and onboarding browser journeys verify the existing flow. The full paid journey finishes at 252.70s with exact frozen results and returns to the welcome on Play again. | Ready for owner review; newcomer comprehension remains unverified. |
 
+### Intro palette follow-up — D194
+
+The owner supplied the earlier intro as a color reference. `v3-game.css` and `V3Orientation.tsx` now use sage-green buttons/outlines, cream labels and darker neutral panels; remove the raised gold CTA styling. Follow-up screenshot feedback moves the ecosystem heading inward and down to provide clear padding inside the intro outline. Copy, CTA size, 3/2/2-second pointer sequence and automatic countdown are unchanged. Production build and focused four-size intro/browser checks pass; screenshots in `test-results/v3-orientation/`. Owner accepted the palette and title spacing and authorized committing, merging into main and pushing to both remotes. The implementation branch is `codex/intro-sage-palette`; deployment completion is checked separately.
+
 ## How to work slice by slice
 
 1. When the owner asks to **start the next slice**, follow the required documentation contract above. Use the earliest unfinished slice in the order above. Resume an in-progress slice rather than starting a later one. State the selected slice and its scope, then begin without asking the owner to repeat the plan.
