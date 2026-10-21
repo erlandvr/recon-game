@@ -1,0 +1,35 @@
+# Start a local preview and adb reverse its port, or pass a deployed GAME_URL.
+# Use a connected Android device; never clear its browser data.
+appId: com.android.chrome
+env:
+  GAME_URL: http://127.0.0.1:5176/
+---
+- launchApp:
+    stopApp: false
+- setOrientation: PORTRAIT
+- openLink:
+    link: ${GAME_URL}
+    browser: true
+- assertVisible: Rotate your phone to play
+- setOrientation: LANDSCAPE_LEFT
+- assertVisible: Get your intro
+- tapOn: Get your intro
+- extendedWaitUntil:
+    notVisible:
+      id: com.android.chrome:id/url_bar
+    timeout: 5000
+- extendedWaitUntil:
+    visible:
+      text: Build system.*
+      enabled: true
+    timeout: 20000
+- tapOn:
+    text: Build system.*
+    enabled: true
+- setOrientation: PORTRAIT
+- assertVisible: Rotate your phone to play
+- assertVisible: Time, cash and progress are held.
+- setOrientation: LANDSCAPE_RIGHT
+- assertVisible: Ready when you are
+- tapOn: Continue experience
+- assertVisible: Restart

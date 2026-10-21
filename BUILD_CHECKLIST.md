@@ -4,7 +4,7 @@ Updated: 2026-10-20. Scope and tuning live in [GAME_BRIEF.md](GAME_BRIEF.md); th
 
 Earlier sections record delivery at that time. Pause/save checks and full-slot rejection were superseded by D42–D44; later sections record current verification. The earlier combined automation was superseded by D51; D69 now adds separately purchased automatic remediation. Fixed elapsed-time milestones and unattended debug presets are superseded by D65–D67.
 
-Current device scope (D94): desktop/laptop only. Do not run mobile validation or add mobile-specific fixes. Historical phone checks below are not current requirements.
+Current device scope: D195 adds mobile landscape support to Active Animation, superseding D94 for this experience. Desktop/laptop regressions remain required. See `docs/analysis/v3-mobile-review.md` for current phone checks and remaining iPhone verification; historical phone checks below concern earlier modes.
 
 ## V3.4 build and hire counters (D176 / V3-F020)
 

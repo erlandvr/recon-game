@@ -31,6 +31,22 @@ Before marking a slice **Ready for review** or **Complete**, perform a documenta
 
 Cover all requirements delivered or changed by the slice and any inherited rules it affects. Link evidence rather than copying the full specification. Update the specification where authorised decisions changed, the progress table/backlog, and the handover. A slice is not review-ready while its documentation contradicts the implementation without an explicit recorded limitation. Moving on does not erase unresolved work; retain its assigned status.
 
+## Mobile landscape follow-up — D195–D197
+
+Owner-accepted implementation on `codex/v3-mobile-layout`, 2026-10-21; D198 authorizes extra regression checks, main merge and publication to both remotes. See [mobile review](docs/analysis/v3-mobile-review.md) for the verification record and remaining device limits.
+
+| Requirement | Implementation | Verification / status |
+| --- | --- | --- |
+| Open URL and play in landscape | Touch-phone portrait gate, existing welcome and intro | Android Chrome device via Maestro; Chromium and WebKit portrait/landscape checks. |
+| Mobile fullscreen from the intro tap | Optional request on touch phones, before starting the intro; rejection/unsupported fallback | Actual Android Chrome toolbar disappearance via Maestro; browser fullscreen entry/exit and rejected/unsupported/desktop checks pass. |
+| Rotation preserves the run | `useMobileLandscape.ts`, held countdown and game clock, explicit continue | Automated frozen cash/time through intro, countdown and run; device rotation and continue flow. |
+| Readable workshop and usable controls | `v3-mobile.css`: compact HUD, right purchase column on wide/short screens, bottom shelf otherwise; safe areas | Seven landscape viewport checks, maximum workshop captures and device inspection. |
+| Finish and replay | Compact results and replay; secondary recap omitted on short screens | Full paid touch run with twelve systems, four developers and Plus; results/replay checks. |
+| Desktop and rules unchanged | Shared engine unchanged; default countdown behavior retained | 172/172 unit tests, production build and four-size desktop intro checks. |
+| Laptop purchase cards (D197) | Mobile-style cards, with a four-column bottom row; right column only on compact touch screens | Five laptop sizes checked (1024×768 through 1440×900, including 1280×600); no page overflow, receipt interaction and desktop intro pass. |
+| Additional regression (D198) | Restart plus rotation/background hold; frozen results across rotation and result reopening at four mobile sizes. Fix duplicate result action and focus-induced viewport shift. | Saved Android Maestro flow: 19/19 commands; see mobile review for final browser evidence. |
+| Remaining verification | Real iPhone Safari; unassisted player readability/performance assessment | Pending. No deployment or release certification. |
+
 ## Current position
 
 **Current slice: V3.4 — Complete event experience · Ready for review.**
