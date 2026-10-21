@@ -28,9 +28,9 @@ export function OrientationSpotlight({step}: {step: number}) {
   const x = systems ? 275 : 355, y = systems ? 430 : 60;
   return <g className="v3-orientation-spotlight" aria-hidden="true">
     <path d={`M0 0H1180V535H0Z ${cutout}`} fillRule="evenodd" fill="#080c07" opacity=".72"/>
-    <path d={cutout} fill="none" stroke="#f1d58d" strokeWidth="4" vectorEffect="non-scaling-stroke"/>
-    <path d={systems ? 'M390 492V510' : 'M790 91H814'} stroke="#f1d58d" strokeWidth="3"/>
-    <rect x={x} y={y} width={systems ? 230 : 435} height="62" rx="6" fill="#293322" stroke="#f1d58d" strokeWidth="2"/>
+    <path d={cutout} fill="none" stroke="#b4d5ab" strokeWidth="4" vectorEffect="non-scaling-stroke"/>
+    <path d={systems ? 'M390 492V510' : 'M790 91H814'} stroke="#b4d5ab" strokeWidth="3"/>
+    <rect x={x} y={y} width={systems ? 230 : 435} height="62" rx="6" fill="#151b13" stroke="#b4d5ab" strokeWidth="2"/>
     <text x={x + 18} y={y + 39} className="v3-orientation-label">{orientationSteps[step].text}</text>
   </g>;
 }

@@ -186,24 +186,24 @@
 
 /* D190: three quick location pointers, with only an explicit Start control. */
 .v3-game [hidden]{display:none!important}
-.v3-world svg .v3-orientation-label{font-size:23px;font-weight:700;fill:#fff3cf}
+.v3-world svg .v3-orientation-label{font-size:23px;font-weight:700;fill:#f0e3ba}
 .v3-orientation-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.v3-controls-pointer{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);padding:14px 22px;background:#293322;border:2px solid #f1d58d;border-radius:6px;color:#fff3cf;font-size:20px;font-weight:700;white-space:nowrap}
-.v3-controls-pointer::after{content:"";position:absolute;left:50%;top:100%;height:28px;border-left:3px solid #f1d58d}
+.v3-controls-pointer{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);padding:14px 22px;background:#151b13;border:2px solid #b4d5ab;border-radius:6px;color:#f0e3ba;font-size:20px;font-weight:700;white-space:nowrap}
+.v3-controls-pointer::after{content:"";position:absolute;left:50%;top:100%;height:28px;border-left:3px solid #b4d5ab}
 .v3-game[data-opening=true] .v3-world-summary,.v3-game[data-opening=true] .v3-crew{opacity:.4}
 .v3-game[data-tour=systems] .v3-purchases,.v3-game[data-tour=developers] .v3-purchases{opacity:.3}
 .v3-game[data-tour=purchases] .v3-world>svg{opacity:.3}
-.v3-game[data-tour=purchases] .v3-purchases{outline:3px solid #f1d58d;outline-offset:3px;border-radius:5px;animation:v3-tour-pulse 1.2s ease-in-out 1}
-@keyframes v3-tour-pulse{0%,100%{box-shadow:0 0 0 0 #f1d58d00}50%{box-shadow:0 0 0 8px #f1d58d40}}
+.v3-game[data-tour=purchases] .v3-purchases{outline:3px solid #b4d5ab;outline-offset:3px;border-radius:5px;animation:v3-tour-pulse 1.2s ease-in-out 1}
+@keyframes v3-tour-pulse{0%,100%{box-shadow:0 0 0 0 #b4d5ab00}50%{box-shadow:0 0 0 8px #b4d5ab40}}
 .v3-game[data-hidden=true] .v3-purchases{animation-play-state:paused}
 .v3-game[data-reduced=true] .v3-purchases{animation:none}
 
 /* D191: visitor-triggered intro, then one continuous path into play. */
 .v3-game[data-welcome=true]>.v3-header,.v3-game[data-welcome=true]>.v3-main{visibility:hidden}
 .v3-game[data-opening=true] .v3-main{padding-bottom:14px}
-.v3-game .modal.v3-welcome{max-width:620px;padding:38px;border-color:#596446}
+.v3-game .modal.v3-welcome{max-width:620px;padding:38px;background:#0b0e0a;border-color:#303a2a}
 .v3-game .v3-welcome h2{font-size:30px;max-width:440px;line-height:1.2;margin-bottom:20px}
-.v3-game .v3-welcome .primary{display:flex;align-items:center;justify-content:space-between;min-height:78px;margin-top:28px;padding:18px 24px;font-size:27px;font-weight:700;background:#e5cb86!important;color:#172011!important;border:2px solid #f4dfa8!important;box-shadow:0 4px 0 #786b3e;transition:background .15s,box-shadow .15s}
-.v3-game .v3-welcome .primary:hover{background:#f5df9c!important;box-shadow:0 5px 0 #786b3e,0 0 24px #e5cb8620}
-.v3-game .v3-welcome .primary:focus-visible{outline:3px solid #fff4d2;outline-offset:5px}
+.v3-game .v3-welcome .primary{display:flex;align-items:center;justify-content:space-between;min-height:78px;margin-top:28px;padding:18px 24px;font-size:27px;font-weight:700;background:#b4d5ab!important;color:#11180e!important;border:2px solid #b4d5ab!important;box-shadow:none;transition:background .15s,border-color .15s}
+.v3-game .v3-welcome .primary:hover{background:#c6e2bd!important;border-color:#c6e2bd!important;box-shadow:none}
+.v3-game .v3-welcome .primary:focus-visible{outline:3px solid #d5e8cd;outline-offset:5px}
 .v3-game .v3-welcome .primary span{font-size:32px;color:inherit!important}
