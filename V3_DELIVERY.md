@@ -2,6 +2,8 @@
 
 Agreed with the owner: 2026-10-20.
 
+**Owner closeout — 2026-10-21 (D193):** the current onboarding and visual polish are accepted, including the final whole-ecosystem intro. The owner authorized committing, merging to main and pushing main to GitHub and Bitbucket. All 172 local tests and the production build pass; targeted browser checks cover intro, gameplay, hidden/restart holds, reduced motion, coffee/champagne and replay. Unassisted newcomer testing remains pending. Publication and deployment are separate checks; historical Ready for review notes below describe earlier delivery stages.
+
 This is the delivery tracker for [V3_MODE.md](V3_MODE.md). The specification defines the game; this file defines what to build next and where feedback belongs. The four versions below are the four delivery slices. Each produces a playable result for review.
 
 ## Required documentation contract
@@ -57,6 +59,65 @@ The owner describes the current result as **“Simple, Lovable and Complete.”*
 The agreed direction is to preserve this focused scope and use an event rehearsal to check that introduced visitors can start independently, enjoy a short run and connect the workshop behaviour to Recon. Additions are not needed merely to make the experience feel more complete; further changes should respond to observed confusion or event needs.
 
 This records the owner's qualitative assessment and the discussion of event fit. It does not record completed visitor testing, Safari validation, a merge or deployment; those remain separately tracked.
+
+## Owner assessment log — V3.4: Game design goal achieved
+
+**Recorded 2026-10-21 · Recon — Active Animation · V3.4 · `codex/guided-first-play` · D178–D179 / V3-F021.** The owner reviewed the local preview and accepted this game-design pass.
+
+The owner is happy with the combined effect of the small changes: the feature backlog appears later, the screen feels better organised and makes better use of space, and the highlights have better timing and remain visible longer. The experience feels more fluent. The existing subtle guidance is accepted; floating explanation cards are not requested.
+
+What changed:
+
+- A shorter opening leads into one complete first build: purchase, assembly, delivery, installation and income, with one relevant highlight at a time.
+- Hiring, maintenance, the first actual Recon repair and Plus are explained when the corresponding situation occurs. The game continues and purchase choices remain free.
+- The feature backlog and feature work start four active seconds after the first purchased system is installed. Muted blue-grey colours reduce their visual prominence.
+- Purchase confirmations have a reserved line inside their cards, clear of developer status. Secondary information is quieter, and guidance can be dismissed or hidden.
+
+The owner also accepted the slower saving-only route caused by delayed feature availability: a player who never buys a system never unlocks feature bonuses. The benchmark median moves from about six to thirteen minutes on that route; the balanced route remains about 2:25. No compensating balance change was requested.
+
+**Outcome: game design goal achieved for this pass.** This is acceptance by an owner already familiar with the game. It does not establish that an unassisted newcomer understands every mechanic. Peer feedback collection remains open; no merge or deployment is recorded by this assessment.
+
+### Guided first play delivery record
+
+| Requirement reference | Implementation / observable behaviour | Verification evidence | Status / remaining work |
+| --- | --- | --- | --- |
+| D178; opening and first build | Short opening; guidance follows actual assembly, carrying, installation and income in `V3Game.tsx`, `v3Guidance.ts`, `V3Guidance.tsx` and `V3Board.tsx`. | Guidance unit tests and paid onboarding/browser journey checks. | Delivered; owner accepted. |
+| D178; contextual choices and receipts | Queue-based hiring, actual maintenance/Recon handoff, repair-bottleneck Plus advice, independent purchase receipts and dismiss/hide/reset. | Guidance, hiring, upgrade, onboarding and full paid gameplay browser checks. | Delivered; owner accepted. |
+| D178; delayed, quieter features | Engine release four active seconds after first purchased installation; hidden column/counters beforehand; muted cards and carried parts. | Feature/guidance tests, paid feature/onboarding browser checks, four desktop sizes and benchmark. | Delivered; saving-route change accepted. |
+| D178; continuity and balance | Free strategies, existing prices/wages/failure rules, frozen result and replay retained. | Full unit suite 169/169; V3 suite 62/62 after final hint ordering; build; event, layout and journey browser checks. Benchmark: 80/80 paid routes and 9/9 delayed starts finish, plus 20 capacity fixtures. | Verified locally; unassisted visitor testing remains pending. |
+
+### Worker polish and finish copy — D180–D181
+
+Follow-up refinements on `codex/guided-first-play`, after the D179 design acceptance. The owner requested visible steps and facial expressions, accepted clearer celebration feet/tools, and asked for a finish title appropriate to the time achieved.
+
+| Requirement reference | Implementation / observable behaviour | Verification evidence | Status / remaining work |
+| --- | --- | --- | --- |
+| D180; readable walking and expressions | `V3Board.tsx` draws separate legs and boots, focused work faces, concerned repair faces and happy celebration faces. D182 also smiles during feature work and for two active seconds after that developer completes a feature, unless responding to a repair. CSS offsets the leg cycles and gives the torso a smaller bob under load. | Paid delivery/repair browser check, opposite stride frames, restart hold, hidden-tab hold and live reduced-motion checks in `test-results/v3-worker-polish/`. | Ready for owner visual review. |
+| D180; celebration silhouette | Tools lie clear of feet; a gentle raised-arm bounce replaces the large rocking jump in both the workshop and results crew. | Paid victory during a carried build, four-size result screenshots, frozen result, reduced motion and replay checks in `test-results/v3-journey/`. | Verified locally; routes and economy unchanged. |
+| D181; meaningful finish title | `V3Game.tsx` uses the frozen finish time: strictly below 180 seconds gets “Peak productivity reached!”; all other wins get “You built a healthy company!”. | Current benchmark supports the trial boundary: balanced 144.2–149s, fastest sampled non-automation route 188.95s. Paid 144.35s balanced browser run shows the peak title; 205.55s/232.05s no-Recon runs, a 313.50s Plus run and the 252.70s carried-build journey show the healthy-company title. All retain their exact engine results and replay. | Time-based trial; no extra win condition or medal system. |
+
+### Coffee welcome and smoother movement — D182–D188
+
+| Requirement reference | Implementation / observable behaviour | Verification evidence | Status / remaining work |
+| --- | --- | --- | --- |
+| D182; happy feature work | Smile during active feature collection/assembly and for two active seconds after the developer completes a feature. Repair concern takes precedence. | Paid feature completion and repair checks, pause-held smile and expiry into ordinary building; `test-results/v3-worker-polish/feature-results.json`. | Delivered; no simulation changes. |
+| D183/D187; coffee welcome | `v3Coffee.ts` derives the visit from purchase history; `V3Coffee.tsx` draws the waiter, tray, serving arm/cup movement and permanent desk cups. Visits the team present at purchase, bottom desk first; later hires queue individual one-cup visits after the current round. Earlier cups remain. | Three sequence tests; `tests/v3-coffee-browser.ts` verifies paid trigger, unchanged engine time/cash, two/four desks, later hires/Plus, hidden/restart holds, reduced motion and replay. Screenshots in `test-results/v3-coffee/`. | Ready for owner review. |
+| D184; smooth travel | CSS interpolates developer/waiter transforms over the existing 50ms update interval. Explicit cancellation settles pause, hidden, reduced-motion and frozen scenes. | Live browser sample: 27 visible position changes against 11 simulation changes across 40 frames, including 26 intermediate frames. Pause and reduced-motion checks pass; `test-results/v3-motion/results.json`. | Owner accepts the calmer motion and improved face readability. |
+| D185–D186; developer hair and mixed crew | Replace green caps with short, side-parted brown hair; second/fourth developers use the female variant with tied-back hair. Retain facial expressions, proportions and consistent appearances during celebration. | Production build and rendered character inspection. | Ready for owner review. |
+| D188; Recon-only champagne | `V3Champagne.tsx` shares the separate victory clock through `V3Presentation.tsx`. Waiter enters beside the crew, pops the cork and settles; no-Recon wins keep only the developer party. | Four full paid browser routes verify both branches, two/four-developer result layouts, cork/spray, hidden hold, reduced motion, frozen results and replay. Screenshots: `test-results/v3-mvp/*-champagne.png`. | Ready for owner review. |
+
+The latest build and all 65 V3 unit tests pass. The waiter is decorative and never enters developer counts, queues or accounting. These follow-up checks supplement the earlier paid full-game and frozen-result checks; no additional economy changes were made.
+
+### Waiting welcome and simple location pointers — D190–D192 (replaces D189)
+
+The owner rejected the four-stop banner tour: too many controls, slow text and weak accents. D190 replaces it with three location-only labels. D192 expands the first outline to the entire ecosystem, changes its label to Your ecosystem and holds it for three seconds; the other two labels remain two seconds each. D191 adds a visitor-triggered welcome modal: a large gold Get your intro button starts the seven-second sequence and automatically continues through the three-second countdown. `V3Orientation.tsx` now supplies the short sequence and stronger SVG spotlights; `V3Game.tsx` provides the welcome modal and automatic countdown; `V3Board.tsx` anchors labels beside their targets. The header banner, navigation, mechanics copy and Recon stop are removed. Existing gameplay and in-run guidance are preserved.
+
+| Requirement | Evidence | Status |
+| --- | --- | --- |
+| Three exact location labels; strong focus; no banner or navigation | `tests/v3-orientation-browser.ts`; systems, developers and controls inspected at four desktop/laptop sizes. Stable workshop dimensions, nearby labels, dimmed surroundings and one shared purchase pulse. | Implemented. |
+| Waiting welcome, one click, automatic intro/countdown, no gameplay before GO | Browser checks verify a minute of idle welcome, unchanged 90-credit balance/time, disabled purchases, hidden features, all three pointer timings and exact automatic countdown/GO boundary. No second Start control. | Verified. |
+| Hidden/restart hold, reduced motion, fresh replay | Browser checks verify held sequence, static reduced-motion highlight, restart held during the final pointer, refresh/fresh-run welcome reset and first-build guidance after start. | Verified. |
+| Existing first-play flow | Build and all 65 V3 tests pass; event-opening and onboarding browser journeys verify the existing flow. The full paid journey finishes at 252.70s with exact frozen results and returns to the welcome on Play again. | Ready for owner review; newcomer comprehension remains unverified. |
 
 ## How to work slice by slice
 
@@ -285,6 +346,13 @@ Human event validation is tracked explicitly; this delivery does not certify eve
 
 | ID | Feedback / desired outcome | Requirement reference | Target slice | Status | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
+| V3-F026 | Recon’s waiter pops champagne beside the celebrating result crew. | D188; presentation-only victory reward | V3.4 | Complete — owner accepted D193 | Waiter enters, pops champagne and holds a happy pose only for Recon finishes. Paid two/four-developer victories verify cork/spray, hidden hold, static reduced motion and replay; no-Recon routes omit him. Frozen time/cash remain exact. |
+| V3-F027 | Identify the workshop areas before play. | D190–D192 supersede rejected D189 banner tour | V3.4 | Complete — owner accepted D193 | Waiting welcome with bold Get your intro button, then the whole-ecosystem pointer for three seconds, two other pointers for two seconds each, and automatic countdown. No second Start button. Banner, navigation and mechanics explanations removed; existing in-run guidance retained. |
+| V3-F025 | Visible movement feels jittery despite the new gait. | D184; presentation timing | V3.4 | Complete | Owner reports calmer, smoother movement and faces readable during travel. Browser sampling confirms intermediate visual positions; pause and reduced-motion checks pass. |
+| V3-F024 | A waiter brings coffees to the developer desks when Recon is bought. | D183/D187; presentation-only purchase reward | V3.4 | Complete — owner accepted D193 | Waiter serves the desks present at Recon purchase; later hires receive queued one-cup welcomes. Cups remain and Plus does not retrigger a visit. Three sequence tests and updated paid browser checks pass for delivery, holds, reduced motion, four desks and replay; game time/cash match the engine. |
+| V3-F023 | Reserve peak-productivity copy for a fast finish; positively recognise other completed runs. | D181; result copy | V3.4 | Complete — owner accepted D193 | Under 3:00 uses peak-productivity copy; other finishes use the healthy-company title. Build, four paid gameplay routes and victory/frozen-result/replay journey pass; cutoff remains a first trial. |
+| V3-F022 | Workers slide while walking; grounded celebration tool reads as a broken leg. Add a clearer gait, feet, facial expressions and gentle celebration. | D180; animation and worker presentation | V3.4 | Complete — owner accepted D193 | Alternating steps, loaded/unloaded bob, boots, focused/concerned/happy faces and separated tools implemented. D182 adds smiles during feature work and briefly after completion; the owner accepts the walking motion. D185–D186 replace green caps with short side-parted hair and female characters with tied-back hair. Build, rendered gait/motion-preference checks and full celebration/replay journey pass. |
+| V3-F021 | Guided first play, delayed features and muted blue-grey backlog; UT-001. | D178; player journey, guidance, feature release and purchase shelf; reviewed onboarding plan | V3.4, revising V3.3 guidance | Complete | Implemented and locally verified; owner accepted the design and saving-route balance change on 2026-10-21. See the Game design goal achieved assessment log. |
 | V3-F001 | Permit visible negative cash while wages/work continue; purchases require enough balance. | Cash-shortage rule, D156 | V3.1 | Complete | Owner confirmed; late-spending regression and benchmark recovery recorded. |
 | V3-F002 | Make Recon visually impressive as the central machine. Preserve the worker movement the owner enjoyed. | Recon visual centrepiece; D146, D151; D157 | V3.2 | Complete | Large central radar tower, live failure blips, active repair links and completion cues implemented. Four-size rendered checks pass; Owner accepted the result when requesting V3.3. |
 | V3-F003 | Make the one/three concurrent repair positions immediately recognisable as Recon processing slots. | Recon visual centrepiece and animation guide; D134, D151, D157 | V3.2 | Complete | Three numbered physical bays show actual systems/progress and explicit ready/locked states. Paid ownership, stable bay, pause and reduced-motion checks pass. Owner accepted the visual result; uncoached comprehension remains unverified. |

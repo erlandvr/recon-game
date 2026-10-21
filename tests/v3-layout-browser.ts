@@ -10,7 +10,7 @@ try {
   await p.goto(process.env.GAME_URL ?? 'http://127.0.0.1:5174/recon-game/');
   assert.equal(await p.locator('.mode-options').count(), 0);
   await p.screenshot({path: 'test-results/v3-mvp/direct-entry.png'});
-  await p.getByRole('button', {name: 'Start experience', exact: true}).click(); await p.clock.runFor(24000);
+  await p.getByRole('button', {name: 'Get your intro', exact: true}).click(); await p.clock.runFor(31000);
   await p.locator('[data-purchase="developer"]').click(); await p.locator('[data-purchase="system"]').click(); await p.locator('[data-purchase="system"]').click();
   // Desk features make this former deficit scenario solvent; the seed-200 negative
   // balance/work/recovery contract is covered in v3.test.ts.
@@ -18,7 +18,7 @@ try {
   await p.screenshot({path: 'test-results/v3-mvp/late-spending-recovery.png'});
   assert.equal(await p.locator('[data-worker]').count(), 2);
   await p.getByRole('button', {name: 'Restart', exact: true}).click(); await p.getByRole('button', {name: 'Start fresh', exact: true}).click();
-  await p.getByRole('button', {name: 'Start experience', exact: true}).click(); await p.clock.runFor(3000);
+  await p.getByRole('button', {name: 'Get your intro', exact: true}).click(); await p.clock.runFor(10000);
   // Wait for a real, affordable repair opportunity rather than a tuning-specific timestamp.
   for (let i = 0; i < 1200; i++) {
     const repairing = await p.locator('[data-worker="0"]').getAttribute('data-phase') === 'repair';

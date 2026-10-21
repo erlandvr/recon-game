@@ -19,6 +19,9 @@
     "v3:journey:browser": "node tests/v3-journey-browser.ts",
     "v3:p1:browser": "node tests/v3-p1-browser.ts",
     "v3:features:browser": "node tests/v3-features-browser.ts",
+    "v3:coffee:browser": "node tests/v3-coffee-browser.ts",
+    "v3:orientation:browser": "node tests/v3-orientation-browser.ts",
+    "v3:onboarding:browser": "node tests/v3-onboarding-browser.ts",
     "v3:event:browser": "node tests/v3-event-browser.ts"
   },
   "dependencies": {

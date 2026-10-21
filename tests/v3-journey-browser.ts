@@ -15,7 +15,7 @@ async function check() {
   assert.equal(d.time, s.time); assert.equal(d.status, s.status); assert.ok(Math.abs(d.cash - s.cash) < 1e-6);
 }
 async function advance(ms: number) {await page.clock.runFor(ms); s = advanceV3(s, ms / 1000); await check();}
-async function reset() {await button('Restart').click(); await button('Start fresh').click(); s = newV3(); await check(); await button('Start experience').click(); await page.clock.runFor(3000); s = startV3(s); await check();}
+async function reset() {await button('Restart').click(); await button('Start fresh').click(); s = newV3(); await check(); await button('Get your intro').click(); await page.clock.runFor(10000); s = startV3(s); await check();}
 async function fit() {
   const issues = await page.evaluate(() => {
     const issues: string[] = [];
@@ -36,7 +36,7 @@ try {
   await fit(); assert.equal(await page.evaluate(() => (window as any).v3SoundNotes), 0);
   const opening = page.getByRole('dialog', {name: 'Recon — Active Animation', exact: true});
   assert.equal(await opening.getByRole('button').count(), 1);
-  await button('Start experience').click(); await page.clock.runFor(1000);
+  await button('Get your intro').click(); await page.clock.runFor(8000);
   assert.equal(await page.locator('[data-theme="workshop"] .lit').count(), 2); await check();
   await page.screenshot({path: `${directory}/countdown.png`});
   await page.evaluate(() => {Object.defineProperty(document, 'hidden', {configurable: true, value: true}); document.dispatchEvent(new Event('visibilitychange'));});
@@ -47,8 +47,8 @@ try {
   await advance(5000); assert.match(await page.locator('.v3-footer').innerText(), /saving is allowed/);
   await page.screenshot({path: `${directory}/first-action.png`});
   await page.locator('[data-purchase="developer"]').click(); s = buyV3(s, 'developer'); await check();
-  assert.match(await page.locator('.v3-footer').innerText(), /Developer hired · −55 cr/); await advance(5000);
-  assert.notEqual(await page.locator('.v3-footer').getAttribute('data-hint'), 'first');
+  assert.match(await page.locator('[data-purchase="developer"]').innerText(), /Hired · −55 cr/); await advance(5000);
+  assert.equal(await page.locator('.v3-footer').getAttribute('data-hint'), 'first');
   await button('Restart').click(); s = pauseV3(s); await advance(20000);
   const restart = page.getByRole('dialog', {name: 'Start a fresh workshop?', exact: true});
   await restart.getByRole('button', {name: 'Keep this workshop', exact: true}).focus();
@@ -67,9 +67,9 @@ try {
   await reset();
   let lateBuild = false;
   while (s.status === 'running' && s.time < 400) {
-    // A paid saving strategy; add a final build just before winning to exercise safe prop set-down.
+    // Paid no-Recon route. Under D178, ordering the last system at 1,070 catches installation at victory.
     if (s.developers.length < 3 && await page.locator('[data-purchase="developer"]').isEnabled()) {await page.locator('[data-purchase="developer"]').click(); s = buyV3(s, 'developer'); await check();}
-    else if (s.developers.length === 3 && (s.systems.length < 4 || !lateBuild && s.cash >= 1140) && await page.locator('[data-purchase="system"]').isEnabled()) {
+    else if (s.developers.length === 3 && (s.systems.length < 4 || !lateBuild && s.cash >= 1070) && await page.locator('[data-purchase="system"]').isEnabled()) {
       if (s.systems.length >= 4) lateBuild = true;
       await page.locator('[data-purchase="system"]').click(); s = buyV3(s, 'system'); await check();
     }
@@ -77,7 +77,7 @@ try {
   }
   assert.equal(s.status, 'won'); assert.equal(s.recon, 0); assert.ok(s.jobs.some(j => j.type === 'build'), 'a queued/building job remains unfinished');
   assert.ok(s.developers.some(w => w.phase === 'delivery' || w.phase === 'install'), 'paid victory catches a carried system');
-  const frozen = JSON.stringify(s), result = page.getByRole('dialog', {name: 'Peak productivity reached!', exact: true});
+  const frozen = JSON.stringify(s), result = page.getByRole('dialog', {name: 'You built a healthy company!', exact: true});
   assert.equal(await result.getByRole('button', {name: 'Play again', exact: true}).isEnabled(), true);
   await page.clock.runFor(800); await check(); assert.ok(await result.locator('.v3-dancing').count()); assert.ok(await result.locator('.v3-parked-cargo').count());
   assert.equal(await result.locator('.v3-tool').count(), 0);
@@ -87,7 +87,7 @@ try {
   assert.equal(await page.locator('.v3-world .v3-dancing').count(), 0);
   await button('View result').click(); await page.screenshot({path: `${directory}/victory-reduced.png`});
   await button('Play again').click(); s = newV3(); await check(); assert.equal(await page.locator('.v3-parked-cargo').count(), 0);
-  await button('Start experience').click(); await page.clock.runFor(1000); assert.equal(await page.locator('[data-theme="workshop"]').getAttribute('data-reduced'), 'true'); await page.clock.runFor(2000); s = startV3(s); await check();
+  await button('Get your intro').click(); await page.clock.runFor(8000); assert.equal(await page.locator('[data-theme="workshop"]').getAttribute('data-reduced'), 'true'); await page.clock.runFor(2000); s = startV3(s); await check();
   assert.equal(await page.locator('.v3-footer').getAttribute('data-hint'), 'first');
   assert.deepEqual(errors, []); await writeFile(`${directory}/results.json`, JSON.stringify({paidVictory: JSON.parse(frozen).result, remainingJobs: JSON.parse(frozen).jobs, errors, checks: ['hidden countdown and GO', 'first action and alternate purchase', 'restart hold, keyboard trap, Escape resumes and focus', 'real failure and affordable Recon only', 'dismissal', 'paid no-Recon victory during delivery', 'frozen economy during party', 'four-size results', 'static reduced motion and retry']}, null, 2));
   console.log('V3.3 journey checks passed', JSON.parse(frozen).result);

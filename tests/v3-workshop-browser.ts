@@ -32,7 +32,7 @@ async function screenshot(name: string) {await page.screenshot({path: `${directo
 try {
   const date = new Date('2026-10-20T10:00:00Z'); await page.clock.install({time: date}); await page.clock.pauseAt(date);
   await page.goto(process.env.GAME_URL ?? 'http://127.0.0.1:5175/recon-game/');
-  await page.getByRole('button', {name: 'Start experience', exact: true}).click(); await page.clock.runFor(3000);
+  await page.getByRole('button', {name: 'Get your intro', exact: true}).click(); await page.clock.runFor(10000);
   await check(); await screenshot('offline');
   while (s.status === 'running' && s.time < 320) {
     const action = choosePurchase(s, 'balanced');

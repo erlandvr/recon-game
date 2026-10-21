@@ -14,7 +14,7 @@ try {
   assert.equal(await p.title(), 'Recon — Active Animation');
   assert.equal(await p.locator('.mode-options').count(), 0);
   assert.equal(await p.getByRole('button', {name: /choose|scoreboard/i}).count(), 0);
-  const start = p.getByRole('button',{name:'Start experience',exact:true});
+  const start = p.getByRole('button',{name:'Get your intro',exact:true});
   assert.equal(await start.evaluate((e:Element)=>e===document.activeElement),true);
   const opening = p.locator('.v3-opening');
   assert.equal(await opening.getByRole('button').count(),1);
@@ -23,8 +23,7 @@ try {
   assert.equal(await p.locator('.v3-header').isVisible(),false);
   assert.match(await opening.innerText(),/Recon — Active Animation/);
   assert.match(await opening.innerText(),/Experience the Benefit of Recon/);
-  assert.match(await opening.innerText(),/1,200 credits/);
-  assert.match(await opening.innerText(),/P1 fires/);
+  assert.doesNotMatch(await opening.innerText(),/P1|wages|as fast as/);
   await p.keyboard.press('Tab'); assert.equal(await start.evaluate((e:Element)=>e===document.activeElement),true);
   await p.clock.runFor(60000);
   assert.equal(await p.locator('.v3-game').getAttribute('data-time'),'0');
@@ -37,7 +36,7 @@ try {
   }
   await start.click(); assert.equal(await opening.count(),0);
   assert.equal(await p.locator('.v3-main').isVisible(),true);
-  await p.clock.runFor(3000); assert.equal(await p.locator('.v3-game').getAttribute('data-time'),'0');
+  await p.clock.runFor(10000); assert.equal(await p.locator('.v3-game').getAttribute('data-time'),'0');
   await p.clock.runFor(1000); assert.equal(await p.locator('.v3-game').getAttribute('data-time'),'1');
   assert.deepEqual(await p.getByRole('navigation', {name: 'Experience controls'}).getByRole('button').allTextContents(), ['Restart']);
   await p.emulateMedia({reducedMotion: 'reduce'});
@@ -62,5 +61,5 @@ try {
   assert.equal(await p.locator('.v3-game').getAttribute('data-cash'),'90');
   assert.equal(await opening.getByRole('button').count(),1);
   assert.equal(await p.locator('.v3-game').getAttribute('data-time'),'0');
-  assert.deepEqual(errors,[]); console.log('Explanation-only opening, single focused Start experience button, held clock, four desktop sizes, countdown and fresh replay pass.');
+  assert.deepEqual(errors,[]); console.log('Waiting welcome modal, prominent Get your intro button and automatic intro/countdown, held clock, four desktop sizes, countdown and fresh replay pass.');
 } finally {await browser.close();}

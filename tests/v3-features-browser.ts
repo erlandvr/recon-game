@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
 import {mkdir, writeFile} from 'node:fs/promises';
-import {advanceV3, buyV3, newV3, pauseV3, startV3, systemIncome, workerPosition, type V3State} from '../src/v3Game.ts';
+import {advanceV3, buyV3, featuresAvailable, newV3, pauseV3, startV3, systemIncome, workerPosition, type V3State} from '../src/v3Game.ts';
 import {choosePurchase} from '../scripts/v3-benchmark.ts';
 const require = createRequire(import.meta.url), {chromium} = require(`${process.env.PLAYWRIGHT_MODULE_DIR}/playwright`);
 const browser = await chromium.launch(), errors: string[] = [], directory = 'test-results/v3-desk-features';
@@ -14,9 +14,9 @@ let s: V3State = newV3(); const captured = new Set<string>();
 async function check() {
   const d = await page.locator('.v3-game').evaluate((el: HTMLElement) => ({time: +el.dataset.time!, cash: +el.dataset.cash!, status: el.dataset.status}));
   assert.equal(d.time, s.time); assert.equal(d.status, s.status); assert.ok(Math.abs(d.cash - s.cash) < 1e-6);
-  assert.equal(await page.locator('.v3-main [data-feature-backlog]').count(), 1);
-  assert.equal(await page.locator('.v3-main [data-backlog-card]').count(), 6);
-  assert.match((await page.locator('.v3-main [data-backlog-card="0"]').textContent())!, new RegExp(`#${s.metrics.featuresTaken + 1}$`));
+  assert.equal(await page.locator('.v3-main [data-feature-backlog]').count(), featuresAvailable(s) ? 1 : 0);
+  assert.equal(await page.locator('.v3-main [data-backlog-card]').count(), featuresAvailable(s) ? 6 : 0);
+  if (featuresAvailable(s)) assert.match((await page.locator('.v3-main [data-backlog-card="0"]').textContent())!, new RegExp(`#${s.metrics.featuresTaken + 1}$`));
   assert.ok(s.jobs.filter(j => j.type === 'feature').every(j => j.system === -1));
   for (const w of s.developers) {
     if (w.feature) {assert.equal(w.system,null); assert.ok(!['delivery','install'].includes(w.phase));}
@@ -50,8 +50,10 @@ async function fit() {
 try {
   const date = new Date('2026-10-20T10:00:00Z'); await page.clock.install({time: date}); await page.clock.pauseAt(date);
   await page.goto(process.env.GAME_URL ?? 'http://127.0.0.1:5175/recon-game/');
-  await button('Start experience').click(); await page.clock.runFor(3000); s = startV3(s);
-  for (let i=0;i<10;i++) {await page.clock.runFor(250);s=advanceV3(s,.25);await check();for(const w of s.developers)if(w.feature)await capture(w.phase);}
+  await button('Get your intro').click(); await page.clock.runFor(10000); s = startV3(s);
+  await check();
+  await page.locator('[data-purchase="system"]').click();s=buyV3(s,'system');
+  while (s.time < 100 && !(s.developers[0].feature && s.developers[0].phase === 'fetch')) {await page.clock.runFor(50);s=advanceV3(s,.05);await check();for(const w of s.developers)if(w.feature)await capture(w.phase);}
   const interruptedPosition=workerPosition(s.developers[0]);
   await page.locator('[data-purchase="system"]').click();s=buyV3(s,'system');
   assert.equal(s.developers[0].phase,'to-build');assert.equal(s.developers[0].parkedFeature?.phase,'fetch');
@@ -60,7 +62,7 @@ try {
     if (Number.isInteger(s.time)) {
       // Leave space for feature work before expanding, so a real P1 can interrupt it.
       const action = !captured.has('p1-feature')
-        ? s.systems.length < 3 ? 'system' : s.developers.length < 3 ? 'developer' : null
+        ? s.systems.length < 3 ? 'system' : null
         : choosePurchase(s, 'four-developers');
       if (action && await page.locator(`[data-purchase="${action}"]`).isEnabled()) {await page.locator(`[data-purchase="${action}"]`).click(); s = buyV3(s, action);}
     }

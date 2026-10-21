@@ -3,7 +3,7 @@ import {backlogPosition, backlogRoute, benchPosition, pathLength, pathPrefix, po
 /** V3.3 shared features and P1 feedback on candidate B maintenance. Independent of the historical sandbox and Speed's scoring engine. */
 export const V3 = Object.freeze({
   step: .05, startCash: 90, target: 1200, maxSystems: 12, maxDevelopers: 4,
-  featureAssembly: 3, featurePickup: .35, featureIncome: .25, featureIdleDelay: .75,
+  featureReleaseDelay: 4, featureAssembly: 3, featurePickup: .35, featureIncome: .25, featureIdleDelay: .75,
   systemCost: 45, developerCost: 55, wage: .35, income: 3,
   assembly: 5, install: 1, repair: 6, reconRepair: 4, reconCost: 180, plusCost: 260,
   youngInterval: 32, matureInterval: 24, matureAge: 90, openingFailure: 22, p1Chance: .2,
@@ -18,6 +18,8 @@ export type V3Result = {at: number; cash: number; systems: number; installed: nu
 export type V3State = {
   status: 'ready' | 'running' | 'paused' | 'won'; time: number; cash: number; seed: number; rng: number;
   systems: System[]; developers: Developer[]; jobs: Job[]; nextJob: number; recon: 0 | 1 | 3; result: V3Result | null;
+  featuresAvailableAt: number | null;
+  firstReconRepair: {system: number; at: number} | null;
   events: {at: number; text: string}[]; purchases: {at: number; action: Purchase; cash: number}[];
   metrics: {income: number; wages: number; minCash: number; idle: number; construction: number; maintenance: number; return: number; queueWait: number; jobsStarted: number; failures: number; repairs: number; takeovers: number; p1Failures: number; interruptions: number; features: number; featureWork: number; featuresTaken: number};
 };
@@ -31,8 +33,12 @@ export function newV3(seed = 31): V3State {
   // The initial machine's integrated hazard reaches 1 at 22 active seconds.
   return {status: 'ready', time: 0, cash: V3.startCash, seed, rng: seed >>> 0,
     systems: [{id: 0, installed: true, broken: false, age: 0, hazard: 0, threshold: 1, installedAt: 0}],
-    developers: [developer(0)], jobs: [], nextJob: 0, recon: 0, result: null, events: [], purchases: [],
+    developers: [developer(0)], jobs: [], nextJob: 0, recon: 0, result: null, featuresAvailableAt: null, firstReconRepair: null, events: [], purchases: [],
     metrics: {income: 0, wages: 0, minCash: V3.startCash, idle: 0, construction: 0, maintenance: 0, return: 0, queueWait: 0, jobsStarted: 0, failures: 0, repairs: 0, takeovers: 0, p1Failures: 0, interruptions: 0, features: 0, featureWork: 0, featuresTaken: 0}};
+}
+/** Engine milestone: hiding or dismissing guidance cannot accelerate feature income. */
+export function featuresAvailable(s: V3State) {
+  return s.featuresAvailableAt !== null && s.time + 1e-8 >= s.featuresAvailableAt;
 }
 export function systemIncome(node: System) {return node.installed && !node.broken ? V3.income + (node.features ?? 0) * V3.featureIncome : 0;}
 export function earnings(s: V3State) {
@@ -127,6 +133,7 @@ function reconDispatch(s: V3State, urgentOnly = false) {
     } else {s.metrics.queueWait += s.time - job.at; s.metrics.jobsStarted++;}
     const previousOwner = job.owner;
     job.owner = 'recon'; delete job.suspended; slots--;
+    s.firstReconRepair ??= {system: job.system, at: s.time};
     if (typeof previousOwner === 'number') {
       const w = s.developers[previousOwner];
       if (w.suspended?.job === job.id) {
@@ -190,7 +197,7 @@ function dispatch(s: V3State) {
       travel(w, 'resume-feature', routeBetween(w.id, workerPosition(w), w.parkedFeature.position));
       continue;
     }
-    if (w.elapsed < V3.featureIdleDelay || !s.systems.some(n => n.installed)) continue;
+    if (!featuresAvailable(s) || w.elapsed < V3.featureIdleDelay || !s.systems.some(n => n.installed)) continue;
     // No destination is reserved: select a random installed system only when the desk work finishes.
     enqueue(s, 'feature', -1);
     const feature = s.jobs.at(-1)!; feature.owner = w.id;
@@ -261,7 +268,9 @@ function tick(s: V3State) {
       else if (w.phase === 'outward') phase(w, 'repair', V3.repair);
       else if (w.phase === 'install') {
         const node = s.systems[w.system!];
-        node.installed = true; node.installedAt = s.time; event(s, `System ${node.id + 1} installed · earning 3 credits/s`);
+        node.installed = true; node.installedAt = s.time;
+        if (node.id === 1) s.featuresAvailableAt = s.time + V3.featureReleaseDelay;
+        event(s, `System ${node.id + 1} installed · earning 3 credits/s`);
         s.jobs = s.jobs.filter(j => j.id !== w.job);
         returnHome(w);
       } else if (w.phase === 'repair' && job) {repairDone(s, job); leaveRepair(s, w, job.priority === 'p1');}

@@ -14,15 +14,16 @@ try {
   const ready = () => page.locator('[data-upgrade-ready]');
   async function afford(el: any) {for (let i=0; !await el.isEnabled() && i<400; i++) await page.clock.runFor(1000); assert.equal(await el.isEnabled(),true);}
   assert.equal(await ready().count(),0);
-  await button('Start experience').click(); await page.clock.runFor(4000); assert.equal(await ready().count(),0);
+  await button('Get your intro').click(); await page.clock.runFor(11000); assert.equal(await ready().count(),0);
   assert.equal(await recon.getAttribute('aria-label'),'Buy Recon · 180 credits');
   assert.equal(await plus.getAttribute('aria-label'),'Upgrade to Plus · 260 credits');
+  await button('Hide guidance').click(); // Verify normal upgrade emphasis with teaching deliberately hidden.
   await afford(recon); assert.equal(await recon.getAttribute('data-upgrade-ready'),'recon');assert.equal(await ready().count(),1);
   assert.match(await recon.innerText(),/Ready to automate/);assert.equal(await page.locator('.v3-purchases [data-guided="true"]').count(),0);
   await mkdir('test-results/v3-upgrade', {recursive:true});
   await page.screenshot({path:'test-results/v3-upgrade/recon-ready.png'});
   await page.locator('[data-purchase="system"]').click();assert.equal(await ready().count(),0);
-  await afford(recon);await recon.click();assert.match(await page.locator('.v3-footer').innerText(),/−180 cr/);assert.equal(await ready().count(),0);assert.equal(await recon.isEnabled(),false);
+  await afford(recon);await recon.click();assert.match(await recon.innerText(),/−180 cr/);assert.equal(await ready().count(),0);assert.equal(await recon.isEnabled(),false);
   await afford(plus);assert.equal(await plus.getAttribute('data-upgrade-ready'),'plus');assert.equal(await ready().count(),1);assert.equal(await page.locator('.v3-upgrade-sparks').count(),1);
   await page.clock.runFor(10000);assert.equal(await plus.getAttribute('data-upgrade-ready'),'plus'); // persists beyond teaching hints
   await button('Restart').click();assert.equal(await plus.evaluate((e:Element)=>getComputedStyle(e).animationPlayState),'paused');
@@ -41,7 +42,7 @@ try {
   while(await plus.isEnabled())await page.locator('[data-purchase="system"]').click();
   assert.equal(await ready().count(),0);assert.equal(await page.locator('.v3-upgrade-sparks').count(),0);
   await afford(plus);const before=Number(await page.locator('.v3-game').getAttribute('data-cash'));await plus.click();
-  assert.match(await page.locator('.v3-footer').innerText(),/−260 cr/);
+  assert.match(await plus.innerText(),/−260 cr/);
   assert.ok(Math.abs(Number(await page.locator('.v3-game').getAttribute('data-cash'))-(before-V3.plusCost))<1e-7);
   assert.equal(await ready().count(),0);assert.equal(await page.locator('.v3-upgrade-sparks').count(),0);assert.equal(await plus.isEnabled(),false);
   assert.equal(await page.locator('.v3-main [data-recon-bay][data-state="locked"]').count(),0);

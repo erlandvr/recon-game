@@ -13,14 +13,14 @@ export default function V3Features({state}: {state: V3State}) {
     <title>Shared feature backlog. All developers collect from the top. New items keep arriving. Features completed at a desk add {V3.featureIncome} credits per second to a random installed system. Builds and repairs pause feature work.</title>
     <text y="-43" textAnchor="middle" className="v3-backlog-heading">FEATURE BACKLOG</text>
     <text y="-24" textAnchor="middle" className="v3-backlog-caption">Collect from the top</text>
-    <path d="M-68 -8H68V325H-68Z" fill="#162731" stroke="#3d6278" strokeWidth="2"/>
+    <path d="M-68 -8H68V325H-68Z" fill="#202a2d" stroke="#485b62" strokeWidth="2"/>
     {Array.from({length: 6}, (_, i) => <g key={i} data-backlog-card={i} transform={`translate(0 ${i * 48})`}>
-      <rect x="-59" width="118" height="41" rx="4" fill={i === 0 ? '#346a8b' : '#24485e'} stroke={i === 0 ? '#9bd8ff' : '#58849c'} strokeWidth={i === 0 ? 2 : 1}/>
-      <path d="M-48 15H-38M-43 10V20" stroke="#b1e2ff" strokeWidth="2"/>
+      <rect x="-59" width="118" height="41" rx="4" fill={i === 0 ? '#3d535d' : '#2c3b42'} stroke={i === 0 ? '#859ea8' : '#536b75'} strokeWidth={i === 0 ? 2 : 1}/>
+      <path d="M-48 15H-38M-43 10V20" stroke="#aec1c8" strokeWidth="2"/>
       <text x="-30" y="18" className="v3-backlog-title">New feature</text>
       <text x="-30" y="32" className="v3-backlog-caption">#{state.metrics.featuresTaken + i + 1}</text>
     </g>)}
-    <path d="M-76 326H76L68 338H-68Z" fill="#344954" stroke="#61869b"/>
+    <path d="M-76 326H76L68 338H-68Z" fill="#303e44" stroke="#5a727d"/>
     <text y="308" textAnchor="middle" className="v3-backlog-caption">Always more to build</text>
     <text y="359" textAnchor="middle" className="v3-backlog-caption">{active} in progress · {state.metrics.features} completed</text>
   </g>;
