@@ -1,0 +1,119 @@
+/* A phone keeps the same workshop and game rules, with space reserved for touch. */
+.v3-mobile-result {display:none}
+.v3-rotate {text-align:center;max-width:430px}
+.v3-rotate-icon {width:100px;height:80px;fill:none;stroke:#b4d5ab;stroke-width:3;margin-top:8px}
+.v3-rotate .v3-held-note {color:#e4c985;font-size:13px}
+.v3-game .v3-rotate button {min-height:48px;margin:16px 0 0}
+@media (any-pointer:coarse) and (max-width:600px) and (orientation:portrait) {
+  .v3-game {min-height:0;height:100dvh;overflow:clip}
+  .v3-game>.v3-main,.v3-game>.v3-header {visibility:hidden}
+}
+
+@media (max-height:600px) and (orientation:landscape) {
+  .v3-game {
+    /* Focus restoration after a dialog must not scroll the fixed game surface. */
+    min-height:0;height:100dvh;position:relative;overflow:clip;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .v3-game button {touch-action:manipulation;min-height:44px}
+  .v3-header {position:absolute;top:env(safe-area-inset-top);right:calc(8px + env(safe-area-inset-right));height:48px;padding:0;border:0;z-index:2}
+  .v3-header .brand {display:none}
+  .v3-header nav button {padding:6px 12px;font-size:12px}
+  .v3-main,.v3-game[data-opening=true] .v3-main {padding:0 10px;min-height:0}
+  .v3-hud {height:48px;grid-template-columns:1.3fr 1fr .9fr;gap:16px;padding:4px 90px 4px 0;align-items:center}
+  .v3-hud>div {position:relative;gap:0}
+  .v3-hud>div>span,.v3-hud>div:nth-child(n+3)>span {font-size:10px;line-height:1.2}
+  .v3-hud strong,.v3-hud>div:nth-child(n+3)>strong {font-size:19px;line-height:1.1}
+  .v3-hud strong small {font-size:11px}
+  .v3-hud>div>small,.v3-hud .v3-capacity {display:none}
+  .v3-cash progress {position:absolute;bottom:-4px;height:2px;max-width:180px}
+  .v3-hud .v3-income[data-guided=true] {outline-offset:2px}
+  .v3-world-summary,.v3-crew {display:none}
+  .v3-world {min-height:0}
+  .v3-world>svg {display:block;width:100%;height:100%;flex:1 1 0}
+  .v3-purchases {gap:6px;padding:4px 0;border-top:1px solid #46513a;border-bottom:0;box-shadow:none;background:none}
+  .v3-game #v3-main .v3-purchases button {height:60px;min-height:60px;padding:5px 8px;gap:0;position:relative;border:1px solid #667954!important;border-radius:4px;background:#232c1e!important}
+  .v3-purchases .v3-supply-prop,.v3-purchases .v3-upgrade-sparks,.v3-purchases .v3-purchase-detail {display:none}
+  .v3-purchases strong {display:block;font-size:12px;line-height:1.25;gap:4px;align-items:center}
+  .v3-purchases strong b {display:inline-block;margin-left:6px;font-size:11px;font-family:var(--font-body);margin-top:0}
+  .v3-purchases strong b:before {display:none}
+  .v3-purchases .v3-affordability {font-size:10px;line-height:1.25;margin-top:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .v3-purchase-count,.v3-purchases button:disabled .v3-purchase-count {position:absolute;top:3px;right:7px;padding:0;margin:0;border:0;background:none;gap:0}
+  .v3-purchase-count>span {display:none}
+  .v3-purchase-count>b {font:500 10px var(--font-body);color:#c3cdb9}
+  .v3-purchases button>span:last-child {padding-top:6px}
+  .v3-game #v3-main .v3-purchases button:disabled {background:#1b2118!important}
+  .v3-purchases .v3-purchase-receipt {display:none}
+  .v3-purchases button[data-receipt=true] .v3-affordability {display:none}
+  .v3-purchases button[data-receipt=true] .v3-purchase-receipt {display:block}
+  .v3-game #v3-main .v3-purchases button .v3-purchase-receipt {font-size:10px;min-height:12px;line-height:1.2;margin-top:0;white-space:nowrap}
+  .v3-footer {height:28px;min-height:28px;padding:0;gap:6px;overflow:visible;flex-wrap:nowrap}
+  .v3-footer>div {flex-direction:row;align-items:center;gap:8px}
+  .v3-footer strong {font-size:11px;white-space:nowrap}
+  .v3-footer span {font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .v3-game #v3-main .v3-hide-guidance,.v3-game #v3-main .v3-dismiss-hint {display:none}
+  .v3-footer button {min-height:44px;position:relative;margin-top:0;align-self:flex-end}
+  .v3-game[data-opening=true] .v3-world {margin-top:48px}
+  .v3-world .v3-orientation-bubble {display:none}
+  .v3-orientation-announcement {position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 16px);height:auto;margin:0;padding:8px 14px;clip-path:none;white-space:normal;text-align:center;background:#151b13;border:2px solid #b4d5ab;border-radius:6px;font-size:16px;font-weight:700;color:#f0e3ba}
+  .v3-controls-pointer {bottom:18px;padding:8px 16px;font-size:16px}
+  .v3-controls-pointer::after {height:16px}
+  .v3-game .modal {left:env(safe-area-inset-left);right:env(safe-area-inset-right);top:env(safe-area-inset-top);bottom:env(safe-area-inset-bottom);width:calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 32px);max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);padding:18px 24px;overscroll-behavior:contain}
+  .v3-game .modal h2 {font-size:23px;margin-bottom:10px}
+  .v3-game .modal p {margin:8px 0;line-height:1.4}
+  .v3-game .modal.v3-welcome {width:calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 32px);padding:22px 28px;max-width:580px}
+  .v3-game .v3-welcome h2 {font-size:25px;margin-bottom:12px;max-width:none}
+  .v3-game .v3-welcome .v3-opening-slogan {font-size:18px}
+  .v3-game .v3-welcome .primary {min-height:52px;margin-top:18px;padding:10px 16px;font-size:22px}
+  .v3-game .v3-welcome .primary span {font-size:25px}
+  .v3-game .v3-rotate-icon {width:70px;height:56px;margin:0}
+  .start-count-visual[data-theme=workshop],.start-count-overlay .start-count-visual[data-theme=workshop] {height:min(240px,85dvh);width:340px;max-width:85vw;border-radius:16px}
+  .start-count-visual[data-theme=workshop]:before,.start-count-visual[data-theme=workshop]:after {display:none}
+  .start-count-visual[data-theme=workshop] .start-count-number,.start-count-visual[data-theme=workshop] .start-count-go {font-size:84px;letter-spacing:-4px;line-height:1}
+  .start-count-visual[data-theme=workshop] .start-count-label {font-size:11px;letter-spacing:1px}
+  .start-count-visual[data-theme=workshop] .start-count-beats {margin-top:12px;padding:8px 20px;gap:20px}
+  .start-count-visual[data-theme=workshop] .start-count-beats i {width:22px;height:22px;border-width:3px}
+  .v3-game .modal.v3-results {max-width:700px;width:calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 40px)}
+  .v3-results .v3-result-hero {grid-template-columns:1fr 180px;gap:12px}
+  .v3-results .v3-result-hero .v3-result-time {font-size:32px;margin:0}
+  .v3-results .v3-result-hero p {font-size:12px;margin:2px 0}
+  .v3-results .v3-recap {padding:8px 0;margin:8px 0;gap:12px}
+  .v3-results .v3-recap dd {font-size:15px;margin-top:2px}
+  .v3-results .v3-run-recap {margin-bottom:4px}
+  .v3-results .v3-run-recap b {font-size:14px;margin-top:2px}
+}
+@media (max-height:380px) and (orientation:landscape) {
+  .v3-footer {display:none}
+  .v3-header .v3-mobile-result {display:inline-flex}
+  .v3-game[data-status=won] .v3-hud {padding-right:180px}
+  .v3-game .modal.v3-welcome {padding:16px 24px}
+}
+
+/* When browser chrome makes the screen very wide and short, give the scene its
+   full height. Four purchases sit within thumb reach on a right-hand shelf. */
+@media (any-pointer:coarse) and (max-height:600px) and (min-width:650px) and (min-aspect-ratio:19/10) {
+  .v3-main,.v3-game[data-opening=true] .v3-main {display:grid;grid-template-columns:minmax(0,1fr) 172px;grid-template-rows:48px minmax(0,1fr) 28px;column-gap:10px}
+  .v3-hud {grid-column:1 / -1;grid-row:1}
+  .v3-world {grid-column:1;grid-row:2;align-self:stretch}
+  .v3-game[data-opening=true] .v3-world {margin-top:0}
+  .v3-purchases {grid-column:2;grid-row:2 / 4;grid-template-columns:1fr;grid-template-rows:repeat(4,minmax(44px,1fr));gap:4px;padding:0 0 4px 8px;border:0;border-left:1px solid #46513a}
+  .v3-game #v3-main .v3-purchases button {height:100%;min-height:44px;padding:4px 8px}
+  .v3-purchases strong b {display:block;margin-left:0}
+  .v3-footer {grid-column:1;grid-row:3}
+  .v3-footer strong {display:none}
+  .v3-controls-pointer {bottom:auto;top:50%;left:auto;right:10px;transform:translateY(-50%);font-size:14px;padding:10px;white-space:normal;max-width:150px}
+  .v3-controls-pointer::after {left:100%;top:50%;width:18px;height:0;border-left:0;border-top:3px solid #b4d5ab}
+}
+@media (any-pointer:coarse) and (max-height:380px) and (min-width:650px) and (min-aspect-ratio:19/10) {
+  .v3-main,.v3-game[data-opening=true] .v3-main {grid-template-rows:48px minmax(0,1fr)}
+  .v3-purchases {grid-row:2}
+  .v3-purchases strong {font-size:12px}
+  .v3-purchases strong b {display:inline-block;margin-left:5px}
+  .v3-purchase-count {top:1px;font-size:9px}
+}
+@media (max-height:380px) and (orientation:landscape) {
+  .v3-game .modal.v3-results {padding:12px 20px}
+  .v3-results .v3-run-recap {display:none}
+  .v3-results .v3-recap {padding:6px 0;margin:6px 0}
+  .v3-results button {margin-top:4px}
+}

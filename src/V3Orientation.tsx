@@ -29,9 +29,11 @@ export function OrientationSpotlight({step}: {step: number}) {
   return <g className="v3-orientation-spotlight" aria-hidden="true">
     <path d={`M0 0H1180V535H0Z ${cutout}`} fillRule="evenodd" fill="#080c07" opacity=".72"/>
     <path d={cutout} fill="none" stroke="#b4d5ab" strokeWidth="4" vectorEffect="non-scaling-stroke"/>
+    <g className="v3-orientation-bubble">
     <path d={systems ? 'M390 492V510' : 'M790 91H814'} stroke="#b4d5ab" strokeWidth="3"/>
     <rect x={x} y={y} width={systems ? 230 : 435} height="62" rx="6" fill="#151b13" stroke="#b4d5ab" strokeWidth="2"/>
     <text x={x + 18} y={y + 39} className="v3-orientation-label">{orientationSteps[step].text}</text>
+    </g>
   </g>;
 }
 

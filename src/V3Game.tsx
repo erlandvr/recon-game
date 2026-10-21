@@ -9,7 +9,9 @@ import {advanceV3, buyV3, earnings, featuresAvailable, newV3, pauseV3, purchaseI
 import {purchaseReceipt} from './v3Guidance.ts';
 import {useV3Guidance} from './V3Guidance.tsx';
 import {RunRecap, useV3Celebration, VictoryCrew} from './V3Presentation.tsx';
+import {needsLandscape, useMobileLandscape} from './useMobileLandscape.ts';
 import './v3-game.css';
+import './v3-mobile.css';
 
 const purchases: {id: Purchase; title: string; detail: string}[] = [
   {id: 'system', title: 'Build system', detail: 'Earn 3/s after installation'},
@@ -24,6 +26,9 @@ export default function V3Game() {
   const [countdown, setCountdown] = useState(false), [restartOpen, setRestartOpen] = useState(false);
   const [showResult, setShowResult] = useState(true);
   const [introStarted, setIntroStarted] = useState(false);
+  const [startingIntro, setStartingIntro] = useState(false);
+  const landscape = useMobileLandscape(introStarted && state.status !== 'won');
+  const deviceHeld = useRef(landscape.held); deviceHeld.current = landscape.held;
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [hidden, setHidden] = useState(document.hidden);
   useEffect(() => {
@@ -38,7 +43,7 @@ export default function V3Game() {
   useEffect(() => {
     function tick() {
       const now = performance.now(), elapsed = now - previous.current; previous.current = now;
-      if (!visible.current || current.current.status !== 'running') return;
+      if (!visible.current || deviceHeld.current || needsLandscape() || current.current.status !== 'running') return;
       pending.current += Math.max(0, elapsed);
       const steps = Math.min(200, Math.floor((pending.current + 1e-6) / (V3.step * 1000)));
       if (steps) {pending.current -= steps * V3.step * 1000; update(advanceV3(current.current, steps * V3.step));}
@@ -56,19 +61,37 @@ export default function V3Game() {
     const next = buyV3(current.current, action);
     if (next !== current.current) {update(next);}
   }
+  async function beginIntro() {
+    if (startingIntro) return;
+    setStartingIntro(true);
+    try {
+      // Request directly from the tap while user activation is still available.
+      // Fullscreen is optional: desktop and unsupported/denied browsers continue normally.
+      const phone = matchMedia('(any-pointer: coarse)').matches && Math.min(innerWidth, innerHeight) <= 600;
+      if (phone && document.fullscreenEnabled && !document.fullscreenElement) {
+        await document.documentElement.requestFullscreen({navigationUI: 'hide'});
+      }
+    } catch {
+      // Keep the same introduction when the browser declines fullscreen.
+    } finally {
+      setStartingIntro(false);
+      setIntroStarted(true);
+    }
+  }
   function reset() { setIntroStarted(false); tour.reset(); pending.current = 0; previous.current = performance.now(); update(newV3()); setRestartOpen(false); setShowResult(true); setCountdown(false);}
   const {hint, dismiss, hidden: guidanceHidden, hide: hideGuidance} = useV3Guidance(state);
   const featuresReady = featuresAvailable(state);
   const opening = state.status === 'ready' && !countdown;
   const welcome = opening && !introStarted;
   const orienting = opening && introStarted;
-  const tour = useOrientation(orienting, hidden || restartOpen, () => setCountdown(true));
+  const tour = useOrientation(orienting, hidden || restartOpen || landscape.held, () => setCountdown(true));
   const celebration = useV3Celebration(state.status === 'won', reduced);
   const income = earnings(state), available = state.developers.filter(w => w.phase === 'idle').length;
   const waiting = state.jobs.filter(j => j.owner === null).length;
   const guidanceActive = !!hint && state.cash >= 0;
-  return <div className="v3-game" data-opening={opening} data-welcome={welcome} data-tour={orienting ? orientationSteps[tour.step].id : undefined} data-reduced={reduced} data-hidden={hidden} data-status={state.status} data-time={state.time} data-cash={state.cash}>
+  return <div className="v3-game" data-opening={opening} data-welcome={welcome} data-tour={orienting ? orientationSteps[tour.step].id : undefined} data-reduced={reduced} data-hidden={hidden || landscape.held} data-device-held={landscape.held} data-status={state.status} data-time={state.time} data-cash={state.cash}>
     <header className="v3-header"><Brand label="Active Animation" subtitle="Experience the Benefit of Recon" onClick={() => {if (!countdown) {pause(); setRestartOpen(true);}}}/><nav aria-label="Experience controls">
+      {state.status === 'won' && <button className="v3-mobile-result" onClick={() => setShowResult(true)}>View result</button>}
       <button disabled={countdown} onClick={() => {pause(); setRestartOpen(true);}}>Restart</button>
     </nav></header>
     <main id="v3-main" className="v3-main">
@@ -84,8 +107,8 @@ export default function V3Game() {
         const count = item.id === 'system' ? {label: 'Systems', value: state.systems.length, max: V3.maxSystems, detail: 'Includes installed systems and queued builds'} : item.id === 'developer' ? {label: 'Developers', value: state.developers.length, max: V3.maxDevelopers, detail: 'Your total team, including busy developers'} : null;
         const spotlight = (item.id === 'recon' || item.id === 'plus') && !info.reason && (!guidanceActive || hint?.target === item.id);
         const receipt = purchaseReceipt(state, item.id);
-        return <button key={item.id} data-purchase={item.id} data-upgrade-ready={spotlight ? item.id : undefined} data-guided={hint?.target === item.id} disabled={!!info.reason} onClick={() => buy(item.id)} aria-label={`${item.title} · ${info.price} credits`} aria-describedby={count ? `v3-${item.id}-count` : undefined}>
-          <SupplyProp kind={item.id}/>{spotlight && item.id === 'plus' && <svg className="v3-upgrade-sparks" viewBox="0 0 100 76" aria-hidden="true"><path d="M12 8L14 15L21 17L14 19L12 26L10 19L3 17L10 15Z"/><path d="M88 4L90 10L96 12L90 14L88 20L86 14L80 12L86 10Z"/><path d="M85 52L87 57L92 59L87 61L85 66L83 61L78 59L83 57Z"/></svg>}<span>{count && <span id={`v3-${item.id}-count`} className="v3-purchase-count" title={count.detail}><span>{count.label}</span><b>{count.value}/{count.max}</b></span>}<strong>{item.title} <b>{info.price} cr</b></strong><small>{item.detail}</small><small className="v3-affordability">{info.reason ?? (spotlight ? item.id === 'plus' ? 'Unlock all 3 bays ✦' : 'Ready to automate' : state.status === 'paused' ? 'Buy while paused' : 'Available')}</small><small className="v3-purchase-receipt" role="status">{receipt ?? '\u00a0'}</small></span>
+        return <button key={item.id} data-purchase={item.id} data-receipt={!!receipt} data-upgrade-ready={spotlight ? item.id : undefined} data-guided={hint?.target === item.id} disabled={!!info.reason} onClick={() => buy(item.id)} aria-label={`${item.title} · ${info.price} credits`} aria-describedby={count ? `v3-${item.id}-count` : undefined}>
+          <SupplyProp kind={item.id}/>{spotlight && item.id === 'plus' && <svg className="v3-upgrade-sparks" viewBox="0 0 100 76" aria-hidden="true"><path d="M12 8L14 15L21 17L14 19L12 26L10 19L3 17L10 15Z"/><path d="M88 4L90 10L96 12L90 14L88 20L86 14L80 12L86 10Z"/><path d="M85 52L87 57L92 59L87 61L85 66L83 61L78 59L83 57Z"/></svg>}<span>{count && <span id={`v3-${item.id}-count`} className="v3-purchase-count" title={count.detail}><span>{count.label}</span><b>{count.value}/{count.max}</b></span>}<strong>{item.title} <b>{info.price} cr</b></strong><small className="v3-purchase-detail">{item.detail}</small><small className="v3-affordability">{info.reason ?? (spotlight ? item.id === 'plus' ? 'Unlock all 3 bays ✦' : 'Ready to automate' : state.status === 'paused' ? 'Buy while paused' : 'Available')}</small><small className="v3-purchase-receipt" role="status">{receipt ?? '\u00a0'}</small></span>
         </button>;
       })}</section>
       <footer hidden={opening} className="v3-footer" data-hint={hint?.id ?? ''}>
@@ -95,19 +118,25 @@ export default function V3Game() {
         {state.status === 'won' && <button onClick={() => setShowResult(true)}>View result</button>}
       </footer>
     </main>
+    {landscape.held && <Modal title={landscape.portrait ? 'Rotate your phone to play' : 'Ready when you are'} onDismiss={() => {}} className="v3-modal v3-rotate">
+      <svg className="v3-rotate-icon" viewBox="0 0 100 80" aria-hidden="true"><rect x="20" y="20" width="60" height="36" rx="6"/><path d="M69 12A32 32 0 0 0 14 28M14 28V13M14 28H29M31 66A32 32 0 0 0 86 50M86 50V65M86 50H71"/><path d="M72 32V44"/></svg>
+      <p>{landscape.portrait ? 'The workshop plays in landscape. Turn your phone sideways.' : 'Your workshop is held. Continue when you’re comfortable.'}</p>
+      {introStarted && <p className="v3-held-note">Time, cash and progress are held.</p>}
+      {!landscape.portrait && <button className="primary" autoFocus onClick={() => {previous.current = performance.now(); landscape.continue();}}>Continue experience</button>}
+    </Modal>}
     <IncomeCoins state={state} reduced={reduced}/>
-    {welcome && !restartOpen && <Modal title="Recon — Active Animation" onDismiss={() => {}} className="v3-modal v3-opening v3-welcome">
+    {welcome && !restartOpen && !landscape.held && <Modal title="Recon — Active Animation" onDismiss={() => {}} className="v3-modal v3-opening v3-welcome">
       <p className="v3-opening-slogan">Experience the Benefit of Recon</p>
       <p>Discover what your team can do with Recon.</p>
-      <button className="primary" autoFocus onClick={() => setIntroStarted(true)}>Get your intro <span aria-hidden="true">↗</span></button>
+      <button className="primary" autoFocus disabled={startingIntro} aria-busy={startingIntro} onClick={beginIntro}>Get your intro <span aria-hidden="true">↗</span></button>
     </Modal>}
-    {countdown && <StartCountdown theme="workshop" goLabel="REACH THE CASH TARGET" focusSelector="[data-purchase='system']" reducedMotion={reduced} onGo={resume} onDone={() => setCountdown(false)}/>}
-    {state.result && showResult && !restartOpen && <Modal title={state.result.at < 180 ? 'Peak productivity reached!' : 'You built a healthy company!'} className="v3-modal v3-results" onDismiss={() => setShowResult(false)}>
+    {countdown && <StartCountdown held={landscape.held} theme="workshop" goLabel="REACH THE CASH TARGET" focusSelector="[data-purchase='system']" reducedMotion={reduced} onGo={resume} onDone={() => setCountdown(false)}/>}
+    {state.result && showResult && !restartOpen && !landscape.held && <Modal title={state.result.at < 180 ? 'Peak productivity reached!' : 'You built a healthy company!'} className="v3-modal v3-results" onDismiss={() => setShowResult(false)}>
       <div className="v3-result-hero"><div><p className="v3-result-time">{v3Time(state.result.at)}</p><p>1,200 credits reached.<br/>Your finish time is frozen.</p></div><VictoryCrew state={state} celebration={celebration} reduced={reduced} hidden={hidden}/></div>
       <dl className="v3-recap"><div><dt>Systems installed</dt><dd>{state.result.installed}</dd></div><div><dt>Developers hired</dt><dd>{state.result.developers - 1}</dd></div><div><dt>Automation</dt><dd>{state.result.recon === 3 ? 'Recon Plus' : state.result.recon ? 'Recon' : 'None'}</dd></div></dl>
       <RunRecap state={state}/>
       <button className="primary" onClick={reset}>Play again</button><button onClick={() => setShowResult(false)}>Inspect workshop</button>
     </Modal>}
-    {restartOpen && <Modal title="Start a fresh workshop?" className="v3-modal" onDismiss={closeRestart}><p>Your current workshop is held while you decide. A fresh run resets cash, systems and time.</p><button className="primary" onClick={reset}>Start fresh</button><button onClick={closeRestart}>Keep this workshop</button></Modal>}
+    {restartOpen && !landscape.held && <Modal title="Start a fresh workshop?" className="v3-modal" onDismiss={closeRestart}><p>Your current workshop is held while you decide. A fresh run resets cash, systems and time.</p><button className="primary" onClick={reset}>Start fresh</button><button onClick={closeRestart}>Keep this workshop</button></Modal>}
   </div>;
 }
